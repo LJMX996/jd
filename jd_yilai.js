@@ -3,6 +3,7 @@
 
 5 12 * * * jd_yilai.js, tag=aaron依赖
  */
+cp -r /ql/repo/LJMX996_jd_aaron/utils /ql/scripts
 
 npm install axios date-fns
 
