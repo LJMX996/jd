@@ -8,8 +8,17 @@
 ============QuantumultX==============
 [task_local]
 #东东超市兑换奖品
-0,59 0,23 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_blueCoin.js, tag=东东超市兑换奖品, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxc.png, enabled=true
+59 23 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_blueCoin.js, tag=东东超市兑换奖品, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxc.png, enabled=true
 
+====================Loon=================
+[Script]
+cron "59 23 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_blueCoin.js,tag=东东超市兑换奖品
+
+===================Surge==================
+东东超市兑换奖品 = type=cron,cronexp="59 23 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_blueCoin.js
+
+============小火箭=========
+东东超市兑换奖品 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_blueCoin.js, cronexpr="59 23 * * *", timeout=3600, enable=true
  */
 const $ = new Env('东东超市兑换奖品');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -103,12 +112,12 @@ Date.prototype.Format = function (fmt) { //author: meizz
   .finally(() => $.done())
 
 async function PrizeIndex() {
-  let timel = new Date().Format("ss")
-  let timea = 58;
-  if(timel < 58) {
-    let timec = (timea - timel) * 1000;
-    console.log(`等待时间 ${timec / 1000}`);
-    await sleep(timec)
+  let nowtime = new Date().Format("ss")
+  let starttime = process.env.SM_STARTTIME ? process.env.SM_STARTTIME : 59;
+  if(nowtime < 59) {
+    let sleeptime = (starttime - nowtime) * 1000;
+    console.log(`等待时间 ${sleeptime / 1000}`);
+    await sleep(sleeptime)
   }
   await smtg_queryPrize();
   // await smtg_materialPrizeIndex();//兑换酒类奖品，此兑换API与之前的兑换京豆类的不一致，故目前无法进行
