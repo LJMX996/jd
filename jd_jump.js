@@ -7,7 +7,7 @@
 ================QuantumultX==================
 [task_local]
 #跳跳乐瓜分京豆
-1 0,11,21 * * * jd_jump.js, tag=跳跳乐瓜分京豆, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+41 3,11,21 * * * jd_jump.js, tag=跳跳乐瓜分京豆, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
 */
 const $ = new Env('跳跳乐瓜分京豆');

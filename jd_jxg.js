@@ -5,7 +5,7 @@
 ============Quantumultx===============
 [task_local]
 #京小鸽
-5 * * * * jd_jxg.js, tag=jd_jxg.js
+26 * * * * jd_jxg.js, tag=jd_jxg.js
 */
 const $ = new Env('京小鸽吾悦寄');
 const notify = $.isNode() ? require('./sendNotify') : '';

@@ -9,17 +9,8 @@
 ============Quantumultx===============
 [task_local]
 #京喜签到
-5 0 * * * https://raw.githubusercontent.com/zero205/JD_tencent_scf/main/jd_jxqd.js, tag=京喜签到, enabled=true
+50 0 * * * https://raw.githubusercontent.com/zero205/JD_tencent_scf/main/jd_jxqd.js, tag=京喜签到, enabled=true
 
-================Loon==============
-[Script]
-cron "5 0 * * *" script-path=https://raw.githubusercontent.com/zero205/JD_tencent_scf/main/jd_jxqd.js,tag=京喜签到
-
-===============Surge=================
-京喜签到 = type=cron,cronexp="5 0 * * *",wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/zero205/JD_tencent_scf/main/jd_jxqd.js
-
-============小火箭=========
-京喜签到 = type=cron,script-path=https://raw.githubusercontent.com/zero205/JD_tencent_scf/main/jd_jxqd.js, cronexpr="5 0 * * *", timeout=200, enable=true
  */
 // prettier-ignore
 !function (t, r) { "object" == typeof exports ? module.exports = exports = r() : "function" == typeof define && define.amd ? define([], r) : t.CryptoJS = r() }(this, function () {
