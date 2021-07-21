@@ -11,15 +11,7 @@ Last Modified time: 2021-06-06 21:22:37
 #宠汪汪积分兑换奖品
 0 8,16 * * * jd_joy_reward.js, tag=宠汪汪积分兑换奖品, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdcww.png, enabled=true
 
-==============Loon==============
-[Script]
-cron "0 8,16 * * *" script-path=jd_joy_reward.js,tag=宠汪汪积分兑换奖品
 
-================Surge===============
-宠汪汪积分兑换奖品 = type=cron,cronexp="0 8,16 * * *",wake-system=1,timeout=3600,script-path=jd_joy_reward.js
-
-===============小火箭==========
-宠汪汪积分兑换奖品 = type=cron,script-path=jd_joy_reward.js, cronexpr="0 8,16 * * *", timeout=3600, enable=true
  */
 // prettier-ignore
 const $ = new Env('宠汪汪兑换20京豆');
