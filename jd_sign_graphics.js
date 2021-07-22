@@ -32,7 +32,7 @@ let UA = ""
 let signFlag = false
 let successNum = 0
 let errorNum = 0
-let JD_API_HOST = 'https://jdjoy.jd.com'
+let JD_API_HOST = 'https://49.7.27.236'
 if(process.env.JOY_HOST){
   JD_API_HOST = process.env.JOY_HOST
 }
