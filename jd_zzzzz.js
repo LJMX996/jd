@@ -1,7 +1,7 @@
 /*
 [task_local]
 #点点券
-10 0,1,9,10 * * * jd_zzzzz.js, tag=特务Z
+10 0,1,9,10,20,21 * * * jd_zzzzz.js, tag=特务Z
 */
 const $ = new Env('特务Z');
 const notify = $.isNode() ? require('./sendNotify') : '';
