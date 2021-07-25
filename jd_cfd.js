@@ -770,7 +770,7 @@ function rubbishOper(dwType, body = '') {
 }
 
 // 牛牛任务
-async function getActTask() {
+async function getActTask(type = true) {
   return new Promise(async (resolve) => {
     $.get(taskUrl(`story/GetActTask`), async (err, resp, data) => {
       try {
@@ -779,25 +779,44 @@ async function getActTask() {
           console.log(`${$.name} GetActTask API请求失败，请检查网路重试`)
         } else {
           data = JSON.parse(data);
-          for (let key of Object.keys(data.Data.TaskList)) {
-            let vo = data.Data.TaskList[key]
-            if (vo.dwCompleteNum >= vo.dwTargetNum && vo.dwAwardStatus !== 1) {
-              await awardActTask('Award', vo)
-              await $.wait(2000)
+          if (type) {
+            for (let key of Object.keys(data.Data.TaskList)) {
+              let vo = data.Data.TaskList[key]
+              if (vo.dwOrderId === 1 && vo.dwCompleteNum !== vo.dwTargetNum) {
+                console.log(`开始【🐮牛牛任务】${vo.strTaskName}`)
+                for (let i = vo.dwCompleteNum; i < vo.dwTargetNum; i++) {
+                  console.log(`【🐮牛牛任务】${vo.strTaskName} 进度：${i + 1}/${vo.dwTargetNum}`)
+                  await doTask(vo.ddwTaskId, 2)
+                  await $.wait(2000)
+                }
+              }
             }
-          }
-          if (data.Data.dwCompleteTaskNum >= data.Data.dwTotalTaskNum && data.Data.dwStatus !== 4) {
-            console.log(`【🐮牛牛任务】已做完，去开启宝箱`)
-            await awardActTask('story/ActTaskAward')
-            await $.wait(2000)
-          } else {
-            console.log(`【🐮牛牛任务】已做完，宝箱已开启`)
+            data = await getActTask(false)
+            for (let key of Object.keys(data.Data.TaskList)) {
+              let vo = data.Data.TaskList[key]
+              if (vo.dwCompleteNum >= vo.dwTargetNum && vo.dwAwardStatus !== 1) {
+                await awardActTask('Award', vo)
+                await $.wait(2000)
+              }
+            }
+            data = await getActTask(false)
+            if (data.Data.dwCompleteTaskNum >= data.Data.dwTotalTaskNum) {
+              if (data.Data.dwStatus !== 4) {
+                console.log(`【🐮牛牛任务】已做完，去开启宝箱`)
+                await awardActTask('story/ActTaskAward')
+                await $.wait(2000)
+              } else {
+                console.log(`【🐮牛牛任务】已做完，宝箱已开启`)
+              }
+            } else {
+              console.log(`【🐮牛牛任务】未全部完成，无法开启宝箱\n`)
+            }
           }
         }
       } catch (e) {
-        $.logErr(e, resp);
+        $.logErr(e, resp)
       } finally {
-        resolve();
+        resolve(data)
       }
     })
   })
@@ -818,7 +837,7 @@ function awardActTask(function_path, taskInfo = '') {
               if (msg.indexOf('活动太火爆了') !== -1) {
                 str = '任务为成就任务或者未到任务时间';
               } else {
-                str = msg + prizeInfo ? ` 获得金币 ¥ ${JSON.parse(prizeInfo).ddwCoin}` : '';
+                str = msg + prizeInfo ? `获得金币 ¥ ${JSON.parse(prizeInfo).ddwCoin}` : '';
               }
               console.log(`【🐮领牛牛任务奖励】${strTaskName} ${str}\n${$.showLog ? data : ''}`);
             }
@@ -975,14 +994,14 @@ async function getBuildInfo(body, buildList, type = true) {
             await $.wait(2000)
             await getUserInfo(false)
             console.log(`升级建筑`)
-            console.log(`【${buildNmae}】当前等级：${buildList.dwLvl} 升级获得财富：${data.ddwLvlRich}`)
-            console.log(`【${buildNmae}】升级需要${data.ddwNextLvlCostCoin}金币，当前拥有${$.info.ddwCoinBalance}，保留三倍升级所需金币${data.ddwNextLvlCostCoin * 3}`)
+            console.log(`【${buildNmae}】当前等级：${buildList.dwLvl}`)
+            console.log(`【${buildNmae}】升级需要${data.ddwNextLvlCostCoin}金币，保留升级需要的3倍${data.ddwNextLvlCostCoin * 3}金币，当前拥有${$.info.ddwCoinBalance}金币`)
             if(data.dwCanLvlUp > 0 && $.info.ddwCoinBalance >= (data.ddwNextLvlCostCoin * 3)) {
               console.log(`【${buildNmae}】满足升级条件，开始升级`)
               const body = `ddwCostCoin=${data.ddwNextLvlCostCoin}&strBuildIndex=${data.strBuildIndex}`
               let buildLvlUpRes = await buildLvlUp(body)
               if (buildLvlUpRes.iRet === 0) {
-                console.log(`【${buildNmae}】升级成功\n`)
+                console.log(`【${buildNmae}】升级成功：获得${data.ddwLvlRich}财富\n`)
               } else {
                 console.log(`【${buildNmae}】升级失败：${buildLvlUpRes.sErrMsg}\n`)
               }
@@ -1246,7 +1265,7 @@ function browserTask(taskType) {
           for (let i = start; i < end; i++) {
             //做任务
             console.log(`【📆日常任务】${taskinfo.taskName} 进度：${i + 1}/${end}`)
-            await doTask(taskinfo);
+            await doTask(taskinfo.taskId);
             await $.wait(2000);
           }
           //领取奖励
@@ -1274,30 +1293,44 @@ function browserTask(taskType) {
 }
 
 //做任务
-function doTask(taskinfo) {
+function doTask(taskId, type = 1) {
   return new Promise(async (resolve) => {
-    const { taskId, completedTimes, targetTimes, taskName } = taskinfo;
-    if (parseInt(completedTimes) >= parseInt(targetTimes)) {
-      resolve(false);
-      console.log(`【做日常任务】${taskName} 任务已做完，去领奖\n`);
-      return;
+    switch (type) {
+      case 1:
+        $.get(taskListUrl(`DoTask`, `taskId=${taskId}`), (err, resp, data) => {
+          try {
+            if (err) {
+              console.log(`${JSON.stringify(err)}`)
+              console.log(`${$.name} DoTask API请求失败，请检查网路重试`)
+            } else {
+              data = JSON.parse(data);
+            }
+          } catch (e) {
+            $.logErr(e, resp)
+          } finally {
+            resolve()
+          }
+        })
+        break
+      case 2:
+        $.get(taskListUrl(`DoTask`, `taskId=${taskId}`, `jxbfddch`), (err, resp, data) => {
+          try {
+            if (err) {
+              console.log(`${JSON.stringify(err)}`)
+              console.log(`${$.name} DoTask API请求失败，请检查网路重试`)
+            } else {
+              data = JSON.parse(data);
+            }
+          } catch (e) {
+            $.logErr(e, resp)
+          } finally {
+            resolve()
+          }
+        })
+      default:
+        break
     }
-    $.get(taskListUrl(`DoTask`, `taskId=${taskId}`), (err, resp, data) => {
-      try {
-        //console.log(`taskId:${taskId},data:${data}`);
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} DoTask API请求失败，请检查网路重试`)
-        } else {
-          const { msg, ret } = JSON.parse(data);
-        }
-      } catch (e) {
-        $.logErr(e, resp);
-      } finally {
-        resolve();
-      }
-    });
-  });
+  })
 }
 
 //领取奖励
