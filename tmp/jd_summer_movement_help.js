@@ -74,7 +74,7 @@ getUA()
       }
       console.log(`您屏蔽的账号是${outuserID}`)
 
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 6; i++) {
     if (cookiesArr[i]) {
       $.index = i + 1;
       let out = false
