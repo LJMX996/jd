@@ -142,7 +142,7 @@ getUA()
     if (new Date().getUTCHours() + 8 >= 8) {
       if(Number(summer_movement_ShHelpFlag) === 1){
         if ($.ShInviteLists && $.ShInviteLists.length) console.log(`\n******开始内部京东账号【百元守卫战SH】助力*********\n`);
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < $.ShInviteLists.length && $.canHelp && !$.hotFlag; i++) {
           if(typeof $.ShInviteLists[i] === 'string'){
             console.log(`${$.UserName} 去助力SH码 ${$.ShInviteLists[i]}`);
             $.inviteId = $.ShInviteLists[i];
