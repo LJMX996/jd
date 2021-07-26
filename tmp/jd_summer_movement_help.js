@@ -33,9 +33,8 @@ const ShHelpAuthorFlag = false;//是否助力作者SH  true 助力，false 不�
 let cookiesArr = [];
 $.cookie = '';
 $.secretpInfo = {};
-$.ShInviteList = [];
-$.innerShInviteList = [
-];
+$.ShInviteList = ['H8mphLbwLg2neoWcENUz0u3hxznUb1rt','H8mphLbwLnv9Ienwa4lPiWCywdkbf2Y','H8mphLbwLkzlNuv9Qb1sh38sEUPFcHY','H8mphLbwLg2meYXLF9Iy1Y9EJO6nCZht'];
+$.innerShInviteList = ['H8mphLbwLg2neoWcENUz0u3hxznUb1rt','H8mphLbwLnv9Ienwa4lPiWCywdkbf2Y','H8mphLbwLkzlNuv9Qb1sh38sEUPFcHY','H8mphLbwLg2meYXLF9Iy1Y9EJO6nCZht'];
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
