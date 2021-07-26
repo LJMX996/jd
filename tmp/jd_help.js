@@ -220,52 +220,7 @@ async function main(){
   console.log('获取百元守卫战信息');
   $.guradHome = {};
   await takePostRequest('olypicgames_guradHome');
-  await $.wait(2000);
-  if (Number($.userInfo.poolCurrency) >= Number($.userInfo.exchangeThreshold)) {
-    console.log(`满足升级条件，去升级`);
-    await $.wait(1000);
-    await takePostRequest('olympicgames_receiveCash');
-  }
-  if($.hotFlag){return ;}
-  if($.homeData.result.trainingInfo.state === 0 && !$.homeData.result.trainingInfo.finishFlag){
-    console.log(`开始运动`)
-    await takePostRequest('olympicgames_startTraining');
-  }else if($.homeData.result.trainingInfo.state === 0 && $.homeData.result.trainingInfo.finishFlag){
-    console.log(`已完成今日运动`)
-  }
-  if($.hotFlag){return ;}
-  bubbleInfos = $.homeData.result.bubbleInfos;
-  let runFlag = false;
-  for(let item of bubbleInfos){
-    if(item.type != 7){
-      $.collectId = item.type
-      await takePostRequest('olympicgames_collectCurrency');
-      await $.wait(1000);
-      runFlag = true;
-    }
-  }
-  if($.hotFlag){return ;}
-  if(runFlag) {
-    await takePostRequest('olympicgames_home');
-    $.userInfo =$.homeData.result.userActBaseInfo;
-  }
-  if (runFlag && Number($.userInfo.poolCurrency) >= Number($.userInfo.exchangeThreshold)) {
-    console.log(`满足升级条件，去升级`);
-    await $.wait(1000);
-    await takePostRequest('olympicgames_receiveCash');
-  }
-  if($.hotFlag){return ;}
-  await $.wait(1000);
-  await takePostRequest('olympicgames_getTaskDetail');
-  await $.wait(1000);
-  console.log(`开始做任务`)
-  await doTask();
-  if($.hotFlag){return ;}
-  await $.wait(1000);
-  console.log(`开始做微信端任务`)
-  await takePostRequest('wxTaskDetail');
-  await $.wait(1000)
-  await doTask();
+  
 
 }
 
