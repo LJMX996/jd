@@ -8,8 +8,17 @@
 ============QuantumultX==============
 [task_local]
 #东东超市兑换奖品
-0,59 0,23 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_blueCoin.js, tag=东东超市兑换奖品, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxc.png, enabled=true
+59 23 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_blueCoin.js, tag=东东超市兑换奖品, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxc.png, enabled=true
 
+====================Loon=================
+[Script]
+cron "59 23 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_blueCoin.js,tag=东东超市兑换奖品
+
+===================Surge==================
+东东超市兑换奖品 = type=cron,cronexp="59 23 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_blueCoin.js
+
+============小火箭=========
+东东超市兑换奖品 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_blueCoin.js, cronexpr="59 23 * * *", timeout=3600, enable=true
  */
 const $ = new Env('东东超市兑换奖品');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -103,7 +112,7 @@ Date.prototype.Format = function (fmt) { //author: meizz
   .finally(() => $.done())
 
 async function PrizeIndex() {
-  let nowtime = new Date().Format("s.S")
+  let nowtime = new Date().Format("s")
   let starttime = $.isNode() ? (process.env.SM_STARTTIME ? process.env.SM_STARTTIME * 1 : 59) : ($.getdata('SM_STARTTIME') ? $.getdata('SM_STARTTIME') * 1 : 59);
   if(nowtime < 59) {
     let sleeptime = (starttime - nowtime) * 1000;
@@ -141,6 +150,7 @@ async function PrizeIndex() {
       if ($.totalBlue > $.blueCost) {
         for (let j = 0; j <= 10; j++) {
           await smtg_obtainPrize(prizeList[1].prizeId);
+          if ($.errBizCodeCount >= 3) break
         }
       } else {
         console.log(`兑换失败,您目前蓝币${$.totalBlue}个,不足以兑换${$.title}所需的${$.blueCost}个`);
@@ -169,6 +179,7 @@ async function PrizeIndex() {
       if ($.totalBlue > $.blueCost) {
         for (let j = 0; j <= 10; j++) {
           await smtg_obtainPrize(prizeList[0].prizeId, 1000);
+          if ($.errBizCodeCount >= 3) break
         }
       } else {
         console.log(`兑换失败,您目前蓝币${$.totalBlue}个,不足以兑换${$.title}所需的${$.blueCost}个`);
@@ -202,10 +213,12 @@ async function PrizeIndex() {
           if ($.type === 4 && !$.beanType) {
             for (let j = 0; j <= 10; j++) {
               await smtg_obtainPrize(prizeId, 0, "smtg_lockMaterialPrize")
+              if ($.errBizCodeCount >= 3) break
             }
           } else {
             for (let j = 0; j <= 10; j++) {
               await smtg_obtainPrize(prizeId);
+              if ($.errBizCodeCount >= 3) break
             }
           }
         } else {
