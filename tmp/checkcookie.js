@@ -79,11 +79,10 @@ function userSignIn() {
           if (safeGet(data)) {
             data = JSON.parse(data);
             if (data.code === 1) {
-              console.log(`今日签到成功，获得${data.content[0].title}`)
-              message += `京东账号${$.index}${$.nickName}\n今日签到成功，获得${data.content[0].title} 🐶\n`;
-              allMsg += message;
+              console.log(`此账号cookie正常`);
+             
             } else if (data.code === -1) {
-              console.log(`今日已签到`)
+              console.log(`cookie正常`)
               // message += `【签到】失败，今日已签到`;
             } else {
               console.log(`异常：${JSON.stringify(data)}`)
