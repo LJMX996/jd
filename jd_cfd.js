@@ -50,7 +50,6 @@ $.appId = 10028;
   await requestAlgo();
   await $.wait(1000)
   let res = await getAuthorShareCode('')
-  let res = await getAuthorShareCode('')
   if (!res) {
     $.http.get({url: ''}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
     await $.wait(1000)
