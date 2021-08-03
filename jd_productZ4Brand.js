@@ -1,6 +1,6 @@
 /*
 特务Z
-cron 23 8,9 3 8 * jd_productZ4Brand.js ,tag=特务z
+cron 23 3,8,16,18,22,23 3 8 * jd_productZ4Brand.js ,tag=特务z
 要跑2次
 */
 const $ = new Env('特务Z');
