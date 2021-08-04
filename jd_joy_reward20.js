@@ -85,12 +85,14 @@ Date.prototype.Format = function (fmt) { //author: meizz
 
 async function joyReward() {
   try {
-    let nowtime = new Date().Format("s.S")
-    let starttime = process.env.JOY_STARTTIME ? process.env.JOY_STARTTIME : 59;
-    if(nowtime < 59) {
-      let sleeptime = (starttime - nowtime) * 1000;
-      console.log(`等待时间 ${sleeptime / 1000}`);
-      await zooFaker.sleep(sleeptime)
+    if (new Date().getMinutes() === 59) {
+      let nowtime = new Date().Format("s.S")
+      let starttime = process.env.JOY_STARTTIME ? process.env.JOY_STARTTIME : 60;
+      if(nowtime < 59) {
+        let sleeptime = (starttime - nowtime) * 1000;
+        console.log(`等待时间 ${sleeptime / 1000}`);
+        await zooFaker.sleep(sleeptime)
+      }
     }
     for (let j = 0; j <= 10; j++) {
       await getExchangeRewards();
