@@ -4,7 +4,7 @@
 ============Quantumultx===============
 [task_local]
 #京喜财富岛
-35 * * * * jd_dpqd.js, tag=店铺签到
+5 0,8 * * * jd_dpqd.js, tag=店铺签到
 */
 const $ = new Env('店铺签到');
 
