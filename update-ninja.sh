@@ -1,4 +1,6 @@
 cd /ql/ninja/backend
+rm -rf .env
+wget https://raw.githubusercontent.com/LJMX996/jd/help/.env
 git checkout .
 git pull
 pnpm install
