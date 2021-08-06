@@ -5,6 +5,7 @@ dir_shell=/ql/shell
 . $dir_shell/share.sh
 
 env_name=(
+  JXNC_SHARECODES
   FRUITSHARECODES
   PETSHARECODES
   PLANT_BEAN_SHARECODES
@@ -12,7 +13,6 @@ env_name=(
   DDFACTORY_SHARECODES
   JDZZ_SHARECODES
   JDJOY_SHARECODES
-  JXNC_SHARECODES
   BOOKSHOP_SHARECODES
   JD_CASH_SHARECODES
   JDSGMH_SHARECODES
@@ -20,6 +20,7 @@ env_name=(
   JDHEALTH_SHARECODES
 )
 var_name=(
+  ForOtherJxnc
   ForOtherFruit
   ForOtherPet
   ForOtherBean
@@ -27,7 +28,6 @@ var_name=(
   ForOtherJdFactory
   ForOtherJdzz
   ForOtherJoy
-  ForOtherJxnc
   ForOtherBookShop
   ForOtherCash
   ForOtherSgmh
@@ -35,23 +35,26 @@ var_name=(
   ForOtherHealth
 )
 
+## name_js为脚本文件名，如果使用ql repo命令拉取，文件名含有作者名
+## 所有有互助码的活动，把脚本名称列在 name_js 中，对应 config.sh 中互助码后缀列在 name_config 中，中文名称列在 name_chinese 中。
+## name_js、name_config 和 name_chinese 中的三个名称必须一一对应。
 name_js=(
-  chinnkarahoi_jd_scripts_jd_fruit
-  chinnkarahoi_jd_scripts_jd_pet
-  chinnkarahoi_jd_scripts_jd_plantBean
-  chinnkarahoi_jd_scripts_jd_dreamFactory
-  chinnkarahoi_jd_scripts_jd_jdfactory
-  chinnkarahoi_jd_scripts_jd_jdzz
-  chinnkarahoi_jd_scripts_jd_crazy_joy
-  chinnkarahoi_jd_scripts_jd_jxnc
-  chinnkarahoi_jd_scripts_jd_bookshop
-  chinnkarahoi_jd_scripts_jd_cash
-  chinnkarahoi_jd_scripts_jd_sgmh
-  chinnkarahoi_jd_scripts_jd_cfd
-  chinnkarahoi_jd_scripts_jd_health
+  LJMX996_jd_hello_jd_jxnc
+  LJMX996_jd_hello_jd_fruit
+  LJMX996_jd_hello_jd_pet
+  LJMX996_jd_hello_jd_plantBean
+  LJMX996_jd_hello_jd_dreamFactory
+  LJMX996_jd_hello_jd_jdfactory
+  LJMX996_jd_hello_jd_jdzz
+  LJMX996_jd_hello_jd_crazy_joy
+  LJMX996_jd_hello_jd_bookshop
+  LJMX996_jd_hello_jd_cash
+  LJMX996_jd_hello_jd_sgmh
+  LJMX996_jd_aaron_jd_cfd
+  LJMX996_jd_hello_jd_health
 )
-
 name_config=(
+  Jxnc
   Fruit
   Pet
   Bean
@@ -59,15 +62,14 @@ name_config=(
   JdFactory
   Jdzz
   Joy
-  Jxnc
   BookShop
   Cash
   Sgmh
   Cfd
   Health
 )
-
 name_chinese=(
+  京喜农场
   东东农场
   东东萌宠
   京东种豆得豆
@@ -75,13 +77,13 @@ name_chinese=(
   东东工厂
   京东赚赚
   crazyJoy任务
-  京喜农场
   口袋书店
   签到领现金
   闪购盲盒
   京喜财富岛
   东东健康社区
 )
+
 
 gen_pt_pin_array() {
   local envs=$(eval echo "\$JD_COOKIE")
