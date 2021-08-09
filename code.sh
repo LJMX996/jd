@@ -18,6 +18,7 @@ env_name=(
   JDSGMH_SHARECODES
   JDCFD_SHARECODES
   JDHEALTH_SHARECODES
+  JDCARNI_SHARECODES
 )
 var_name=(
   ForOtherJxnc
@@ -33,6 +34,7 @@ var_name=(
   ForOtherSgmh
   ForOtherCfd
   ForOtherHealth
+  ForOtherCarni    
 )
 
 ## name_js为脚本文件名，如果使用ql repo命令拉取，文件名含有作者名
@@ -52,6 +54,7 @@ name_js=(
   LJMX996_jd_hello_jd_sgmh
   LJMX996_jd_aaron_jd_cfd
   LJMX996_jd_hello_jd_health
+  LJMX996_jd_aaron_gua_carnivalcity
 )
 name_config=(
   Jxnc
@@ -67,6 +70,7 @@ name_config=(
   Sgmh
   Cfd
   Health
+  Carni
 )
 name_chinese=(
   京喜农场
@@ -82,6 +86,7 @@ name_chinese=(
   闪购盲盒
   京喜财富岛
   东东健康社区
+  京东手机狂欢城
 )
 
 
