@@ -148,7 +148,7 @@ export_codes_sub() {
                     tmp_for_other="$tmp_for_other@\${$config_name_my$j}"
                 done
                 echo "${config_name_for_other}1=\"$tmp_for_other\"" | perl -pe "s|($config_name_for_other\d+=\")@|\1|"
-                for ((m = 1; m < 30; m++)); do
+                for ((m = 1; m < ${#pt_pin[*]}; m++)); do
                     j=$((m + 1))
                     echo "$config_name_for_other$j=\"\${${config_name_for_other}1}\""
                 done
