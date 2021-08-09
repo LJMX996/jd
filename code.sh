@@ -18,7 +18,6 @@ env_name=(
   JDSGMH_SHARECODES
   JDCFD_SHARECODES
   JDHEALTH_SHARECODES
-  JDCARNI_SHARECODES
 )
 var_name=(
   ForOtherJxnc
@@ -33,8 +32,7 @@ var_name=(
   ForOtherCash
   ForOtherSgmh
   ForOtherCfd
-  ForOtherHealth
-  ForOtherCarni    
+  ForOtherHealth    
 )
 
 ## name_js为脚本文件名，如果使用ql repo命令拉取，文件名含有作者名
