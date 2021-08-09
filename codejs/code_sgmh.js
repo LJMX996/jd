@@ -94,7 +94,7 @@ function interact_template_getHomeData(timeout = 0) {
 
             //签到
             if (data.data.result.taskVos[i].taskName === '邀请好友助力') {
-              console.log(`\n【好友互助码】${data.data.result.taskVos[i].assistTaskDetailVo.taskToken}\n`);
+              console.log(`\n【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】${data.data.result.taskVos[i].assistTaskDetailVo.taskToken}\n`);
             }
 
         } catch (e) {

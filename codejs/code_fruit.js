@@ -66,7 +66,7 @@ async function jdFruit() {
     await initForFarm();
     if ($.farmInfo.farmUserPro) {
       message = `【水果名称】${$.farmInfo.farmUserPro.name}\n`;
-      console.log(`\n【好友互助码】${$.farmInfo.farmUserPro.shareCode}\n`);
+      console.log(`\n【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】${$.farmInfo.farmUserPro.shareCode}\n`);
       }
 }
 

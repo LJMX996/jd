@@ -98,7 +98,7 @@ async function jdPet() {
         }
         return
       }
-      console.log(`\n【好友互助码】${$.petInfo.shareCode}\n`);
+      console.log(`\n【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】${$.petInfo.shareCode}\n`);
 
     } else if (initPetTownRes.code === '0'){
       console.log(`初始化萌宠失败:  ${initPetTownRes.message}`);

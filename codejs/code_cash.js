@@ -98,7 +98,7 @@ function index(info=false) {
               }
               $.signMoney = data.data.result.signMoney;
               // console.log(`您的助力码为${data.data.result.inviteCode}`)
-              console.log(`【好友互助码】${data.data.result.inviteCode}\n`);
+              console.log(`【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】${data.data.result.inviteCode}\n`);
               }
             }
           }
