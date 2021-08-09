@@ -53,7 +53,7 @@ name_js=(
   LJMX996_jd_hello_jd_cash
   LJMX996_jd_hello_jd_sgmh
   LJMX996_jd_aaron_jd_cfd
-  LJMX996_jd_hello_jd_health
+  LJMX996_jd_aaron_jd_health
   LJMX996_jd_aaron_gua_carnivalcity
 )
 name_config=(
