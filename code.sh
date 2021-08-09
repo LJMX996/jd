@@ -42,7 +42,7 @@ name_js=(
   LJMX996_jd_hello_jd_jxnc
   LJMX996_jd_hello_jd_fruit
   LJMX996_jd_hello_jd_pet
-  LJMX996_jd_hello_jd_plantBean
+  LJMX996_jd_aaron_jd_plantBean
   LJMX996_jd_hello_jd_dreamFactory
   LJMX996_jd_hello_jd_jdfactory
   LJMX996_jd_hello_jd_jdzz
