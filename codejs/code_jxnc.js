@@ -51,7 +51,7 @@ let assistUserShareCode = 0; // 随机助力用户 share code
   }
   $.CryptoJS = $.isNode() ? require('crypto-js') : CryptoJS;
   await requestAlgo();
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 40; i++) {
     if (cookieArr[i]) {
       currentCookie = cookieArr[i];
       $.UserName = decodeURIComponent(currentCookie.match(/pt_pin=([^; ]+)(?=;?)/) && currentCookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
