@@ -3,7 +3,7 @@
 ============Quantumultx===============
 [task_local]
 #京喜工厂
-2 0-23/3 * * * jd_dreamFactory.js, tag=京喜工厂助力码
+2 0-23/3 * * * code_dreamFactory.js
 
 
  */
