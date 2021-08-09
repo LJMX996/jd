@@ -41,20 +41,19 @@ var_name=(
 ## 所有有互助码的活动，把脚本名称列在 name_js 中，对应 config.sh 中互助码后缀列在 name_config 中，中文名称列在 name_chinese 中。
 ## name_js、name_config 和 name_chinese 中的三个名称必须一一对应。
 name_js=(
-  LJMX996_jd_hello_jd_jxnc
-  LJMX996_jd_hello_jd_fruit
-  LJMX996_jd_hello_jd_pet
-  LJMX996_jd_aaron_jd_plantBean
-  LJMX996_jd_hello_jd_dreamFactory
-  LJMX996_jd_hello_jd_jdfactory
-  LJMX996_jd_hello_jd_jdzz
-  LJMX996_jd_hello_jd_crazy_joy
-  LJMX996_jd_hello_jd_bookshop
-  LJMX996_jd_hello_jd_cash
-  LJMX996_jd_hello_jd_sgmh
-  LJMX996_jd_aaron_jd_cfd
-  LJMX996_jd_aaron_jd_health
-  LJMX996_jd_aaron_gua_carnivalcity
+  LJMX996_jd_aaron_code_jxnc
+  LJMX996_jd_aaron_code_fruit
+  LJMX996_jd_aaron_code_pet
+  LJMX996_jd_aaron_code_plantBean
+  LJMX996_jd_aaron_code_dreamFactory
+  LJMX996_jd_aaron_code_jdfactory
+  LJMX996_jd_aaron_code_jdzz
+  LJMX996_jd_aaron_code_crazy_joy
+  LJMX996_jd_aaron_code_bookshop
+  LJMX996_jd_aaron_code_cash
+  LJMX996_jd_aaron_code_sgmh
+  LJMX996_jd_aaron_code_cfd
+  LJMX996_jd_aaron_code_health
 )
 name_config=(
   Jxnc
@@ -70,7 +69,6 @@ name_config=(
   Sgmh
   Cfd
   Health
-  Carni
 )
 name_chinese=(
   京喜农场
@@ -86,7 +84,6 @@ name_chinese=(
   闪购盲盒
   京喜财富岛
   东东健康社区
-  京东手机狂欢城
 )
 
 
