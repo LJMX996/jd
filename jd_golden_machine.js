@@ -16,8 +16,8 @@ if ($.isNode()) {
     cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
 $.authorizationInfo = {};
-$.joinTeamLsit = [61106ea1714ca77012];
-$.inviteList = [61106ea1714ca77012];
+$.joinTeamLsit = ['61106ea1714ca77012'];
+$.inviteList = ['61106ea1714ca77012'];
 $.authorCode = '61106ea1714ca77012';
 !(async () => {
     if (!cookiesArr[0]) {
