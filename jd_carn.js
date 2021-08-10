@@ -13,7 +13,7 @@ d、 30000名之外，0京豆
 ===================quantumultx================
 [task_local]
 #京东手机狂欢城
-0 0-18/6 * * * jd_carn.js
+0 6,18 * * * jd_carn.js
 */
 const $ = new Env('京东手机狂欢城');
 const notify = $.isNode() ? require('./sendNotify') : '';
