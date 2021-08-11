@@ -4,6 +4,7 @@ cp -rf /ql/repo/LJMX996_jd_aaron/utils /ql/scripts/
 npm install got
 npm install tough-cookie
 npm install axios date-fns
+npm install crypto-js
 
 cd /ql/scripts && npm i -S png-js
 
