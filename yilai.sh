@@ -5,6 +5,7 @@ npm install got
 npm install tough-cookie
 npm install axios date-fns
 npm install crypto-js
+npm install download
 
 cd /ql/scripts && npm i -S png-js
 
