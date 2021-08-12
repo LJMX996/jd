@@ -43,9 +43,9 @@ let allMessage = '';
       $.nickName = '';
       message = '';
       await TotalBean();
-      console.log(`\n开始【京东账号${$.index}】`);
+      console.log(`\n开始【账号${$.index}】`);
       if (!$.isLogin) {
-        $.msg($.name,`❗❗❗❗❗❗❗❗❗\n【提示】京东账号${$.index} ${$.UserName}cookie已失效\n❗❗❗❗❗❗❗❗❗`);
+        $.msg($.name,`❗❗❗❗❗❗❗❗❗\n【提示】账号${$.index} ${$.UserName}cookie已失效\n❗❗❗❗❗❗❗❗❗`);
 
         if ($.isNode()) {
           await notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
