@@ -3,7 +3,7 @@
 ============Quantumultx===============
 [task_local]
 #检测cookie状态
-2 0-23/3 * * * checkcookie.js
+2 0-23/3 * * * jd_checkcookie.js
  */
 const $ = new Env('ck检测');
 const notify = $.isNode() ? require('./sendNotify') : '';
