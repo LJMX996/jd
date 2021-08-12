@@ -3,7 +3,7 @@
 
 [task_local]
 #汽车生活节
-20 1 * * * zy_qcshj.js, tag= 汽车生活节
+10 0,1,6,16 * * * zy_qcshj.js, tag= 汽车生活节
 
 */
 const $ = new Env('汽车生活节')
