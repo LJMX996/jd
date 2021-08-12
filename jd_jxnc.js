@@ -155,7 +155,7 @@ function requireConfig() {
           $.log('互助码格式已变更，请重新填写互助码');
           $.msg($.name, '互助码格式变更通知', '互助码格式变更，请重新填写 ‼️‼️', option);
           if ($.isNode()) {
-            await notify.sendNotify(`${$.name}`, `互助码格式变更，请重新填写 ‼️‼️`);
+            $.log(`${$.name}`, `互助码格式变更，请重新填写 ‼️‼️`);
           }
         }
         break;
