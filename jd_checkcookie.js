@@ -48,7 +48,7 @@ let allMessage = '';
         $.msg($.name,`❗❗❗❗❗❗❗❗❗\n【提示】账号${$.index} ${$.UserName}已失效\n❗❗❗❗❗❗❗❗❗`);
 
         if ($.isNode()) {
-          await notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
+          await notify.sendNotify($.name,`❗❗❗❗❗❗❗❗❗\n【提示】账号${$.index} ${$.UserName}已失效\n❗❗❗❗❗❗❗❗❗`);
         }
         continue
       }
