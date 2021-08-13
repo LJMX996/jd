@@ -52,7 +52,7 @@ $.appId = 10028;
     res = await getAuthorShareCode('')
   }
   $.strMyShareIds = [...(res && res.shareId || [])]
-  for (let i = 0; i < 40; i++) {
+  for (let i = 0; i < 30; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
