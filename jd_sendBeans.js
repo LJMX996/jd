@@ -51,8 +51,8 @@ if ($.isNode()) {
   let openCount = Math.floor((Number(cookiesArr.length)-1)/Number($.completeNumbers));
   console.log(`\n共有${cookiesArr.length}个账号，前${openCount}个账号可以开团\n`);
   $.openTuanList = [];
-  console.log(`前${openCount}个账号开始开团\n`);
-  for (let i = 0; i < cookiesArr.length && i < openCount; i++) {
+  console.log(`前30个账号开始开团\n`);
+  for (let i = 0; i < 30; i++) {
     $.cookie = cookiesArr[i];
     $.UserName = decodeURIComponent($.cookie.match(/pt_pin=([^; ]+)(?=;?)/) && $.cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);;
     $.index = i + 1;
