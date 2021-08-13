@@ -1,6 +1,5 @@
 /*
 
-
 [task_local]
 #汽车生活节
 10 0,1,6,16 * * * zy_qcshj.js, tag= 汽车生活节
@@ -63,7 +62,10 @@ if ($.isNode()) {
                 continue
             }
       
-      await gethelpcode()
+       await gethelpcode()
+       await getlist()
+       await Ariszy()
+       await zy()
       
    }
 for(let i = 0; i < cookiesArr.length; i++){
