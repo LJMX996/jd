@@ -3,3 +3,5 @@ ql repo https://github.com/LJMX996/jd.git "jd_|jx_|pull|gua_|code_|zy_" "tmp" "J
 ql repo https://github.com/LJMX996/jd.git "jd_|jx_|getJDCookie" "tools|activity|backUp|jd_delCoupon|format_" "^jd[^_]|USER" "hello"
 
 cp -rf /ql/repo/LJMX996_jd_aaron/utils /ql/scripts/
+
+cp /ql/ninja/backend/sendNotify.js /ql/scripts/sendNotify.js
