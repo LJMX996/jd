@@ -1,9 +1,9 @@
-/*
-* 粉丝互动，没啥水
-* 修改温某的脚本，由于温某不干活，只能自己动手修改了
-* 注意：脚本会加购，脚本会加购，脚本会加购
-* 若发现脚本里没有的粉丝互动活动。欢迎反馈给我
-* cron  34 6,18 * * *
+/**
+粉丝互动，没啥水
+修改温某的脚本，由于温某不干活，只能自己动手修改了
+注意：脚本会加购，脚本会加购，脚本会加购
+若发现脚本里没有的粉丝互动活动。欢迎反馈给我
+cron 34 6,18 * * * https://raw.githubusercontent.com/star261/jd/main/scripts/jd_fan.js
 * */
 const $ = new Env('粉丝互动');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
@@ -23,6 +23,9 @@ const activityList = [
     {'actid':'22b1a22937be493f88f8c1913b010666','endTime':1628956800000},
     {'actid':'59ed837510d4424dada9c662c6b25857','endTime':1628824016000},
     {'actid':'4ee56f673e164305a527545efe566b20','endTime':1630425599000},//需要入会
+    {'actid':'c77e8342bca24d5f86d2a076b8f00860','endTime':1629907199000},
+    {'actid':'49d8035a8f294ac7893e814d2b8e79ed','endTime':1629907199000},
+    {'actid':'f22809ea36b14411a625641ef9685e53','endTime':1630339200000},
 ];
 if ($.isNode()) {
     Object.keys(jdCookieNode).forEach((item) => {
