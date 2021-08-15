@@ -6,6 +6,7 @@ cd /ql/scripts && npm install got
 cd /ql/scripts && npm install tough-cookie
 cd /ql/scripts && npm install axios date-fns
 cd /ql/scripts && npm install crypto-js
+cd /ql/scripts && npm install crypto -g
 cd /ql/scripts && npm install download
 cd /ql/scripts && npm install -g typescript
 cd /ql/scripts && npm i -S png-js
