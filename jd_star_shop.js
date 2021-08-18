@@ -54,7 +54,6 @@ if ($.isNode()) {
         }
         await main();
     }
-    return;
     try{res = await getAuthorShareCode('');}catch (e) {}
     if(!res){
         try{res = await getAuthorShareCode('');}catch (e) {}
