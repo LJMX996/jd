@@ -280,7 +280,7 @@ async function jdJXNC() {
         "active": $.info.active,
         "joinnum": $.info.joinnum,
       }
-      $.log(`【好友互助码】` + JSON.stringify(shareCodeJson));
+      $.log(`【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】` + JSON.stringify(shareCodeJson));
 
     }
   }
