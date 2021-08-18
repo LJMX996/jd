@@ -5,7 +5,7 @@
 ===============Quantumultx===============
 [task_local]
 #众筹许愿池
-40 0,20 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_wish.js, tag=众筹许愿池, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+40 0,2,4 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_wish.js, tag=众筹许愿池, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
 
  */
@@ -53,6 +53,13 @@ if ($.isNode()) {
       await jd_wish();
     }
   }
+  let res = await getAuthorShareCode('')
+  if (!res) {
+    $.http.get({url: ''}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
+    await $.wait(1000)
+    res = await getAuthorShareCode('')
+  }
+  $.shareCode = [...$.shareCode, ...(res || [])]
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -156,7 +163,7 @@ async function healthyDay_getHomeData(type = true) {
                       }
                     }
                   } else if (vo.taskType === 14) {
-                    console.log(`您的助力码：${vo.assistTaskDetailVo.taskToken}`)
+                    console.log(`【京东账号${$.index}（${$.UserName}）的众筹许愿池好友互助码】${vo.assistTaskDetailVo.taskToken}\n`)
                     if (vo.times !== vo.maxTimes) {
                       $.shareCode.push({
                         "code": vo.assistTaskDetailVo.taskToken,
@@ -165,7 +172,7 @@ async function healthyDay_getHomeData(type = true) {
                     }
                   }
                 } else {
-                  console.log(`【${vo.taskName}】已完成`)
+                  console.log(`【${vo.taskName}】已完成\n`)
                 }
               }
             }
@@ -189,12 +196,11 @@ function harmony_collectScore(body = {}, taskType = '') {
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
-            console.log(data)
             if (data && data.data && data.data.bizCode === 0) {
               if (taskType === 13) {
                 console.log(`签到成功：获得${data.data.result.score}金币\n`)
               } else if (body.taskId == 6) {
-                console.log(`助力成功：获得${data.data.result.score}金币\n`)
+                console.log(`助力成功：您的好友获得${data.data.result.score}金币\n`)
               } else {
                 console.log(`完成任务：获得${data.data.result.score}金币\n`)
               }
@@ -228,8 +234,13 @@ function interact_template_getLotteryResult() {
           console.log(`${$.name} getLotteryResul API请求失败，请检查网路重试`)
         } else {
           if (safeGet(data)) {
-            console.log(data)
             data = JSON.parse(data);
+            let userAwardsCacheDto = data.data.result.userAwardsCacheDto
+            if (userAwardsCacheDto && userAwardsCacheDto.type === 2) {
+              console.log(`抽中：${userAwardsCacheDto.jBeanAwardVo.quantity}${userAwardsCacheDto.jBeanAwardVo.ext}`)
+            } else {
+              console.log(JSON.stringify(data))
+            }
           }
         }
       } catch (e) {
@@ -257,6 +268,39 @@ function taskUrl(function_id, body = {}) {
       "Accept-Encoding": "gzip, deflate, br"
     }
   }
+}
+
+function getAuthorShareCode(url) {
+  return new Promise(async resolve => {
+    const options = {
+      url: `${url}?${new Date()}`, "timeout": 10000, headers: {
+        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
+      }
+    };
+    if ($.isNode() && process.env.TG_PROXY_HOST && process.env.TG_PROXY_PORT) {
+      const tunnel = require("tunnel");
+      const agent = {
+        https: tunnel.httpsOverHttp({
+          proxy: {
+            host: process.env.TG_PROXY_HOST,
+            port: process.env.TG_PROXY_PORT * 1
+          }
+        })
+      }
+      Object.assign(options, { agent })
+    }
+    $.get(options, async (err, resp, data) => {
+      try {
+        resolve(JSON.parse(data))
+      } catch (e) {
+        // $.logErr(e, resp)
+      } finally {
+        resolve();
+      }
+    })
+    await $.wait(10000)
+    resolve();
+  })
 }
 
 function TotalBean() {
