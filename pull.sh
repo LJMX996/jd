@@ -2,12 +2,12 @@ ql repo https://github.com/LJMX996/jd.git "jd_|jx_|gua_|code_|zy_|jd-task-" "tmp
 
 ql repo https://github.com/LJMX996/jd.git "jd_|jx_|getJDCookie" "tools|activity|backUp|jd_delCoupon|format_" "^jd[^_]" "hello"
 
-cp -rf /ql/repo/LJMX996_jd_aaron/utils /ql/scripts/
+cp -rfv /ql/repo/LJMX996_jd_aaron/utils /ql/scripts/
 
-cp -rf /ql/repo/LJMX996_jd_aaron/function /ql/scripts/
+cp -rfv /ql/repo/LJMX996_jd_aaron/function /ql/scripts/
 
-cp /ql/ninja/backend/sendNotify.js /ql/scripts/sendNotify.js
+cp -rfv /ql/ninja/backend/sendNotify.js /ql/scripts/sendNotify.js
 
 
-cp -rf /ql/repo/LJMX996_jd_aaron/pull.sh /ql/scripts/
+cp -rfv /ql/repo/LJMX996_jd_aaron/pull.sh /ql/scripts/
 
