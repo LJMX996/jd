@@ -9,5 +9,5 @@ cp -rfv /ql/repo/LJMX996_jd_aaron/function /ql/scripts/
 cp -rfv /ql/ninja/backend/sendNotify.js /ql/scripts/sendNotify.js
 
 
-cp -rfv /ql/repo/LJMX996_jd_aaron/pull.sh /ql/scripts/
+cp -rfv /ql/repo/LJMX996_jd_aaron/pull.sh /ql/config/
 
