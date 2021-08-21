@@ -67,11 +67,15 @@ services:
 
 > * /cmd ql repo https://github.com/LJMX996/jd.git "pull.sh" "" "" "aaron"
 
-## 去面板添加这三个任务
+## 去面板添加这四个任务
 
 > * 名称:更新仓库
 > * 定时:3,33 * * * *
 > * 命令:task /ql/repo/LJMX996_jd_aaron/pull.sh
+
+> * 名称:更新仓库备用
+> * 定时:25 * * * *
+> * 命令:task /ql/config/pull.sh
 
 > * 名称:依赖安装
 > * 定时: 10 13 * * * *
