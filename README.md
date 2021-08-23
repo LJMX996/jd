@@ -28,7 +28,7 @@ services:
       - /volume1/docker/ql/1/ninja:/ql/ninja
     ports:
       - 8701:5700
-      - 701:5701
+      - 701:701
     environment: 
       - ENABLE_TTYD=true             
       - ENABLE_WEB_PANEL=true
@@ -53,7 +53,7 @@ services:
       - /volume1/docker/ql/2/ninja:/ql/ninja
     ports:
       - 8702:5700
-      - 702:5701
+      - 702:701
     environment: 
       - ENABLE_TTYD=true             
       - ENABLE_WEB_PANEL=true
@@ -86,7 +86,7 @@ services:
 > * 定时: 10 0-23/4 * * * *
 > * 命令:task /ql/repo/LJMX996_jd_aaron/code.sh
 
-### 2.8.1自动互助提示
+### 2.8.*自动互助提示
 编辑config下 → task_before.sh文件
 
 内容如下
