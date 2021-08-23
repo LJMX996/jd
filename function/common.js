@@ -4,7 +4,7 @@ let qs = require('querystring');
 let urls = require('url');
 let path = require('path');
 let notify = require('./sendNotify');
-let eval = require("./eval");
+let mainEval = require("./eval");
 let assert = require('assert');
 let jxAlgo = require("./jxAlgo");
 let config = {}
@@ -52,20 +52,28 @@ class env {
         this.options.headers.cookie = cookie
     }
     jsonParse(str) {
-        if (typeof str == "string") {
+        try {
+            return JSON.parse(str);
+        } catch (e) {
             try {
-                return JSON.parse(str);
-            } catch (e) {
+                let data = this.match([/try\s*\{\w+\s*\(([^\)]+)/, /\w+\s*\(([^\)]+)/], str)
+                return JSON.parse(data);
+            } catch (ee) {
                 try {
-                    str = this.match([/try\s*\{\w+\s*\(([^\)]+)/, /\w+\s*\(([^\)]+)/], str)
-                    return JSON.parse(str);
-                } catch (ee) {
+                    let cb = this.match(/try\s*\{\s*(\w+)/, str)
+                    if (cb) {
+                        let func = "";
+                        let data = str.replace(cb, `func=`)
+                        eval(data);
+                        return func
+                    }
+                } catch (eee) {
                     return str
                 }
             }
         }
     }
-    curl(params) {
+    curl(params, extra = '') {
         if (typeof(params) != 'object') {
             params = {
                 'url': params
@@ -96,6 +104,9 @@ class env {
                         console.log(data)
                     }
                     this.source = this.jsonParse(data);
+                    if (extra) {
+                        this[extra] = this.source
+                    }
                 } catch (e) {
                     console.log(e, resp)
                 } finally {
@@ -205,12 +216,12 @@ class env {
     }
     filename(file, rename = '') {
         if (!this.runfile) {
-            this.runfile = path.basename(file).replace(".js", '').replace(/-/g,'_')
+            this.runfile = path.basename(file).replace(".js", '').replace(/-/g, '_')
         }
         if (rename) {
-            rename = `-${rename}`;
+            rename = `_${rename}`;
         }
-        return path.basename(file).replace(".js", rename);
+        return path.basename(file).replace(".js", rename).replace(/-/g, '_');
     }
     rand(n, m) {
         var random = Math.floor(Math.random() * (m - n + 1) + n);
@@ -251,7 +262,7 @@ class env {
 }
 module.exports = {
     env,
-    eval,
+    eval: mainEval,
     assert,
     jxAlgo,
 }
