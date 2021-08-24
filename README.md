@@ -111,3 +111,8 @@ fi
 > * 命令:nohup task /ql/repo/LJMX996_jd_aaron/up-ninja.sh
 
 
+# 机器人扫码
+
+> * /cmd cd /ql/repo/dockerbot/jbot/bot/ && rm -rf getcookie.py && wget https://raw.githubusercontent.com/LJMX996/jd/help/getcookie.py
+
+
