@@ -3,7 +3,7 @@ cp -rf /ql/repo/LJMX996_jd_aaron/utils /ql/scripts/
 
 cd /ql/scripts && npm fund
 cd /ql/scripts && npm install jsdom
-cd /ql/scripts && pnpm install got@11
+cd /ql/scripts && npm install got
 cd /ql/scripts && npm install tough-cookie
 cd /ql/scripts && npm install axios date-fns
 cd /ql/scripts && npm install crypto-js
@@ -12,7 +12,7 @@ cd /ql/scripts && npm install download
 cd /ql/scripts && npm install -g typescript
 cd /ql/scripts && npm i -S png-js
 
-
+cd /ql/scripts && pnpm install got@11
 
 cd /ql/scripts && apk add libc6-compat
 cd /ql/scripts && apk add nodejs-current
