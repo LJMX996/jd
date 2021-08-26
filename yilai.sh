@@ -3,7 +3,7 @@ cp -rf /ql/repo/LJMX996_jd_aaron/utils /ql/scripts/
 
 cd /ql/scripts && npm fund
 cd /ql/scripts && npm install jsdom
-cd /ql/scripts && npm install got
+cd /ql/scripts && pnpm install got@11
 cd /ql/scripts && npm install tough-cookie
 cd /ql/scripts && npm install axios date-fns
 cd /ql/scripts && npm install crypto-js
