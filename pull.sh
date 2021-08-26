@@ -14,3 +14,4 @@ cp -rfv /ql/repo/LJMX996_jd_aaron/pull.sh /ql/config/
 
 
 ql repo https://github.com/LJMX996/jd.git "jd_|jx_|getJDCookie" "tools|activity|backUp|jd_delCoupon|format_" "^jd[^_]" "hello"
+
