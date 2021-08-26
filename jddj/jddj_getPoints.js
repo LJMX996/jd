@@ -1,8 +1,7 @@
 
 
 //[task_local]
-//18 1-23/1 * * * https://raw.githubusercontent.com/passerby-b/JDDJ/main/jddj_getPoints.js
-
+//27 */1 * * * jddj_getPoints.js
 
 
 

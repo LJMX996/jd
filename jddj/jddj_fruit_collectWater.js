@@ -1,10 +1,6 @@
-/*
 
-[task_local]
-25 0-23/1 * * * jddj_fruit_collectWater.js
-
-*/
-
+//[task_local]
+// 15 */1 * * * jddj_fruit_collectWater.js
 
 //
 

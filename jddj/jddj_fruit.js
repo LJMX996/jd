@@ -1,8 +1,7 @@
 /*
 
-
 [task_local]
-15 1,3,5,7,11,17 * * * https://raw.githubusercontent.com/passerby-b/JDDJ/main/jddj_fruit.js
+20 0,2,4,6,7 * * * jddj_fruit.js
 
 
 */
