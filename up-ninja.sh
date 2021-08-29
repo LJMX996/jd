@@ -1,8 +1,7 @@
 cd /ql/ninja/backend
 
 
-git checkout .
-git pull
+
 
 rm -rf /ql/ninja/backend/utils/USER_AGENT.js
 
