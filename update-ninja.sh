@@ -5,9 +5,6 @@ wget https://raw.githubusercontent.com/LJMX996/jd/help/.env
 
 
 
-rm -rf /ql/ninja/backend/utils/USER_AGENT.js
-
-cd /ql/ninja/backend/utils/ && wget https://raw.githubusercontent.com/LJMX996/jd/help/USER_AGENT.js
 
 rm -rf /ql/ninja/backend/static/*
 cp -rf /ql/repo/LJMX996_jd_aaron/static/* /ql/ninja/backend/static/
