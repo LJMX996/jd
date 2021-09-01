@@ -52,7 +52,7 @@ def wstopt(wskey):
     try:
         url = "http://cdn.xia.me/getck"
         headers = {
-            "Host": "jdsign.tk",
+            "Host": "signer.nz.lu",
             "user-agent": "Mozilla/5.0 (Windows NT 6.3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
         }
         data = {"wskey": wskey, "key": "xb3z4z2m3n847"}
