@@ -7,16 +7,17 @@ import requests
 import time
 import json
 import re
+
 requests.packages.urllib3.disable_warnings()
 
-token=""
+token = ""
 if username == "" or password == "":
     f = open("/ql/config/auth.json")
     auth = f.read()
     auth = json.loads(auth)
     username = auth["username"]
     password = auth["password"]
-    token=auth["token"]
+    token = auth["token"]
     f.close()
 
 
@@ -38,10 +39,20 @@ def getitem(key):
     return item
 
 
+def getckitem(key):
+    url = "http://127.0.0.1:5700/api/envs?searchValue=JD_COOKIE&t=%s" % gettimestamp()
+    r = s.get(url)
+    for i in json.loads(r.text)["data"]:
+        if key in i["value"]:
+            return i
+    return []
+
+
 def wstopt(wskey):
     try:
-        url = "https://jdsign.tk/getck"
+        url = "http://cdn.xia.me/getck"
         headers = {
+            "Host": "jdsign.tk",
             "user-agent": "Mozilla/5.0 (Windows NT 6.3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
         }
         data = {"wskey": wskey, "key": "xb3z4z2m3n847"}
@@ -84,30 +95,34 @@ def insert(text):
 
 if __name__ == '__main__':
     s = requests.session()
-    if token =="":
+    if token == "":
         login(username, password)
     else:
         s.headers.update({"authorization": "Bearer " + token})
     wskeys = getitem("JD_WSCK")
     count = 1
     for i in wskeys:
-        ptck = wstopt(i["value"])
-        if ptck == "wskey错误":
-            print("第%s个wskey可能过期了" % count)
-        elif ptck == "未知错误":
-            print("第%s个wskey发生了未知错误" % count)
-        else:
-            ptpin = re.findall(r"pt_pin=(.*?);", ptck)[0]
-            item = getitem("pt_pin=" + ptpin)
-            if item != []:
-                qlid = item[0]["_id"]
-                if update(ptck, qlid):
-                    print("第%s个wskey更新成功" % count)
-                else:
-                    print("第%s个wskey更新失败" % count)
+        if i["status"] == 0:
+            ptck = wstopt(i["value"])
+            wspin = re.findall(r"pin=(.*?);", i["value"])[0]
+            if ptck == "wskey错误":
+                print("第%s个wskey可能过期了,pin为%s" % (count, wspin))
+            elif ptck == "未知错误" or ptck == "error":
+                print("第%s个wskey发生了未知错误,pin为%s" % (count, wspin))
             else:
-                if insert(ptck):
-                    print("第%s个wskey添加成功" % count)
+                ptpin = re.findall(r"pt_pin=(.*?);", ptck)[0]
+                item = getckitem("pt_pin=" + ptpin)
+                if item != []:
+                    qlid = item["_id"]
+                    if update(ptck, qlid):
+                        print("第%s个wskey更新成功,pin为%s" % (count, wspin))
+                    else:
+                        print("第%s个wskey更新失败,pin为%s" % (count, wspin))
                 else:
-                    print("第%s个wskey添加失败" % count)
-        count += 1
+                    if insert(ptck):
+                        print("第%s个wskey添加成功" % count)
+                    else:
+                        print("第%s个wskey添加失败" % count)
+            count += 1
+        else:
+            print("有一个wskey被禁用了")
