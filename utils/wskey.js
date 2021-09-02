@@ -27,7 +27,7 @@ console.log(`${pin};${wskey};`)
 console.log('================')
 $.msg(`${pin};`, "的wskey获取成功！")
 
-$notify(${pin};${wskey};);
+
 
     
 function Env(t, e) {
