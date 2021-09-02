@@ -1,4 +1,3 @@
-# 25 1-23/3 * * *
 # 在这里输入青龙面板用户名密码，如果不填写，就自动从auth.json中读取
 username = ""
 password = ""
@@ -104,25 +103,28 @@ if __name__ == '__main__':
     for i in wskeys:
         if i["status"] == 0:
             ptck = wstopt(i["value"])
-            wspin = re.findall(r"pin=(.*?);", i["value"])[0]
-            if ptck == "wskey错误":
-                print("第%s个wskey可能过期了,pin为%s" % (count, wspin))
-            elif ptck == "未知错误" or ptck == "error":
-                print("第%s个wskey发生了未知错误,pin为%s" % (count, wspin))
-            else:
-                ptpin = re.findall(r"pt_pin=(.*?);", ptck)[0]
-                item = getckitem("pt_pin=" + ptpin)
-                if item != []:
-                    qlid = item["_id"]
-                    if update(ptck, qlid):
-                        print("第%s个wskey更新成功,pin为%s" % (count, wspin))
-                    else:
-                        print("第%s个wskey更新失败,pin为%s" % (count, wspin))
+            try:
+                wspin = re.findall(r"pin=(.*?);", i["value"])[0]
+                if ptck == "wskey错误":
+                    print("第%s个wskey可能过期了,pin为%s" % (count, wspin))
+                elif ptck == "未知错误" or ptck == "error":
+                    print("第%s个wskey发生了未知错误,pin为%s" % (count, wspin))
                 else:
-                    if insert(ptck):
-                        print("第%s个wskey添加成功" % count)
+                    ptpin = re.findall(r"pt_pin=(.*?);", ptck)[0]
+                    item = getckitem("pt_pin=" + ptpin)
+                    if item != []:
+                        qlid = item["_id"]
+                        if update(ptck, qlid):
+                            print("第%s个wskey更新成功,pin为%s" % (count, wspin))
+                        else:
+                            print("第%s个wskey更新失败,pin为%s" % (count, wspin))
                     else:
-                        print("第%s个wskey添加失败" % count)
+                        if insert(ptck):
+                            print("第%s个wskey添加成功" % count)
+                        else:
+                            print("第%s个wskey添加失败" % count)
+            except:
+                print("第%s个wskey出现异常错误" % count)
             count += 1
         else:
             print("有一个wskey被禁用了")
