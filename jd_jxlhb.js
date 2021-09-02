@@ -40,7 +40,7 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
   $.activeId = '489177';
   $.authorMyShareIds = [];
   //开启红包,获取互助码 i <10 助力前10个ck
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 7; i++) {
     cookie = cookiesArr[i];
     $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
     $.index = i + 1;
