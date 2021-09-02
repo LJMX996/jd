@@ -1,4 +1,4 @@
-ql repo https://github.com/LJMX996/jd.git "jd_|jx_|gua_|code_|zy_|jd-task-|jddj_" "tmp|static" "JDJRValidator_Pure.js|sign_graphics_validate.js|MovementFaker.js|ZooFaker_Necklace.js|USER" "aaron" 
+ql repo https://github.com/LJMX996/jd.git "jd_|jx_|gua_|code_|zy_|jd-task-|jddj_|ql_" "tmp|static" "JDJRValidator_Pure.js|sign_graphics_validate.js|MovementFaker.js|ZooFaker_Necklace.js|USER" "aaron" 
 
 
 
