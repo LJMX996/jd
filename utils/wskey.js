@@ -10,9 +10,11 @@ hostname = api.m.jd.com
 
 
 # wskey
-^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=serverConfig url script-request-header wskey.js
 
-
+#京喜
+^https:\/\/api\.m\.jd\.com\/api\?functionId=jxssdarkword url script-request-header https://raw.githubusercontent.com/LJMX996/jd/aaron/utils/wskey.js
+# 京东
+^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=serverConfig url script-request-header https://raw.githubusercontent.com/LJMX996/jd/aaron/utils/wskey.js
 
 
 */
