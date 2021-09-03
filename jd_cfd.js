@@ -1,15 +1,9 @@
 /*
 京喜财富岛
-cron 5 * * * * jd_cfd.js
+40 * * * * jd_cfd.js
 更新时间：2021-7-13
 活动入口：京喜APP-我的-京喜财富岛
 
-已支持IOS双京东账号,Node.js支持N个京东账号
-脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
-============Quantumultx===============
-[task_local]
-#京喜财富岛
-35 * * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_cfd.js, tag=京喜财富岛, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxcfd.png, enabled=true
 
  */
 !function (t, r) { "object" == typeof exports ? module.exports = exports = r() : "function" == typeof define && define.amd ? define([], r) : t.CryptoJS = r() }(this, function () {

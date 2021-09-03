@@ -1,0 +1,44 @@
+国内鸡
+进入容器
+docker exec -it qinglong bash 
+#获取ninja
+git clone -b main https://ghproxy.com/https://github.com/MoonBegonia/ninja.git /ql/ninja
+#安装
+cd /ql/ninja/backend && pnpm install 
+cp .env.example .env  
+#添加UA_
+echo 'NINJA_UA="Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Mobile/15E148 Safari/604.1"' >> .env 
+#关闭通知 （可选）
+sed -i 's/NINJA_NOTIFY=true/NINJA_NOTIFY=false/g' .env  
+#启动
+pm2 start 
+#和面板一起启动
+echo -e "cd /ql/ninja/backend\npm2 start" >> /ql/config/extra.sh 
+
+开启ninja隐藏的手动输入cookie界面：
+进入qinglong 容器
+
+docker exec -it qinglong bash
+
+输入命令：sed -i '/<body>/a\<script type="text/javascript">\nwindow.onload=function(){\ndocument.getElementsByClassName("card hidden")[0].className = "card";\n}\n</script>' $(find /ql -type f -name '*.html'| xargs grep -l -r 'modulepreload')
+
+删除添加内容 
+输入命令：sed -i '13,17d' $(find /ql -type f -name '*.html'| xargs grep -l -r 'modulepreload')
+方法来自:Tiny Serve
+
+
+
+pt_key=app_openAAJhGoR2ADDUHFmwcNpmvn38rlnnVTB50mr4g1-9wz_bSR6TtUW_IPXF73Gh8O5SKbgc_l4Xwck;pt_pin=leijianfa;
+pt_key=AAJhLxe0ADCxBUS77WVid2_W4SC9qijBx4hSHwD1W2Feor5v31urm1tbKwsZnVpNu9EhCisS6gg;pt_pin=jd_6db8ea97b3889;
+pt_key=app_openAAJhMFnFADAor6iL7aMIAvTd0j52fhimAjAtCewKTazsorYjXbe_RLFeoEaampniiznWUFjmub4;pt_pin=jd_6d8ed5aa7eaa8;
+pt_key=app_openAAJhL6MsADBPNTb7E4dS8_G3yWbG_FKpjnDnIUQOPloSS0nZggJ7YrdBXgK_COSiBAYu2QXqtR4;pt_pin=jd_77db620d5727a;
+pt_key=app_openAAJhMNikADACoetWDirGvBcIt4CCD0SehnCnCdR1FIkYZiop5HUh2YELSmgTTNuYIGNvCMgXjhY; pt_pin=jd_UKBlefRHnGGm;
+pt_key=AAJhK4tuADCUPDnZyWa40ff2MjrQE4LNysmBnr9iaTuNJk-uxSlQtUnC7xyAD3faVZ0ksrLfUtg;pt_pin=jd_4e08a1371dec4;pt_token=dqjy12qa;
+pt_key=app_openAAJhL5-4ADAdzzHO-rTeaTn28YHA3KlhkurutotXY4pliv3nUI8PdntGFFXSCiZ5_3_DHAJXxYE;pt_pin=jd_4d38fddaf0c20;
+pt_key=app_openAAJhL6FgADAXR-s-qlw79LtPza0vzOWjVd9yGxDSqFtEwQtFWmT-xhHWax2NpQIXjWdhbNK52ZQ;pt_pin=jd_7a1d4520adc95;
+pt_key=app_openAAJhL4GxADBJktZ6hY5Yi05B79cC0uNm3_J6e0n4jrL46zAJvAFXY2MGbv_7sB6zaspY6m9_awQ;pt_pin=jd_638ecf5c1732c;
+pt_key=app_openAAJhL4yOADBCVmt_BN55_7O8w0eTgKTmp45U61VngxWDU8z-11E0hhoHftbaBg-is0GhwREJ1t4;pt_pin=jd_4b632808626e5;
+pt_key=AAJhLZgOADBNIEB2GUpnHslgN7ig5CxhqwoqAgEEMtLhbRrvxfiUFsyLIWDhNROXbyVcO6Vh_WQ;pt_pin=15580875624_p;
+pt_key=app_openAAJhL6IbADDXcopEtau8xPW_G5cx09CEFVfmmYUwCzTAlJECO4ZBEFNkaHIkdpOlOMgbH1gD3vo;pt_pin=jd_AshdZQCyZsdw;
+pt_key=app_openAAJhL6LJADARKkqzUYFw-ex99K2JUD9t4wabIVufwgTTuqHIgCoJ_5FyzeuLXCmAkzf9-zhPA9E;pt_pin=jd_52caebe8f28f7;
+pt_key=app_openAAJhL6MsADBPNTb7E4dS8_G3yWbG_FKpjnDnIUQOPloSS0nZggJ7YrdBXgK_COSiBAYu2QXqtR4;pt_pin=jd_77db620d5727a;

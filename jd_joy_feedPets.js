@@ -1,13 +1,9 @@
 /*
-宠汪汪喂食(如果喂食80g失败，降级一个档次喂食（40g）,依次类推),三餐，建议一小时运行一次
-更新时间：2021-6-6
-活动入口：京东APP我的-更多工具-宠汪汪
-支持京东多个账号
-脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
+
 ==============Quantumult X==============
 [task_local]
 #京东宠汪汪喂食
-29 0-23/1 * * * jd_joy_feedPets.js, tag=京东宠汪汪喂食, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdcww.png, enabled=true
+15 0-23/1 * * * jd_joy_feedPets.js
 
 */
 const $ = new Env('宠汪汪🐕喂食');
@@ -30,7 +26,7 @@ if ($.isNode()) {
 let jdNotify = true;//是否开启静默运行。默认true开启
 let message = '', subTitle = '';
 const JD_API_HOST = 'https://jdjoy.jd.com'
-let FEED_NUM = ($.getdata('joyFeedCount') * 1) || 10;   //喂食数量默认10g,可选 10,20,40,80 , 其他数字不可.
+let FEED_NUM = ($.getdata('joyFeedCount') * 1) || 80;   //喂食数量默认10g,可选 10,20,40,80 , 其他数字不可.
 
 !(async () => {
   if (!cookiesArr[0]) {

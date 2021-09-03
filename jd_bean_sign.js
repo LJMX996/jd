@@ -1,6 +1,8 @@
 /*
+
 12 1-23/10 * * * jd_bean_sign.js
- */
+
+*/
 const $ = new Env('京东多合一签到');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;

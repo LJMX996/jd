@@ -1,13 +1,5 @@
 /*
-领券中心签到
 
-@感谢 ddo 提供sign算法
-@感谢 匿名大佬 提供pin算法
-
-活动入口：领券中心
-更新时间：2021-08-23
-已支持IOS双京东账号,Node.js支持N个京东账号
-脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ============Quantumultx===============
 [task_local]
 #领券中心签到

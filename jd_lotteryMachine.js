@@ -8,6 +8,8 @@ github： https://github.com/yangtingxiao
 #京东抽奖机
 5 * * * * jd_lotteryMachine.js, tag=京东抽奖机
 
+修改自用 By xxx
+更新时间：2021-05-25 8:50
  */
 const $ = new Env('京东抽奖机&内部互助');
 const notify = $.isNode() ? require('./sendNotify') : '';
