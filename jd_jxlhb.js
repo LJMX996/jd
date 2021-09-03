@@ -75,7 +75,7 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
       console.log(`【${$.UserName}】去助力【${code['userName']}】邀请码：${code['strUserPin']}`);
       await tojx();
       await enrollFriend(code['strUserPin']);
-      await $.wait(2000);
+      await $.wait(6000);
       if ($.max) continue
       if (!$.canHelp) break
     }
@@ -101,7 +101,7 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
       if (!$.packetIdArr[i]) continue;
       console.log(`\n【${$.UserName}】去拆第${grade}个红包`);
       await openRedPack($.packetIdArr[i]['strUserPin'], grade);
-      await $.wait(2000);
+      await $.wait(6000);
     }
   }
 })()
@@ -113,7 +113,7 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
     })
 async function main() {
   await joinActive();
-  await $.wait(2000)
+  await $.wait(6000)
   await getUserInfo()
 }
 //参与活动
