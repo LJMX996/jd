@@ -2,9 +2,9 @@ ql repo https://github.com/LJMX996/jd.git "getJDCookie|jd_|jx_|gua_|code_|zy_|jd
 
 
 
-cp -rfv /ql/repo/LJMX996_jd_aaron/utils /ql/scripts/
+cp -rfv /ql/repo/LJMX996_jd_aaron/* /ql/scripts/
 
-cp -rfv /ql/repo/LJMX996_jd_aaron/function /ql/scripts/
+
 
 
 
