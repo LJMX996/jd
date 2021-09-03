@@ -1,6 +1,6 @@
 
-cp -rf /ql/repo/LJMX996_jd_aaron/utils /ql/scripts/
 
+pnpm install @otplib/preset-default
 cd /ql/scripts && npm fund
 cd /ql/scripts && npm install jsdom
 
