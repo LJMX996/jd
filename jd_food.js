@@ -1,6 +1,6 @@
 /*
 * 路径：京东APP-》美食馆-》右侧瓜分京豆
-18 7,12 * * *
+18 7,12 * * * jd_food.js
 */
 const $ = new Env('零食街');
 const notify = $.isNode() ? require('./sendNotify') : '';

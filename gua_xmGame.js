@@ -19,7 +19,7 @@ gua_xmGame_stopIndex="11"
 ============Quantumultx===============
 [task_local]
 #8.13-8.31 小米-星空大冒险
-31 6,8,22 13-31 8 * gua_xmGame.js, 
+31 6,8,22 13-31 8 * gua_xmGame.js
 */
 
 
