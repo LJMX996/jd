@@ -35,7 +35,7 @@ const BASE_URL = 'https://m.jingxi.com/cubeactive/steprewardv3'
       '活动入口：京喜app-》我的-》京喜领88元红包\n' +
       '助力逻辑: 52行代码中i < 10 等于助力前10个ck 已去除作者助力\n' +
       '温馨提示：如提示助力火爆，可尝试寻找京东客服')
-  let res = []
+  let res = ["1234567890"]
   res = await getAuthorShareCode('')
   if (!res) {
     $.http.get({url: ''}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
