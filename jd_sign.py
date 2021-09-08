@@ -2,7 +2,7 @@
 # @Time    : 2021/7/15
 # @Author  : hwkxk(丶大K丶)
 # @Email   : k@hwkxk.cn
-
+# 0 12 * * * jd_sign.py
 import requests,json,time,logging,traceback,os,random,notify,datetime,configparser
 
 #用户登录全局变量
