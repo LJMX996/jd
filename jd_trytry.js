@@ -1,6 +1,7 @@
 /*
 新版京东试用，误传
 35 8 * * * jd_trytry.js
+
 ⚠️ 非常耗时的脚本。一个账号可能执行1小时！
 自行根据账号数量修改脚本超时时间
 每天最多关注300个商店，但用户商店关注上限为500个。
@@ -58,7 +59,7 @@ let feedsList = []; // 所有试用商品
   await try_tabList();
   console.log(tabList);
   if (tabList.length > 0) {
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < tabList.length; i++) {
       await try_feedsList(tabList[i]);
     }
   }
