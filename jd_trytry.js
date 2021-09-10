@@ -58,7 +58,7 @@ let feedsList = []; // 所有试用商品
   await try_tabList();
   console.log(tabList);
   if (tabList.length > 0) {
-    for (let i = 0; i < tabList.length; i++) {
+    for (let i = 0; i < 20; i++) {
       await try_feedsList(tabList[i]);
     }
   }
@@ -199,7 +199,7 @@ function try_feedsList(tab, page = 1) {
     $.get(option, async (err, resp, data) => {
       if (err) {
         console.log(`try_feedsList ${err}`);
-        reject(err);
+        resolve();
       }
       data = JSON.parse(data);
       if (data.success) {
@@ -207,7 +207,7 @@ function try_feedsList(tab, page = 1) {
         feedsList = feedsList.concat(data.data.feedList);
 
         if (data.data.page * data.data.pageSize < data.data.total) {
-          await $.wait(6000);
+          // await $.wait(6000);
           resolve(await try_feedsList(tab, page + 1));
         } else {
           resolve();
@@ -280,7 +280,7 @@ async function tryGoodList() {
    }
    var Range = max - min;
    var Rand = Math.random();
-   return Min + Math.round(Rand * Range);
+   return min + Math.round(Rand * Range);
  };
 
 async function try_apply(good) {
