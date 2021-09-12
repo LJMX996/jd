@@ -1,9 +1,6 @@
 /*
-京喜财富岛
-40 * * * * jd_cfd.js
-更新时间：2021-7-13
-活动入口：京喜APP-我的-京喜财富岛
-
+京喜财富岛合成月饼
+cron 25 * * * * jd_cfd_mooncake.js
 
  */
 !function (t, r) { "object" == typeof exports ? module.exports = exports = r() : "function" == typeof define && define.amd ? define([], r) : t.CryptoJS = r() }(this, function () {
@@ -13,7 +10,7 @@
     } var i = t, n = i.lib, o = n.WordArray, s = n.BlockCipher, a = i.algo, c = [57, 49, 41, 33, 25, 17, 9, 1, 58, 50, 42, 34, 26, 18, 10, 2, 59, 51, 43, 35, 27, 19, 11, 3, 60, 52, 44, 36, 63, 55, 47, 39, 31, 23, 15, 7, 62, 54, 46, 38, 30, 22, 14, 6, 61, 53, 45, 37, 29, 21, 13, 5, 28, 20, 12, 4], h = [14, 17, 11, 24, 1, 5, 3, 28, 15, 6, 21, 10, 23, 19, 12, 4, 26, 8, 16, 7, 27, 20, 13, 2, 41, 52, 31, 37, 47, 55, 30, 40, 51, 45, 33, 48, 44, 49, 39, 56, 34, 53, 46, 42, 50, 36, 29, 32], l = [1, 2, 4, 6, 8, 10, 12, 14, 15, 17, 19, 21, 23, 25, 27, 28], f = [{ 0: 8421888, 268435456: 32768, 536870912: 8421378, 805306368: 2, 1073741824: 512, 1342177280: 8421890, 1610612736: 8389122, 1879048192: 8388608, 2147483648: 514, 2415919104: 8389120, 2684354560: 33280, 2952790016: 8421376, 3221225472: 32770, 3489660928: 8388610, 3758096384: 0, 4026531840: 33282, 134217728: 0, 402653184: 8421890, 671088640: 33282, 939524096: 32768, 1207959552: 8421888, 1476395008: 512, 1744830464: 8421378, 2013265920: 2, 2281701376: 8389120, 2550136832: 33280, 2818572288: 8421376, 3087007744: 8389122, 3355443200: 8388610, 3623878656: 32770, 3892314112: 514, 4160749568: 8388608, 1: 32768, 268435457: 2, 536870913: 8421888, 805306369: 8388608, 1073741825: 8421378, 1342177281: 33280, 1610612737: 512, 1879048193: 8389122, 2147483649: 8421890, 2415919105: 8421376, 2684354561: 8388610, 2952790017: 33282, 3221225473: 514, 3489660929: 8389120, 3758096385: 32770, 4026531841: 0, 134217729: 8421890, 402653185: 8421376, 671088641: 8388608, 939524097: 512, 1207959553: 32768, 1476395009: 8388610, 1744830465: 2, 2013265921: 33282, 2281701377: 32770, 2550136833: 8389122, 2818572289: 514, 3087007745: 8421888, 3355443201: 8389120, 3623878657: 0, 3892314113: 33280, 4160749569: 8421378 }, { 0: 1074282512, 16777216: 16384, 33554432: 524288, 50331648: 1074266128, 67108864: 1073741840, 83886080: 1074282496, 100663296: 1073758208, 117440512: 16, 134217728: 540672, 150994944: 1073758224, 167772160: 1073741824, 184549376: 540688, 201326592: 524304, 218103808: 0, 234881024: 16400, 251658240: 1074266112, 8388608: 1073758208, 25165824: 540688, 41943040: 16, 58720256: 1073758224, 75497472: 1074282512, 92274688: 1073741824, 109051904: 524288, 125829120: 1074266128, 142606336: 524304, 159383552: 0, 176160768: 16384, 192937984: 1074266112, 209715200: 1073741840, 226492416: 540672, 243269632: 1074282496, 260046848: 16400, 268435456: 0, 285212672: 1074266128, 301989888: 1073758224, 318767104: 1074282496, 335544320: 1074266112, 352321536: 16, 369098752: 540688, 385875968: 16384, 402653184: 16400, 419430400: 524288, 436207616: 524304, 452984832: 1073741840, 469762048: 540672, 486539264: 1073758208, 503316480: 1073741824, 520093696: 1074282512, 276824064: 540688, 293601280: 524288, 310378496: 1074266112, 327155712: 16384, 343932928: 1073758208, 360710144: 1074282512, 377487360: 16, 394264576: 1073741824, 411041792: 1074282496, 427819008: 1073741840, 444596224: 1073758224, 461373440: 524304, 478150656: 0, 494927872: 16400, 511705088: 1074266128, 528482304: 540672 }, { 0: 260, 1048576: 0, 2097152: 67109120, 3145728: 65796, 4194304: 65540, 5242880: 67108868, 6291456: 67174660, 7340032: 67174400, 8388608: 67108864, 9437184: 67174656, 10485760: 65792, 11534336: 67174404, 12582912: 67109124, 13631488: 65536, 14680064: 4, 15728640: 256, 524288: 67174656, 1572864: 67174404, 2621440: 0, 3670016: 67109120, 4718592: 67108868, 5767168: 65536, 6815744: 65540, 7864320: 260, 8912896: 4, 9961472: 256, 11010048: 67174400, 12058624: 65796, 13107200: 65792, 14155776: 67109124, 15204352: 67174660, 16252928: 67108864, 16777216: 67174656, 17825792: 65540, 18874368: 65536, 19922944: 67109120, 20971520: 256, 22020096: 67174660, 23068672: 67108868, 24117248: 0, 25165824: 67109124, 26214400: 67108864, 27262976: 4, 28311552: 65792, 29360128: 67174400, 30408704: 260, 31457280: 65796, 32505856: 67174404, 17301504: 67108864, 18350080: 260, 19398656: 67174656, 20447232: 0, 21495808: 65540, 22544384: 67109120, 23592960: 256, 24641536: 67174404, 25690112: 65536, 26738688: 67174660, 27787264: 65796, 28835840: 67108868, 29884416: 67109124, 30932992: 67174400, 31981568: 4, 33030144: 65792 }, { 0: 2151682048, 65536: 2147487808, 131072: 4198464, 196608: 2151677952, 262144: 0, 327680: 4198400, 393216: 2147483712, 458752: 4194368, 524288: 2147483648, 589824: 4194304, 655360: 64, 720896: 2147487744, 786432: 2151678016, 851968: 4160, 917504: 4096, 983040: 2151682112, 32768: 2147487808, 98304: 64, 163840: 2151678016, 229376: 2147487744, 294912: 4198400, 360448: 2151682112, 425984: 0, 491520: 2151677952, 557056: 4096, 622592: 2151682048, 688128: 4194304, 753664: 4160, 819200: 2147483648, 884736: 4194368, 950272: 4198464, 1015808: 2147483712, 1048576: 4194368, 1114112: 4198400, 1179648: 2147483712, 1245184: 0, 1310720: 4160, 1376256: 2151678016, 1441792: 2151682048, 1507328: 2147487808, 1572864: 2151682112, 1638400: 2147483648, 1703936: 2151677952, 1769472: 4198464, 1835008: 2147487744, 1900544: 4194304, 1966080: 64, 2031616: 4096, 1081344: 2151677952, 1146880: 2151682112, 1212416: 0, 1277952: 4198400, 1343488: 4194368, 1409024: 2147483648, 1474560: 2147487808, 1540096: 64, 1605632: 2147483712, 1671168: 4096, 1736704: 2147487744, 1802240: 2151678016, 1867776: 4160, 1933312: 2151682048, 1998848: 4194304, 2064384: 4198464 }, { 0: 128, 4096: 17039360, 8192: 262144, 12288: 536870912, 16384: 537133184, 20480: 16777344, 24576: 553648256, 28672: 262272, 32768: 16777216, 36864: 537133056, 40960: 536871040, 45056: 553910400, 49152: 553910272, 53248: 0, 57344: 17039488, 61440: 553648128, 2048: 17039488, 6144: 553648256, 10240: 128, 14336: 17039360, 18432: 262144, 22528: 537133184, 26624: 553910272, 30720: 536870912, 34816: 537133056, 38912: 0, 43008: 553910400, 47104: 16777344, 51200: 536871040, 55296: 553648128, 59392: 16777216, 63488: 262272, 65536: 262144, 69632: 128, 73728: 536870912, 77824: 553648256, 81920: 16777344, 86016: 553910272, 90112: 537133184, 94208: 16777216, 98304: 553910400, 102400: 553648128, 106496: 17039360, 110592: 537133056, 114688: 262272, 118784: 536871040, 122880: 0, 126976: 17039488, 67584: 553648256, 71680: 16777216, 75776: 17039360, 79872: 537133184, 83968: 536870912, 88064: 17039488, 92160: 128, 96256: 553910272, 100352: 262272, 104448: 553910400, 108544: 0, 112640: 553648128, 116736: 16777344, 120832: 262144, 124928: 537133056, 129024: 536871040 }, { 0: 268435464, 256: 8192, 512: 270532608, 768: 270540808, 1024: 268443648, 1280: 2097152, 1536: 2097160, 1792: 268435456, 2048: 0, 2304: 268443656, 2560: 2105344, 2816: 8, 3072: 270532616, 3328: 2105352, 3584: 8200, 3840: 270540800, 128: 270532608, 384: 270540808, 640: 8, 896: 2097152, 1152: 2105352, 1408: 268435464, 1664: 268443648, 1920: 8200, 2176: 2097160, 2432: 8192, 2688: 268443656, 2944: 270532616, 3200: 0, 3456: 270540800, 3712: 2105344, 3968: 268435456, 4096: 268443648, 4352: 270532616, 4608: 270540808, 4864: 8200, 5120: 2097152, 5376: 268435456, 5632: 268435464, 5888: 2105344, 6144: 2105352, 6400: 0, 6656: 8, 6912: 270532608, 7168: 8192, 7424: 268443656, 7680: 270540800, 7936: 2097160, 4224: 8, 4480: 2105344, 4736: 2097152, 4992: 268435464, 5248: 268443648, 5504: 8200, 5760: 270540808, 6016: 270532608, 6272: 270540800, 6528: 270532616, 6784: 8192, 7040: 2105352, 7296: 2097160, 7552: 0, 7808: 268435456, 8064: 268443656 }, { 0: 1048576, 16: 33555457, 32: 1024, 48: 1049601, 64: 34604033, 80: 0, 96: 1, 112: 34603009, 128: 33555456, 144: 1048577, 160: 33554433, 176: 34604032, 192: 34603008, 208: 1025, 224: 1049600, 240: 33554432, 8: 34603009, 24: 0, 40: 33555457, 56: 34604032, 72: 1048576, 88: 33554433, 104: 33554432, 120: 1025, 136: 1049601, 152: 33555456, 168: 34603008, 184: 1048577, 200: 1024, 216: 34604033, 232: 1, 248: 1049600, 256: 33554432, 272: 1048576, 288: 33555457, 304: 34603009, 320: 1048577, 336: 33555456, 352: 34604032, 368: 1049601, 384: 1025, 400: 34604033, 416: 1049600, 432: 1, 448: 0, 464: 34603008, 480: 33554433, 496: 1024, 264: 1049600, 280: 33555457, 296: 34603009, 312: 1, 328: 33554432, 344: 1048576, 360: 1025, 376: 34604032, 392: 33554433, 408: 34603008, 424: 0, 440: 34604033, 456: 1049601, 472: 1024, 488: 33555456, 504: 1048577 }, { 0: 134219808, 1: 131072, 2: 134217728, 3: 32, 4: 131104, 5: 134350880, 6: 134350848, 7: 2048, 8: 134348800, 9: 134219776, 10: 133120, 11: 134348832, 12: 2080, 13: 0, 14: 134217760, 15: 133152, 2147483648: 2048, 2147483649: 134350880, 2147483650: 134219808, 2147483651: 134217728, 2147483652: 134348800, 2147483653: 133120, 2147483654: 133152, 2147483655: 32, 2147483656: 134217760, 2147483657: 2080, 2147483658: 131104, 2147483659: 134350848, 2147483660: 0, 2147483661: 134348832, 2147483662: 134219776, 2147483663: 131072, 16: 133152, 17: 134350848, 18: 32, 19: 2048, 20: 134219776, 21: 134217760, 22: 134348832, 23: 131072, 24: 0, 25: 131104, 26: 134348800, 27: 134219808, 28: 134350880, 29: 133120, 30: 2080, 31: 134217728, 2147483664: 131072, 2147483665: 2048, 2147483666: 134348832, 2147483667: 133152, 2147483668: 32, 2147483669: 134348800, 2147483670: 134217728, 2147483671: 134219808, 2147483672: 134350880, 2147483673: 134217760, 2147483674: 134219776, 2147483675: 0, 2147483676: 133120, 2147483677: 2080, 2147483678: 131104, 2147483679: 134350848 }], u = [4160749569, 528482304, 33030144, 2064384, 129024, 8064, 504, 2147483679], d = a.DES = s.extend({ _doReset: function () { for (var t = this._key, r = t.words, e = [], i = 0; i < 56; i++) { var n = c[i] - 1; e[i] = r[n >>> 5] >>> 31 - n % 32 & 1 } for (var o = this._subKeys = [], s = 0; s < 16; s++) { for (var a = o[s] = [], f = l[s], i = 0; i < 24; i++)a[i / 6 | 0] |= e[(h[i] - 1 + f) % 28] << 31 - i % 6, a[4 + (i / 6 | 0)] |= e[28 + (h[i + 24] - 1 + f) % 28] << 31 - i % 6; a[0] = a[0] << 1 | a[0] >>> 31; for (var i = 1; i < 7; i++)a[i] = a[i] >>> 4 * (i - 1) + 3; a[7] = a[7] << 5 | a[7] >>> 27 } for (var u = this._invSubKeys = [], i = 0; i < 16; i++)u[i] = o[15 - i] }, encryptBlock: function (t, r) { this._doCryptBlock(t, r, this._subKeys) }, decryptBlock: function (t, r) { this._doCryptBlock(t, r, this._invSubKeys) }, _doCryptBlock: function (t, i, n) { this._lBlock = t[i], this._rBlock = t[i + 1], r.call(this, 4, 252645135), r.call(this, 16, 65535), e.call(this, 2, 858993459), e.call(this, 8, 16711935), r.call(this, 1, 1431655765); for (var o = 0; o < 16; o++) { for (var s = n[o], a = this._lBlock, c = this._rBlock, h = 0, l = 0; l < 8; l++)h |= f[l][((c ^ s[l]) & u[l]) >>> 0]; this._lBlock = c, this._rBlock = a ^ h } var d = this._lBlock; this._lBlock = this._rBlock, this._rBlock = d, r.call(this, 1, 1431655765), e.call(this, 8, 16711935), e.call(this, 2, 858993459), r.call(this, 16, 65535), r.call(this, 4, 252645135), t[i] = this._lBlock, t[i + 1] = this._rBlock }, keySize: 2, ivSize: 2, blockSize: 2 }); i.DES = s._createHelper(d); var v = a.TripleDES = s.extend({ _doReset: function () { var t = this._key, r = t.words; this._des1 = d.createEncryptor(o.create(r.slice(0, 2))), this._des2 = d.createEncryptor(o.create(r.slice(2, 4))), this._des3 = d.createEncryptor(o.create(r.slice(4, 6))) }, encryptBlock: function (t, r) { this._des1.encryptBlock(t, r), this._des2.decryptBlock(t, r), this._des3.encryptBlock(t, r) }, decryptBlock: function (t, r) { this._des3.decryptBlock(t, r), this._des2.encryptBlock(t, r), this._des1.decryptBlock(t, r) }, keySize: 6, ivSize: 2, blockSize: 2 }); i.TripleDES = s._createHelper(v)
   }(), function () { function r() { for (var t = this._S, r = this._i, e = this._j, i = 0, n = 0; n < 4; n++) { r = (r + 1) % 256, e = (e + t[r]) % 256; var o = t[r]; t[r] = t[e], t[e] = o, i |= t[(t[r] + t[e]) % 256] << 24 - 8 * n } return this._i = r, this._j = e, i } var e = t, i = e.lib, n = i.StreamCipher, o = e.algo, s = o.RC4 = n.extend({ _doReset: function () { for (var t = this._key, r = t.words, e = t.sigBytes, i = this._S = [], n = 0; n < 256; n++)i[n] = n; for (var n = 0, o = 0; n < 256; n++) { var s = n % e, a = r[s >>> 2] >>> 24 - s % 4 * 8 & 255; o = (o + i[n] + a) % 256; var c = i[n]; i[n] = i[o], i[o] = c } this._i = this._j = 0 }, _doProcessBlock: function (t, e) { t[e] ^= r.call(this) }, keySize: 8, ivSize: 0 }); e.RC4 = n._createHelper(s); var a = o.RC4Drop = s.extend({ cfg: s.cfg.extend({ drop: 192 }), _doReset: function () { s._doReset.call(this); for (var t = this.cfg.drop; t > 0; t--)r.call(this) } }); e.RC4Drop = n._createHelper(a) }(), t.mode.CTRGladman = function () { function r(t) { if (255 === (t >> 24 & 255)) { var r = t >> 16 & 255, e = t >> 8 & 255, i = 255 & t; 255 === r ? (r = 0, 255 === e ? (e = 0, 255 === i ? i = 0 : ++i) : ++e) : ++r, t = 0, t += r << 16, t += e << 8, t += i } else t += 1 << 24; return t } function e(t) { return 0 === (t[0] = r(t[0])) && (t[1] = r(t[1])), t } var i = t.lib.BlockCipherMode.extend(), n = i.Encryptor = i.extend({ processBlock: function (t, r) { var i = this._cipher, n = i.blockSize, o = this._iv, s = this._counter; o && (s = this._counter = o.slice(0), this._iv = void 0), e(s); var a = s.slice(0); i.encryptBlock(a, 0); for (var c = 0; c < n; c++)t[r + c] ^= a[c] } }); return i.Decryptor = n, i }(), function () { function r() { for (var t = this._X, r = this._C, e = 0; e < 8; e++)a[e] = r[e]; r[0] = r[0] + 1295307597 + this._b | 0, r[1] = r[1] + 3545052371 + (r[0] >>> 0 < a[0] >>> 0 ? 1 : 0) | 0, r[2] = r[2] + 886263092 + (r[1] >>> 0 < a[1] >>> 0 ? 1 : 0) | 0, r[3] = r[3] + 1295307597 + (r[2] >>> 0 < a[2] >>> 0 ? 1 : 0) | 0, r[4] = r[4] + 3545052371 + (r[3] >>> 0 < a[3] >>> 0 ? 1 : 0) | 0, r[5] = r[5] + 886263092 + (r[4] >>> 0 < a[4] >>> 0 ? 1 : 0) | 0, r[6] = r[6] + 1295307597 + (r[5] >>> 0 < a[5] >>> 0 ? 1 : 0) | 0, r[7] = r[7] + 3545052371 + (r[6] >>> 0 < a[6] >>> 0 ? 1 : 0) | 0, this._b = r[7] >>> 0 < a[7] >>> 0 ? 1 : 0; for (var e = 0; e < 8; e++) { var i = t[e] + r[e], n = 65535 & i, o = i >>> 16, s = ((n * n >>> 17) + n * o >>> 15) + o * o, h = ((4294901760 & i) * i | 0) + ((65535 & i) * i | 0); c[e] = s ^ h } t[0] = c[0] + (c[7] << 16 | c[7] >>> 16) + (c[6] << 16 | c[6] >>> 16) | 0, t[1] = c[1] + (c[0] << 8 | c[0] >>> 24) + c[7] | 0, t[2] = c[2] + (c[1] << 16 | c[1] >>> 16) + (c[0] << 16 | c[0] >>> 16) | 0, t[3] = c[3] + (c[2] << 8 | c[2] >>> 24) + c[1] | 0, t[4] = c[4] + (c[3] << 16 | c[3] >>> 16) + (c[2] << 16 | c[2] >>> 16) | 0, t[5] = c[5] + (c[4] << 8 | c[4] >>> 24) + c[3] | 0, t[6] = c[6] + (c[5] << 16 | c[5] >>> 16) + (c[4] << 16 | c[4] >>> 16) | 0, t[7] = c[7] + (c[6] << 8 | c[6] >>> 24) + c[5] | 0 } var e = t, i = e.lib, n = i.StreamCipher, o = e.algo, s = [], a = [], c = [], h = o.Rabbit = n.extend({ _doReset: function () { for (var t = this._key.words, e = this.cfg.iv, i = 0; i < 4; i++)t[i] = 16711935 & (t[i] << 8 | t[i] >>> 24) | 4278255360 & (t[i] << 24 | t[i] >>> 8); var n = this._X = [t[0], t[3] << 16 | t[2] >>> 16, t[1], t[0] << 16 | t[3] >>> 16, t[2], t[1] << 16 | t[0] >>> 16, t[3], t[2] << 16 | t[1] >>> 16], o = this._C = [t[2] << 16 | t[2] >>> 16, 4294901760 & t[0] | 65535 & t[1], t[3] << 16 | t[3] >>> 16, 4294901760 & t[1] | 65535 & t[2], t[0] << 16 | t[0] >>> 16, 4294901760 & t[2] | 65535 & t[3], t[1] << 16 | t[1] >>> 16, 4294901760 & t[3] | 65535 & t[0]]; this._b = 0; for (var i = 0; i < 4; i++)r.call(this); for (var i = 0; i < 8; i++)o[i] ^= n[i + 4 & 7]; if (e) { var s = e.words, a = s[0], c = s[1], h = 16711935 & (a << 8 | a >>> 24) | 4278255360 & (a << 24 | a >>> 8), l = 16711935 & (c << 8 | c >>> 24) | 4278255360 & (c << 24 | c >>> 8), f = h >>> 16 | 4294901760 & l, u = l << 16 | 65535 & h; o[0] ^= h, o[1] ^= f, o[2] ^= l, o[3] ^= u, o[4] ^= h, o[5] ^= f, o[6] ^= l, o[7] ^= u; for (var i = 0; i < 4; i++)r.call(this) } }, _doProcessBlock: function (t, e) { var i = this._X; r.call(this), s[0] = i[0] ^ i[5] >>> 16 ^ i[3] << 16, s[1] = i[2] ^ i[7] >>> 16 ^ i[5] << 16, s[2] = i[4] ^ i[1] >>> 16 ^ i[7] << 16, s[3] = i[6] ^ i[3] >>> 16 ^ i[1] << 16; for (var n = 0; n < 4; n++)s[n] = 16711935 & (s[n] << 8 | s[n] >>> 24) | 4278255360 & (s[n] << 24 | s[n] >>> 8), t[e + n] ^= s[n] }, blockSize: 4, ivSize: 2 }); e.Rabbit = n._createHelper(h) }(), t.mode.CTR = function () { var r = t.lib.BlockCipherMode.extend(), e = r.Encryptor = r.extend({ processBlock: function (t, r) { var e = this._cipher, i = e.blockSize, n = this._iv, o = this._counter; n && (o = this._counter = n.slice(0), this._iv = void 0); var s = o.slice(0); e.encryptBlock(s, 0), o[i - 1] = o[i - 1] + 1 | 0; for (var a = 0; a < i; a++)t[r + a] ^= s[a] } }); return r.Decryptor = e, r }(), function () { function r() { for (var t = this._X, r = this._C, e = 0; e < 8; e++)a[e] = r[e]; r[0] = r[0] + 1295307597 + this._b | 0, r[1] = r[1] + 3545052371 + (r[0] >>> 0 < a[0] >>> 0 ? 1 : 0) | 0, r[2] = r[2] + 886263092 + (r[1] >>> 0 < a[1] >>> 0 ? 1 : 0) | 0, r[3] = r[3] + 1295307597 + (r[2] >>> 0 < a[2] >>> 0 ? 1 : 0) | 0, r[4] = r[4] + 3545052371 + (r[3] >>> 0 < a[3] >>> 0 ? 1 : 0) | 0, r[5] = r[5] + 886263092 + (r[4] >>> 0 < a[4] >>> 0 ? 1 : 0) | 0, r[6] = r[6] + 1295307597 + (r[5] >>> 0 < a[5] >>> 0 ? 1 : 0) | 0, r[7] = r[7] + 3545052371 + (r[6] >>> 0 < a[6] >>> 0 ? 1 : 0) | 0, this._b = r[7] >>> 0 < a[7] >>> 0 ? 1 : 0; for (var e = 0; e < 8; e++) { var i = t[e] + r[e], n = 65535 & i, o = i >>> 16, s = ((n * n >>> 17) + n * o >>> 15) + o * o, h = ((4294901760 & i) * i | 0) + ((65535 & i) * i | 0); c[e] = s ^ h } t[0] = c[0] + (c[7] << 16 | c[7] >>> 16) + (c[6] << 16 | c[6] >>> 16) | 0, t[1] = c[1] + (c[0] << 8 | c[0] >>> 24) + c[7] | 0, t[2] = c[2] + (c[1] << 16 | c[1] >>> 16) + (c[0] << 16 | c[0] >>> 16) | 0, t[3] = c[3] + (c[2] << 8 | c[2] >>> 24) + c[1] | 0, t[4] = c[4] + (c[3] << 16 | c[3] >>> 16) + (c[2] << 16 | c[2] >>> 16) | 0, t[5] = c[5] + (c[4] << 8 | c[4] >>> 24) + c[3] | 0, t[6] = c[6] + (c[5] << 16 | c[5] >>> 16) + (c[4] << 16 | c[4] >>> 16) | 0, t[7] = c[7] + (c[6] << 8 | c[6] >>> 24) + c[5] | 0 } var e = t, i = e.lib, n = i.StreamCipher, o = e.algo, s = [], a = [], c = [], h = o.RabbitLegacy = n.extend({ _doReset: function () { var t = this._key.words, e = this.cfg.iv, i = this._X = [t[0], t[3] << 16 | t[2] >>> 16, t[1], t[0] << 16 | t[3] >>> 16, t[2], t[1] << 16 | t[0] >>> 16, t[3], t[2] << 16 | t[1] >>> 16], n = this._C = [t[2] << 16 | t[2] >>> 16, 4294901760 & t[0] | 65535 & t[1], t[3] << 16 | t[3] >>> 16, 4294901760 & t[1] | 65535 & t[2], t[0] << 16 | t[0] >>> 16, 4294901760 & t[2] | 65535 & t[3], t[1] << 16 | t[1] >>> 16, 4294901760 & t[3] | 65535 & t[0]]; this._b = 0; for (var o = 0; o < 4; o++)r.call(this); for (var o = 0; o < 8; o++)n[o] ^= i[o + 4 & 7]; if (e) { var s = e.words, a = s[0], c = s[1], h = 16711935 & (a << 8 | a >>> 24) | 4278255360 & (a << 24 | a >>> 8), l = 16711935 & (c << 8 | c >>> 24) | 4278255360 & (c << 24 | c >>> 8), f = h >>> 16 | 4294901760 & l, u = l << 16 | 65535 & h; n[0] ^= h, n[1] ^= f, n[2] ^= l, n[3] ^= u, n[4] ^= h, n[5] ^= f, n[6] ^= l, n[7] ^= u; for (var o = 0; o < 4; o++)r.call(this) } }, _doProcessBlock: function (t, e) { var i = this._X; r.call(this), s[0] = i[0] ^ i[5] >>> 16 ^ i[3] << 16, s[1] = i[2] ^ i[7] >>> 16 ^ i[5] << 16, s[2] = i[4] ^ i[1] >>> 16 ^ i[7] << 16, s[3] = i[6] ^ i[3] >>> 16 ^ i[1] << 16; for (var n = 0; n < 4; n++)s[n] = 16711935 & (s[n] << 8 | s[n] >>> 24) | 4278255360 & (s[n] << 24 | s[n] >>> 8), t[e + n] ^= s[n] }, blockSize: 4, ivSize: 2 }); e.RabbitLegacy = n._createHelper(h) }(), t.pad.ZeroPadding = { pad: function (t, r) { var e = 4 * r; t.clamp(), t.sigBytes += e - (t.sigBytes % e || e) }, unpad: function (t) { for (var r = t.words, e = t.sigBytes - 1; !(r[e >>> 2] >>> 24 - e % 4 * 8 & 255);)e--; t.sigBytes = e + 1 } }, t
 });
-const $ = new Env("京喜财富岛");
+const $ = new Env("京喜财富岛合成月饼");
 const JD_API_HOST = "https://m.jingxi.com/";
 const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require("./jdCookie.js") : "";
@@ -136,227 +133,122 @@ async function cfd() {
       }
     }
 
-    // 寻宝
-    console.log(`寻宝`)
-    let XBDetail = beginInfo.XbStatus.XBDetail.filter((x) => x.dwRemainCnt !== 0)
-    if (XBDetail.length !== 0) {
-      console.log(`开始寻宝`)
-      for (let key of Object.keys(XBDetail)) {
-        let vo = XBDetail[key]
-        await $.wait(2000)
-        await TreasureHunt(vo.strIndex)
-      }
-    } else {
-      console.log(`暂无宝物`)
-    }
-
-    //每日签到
+    //抽奖
     await $.wait(2000)
-    await getTakeAggrPage('sign')
-
-    //小程序每日签到
-    await $.wait(2000)
-    await getTakeAggrPage('wxsign')
+    await composePearlState(4)
 
     //助力奖励
     await $.wait(2000)
-    await getTakeAggrPage('helpdraw')
+    await composePearlState(2)
 
-    console.log('')
-    //卖贝壳
-    // await $.wait(2000)
-    // await querystorageroom('1')
-
-    //升级建筑
-    await $.wait(2000)
-    for(let key of Object.keys($.info.buildInfo.buildList)) {
-      let vo = $.info.buildInfo.buildList[key]
-      let body = `strBuildIndex=${vo.strBuildIndex}`
-      await getBuildInfo(body, vo)
+    //合成月饼
+    let count = $.isNode() ? (process.env.JD_CFD_RUNNUM ? process.env.JD_CFD_RUNNUM * 1 : Math.floor((Math.random() * 2)) + 3) : ($.getdata('JD_CFD_RUNNUM') ? $.getdata('JD_CFD_RUNNUM') * 1 : Math.floor((Math.random() * 2)) + 3);
+    console.log(`\n合成月饼`)
+    console.log(`合成月饼运行次数为：${count}\n`)
+    let num = 0
+    do {
       await $.wait(2000)
-    }
-
-    //合成珍珠
-    // if (nowTimes.getHours() >= 5) {
-    //   await $.wait(2000)
-    //   await composeGameState()
-    // }
-
-    //接待贵宾
-    console.log(`接待贵宾`)
-    if ($.info.StoryInfo.StoryList) {
-      await $.wait(2000)
-      for (let key of Object.keys($.info.StoryInfo.StoryList)) {
-        let vo = $.info.StoryInfo.StoryList[key]
-        if (vo.Special) {
-          console.log(`请贵宾下船，需等待${vo.Special.dwWaitTime}秒`)
-          await specialUserOper(vo.strStoryId, '2', vo.ddwTriggerDay, vo)
-          await $.wait(vo.Special.dwWaitTime * 1000)
-          await specialUserOper(vo.strStoryId, '3', vo.ddwTriggerDay, vo)
-          await $.wait(2000)
-        } else {
-          console.log(`当前暂无贵宾\n`)
-        }
-      }
-    } else {
-      console.log(`当前暂无贵宾\n`)
-    }
-
-    //收藏家
-    console.log(`收藏家`)
-    if ($.info.StoryInfo.StoryList) {
-      await $.wait(2000)
-      for (let key of Object.keys($.info.StoryInfo.StoryList)) {
-        let vo = $.info.StoryInfo.StoryList[key]
-        if (vo.Collector) {
-          console.log(`喜欢贝壳的收藏家来了，快去卖贝壳吧~`)
-          await collectorOper(vo.strStoryId, '2', vo.ddwTriggerDay)
-          await $.wait(2000)
-          await querystorageroom('2')
-          await $.wait(2000)
-          await collectorOper(vo.strStoryId, '4', vo.ddwTriggerDay)
-        } else {
-          console.log(`当前暂无收藏家\n`)
-        }
-      }
-    } else {
-      console.log(`当前暂无收藏家\n`)
-    }
-
-    //美人鱼
-    console.log(`美人鱼`)
-    if ($.info.StoryInfo.StoryList) {
-      await $.wait(2000)
-      for (let key of Object.keys($.info.StoryInfo.StoryList)) {
-        let vo = $.info.StoryInfo.StoryList[key]
-        if (vo.Mermaid) {
-          if (vo.Mermaid.dwIsToday === 1) {
-            console.log(`可怜的美人鱼困在沙滩上了，快去解救她吧~`)
-            await mermaidOper(vo.strStoryId, '1', vo.ddwTriggerDay)
-          } else if (vo.Mermaid.dwIsToday === 0) {
-            await mermaidOper(vo.strStoryId, '4', vo.ddwTriggerDay)
-          }
-        } else {
-          console.log(`当前暂无美人鱼\n`)
-        }
-      }
-    } else {
-      console.log(`当前暂无美人鱼\n`)
-    }
-
-    //倒垃圾
-    await $.wait(2000)
-    await queryRubbishInfo()
-
-    //雇导游
-    await $.wait(2000);
-    await employTourGuideInfo();
-
-    console.log(`\n做任务`)
-    //牛牛任务
-    await $.wait(2000)
-    await getActTask()
-
-    //日常任务
-    await $.wait(2000);
-    await getTaskList(0);
-    await $.wait(2000);
-    await browserTask(0);
-
-    //成就任务
-    await $.wait(2000);
-    await getTaskList(1);
-    await $.wait(2000);
-    await browserTask(1);
-
-    await $.wait(2000);
-    const endInfo = await getUserInfo(false);
-    $.result.push(
-        `【京东账号${$.index}】${$.nickName || $.UserName}`,
-        `【🥇金币】${endInfo.ddwCoinBalance}`,
-        `【💵财富值】${endInfo.ddwRichBalance}\n`,
-    );
+      await composePearlState(3)
+      num++
+    } while (!$.stop && num < count)
 
   } catch (e) {
     $.logErr(e)
   }
 }
 
-// 寻宝
-function TreasureHunt(strIndex) {
-  return new Promise((resolve) => {
-    $.get(taskUrl(`user/TreasureHunt`, `strIndex=${strIndex}`), (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} TreasureHunt API请求失败，请检查网路重试`)
-        } else {
-          data = JSON.parse(data);
-          if (data.iRet === 0) {
-            if (data.AwardInfo.dwAwardType === 0) {
-              console.log(`${data.strAwardDesc}，获得 ${data.AwardInfo.ddwValue} 金币`)
-            } else if (data.AwardInfo.dwAwardType === 1) {
-              console.log(`${data.strAwardDesc}，获得 ${data.AwardInfo.ddwValue} 财富`)
-            } else {
-              console.log(JSON.stringify(data))
-            }
-          } else {
-            console.log(`寻宝失败：${data.sErrMsg}`)
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp);
-      } finally {
-        resolve();
-      }
-    })
-  })
-}
-
-// 合成珍珠
-async function composeGameState(type = true) {
+// 合成月饼
+async function composePearlState(type) {
   return new Promise(async (resolve) => {
-    $.get(taskUrl(`user/ComposeGameState`, `dwFirst=1`), async (err, resp, data) => {
+    $.get(taskUrl(`user/ComposePearlState`, `__t=${Date.now()}&dwGetType=0`), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} ComposeGameState API请求失败，请检查网路重试`)
+          console.log(`${$.name} ComposePearlState API请求失败，请检查网路重试`)
         } else {
-          data = JSON.parse(data);
-          if (type) {
-            console.log(`合成珍珠`)
-            if (data.iRet === 0) {
-              if (data.dwCurProgress < data.stagelist[data.stagelist.length - 1].dwCurStageEndCnt && data.strDT) {
-                let count = data.stagelist[data.stagelist.length - 1].dwCurStageEndCnt
-                console.log(`当前已合成${data.dwCurProgress}颗珍珠，还需合成珍珠${count - data.dwCurProgress}颗\n`)
-                for (let j = data.dwCurProgress; j < count; j++) {
-                  let num = Math.ceil(Math.random() * 12 + 12)
-                  console.log(`合成珍珠：模拟操作${num}次`)
+          switch (type) {
+            case 1:
+              data = JSON.parse(data);
+              break
+            case 2:
+              data = JSON.parse(data);
+              console.log(`领助力奖励`)
+              if (data.iRet === 0) {
+                let helpNum = []
+                for (let key of Object.keys(data.helpInfo.HelpList)) {
+                  let vo = data.helpInfo.HelpList[key]
+                  if (vo.dwStatus !== 1 && vo.dwIsHasAward === 1 && vo.dwIsHelp === 1) {
+                    helpNum.push(vo.dwId)
+                  }
+                }
+                if (helpNum.length !== 0) {
+                  for (let j = 0; j < helpNum.length; j++) {
+                    await pearlHelpDraw(data.ddwSeasonStartTm, helpNum[j])
+                    await $.wait(2000)
+                    data = await composePearlState(1)
+                  }
+                } else {
+                  console.log(`暂无可领助力奖励`)
+                }
+              }
+              break
+            case 3:
+              data = JSON.parse(data);
+              if (data.iRet === 0) {
+                console.log(`当前已合成${data.dwCurProgress}颗月饼，总计获得${data.ddwVirHb / 100}元红包`)
+                if (data.strDT) {
+                  let beacon = data.PearlList[0]
+                  data.PearlList.shift()
+                  let beaconType = beacon.type
+                  let num = Math.ceil(Math.random() * 12 + 8)
+                  console.log(`合成月饼：模拟操作${num}次`)
                   for (let v = 0; v < num; v++) {
                     console.log(`模拟操作进度：${v + 1}/${num}`)
                     await $.wait(2000)
                     await realTmReport(data.strMyShareId)
+                    if (beacon.rbf) {
+                      let size = 1
+                      for (let key of Object.keys(data.PearlList)) {
+                        let vo = data.PearlList[key]
+                        if (vo.rbf && vo.type === beaconType) {
+                          size = 2
+                          vo.rbf = 0
+                          break
+                        }
+                      }
+                      await composePearlAward(data.strDT, beaconType, size)
+                    }
                   }
-                  let res = await composeGameAddProcess(data.strDT)
+                  let strLT = data.oPT[data.ddwCurTime % data.oPT.length]
+                  let res = await composePearlAddProcess(data.strDT, strLT)
                   if (res.iRet === 0) {
-                    console.log(`\n合成珍珠成功：${j + 1}/${count}\n`)
+                    console.log(`\n合成月饼成功：获得${res.ddwAwardHb / 100}元红包\n`)
+                    if (res.ddwAwardHb === 0) {
+                      $.stop = true
+                      console.log(`合成月饼没有奖励，停止运行\n`)
+                    }
                   } else {
-                    console.log(`\n合成珍珠失败：${data.sErrMsg}\n`)
+                    console.log(`\n合成月饼失败：${res.sErrMsg}\n`)
                   }
+                } else {
+                  console.log(`今日已完成\n`)
                 }
-                let composeGameStateRes = await composeGameState(false)
-                console.log("合成珍珠领奖")
-                for (let key of Object.keys(composeGameStateRes.stagelist)) {
-                  let vo = composeGameStateRes.stagelist[key]
-                  if (vo.dwIsAward == 0 && composeGameStateRes.dwCurProgress >= vo.dwCurStageEndCnt) {
-                    await $.wait(2000)
-                    await composeGameAward(vo.dwCurStageEndCnt)
-                  }
-                }
-              } else {
-                console.log(`今日已完成\n`)
               }
-            }
+              break
+            case 4:
+              data = JSON.parse(data);
+              console.log(`每日抽奖`)
+              if (data.iRet === 0) {
+                if (data.dayDrawInfo.dwIsDraw === 0) {
+                  let strToken = (await getPearlDailyReward()).strToken
+                  await $.wait(2000)
+                  await pearlDailyDraw(data.ddwSeasonStartTm, strToken)
+                } else {
+                  console.log(`无抽奖次数\n`)
+                }
+              }
+            default:
+              break;
           }
         }
       } catch (e) {
@@ -369,7 +261,7 @@ async function composeGameState(type = true) {
 }
 function realTmReport(strMyShareId) {
   return new Promise((resolve) => {
-    $.get(taskUrl(`user/RealTmReport`, `dwIdentityType=0&strBussKey=composegame&strMyShareId=${strMyShareId}&ddwCount=5`), (err, resp, data) => {
+    $.get(taskUrl(`user/RealTmReport`, `__t=${Date.now()}&dwIdentityType=0&strBussKey=composegame&strMyShareId=${strMyShareId}&ddwCount=10`), (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -385,13 +277,13 @@ function realTmReport(strMyShareId) {
     })
   })
 }
-function composeGameAddProcess(strDT) {
+function composePearlAddProcess(strDT, strLT) {
   return new Promise((resolve) => {
-    $.get(taskUrl(`user/ComposeGameAddProcess`, `strBT=${strDT}`), (err, resp, data) => {
+    $.get(taskUrl(`user/ComposePearlAddProcess`, `strBT=${strDT}&strLT=${strLT}`), (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} ComposeGameAddProcess API请求失败，请检查网路重试`)
+          console.log(`${$.name} ComposePearlAddProcess API请求失败，请检查网路重试`)
         } else {
           data = JSON.parse(data);
         }
@@ -403,23 +295,37 @@ function composeGameAddProcess(strDT) {
     })
   })
 }
-function composeGameAward(dwCurStageEndCnt) {
+function getPearlDailyReward() {
   return new Promise((resolve) => {
-    $.get(taskUrl(`user/ComposeGameAward`, `dwCurStageEndCnt=${dwCurStageEndCnt}`), (err, resp, data) => {
+    $.get(taskUrl(`user/GetPearlDailyReward`, `__t=${Date.now()}`), (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} ComposeGameAward API请求失败，请检查网路重试`)
+          console.log(`${$.name} GetPearlDailyReward API请求失败，请检查网路重试`)
+        } else {
+          data = JSON.parse(data);
+        }
+      } catch (e) {
+        $.logErr(e, resp);
+      } finally {
+        resolve(data);
+      }
+    })
+  })
+}
+function pearlDailyDraw(ddwSeasonStartTm, strToken) {
+  return new Promise((resolve) => {
+    $.get(taskUrl(`user/PearlDailyDraw`, `__t=${Date.now()}&ddwSeaonStart=${ddwSeasonStartTm}&strToken=${strToken}`), (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${JSON.stringify(err)}`)
+          console.log(`${$.name} PearlDailyDraw API请求失败，请检查网路重试`)
         } else {
           data = JSON.parse(data);
           if (data.iRet === 0) {
-            if (data.dwPrizeType === 0) {
-              console.log(`合成珍珠领奖成功：获得${data.ddwCoin}金币`)
-            } else if (data.dwPrizeType === 1) {
-              console.log(`合成珍珠领奖成功：获得${data.ddwMoney}财富\n`)
-            }
+            console.log(`抽奖成功：获得${data.strPrizeName || JSON.stringify(data)}\n`)
           } else {
-            console.log(`合成珍珠领奖失败：${data.sErrMsg}\n`)
+            console.log(`抽奖失败：${data.sErrMsg}\n`)
           }
         }
       } catch (e) {
@@ -430,323 +336,42 @@ function composeGameAward(dwCurStageEndCnt) {
     })
   })
 }
-
-// 接待贵宾
-function specialUserOper(strStoryId, dwType, ddwTriggerDay, StoryList) {
+function composePearlAward(strDT, type, size) {
   return new Promise((resolve) => {
-    $.get(taskUrl(`story/SpecialUserOper`, `strStoryId=${strStoryId}&dwType=${dwType}&triggerType=0&ddwTriggerDay=${ddwTriggerDay}`), (err, resp, data) => {
+    $.get(taskUrl(`user/ComposePearlAward`, `__t=${Date.now()}&type=${type}&size=${size}&strBT=${strDT}`), (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} SpecialUserOper API请求失败，请检查网路重试`)
-        } else {
-          data = JSON.parse(data);
-          if (dwType === '2') {
-            if (data.iRet === 0 || data.sErrMsg === "success") {
-              console.log(`贵宾'${StoryList.Special.strName}'下船成功`)
-            } else {
-              console.log(`贵宾'${StoryList.Special.strName}'下船失败 ${data.sErrMsg}\n`)
-            }
-          } else if (dwType === '3') {
-            if (data.iRet === 0 || data.sErrMsg === "success") {
-              console.log(`贵宾'${StoryList.Special.strName}'用餐成功：获得${StoryList.Special.ddwCoin}金币\n`)
-            } else {
-              console.log(`贵宾'${StoryList.Special.strName}'用餐失败：${data.sErrMsg}\n`)
-            }
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp);
-      } finally {
-        resolve();
-      }
-    })
-  })
-}
-
-// 收藏家
-function collectorOper(strStoryId, dwType, ddwTriggerDay) {
-  return new Promise((resolve) => {
-    $.get(taskUrl(`story/CollectorOper`, `strStoryId=${strStoryId}&dwType=${dwType}&ddwTriggerDay=${ddwTriggerDay}`), (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} CollectorOper API请求失败，请检查网路重试`)
-        } else {
-          data = JSON.parse(data);
-        }
-      } catch (e) {
-        $.logErr(e, resp);
-      } finally {
-        resolve(data);
-      }
-    })
-  })
-}
-
-// 美人鱼
-async function mermaidOper(strStoryId, dwType, ddwTriggerDay) {
-  return new Promise(async (resolve) => {
-    $.get(taskUrl(`story/MermaidOper`, `strStoryId=${strStoryId}&dwType=${dwType}&ddwTriggerDay=${ddwTriggerDay}`), async (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} MermaidOper API请求失败，请检查网路重试`)
-        } else {
-          data = JSON.parse(data);
-          switch (dwType) {
-            case '1':
-              if (data.iRet === 0 || data.sErrMsg === 'success') {
-                console.log(`开始解救美人鱼`)
-                dwType = '3'
-                await mermaidOper(strStoryId, dwType, ddwTriggerDay)
-                await $.wait(2000)
-              } else {
-                console.log(`开始解救美人鱼失败：${data.sErrMsg}\n`)
-              }
-              break
-            case '2':
-              break
-            case '3':
-              if (data.iRet === 0 || data.sErrMsg === 'success') {
-                dwType = '2'
-                let mermaidOperRes = await mermaidOper(strStoryId, dwType, ddwTriggerDay)
-                console.log(`解救美人鱼成功：获得${mermaidOperRes.Data.ddwCoin || '0'}金币\n`)
-              } else {
-                console.log(`解救美人鱼失败：${data.sErrMsg}\n`)
-              }
-              break
-            case '4':
-              if (data.iRet === 0 || data.sErrMsg === 'success') {
-                console.log(`昨日解救美人鱼领奖成功：获得${data.Data.Prize.strPrizeName}\n`)
-              } else {
-                console.log(`昨日解救美人鱼领奖失败：${data.sErrMsg}\n`)
-              }             
-              break
-            default:
-              break
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp);
-      } finally {
-        resolve(data);
-      }
-    })
-  })
-}
-
-// 卖贝壳
-async function querystorageroom(dwSceneId) {
-  return new Promise(async (resolve) => {
-    $.get(taskUrl(`story/querystorageroom`), async (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} querystorageroom API请求失败，请检查网路重试`)
-        } else {
-          data = JSON.parse(data);
-          console.log(`\n卖贝壳`)
-          let bags = []
-          for (let key of Object.keys(data.Data.Office)) {
-            let vo = data.Data.Office[key]
-            bags.push(vo.dwType)
-            bags.push(vo.dwCount)
-          }
-          if (bags.length !== 0) {
-            let strTypeCnt = ''
-            for (let j = 0; j < bags.length; j++) {
-              if (j % 2 === 0) {
-                strTypeCnt += `${bags[j]}:`
-              } else {
-                strTypeCnt += `${bags[j]}|`
-              }
-            }
-            await $.wait(2000)
-            await sellgoods(`strTypeCnt=${strTypeCnt}&dwSceneId=${dwSceneId}`)
-          } else {
-            console.log(`背包是空的，快去捡贝壳吧\n`)
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp);
-      } finally {
-        resolve();
-      }
-    })
-  })
-}
-function sellgoods(body) {
-  return new Promise((resolve) => {
-    $.get(taskUrl(`story/sellgoods`, body), (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} sellgoods API请求失败，请检查网路重试`)
+          console.log(`${$.name} ComposePearlAward API请求失败，请检查网路重试`)
         } else {
           data = JSON.parse(data);
           if (data.iRet === 0) {
-            console.log(`贝壳出售成功：获得${data.Data.ddwCoin}金币 ${data.Data.ddwMoney}财富\n`)
+            console.log(`模拟操作中奖：获得${data.ddwAwardHb / 100}元红包，总计获得${data.ddwVirHb / 100}元红包`)
           } else {
-            console.log(`贝壳出售失败：${data.sErrMsg}\n`)
+            console.log(`模拟操作未中奖：${data.sErrMsg}`)
           }
         }
       } catch (e) {
         $.logErr(e, resp);
       } finally {
-        resolve();
+        resolve(data);
       }
     })
   })
 }
 
-// 每日签到
-async function getTakeAggrPage(type) {
-  return new Promise(async (resolve) => {
-    switch (type) {
-      case 'sign':
-        $.get(taskUrl(`story/GetTakeAggrPage`), async (err, resp, data) => {
-          try {
-            if (err) {
-              console.log(`${JSON.stringify(err)}`)
-              console.log(`${$.name} GetTakeAggrPage API请求失败，请检查网路重试`)
-            } else {
-              data = JSON.parse(data);
-              console.log(`\n每日签到`)
-              for (let key of Object.keys(data.Data.Sign.SignList)) {
-                let vo = data.Data.Sign.SignList[key]
-                if (vo.dwDayId === data.Data.Sign.dwTodayId) {
-                  if (vo.dwStatus !== 1) {
-                    const body = `ddwCoin=${vo.ddwCoin}&ddwMoney=${vo.ddwMoney}&dwPrizeType=${vo.dwPrizeType}&strPrizePool=${vo.strPrizePool}&dwPrizeLv=${vo.dwBingoLevel}&strPgUUNum=${token['farm_jstoken']}&strPgtimestamp=${token['timestamp']}&strPhoneID=${token['phoneid']}`
-                    await rewardSign(body)
-                    await $.wait(2000)
-                  } else {
-                    console.log(`今日已签到\n`)
-                    break
-                  }
-                }
-              }
-            }
-          } catch (e) {
-            $.logErr(e, resp);
-          } finally {
-            resolve();
-          }
-        })
-        break
-      case 'wxsign':
-        $.get(taskUrl(`story/GetTakeAggrPage`, '', 6), async (err, resp, data) => {
-          try {
-            if (err) {
-              console.log(`${JSON.stringify(err)}`)
-              console.log(`${$.name} GetTakeAggrPage API请求失败，请检查网路重试`)
-            } else {
-              data = JSON.parse(data);
-              console.log(`小程序每日签到`)
-              for (let key of Object.keys(data.Data.Sign.SignList)) {
-                let vo = data.Data.Sign.SignList[key]
-                if (vo.dwDayId === data.Data.Sign.dwTodayId) {
-                  if (vo.dwStatus !== 1) {
-                    const body = `ddwCoin=${vo.ddwCoin}&ddwMoney=${vo.ddwMoney}&dwPrizeType=${vo.dwPrizeType}&strPrizePool=${vo.strPrizePool}&dwPrizeLv=${vo.dwBingoLevel}&strPgUUNum=${token['farm_jstoken']}&strPgtimestamp=${token['timestamp']}&strPhoneID=${token['phoneid']}`
-                    await rewardSign(body, 6)
-                    await $.wait(2000)
-                  } else {
-                    console.log(`今日已签到\n`)
-                    break
-                  }
-                }
-              }
-            }
-          } catch (e) {
-            $.logErr(e, resp);
-          } finally {
-            resolve();
-          }
-        })
-        break
-      case 'helpdraw':
-        $.get(taskUrl(`story/GetTakeAggrPage`), async (err, resp, data) => {
-          try {
-            if (err) {
-              console.log(`${JSON.stringify(err)}`)
-              console.log(`${$.name} GetTakeAggrPage API请求失败，请检查网路重试`)
-            } else {
-              data = JSON.parse(data);
-              console.log(`领助力奖励`)
-              let helpNum = []
-              for (let key of Object.keys(data.Data.Employee.EmployeeList)) {
-                let vo = data.Data.Employee.EmployeeList[key]
-                if (vo.dwStatus !== 1) {
-                  helpNum.push(vo.dwId)
-                }
-              }
-              if (helpNum.length !== 0) {
-                for (let j = 0; j < helpNum.length; j++) {
-                  await helpdraw(helpNum[j])
-                  await $.wait(2000)
-                }
-              } else {
-                console.log(`暂无可领助力奖励`)
-              }
-            }
-          } catch (e) {
-            $.logErr(e, resp);
-          } finally {
-            resolve();
-          }
-        })
-        break
-      default:
-        break
-    }
-  })
-}
-function rewardSign(body, dwEnv = 7) {
+// 助力奖励
+function pearlHelpDraw(ddwSeasonStartTm, dwUserId) {
   return new Promise((resolve) => {
-    $.get(taskUrl(`story/RewardSign`, body, dwEnv), (err, resp, data) => {
+    $.get(taskUrl(`user/PearlHelpDraw`, `__t=${Date.now()}&ddwSeaonStart=${ddwSeasonStartTm}&dwUserId=${dwUserId}`), (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} RewardSign API请求失败，请检查网路重试`)
+          console.log(`${$.name} PearlHelpDraw API请求失败，请检查网路重试`)
         } else {
           data = JSON.parse(data);
-          if (data.iRet === 0 || data.sErrMsg === "success") {
-            if (data.Data.ddwCoin) {
-              console.log(`签到成功：获得${data.Data.ddwCoin}金币\n`)
-            } else if (data.Data.ddwMoney) {
-              console.log(`签到成功：获得${data.Data.ddwMoney}财富\n`)
-            } else if (data.Data.strPrizeName) {
-              console.log(`签到成功：获得${data.Data.strPrizeName}\n`)
-            } else {
-              console.log(`签到成功：很遗憾未中奖~\n`)
-            }
-          } else {
-            console.log(`签到失败：${data.sErrMsg}\n`)
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp);
-      } finally {
-        resolve();
-      }
-    })
-  })
-}
-function helpdraw(dwUserId) {
-  return new Promise((resolve) => {
-    $.get(taskUrl(`story/helpdraw`, `dwUserId=${dwUserId}`), (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} helpdraw API请求失败，请检查网路重试`)
-        } else {
-          data = JSON.parse(data);
-          if (data.iRet === 0 || data.sErrMsg === "success") {
-            if (data.Data.StagePrizeInfo) {
-              console.log(`领取助力奖励成功：获得${data.Data.ddwCoin}金币 ${data.Data.StagePrizeInfo.ddwMoney}财富 ${(data.Data.StagePrizeInfo.strPrizeName && !data.Data.StagePrizeInfo.ddwMoney) ? data.Data.StagePrizeInfo.strPrizeName : `0元`}红包`)
-            } else {
-              console.log(`领取助力奖励成功：获得${data.Data.ddwCoin}金币`)
-            }
+          if (data.iRet === 0) {
+            console.log(`领取助力奖励成功：获得${data.StagePrizeInfo.ddwAwardHb / 100}元红包，总计获得${data.StagePrizeInfo.ddwVirHb / 100}元红包`)
           } else {
             console.log(`领取助力奖励失败：${data.sErrMsg}`)
           }
@@ -760,418 +385,10 @@ function helpdraw(dwUserId) {
   })
 }
 
-// 倒垃圾
-async function queryRubbishInfo() {
-  return new Promise(async (resolve) => {
-    $.get(taskUrl(`story/QueryRubbishInfo`), async (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} QueryRubbishInfo API请求失败，请检查网路重试`)
-        } else {
-          data = JSON.parse(data);
-          console.log(`倒垃圾`)
-          if (data.Data.StoryInfo.StoryList.length !== 0) {
-            for (let key of Object.keys(data.Data.StoryInfo.StoryList)) {
-              let vo = data.Data.StoryInfo.StoryList[key]
-              if (vo.Rubbish) {
-                await $.wait(2000)
-                let rubbishOperRes = await rubbishOper('1')
-                if (Object.keys(rubbishOperRes.Data.ThrowRubbish.Game).length) {
-                  console.log(`获取垃圾信息成功：本次需要垃圾分类`)
-                  for (let key of Object.keys(rubbishOperRes.Data.ThrowRubbish.Game.RubbishList)) {
-                    let vo = rubbishOperRes.Data.ThrowRubbish.Game.RubbishList[key]
-                    await $.wait(2000)
-                    var rubbishOperTwoRes = await rubbishOper('2', `dwRubbishId=${vo.dwId}`)
-                  }
-                  if (rubbishOperTwoRes.iRet === 0) {
-                    let AllRubbish = rubbishOperTwoRes.Data.RubbishGame.AllRubbish
-                    console.log(`倒垃圾成功：获得${AllRubbish.ddwCoin}金币 ${AllRubbish.ddwMoney}财富\n`)
-                  } else {
-                    console.log(`倒垃圾失败：${rubbishOperTwoRes.sErrMsg}\n`)
-                  }
-                } else {
-                  console.log(`获取垃圾信息成功：本次不需要垃圾分类`)
-                  if (rubbishOperRes.iRet === 0 || rubbishOperRes.sErrMsg === "success") {
-                    console.log(`倒垃圾成功：获得${rubbishOperRes.Data.ThrowRubbish.ddwCoin}金币\n`)
-                  } else {
-                    console.log(`倒垃圾失败：${rubbishOperRes.sErrMsg}\n`)
-                  }
-                }
-              } else {
-                console.log(`当前暂无垃圾\n`)
-              }
-            }
-          } else {
-            console.log(`当前暂无垃圾\n`)
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp);
-      } finally {
-        resolve();
-      }
-    })
-  })
-}
-function rubbishOper(dwType, body = '') {
-  return new Promise((resolve) => {
-    switch(dwType) {
-      case '1':
-        $.get(taskUrl(`story/RubbishOper`, `dwType=1&dwRewardType=0`), (err, resp, data) => {
-          try {
-            if (err) {
-              console.log(`${JSON.stringify(err)}`)
-              console.log(`${$.name} RubbishOper API请求失败，请检查网路重试`)
-            } else {
-              data = JSON.parse(data);
-            }
-          } catch (e) {
-            $.logErr(e, resp);
-          } finally {
-            resolve(data);
-          }
-        })
-        break
-      case '2':
-        $.get(taskUrl(`story/RubbishOper`, `dwType=2&dwRewardType=0&${body}`), (err, resp, data) => {
-          try {
-            if (err) {
-              console.log(`${JSON.stringify(err)}`)
-              console.log(`${$.name} RubbishOper API请求失败，请检查网路重试`)
-            } else {
-              data = JSON.parse(data);
-            }
-          } catch (e) {
-            $.logErr(e, resp);
-          } finally {
-            resolve(data);
-          }
-        })
-        break
-      default:
-        break
-    }
-  })
-}
-
-// 牛牛任务
-async function getActTask(type = true) {
-  return new Promise(async (resolve) => {
-    $.get(taskUrl(`story/GetActTask`), async (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} GetActTask API请求失败，请检查网路重试`)
-        } else {
-          data = JSON.parse(data);
-          if (type) {
-            for (let key of Object.keys(data.Data.TaskList)) {
-              let vo = data.Data.TaskList[key]
-              if ([1, 2].includes(vo.dwOrderId) && (vo.dwCompleteNum !== vo.dwTargetNum)) {
-                console.log(`开始【🐮牛牛任务】${vo.strTaskName}`)
-                for (let i = vo.dwCompleteNum; i < vo.dwTargetNum; i++) {
-                  console.log(`【🐮牛牛任务】${vo.strTaskName} 进度：${i + 1}/${vo.dwTargetNum}`)
-                  await doTask(vo.ddwTaskId, 2)
-                  await $.wait(2000)
-                }
-              }
-            }
-            data = await getActTask(false)
-            for (let key of Object.keys(data.Data.TaskList)) {
-              let vo = data.Data.TaskList[key]
-              if ((vo.dwCompleteNum >= vo.dwTargetNum) && vo.dwAwardStatus !== 1) {
-                await awardActTask('Award', vo)
-                await $.wait(2000)
-              }
-            }
-            data = await getActTask(false)
-            if (data.Data.dwCompleteTaskNum >= data.Data.dwTotalTaskNum) {
-              if (data.Data.dwStatus !== 4) {
-                console.log(`【🐮牛牛任务】已做完，去开启宝箱`)
-                await awardActTask('story/ActTaskAward')
-                await $.wait(2000)
-              } else {
-                console.log(`【🐮牛牛任务】已做完，宝箱已开启`)
-              }
-            } else {
-              console.log(`【🐮牛牛任务】未全部完成，无法开启宝箱\n`)
-            }
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve(data)
-      }
-    })
-  })
-}
-function awardActTask(function_path, taskInfo = '') {
-  const { ddwTaskId, strTaskName} = taskInfo
-  return new Promise((resolve) => {
-    switch (function_path) {
-      case 'Award':
-        $.get(taskListUrl(function_path, `taskId=${ddwTaskId}`, 'jxbfddch'), (err, resp, data) => {
-          try {
-            if (err) {
-              console.log(`${JSON.stringify(err)}`)
-              console.log(`${$.name} awardActTask API请求失败，请检查网路重试`)
-            } else {
-              const {msg, ret, data: {prizeInfo = ''} = {}} = JSON.parse(data);
-              let str = '';
-              if (msg.indexOf('活动太火爆了') !== -1) {
-                str = '任务为成就任务或者未到任务时间';
-              } else {
-                str = msg + prizeInfo ? `获得金币 ¥ ${JSON.parse(prizeInfo).ddwCoin}` : '';
-              }
-              console.log(`【🐮领牛牛任务奖励】${strTaskName} ${str}\n${$.showLog ? data : ''}`);
-            }
-          } catch (e) {
-            $.logErr(e, resp);
-          } finally {
-            resolve();
-          }
-        })
-        break
-      case 'story/ActTaskAward':
-        $.get(taskUrl(function_path), (err, resp, data) => {
-          try {
-            if (err) {
-              console.log(`${JSON.stringify(err)}`)
-              console.log(`${$.name} awardActTask API请求失败，请检查网路重试`)
-            } else {
-              data = JSON.parse(data);
-              if (data.iRet === 0 || data.sErrMsg === 'success') {
-                console.log(`【🐮牛牛任务】开启宝箱成功：获得财富 ¥ ${data.Data.ddwBigReward}\n`)
-              } else {
-                console.log(`【🐮牛牛任务】开启宝箱失败：${data.sErrMsg}\n`)
-              }
-            }
-          } catch (e) {
-            $.logErr(e, resp);
-          } finally {
-            resolve();
-          }
-        })
-        break
-      default:
-        break
-    }
-  })
-}
-
-// 导游
-async function employTourGuideInfo() {
-  return new Promise(async (resolve) => {
-    $.get(taskUrl(`user/EmployTourGuideInfo`), async (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} EmployTourGuideInfo API请求失败，请检查网路重试`)
-        } else {
-          data = JSON.parse(data);
-          console.log(`雇导游`)
-          let minProductCoin = data.TourGuideList[0].ddwProductCoin
-          for(let key of Object.keys(data.TourGuideList)) {
-            let vo = data.TourGuideList[key]
-            if (vo.ddwProductCoin < minProductCoin) {
-              minProductCoin = vo.ddwProductCoin
-            }
-          }
-          for(let key of Object.keys(data.TourGuideList)) {
-            let vo = data.TourGuideList[key]
-            let buildNmae;
-            switch(vo.strBuildIndex) {
-              case 'food':
-                buildNmae = '京喜美食城'
-                break
-              case 'sea':
-                buildNmae = '京喜旅馆'
-                break
-              case 'shop':
-                buildNmae = '京喜商店'
-                break
-              case 'fun':
-                buildNmae = '京喜游乐场'
-              default:
-                break
-            }
-            if(vo.ddwRemainTm === 0 && vo.ddwProductCoin !== minProductCoin) {
-              let dwIsFree;
-              if(vo.dwFreeMin !== 0) {
-                dwIsFree = 1
-              } else {
-                dwIsFree = 0
-              }
-              console.log(`【${buildNmae}】雇佣费用：${vo.ddwCostCoin}金币 增加收益：${vo.ddwProductCoin}金币`)
-              const body = `strBuildIndex=${vo.strBuildIndex}&dwIsFree=${dwIsFree}&ddwConsumeCoin=${vo.ddwCostCoin}`
-              await employTourGuide(body, buildNmae)
-            } else if (vo.ddwProductCoin !== minProductCoin) {
-              console.log(`【${buildNmae}】无可雇佣导游`)
-            }
-            await $.wait(2000)
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp);
-      } finally {
-        resolve();
-      }
-    })
-  })
-}
-function employTourGuide(body, buildNmae) {
-  return new Promise(async (resolve) => {
-    $.get(taskUrl(`user/EmployTourGuide`, body), (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} EmployTourGuide API请求失败，请检查网路重试`)
-        } else {
-          data = JSON.parse(data);
-          if (data.iRet === 0) {
-            console.log(`【${buildNmae}】雇佣导游成功`)
-          } else {
-            console.log(`【${buildNmae}】雇佣导游失败：${data.sErrMsg}`)
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp);
-      } finally {
-        resolve();
-      }
-    })
-  })
-}
-
-// 升级建筑
-async function getBuildInfo(body, buildList, type = true) {
-  let twobody = body
-  return new Promise(async (resolve) => {
-    $.get(taskUrl(`user/GetBuildInfo`, body), async (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} GetBuildInfo API请求失败，请检查网路重试`)
-        } else {
-          data = JSON.parse(data);
-          if (type) {
-            let buildNmae;
-            switch(buildList.strBuildIndex) {
-              case 'food':
-                buildNmae = '京喜美食城'
-                break
-              case 'sea':
-                buildNmae = '京喜旅馆'
-                break
-              case 'shop':
-                buildNmae = '京喜商店'
-                break
-              case 'fun':
-                buildNmae = '京喜游乐场'
-              default:
-                break
-            }
-            if (data.dwBuildLvl === 0) {
-              console.log(`创建建筑`)
-              console.log(`【${buildNmae}】当前建筑还未创建，开始创建`)
-              await createbuilding(`strBuildIndex=${data.strBuildIndex}`, buildNmae)
-              await $.wait(2000)
-              data = await getBuildInfo(twobody, buildList, false)
-              await $.wait(2000)
-            }
-            console.log(`收金币`)
-            const body = `strBuildIndex=${data.strBuildIndex}&dwType=1`
-            let collectCoinRes = await collectCoin(body)
-            console.log(`【${buildNmae}】收集${collectCoinRes.ddwCoin}金币`)
-            await $.wait(2000)
-            await getUserInfo(false)
-            console.log(`升级建筑`)
-            console.log(`【${buildNmae}】当前等级：${buildList.dwLvl}`)
-            console.log(`【${buildNmae}】升级需要${data.ddwNextLvlCostCoin}金币，保留升级需要的3倍${data.ddwNextLvlCostCoin * 3}金币，当前拥有${$.info.ddwCoinBalance}金币`)
-            if(data.dwCanLvlUp > 0 && $.info.ddwCoinBalance >= (data.ddwNextLvlCostCoin * 3)) {
-              console.log(`【${buildNmae}】满足升级条件，开始升级`)
-              const body = `ddwCostCoin=${data.ddwNextLvlCostCoin}&strBuildIndex=${data.strBuildIndex}`
-              let buildLvlUpRes = await buildLvlUp(body)
-              if (buildLvlUpRes.iRet === 0) {
-                console.log(`【${buildNmae}】升级成功：获得${data.ddwLvlRich}财富\n`)
-              } else {
-                console.log(`【${buildNmae}】升级失败：${buildLvlUpRes.sErrMsg}\n`)
-              }
-            } else {
-              console.log(`【${buildNmae}】不满足升级条件，跳过升级\n`)
-            }
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp);
-      } finally {
-        resolve(data);
-      }
-    })
-  })
-}
-function collectCoin(body) {
-  return new Promise((resolve) => {
-    $.get(taskUrl(`user/CollectCoin`, body), (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} CollectCoin API请求失败，请检查网路重试`)
-        } else {
-          data = JSON.parse(data);
-        }
-      } catch (e) {
-        $.logErr(e, resp);
-      } finally {
-        resolve(data);
-      }
-    })
-  })
-}
-function buildLvlUp(body) {
-  return new Promise((resolve) => {
-    $.get(taskUrl(`user/BuildLvlUp`, body), (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} BuildLvlUp API请求失败，请检查网路重试`)
-        } else {
-          data = JSON.parse(data);
-        }
-      } catch (e) {
-        $.logErr(e, resp);
-      } finally {
-        resolve(data);
-      }
-    })
-  })
-}
-function createbuilding(body, buildNmae) {
-  return new Promise(async (resolve) => {
-    $.get(taskUrl(`user/createbuilding`, body), (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} createbuilding API请求失败，请检查网路重试`)
-        } else {
-          data = JSON.parse(data);
-          if (data.iRet === 0) console.log(`【${buildNmae}】创建成功`)
-        }
-      } catch (e) {
-        $.logErr(e, resp);
-      } finally {
-        resolve();
-      }
-    })
-  })
-}
-
 // 助力
 function helpByStage(shareCodes) {
   return new Promise((resolve) => {
-    $.get(taskUrl(`story/helpbystage`, `strShareId=${shareCodes}`), (err, resp, data) => {
+    $.get(taskUrl(`user/PearlHelpByStage`, `__t=${Date.now()}&strShareId=${shareCodes}`), (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -1179,7 +396,7 @@ function helpByStage(shareCodes) {
         } else {
           data = JSON.parse(data);
           if (data.iRet === 0 || data.sErrMsg === 'success') {
-            console.log(`助力成功：获得${data.Data.GuestPrizeInfo.strPrizeName}`)
+            console.log(`助力成功：获得${data.GuestPrizeInfo.strPrizeName}`)
           } else if (data.iRet === 2232 || data.sErrMsg === '今日助力次数达到上限，明天再来帮忙吧~') {
             console.log(`助力失败：${data.sErrMsg}`)
             $.canHelp = false
@@ -1250,16 +467,13 @@ function getUserInfo(showInvite = true) {
         } else {
           data = JSON.parse(data);
           const {
-            buildInfo = {},
             ddwRichBalance,
             ddwCoinBalance,
             sErrMsg,
             strMyShareId,
             dwLandLvl,
             LeadInfo = {},
-            StoryInfo = {},
             Business = {},
-            XbStatus = {}
           } = data;
           if (showInvite) {
             console.log(`\n获取用户信息：${sErrMsg}\n${$.showLog ? data : ""}`);
@@ -1272,23 +486,17 @@ function getUserInfo(showInvite = true) {
           }
           $.info = {
             ...$.info,
-            buildInfo,
             ddwRichBalance,
             ddwCoinBalance,
             strMyShareId,
             dwLandLvl,
             LeadInfo,
-            StoryInfo,
-            XbStatus
           };
           resolve({
-            buildInfo,
             ddwRichBalance,
             ddwCoinBalance,
             strMyShareId,
             LeadInfo,
-            StoryInfo,
-            XbStatus
           });
         }
       } catch (e) {
@@ -1298,195 +506,6 @@ function getUserInfo(showInvite = true) {
       }
     })
   })
-}
-
-//任务
-function getTaskList(taskType) {
-  return new Promise(async (resolve) => {
-    switch (taskType){
-      case 0: //日常任务
-        $.get(taskListUrl("GetUserTaskStatusList"), async (err, resp, data) => {
-          try {
-            if (err) {
-              console.log(`${JSON.stringify(err)}`)
-              console.log(`${$.name} GetUserTaskStatusList 日常任务 API请求失败，请检查网路重试`)
-            } else {
-              const { ret, data: { userTaskStatusList = [] } = {}, msg } = JSON.parse(data);
-              $.allTask = userTaskStatusList.filter((x) => x.awardStatus !== 1 && x.taskCaller === 1);
-              if($.allTask.length === 0) {
-                console.log(`【📆日常任务】已做完`)
-              } else {
-                console.log(`获取【📆日常任务】列表 ${msg}，总共${$.allTask.length}个任务！\n${$.showLog ? data : ""}`);
-              }
-            }
-          } catch (e) {
-            $.logErr(e, resp);
-          } finally {
-            resolve();
-          }
-        });
-        break;
-      case 1: //成就任务
-        $.get(taskListUrl("GetUserTaskStatusList"), async (err, resp, data) => {
-          try {
-            if (err) {
-              console.log(`${JSON.stringify(err)}`)
-              console.log(`${$.name} GetUserTaskStatusList 成就任务 API请求失败，请检查网路重试`)
-            } else {
-              const { ret, data: { userTaskStatusList = [] } = {}, msg } = JSON.parse(data);
-              $.allTask = userTaskStatusList.filter((x) => (x.completedTimes >= x.targetTimes) && x.awardStatus !== 1 && x.taskCaller === 2);
-              if($.allTask.length === 0) {
-                console.log(`【🎖成就任务】没有可领奖的任务\n`)
-              } else {
-                console.log(`获取【🎖成就任务】列表 ${msg}，总共${$.allTask.length}个任务！\n${$.showLog ? data : ""}`);
-              }
-            }
-          } catch (e) {
-            $.logErr(e, resp);
-          } finally {
-            resolve();
-          }
-        });
-        break;
-      default:
-        break;
-    }
-  });
-}
-
-//浏览任务 + 做任务 + 领取奖励
-function browserTask(taskType) {
-  return new Promise(async (resolve) => {
-    switch (taskType) {
-      case 0://日常任务
-        for (let i = 0; i < $.allTask.length; i++) {
-          const start = $.allTask[i].completedTimes, end = $.allTask[i].targetTimes
-          const taskinfo = $.allTask[i];
-          console.log(`开始第${i + 1}个【📆日常任务】${taskinfo.taskName}\n`);
-          for (let i = start; i < end; i++) {
-            //做任务
-            console.log(`【📆日常任务】${taskinfo.taskName} 进度：${i + 1}/${end}`)
-            await doTask(taskinfo.taskId);
-            await $.wait(2000);
-          }
-          //领取奖励
-          await awardTask(0, taskinfo);
-        }
-        break;
-      case 1://成就任务
-        for (let i = 0; i < $.allTask.length; i++) {
-          const taskinfo = $.allTask[i];
-          console.log(`开始第${i + 1}个【🎖成就任务】${taskinfo.taskName}\n`);
-          if(taskinfo.completedTimes < taskinfo.targetTimes){
-            console.log(`【领成就奖励】${taskinfo.taskName} 该成就任务未达到门槛\n`);
-          } else {
-            //领奖励
-            await awardTask(1, taskinfo);
-            await $.wait(2000);
-          }
-        }
-        break;
-      default:
-        break;
-    }
-    resolve();
-  });
-}
-
-//做任务
-function doTask(taskId, type = 1) {
-  return new Promise(async (resolve) => {
-    switch (type) {
-      case 1:
-        $.get(taskListUrl(`DoTask`, `taskId=${taskId}`), (err, resp, data) => {
-          try {
-            if (err) {
-              console.log(`${JSON.stringify(err)}`)
-              console.log(`${$.name} DoTask API请求失败，请检查网路重试`)
-            } else {
-              data = JSON.parse(data);
-            }
-          } catch (e) {
-            $.logErr(e, resp)
-          } finally {
-            resolve()
-          }
-        })
-        break
-      case 2:
-        $.get(taskListUrl(`DoTask`, `taskId=${taskId}`, `jxbfddch`), (err, resp, data) => {
-          try {
-            if (err) {
-              console.log(`${JSON.stringify(err)}`)
-              console.log(`${$.name} DoTask API请求失败，请检查网路重试`)
-            } else {
-              data = JSON.parse(data);
-            }
-          } catch (e) {
-            $.logErr(e, resp)
-          } finally {
-            resolve()
-          }
-        })
-      default:
-        break
-    }
-  })
-}
-
-//领取奖励
-function awardTask(taskType, taskinfo) {
-  return new Promise((resolve) => {
-    const {taskId, taskName} = taskinfo;
-    switch (taskType) {
-      case 0://日常任务
-        $.get(taskListUrl(`Award`, `taskId=${taskId}`), (err, resp, data) => {
-          try {
-            if (err) {
-              console.log(`${JSON.stringify(err)}`)
-              console.log(`${$.name} Award API请求失败，请检查网路重试`)
-            } else {
-              const {msg, ret, data: {prizeInfo = ''} = {}} = JSON.parse(data);
-              let str = '';
-              if (msg.indexOf('活动太火爆了') !== -1) {
-                str = '任务为成就任务或者未到任务时间';
-              } else {
-                str = msg + prizeInfo ? `获得金币 ¥ ${JSON.parse(prizeInfo).ddwCoin}` : '';
-              }
-              console.log(`【领日常奖励】${taskName} ${str}\n${$.showLog ? data : ''}`);
-            }
-          } catch (e) {
-            $.logErr(e, resp);
-          } finally {
-            resolve();
-          }
-        });
-        break
-      case 1://成就奖励
-        $.get(taskListUrl(`Award`, `taskId=${taskId}`), (err, resp, data) => {
-          try {
-            if (err) {
-              console.log(`${JSON.stringify(err)}`)
-              console.log(`${$.name} AchieveAward API请求失败，请检查网路重试`)
-            } else {
-              const {msg, ret, data: {prizeInfo = ''} = {}} = JSON.parse(data);
-              if(msg.indexOf('活动太火爆了') !== -1) {
-                console.log(`活动太火爆了`)
-              } else {
-                console.log(`【领成就奖励】${taskName} 获得财富值 ¥ ${JSON.parse(prizeInfo).ddwMoney}\n${$.showLog ? data : ''}`);
-              }
-            }
-          } catch (e) {
-            $.logErr(e, resp);
-          } finally {
-            resolve();
-          }
-        });
-        break
-      default:
-        break
-    }
-  });
 }
 
 // 新手任务
@@ -1561,25 +580,6 @@ function biz(contents){
 
 function taskUrl(function_path, body = '', dwEnv = 7) {
   let url = `${JD_API_HOST}jxbfd/${function_path}?strZone=jxbfd&bizCode=jxbfd&source=jxbfd&dwEnv=${dwEnv}&_cfd_t=${Date.now()}&ptag=138631.26.55&${body}&_stk=_cfd_t%2CbizCode%2CddwTaskId%2CdwEnv%2Cptag%2Csource%2CstrShareId%2CstrZone&_ste=1`;
-  url += `&h5st=${decrypt(Date.now(), '', '', url)}&_=${Date.now() + 2}&sceneval=2&g_login_type=1&g_ty=ls`;
-  return {
-    url,
-    headers: {
-      Cookie: cookie,
-      Accept: "*/*",
-      Connection: "keep-alive",
-      Referer:"https://st.jingxi.com/fortune_island/index.html?ptag=138631.26.55",
-      "Accept-Encoding": "gzip, deflate, br",
-      Host: "m.jingxi.com",
-      "User-Agent": UA,
-      "Accept-Language": "zh-cn",
-    },
-    timeout: 10000
-  };
-}
-
-function taskListUrl(function_path, body = '', bizCode = 'jxbfd') {
-  let url = `${JD_API_HOST}newtasksys/newtasksys_front/${function_path}?strZone=jxbfd&bizCode=${bizCode}&source=jxbfd&dwEnv=7&_cfd_t=${Date.now()}&ptag=138631.26.55&${body}&_stk=_cfd_t%2CbizCode%2CconfigExtra%2CdwEnv%2Cptag%2Csource%2CstrZone%2CtaskId&_ste=1`;
   url += `&h5st=${decrypt(Date.now(), '', '', url)}&_=${Date.now() + 2}&sceneval=2&g_login_type=1&g_ty=ls`;
   return {
     url,
