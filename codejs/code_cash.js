@@ -21,7 +21,7 @@ let cookiesArr = [], cookie = '', message;
 let helpAuthor = false;
 const randomCount = $.isNode() ? 5 : 5;
 let cash_exchange = false;//是否消耗2元红包兑换200京豆，默认否
-let Code_num = ($.getdata('code_num') * 1) || 20;   //内置助力人数
+let Code_num = process.env.code_num || 20;   //内置助力人数
 const inviteCodes = [
   `fuck@fuck`,
 
