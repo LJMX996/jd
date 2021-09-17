@@ -14,7 +14,7 @@ let cookiesArr = [], cookie = "", allMessage = "", message;
 const inviteCodes = [
 `123@123`,
 ]
-let Code_num = ($.getdata('code_num') * 1) || 20;   //内置助力人数
+let Code_num = process.env.code_num || 20;   //内置助力人数
 let reward = process.env.JD_HEALTH_REWARD_NAME ? process.env.JD_HEALTH_REWARD_NAME : ''
 const randomCount = $.isNode() ? 20 : 5;
 if ($.isNode()) {

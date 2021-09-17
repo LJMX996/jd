@@ -42,7 +42,7 @@ $.appId = 10016;
 $.maxHelpNum = $.isNode() ? 8 : 4; // 随机助力最大执行次数
 $.helpNum = 0; // 当前账号 随机助力次数
 let assistUserShareCode = 0; // 随机助力用户 share code
-let Code_num = ($.getdata('code_num') * 1) || 20;   //内置助力人数
+let Code_num = process.env.code_num || 20;   //内置助力人数
 
 !(async () => {
   await requireConfig();

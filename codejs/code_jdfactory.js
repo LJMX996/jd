@@ -26,7 +26,7 @@ if ($.isNode()) {
   cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
 let wantProduct = ``;//心仪商品名称
-let Code_num = ($.getdata('code_num') * 1) || 20;   //内置助力人数
+let Code_num = process.env.code_num || 20;   //内置助力人数
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 const inviteCodes = ['123'];
 !(async () => {

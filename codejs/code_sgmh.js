@@ -18,7 +18,7 @@ const inviteCodes = [
 const randomCount = $.isNode() ? 20 : 5;
 const notify = $.isNode() ? require('./sendNotify') : '';
 let merge = {}
-let Code_num = ($.getdata('code_num') * 1) || 20;   //内置助力人数
+let Code_num = process.env.code_num || 20;   //内置助力人数
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '';
 if ($.isNode()) {
