@@ -36,7 +36,7 @@ const JD_API_HOST = `https://api.m.jd.com/client.action`;
     return;
   }
   await requireConfig();
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 20 || process.env.code_num; i++) {
     cookie = cookiesArr[i];
     if (cookie) {
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
