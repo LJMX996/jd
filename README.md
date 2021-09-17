@@ -87,7 +87,14 @@ services:
 > * 命令:task /ql/repo/LJMX996_jd_aaron/code.sh
 
 ### 2.8.*自动互助提示
-编辑config下 → task_before.sh文件
+使用上面定时导出助力默认是助力前20个账号
+如果想助力其他数量账号，请添加变量，例如👇🏻
+
+   ```diff
+export code_num="10"   
+   ```
+   
+然后编辑config下 → task_before.sh文件
 
 内容如下
 
