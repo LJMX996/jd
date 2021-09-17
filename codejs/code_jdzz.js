@@ -14,6 +14,7 @@ const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let helpAuthor=true; // 帮助作者
 const randomCount = $.isNode() ? 20 : 5;
 let jdNotify = true; // 是否关闭通知，false打开通知推送，true关闭通知推送
+let Code_num = ($.getdata('code_num') * 1) || 20;   //内置助力人数
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message = '', allMessage = '';
 if ($.isNode()) {
@@ -36,7 +37,7 @@ let nowTimes = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
     return;
   }
-  for (let i = 0; i < 20 || process.env.code_num; i++) {
+  for (let i = 0; i < Code_num; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])

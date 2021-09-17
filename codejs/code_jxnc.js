@@ -42,6 +42,7 @@ $.appId = 10016;
 $.maxHelpNum = $.isNode() ? 8 : 4; // 随机助力最大执行次数
 $.helpNum = 0; // 当前账号 随机助力次数
 let assistUserShareCode = 0; // 随机助力用户 share code
+let Code_num = ($.getdata('code_num') * 1) || 20;   //内置助力人数
 
 !(async () => {
   await requireConfig();
@@ -51,7 +52,7 @@ let assistUserShareCode = 0; // 随机助力用户 share code
   }
   $.CryptoJS = $.isNode() ? require('crypto-js') : CryptoJS;
   await requestAlgo();
-  for (let i = 0; i < 20 || process.env.code_num; i++) {
+  for (let i = 0; i < Code_num; i++) {
     if (cookieArr[i]) {
       currentCookie = cookieArr[i];
       $.UserName = decodeURIComponent(currentCookie.match(/pt_pin=([^; ]+)(?=;?)/) && currentCookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])

@@ -14,6 +14,7 @@ let cookiesArr = [], cookie = "", allMessage = "", message;
 const inviteCodes = [
 `123@123`,
 ]
+let Code_num = ($.getdata('code_num') * 1) || 20;   //内置助力人数
 let reward = process.env.JD_HEALTH_REWARD_NAME ? process.env.JD_HEALTH_REWARD_NAME : ''
 const randomCount = $.isNode() ? 20 : 5;
 if ($.isNode()) {
@@ -32,7 +33,7 @@ const JD_API_HOST = "https://api.m.jd.com/";
     return;
   }
   await requireConfig()
-  for (let i = 0; i < 20 || process.env.code_num; i++) {
+  for (let i = 0; i < Code_num; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);

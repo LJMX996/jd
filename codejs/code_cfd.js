@@ -24,6 +24,7 @@ $.shareCodes = [];
 let cookiesArr = [], cookie = '', token = '';
 let UA, UAInfo = {}
 let nowTimes;
+let Code_num = ($.getdata('code_num') * 1) || 20;   //内置助力人数
 
 const randomCount = $.isNode() ? 3 : 3;
 if ($.isNode()) {
@@ -52,7 +53,7 @@ $.appId = 10028;
     res = await getAuthorShareCode('')
   }
   $.strMyShareIds = [...(res && res.shareId || [])]
-  for (let i = 0; i < 20 || process.env.code_num; i++) {
+  for (let i = 0; i < Code_num; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
