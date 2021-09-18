@@ -120,12 +120,15 @@ if ($.isNode()) {
     }
 
     if (allReceiveMessage) {
-        allMessage2 = "【⏰商品白嫖活动领取提醒⏰】\n" + allReceiveMessage + "\n"+allMessage2 ;
+        allMessage2 = `【⏰商品白嫖活动领取提醒⏰】\n` + allReceiveMessage;
     }
     if (allWarnMessage) {
-        allMessage2 = "【⏰商品白嫖活动任务提醒⏰】\n" + allWarnMessage + "\n" + allMessage2;
+        if (allMessage2) {
+            allMessage2 = `\n` + allMessage2;
+        }
+        allMessage2 = `【⏰商品白嫖活动任务提醒⏰】\n` + allWarnMessage + allMessage2;
     }
-	
+
     if (intPerSent > 0) {
         if (cookiesArr.length % intPerSent != 0) {
             console.log("分段通知收尾，处理发送通知....");
@@ -142,7 +145,7 @@ if ($.isNode()) {
             })
         }
     }
-	
+
     if ($.isNode() && allMessage2) {
         await notify.sendNotify(`${$.name}`, `${allMessage2}`, {
             url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
