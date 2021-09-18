@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*
 
 '''
-new Env('wskey转换');
+new Env('检测更新ck');
 cron: 30 */8 * * * ck_check&up.py
 
 '''
@@ -99,7 +99,7 @@ def get_ck():
 
 # 返回值 bool
 def check_ck(ck):
-    if "QL_WSCK" in os.environ:
+    if 1 == 0:
         logger.info("不检查账号有效性\n--------------------\n")
         return False
     else:
