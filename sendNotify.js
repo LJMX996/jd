@@ -7,6 +7,8 @@
  * @param author 作者仓库等信息  例：`本脚本免费使用 By：xxx`
  * @returns {Promise<unknown>}
  */
+const exec = require('child_process').exec; 
+
 
 const querystring = require('querystring');
 const fs = require('fs');
@@ -188,6 +190,15 @@ if (process.env.TG_ONLY) {
 }
 
 async function sendNotify(text, desp, params = {}, author = '\n\n' + end_txt) {
+
+//调用python脚本，转换ck 
+if(text.indexOf("cookie已失效") != -1) 
+{ 
+  exec('task ql_refreshCK.py ',function(error,stdout,stderr){ 
+    console.log(error,stdout,stderr); 
+  }); 
+} 
+
   //提供6种通知
   desp += author;//增加作者信息，防止被贩卖等
   try {
