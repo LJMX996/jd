@@ -99,7 +99,7 @@ def get_ck():
 
 # 返回值 bool
 def check_ck(ck):
-    if 1 == 0:
+    if "QL_WSCK" in os.environ:
         logger.info("不检查账号有效性\n--------------------\n")
         return False
     else:
