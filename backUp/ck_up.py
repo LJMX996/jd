@@ -1,5 +1,6 @@
 """
-new Env('青龙全自动更新cookie');
+new Env('强制更新ck');
+cron: 15 4,16 * * * ck_up.py
 """
 
 import requests

@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*
-
-'''
-
-new Env('wskey转换');
-'''
+"""
+new Env('强制更新ck');
+cron: 15 4,16 * * * ck_up.py
+        
+"""
 
 import socket
 import base64
@@ -98,7 +97,7 @@ def get_ck():
 
 # 返回值 bool
 def check_ck(ck):
-    if "QL_WSCK" in os.environ:
+    if 1 == 1:
         logger.info("不检查账号有效性\n--------------------\n")
         return False
     else:
