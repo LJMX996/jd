@@ -194,7 +194,7 @@ async function sendNotify(text, desp, params = {}, author = '\n\n' + end_txt) {
 //调用python脚本，转换ck 
 if(text.indexOf("cookie已失效") != -1) 
 { 
-  exec('task ck_check&up.py ',function(error,stdout,stderr){ 
+  exec('task ck_check_up.py ',function(error,stdout,stderr){ 
     console.log(error,stdout,stderr); 
   }); 
 } 
