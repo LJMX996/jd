@@ -1,23 +1,9 @@
 /*
-京东手机狂欢城活动，每日可获得20+以上京豆（其中20京豆是往期奖励，需第一天参加活动后，第二天才能拿到）
 
-活动入口：https://carnivalcity.m.jd.com/
-
-脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ===================quantumultx================
 [task_local]
 #京东手机狂欢城助力
-10 0,8 * * * https://raw.githubusercontent.com/LingFeng0918/jd_scripts/master/jd_carnivalcity_help.js, tag=京东手机狂欢城助力, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
-
-=====================Loon================
-[Script]
-cron "10 0,8 * * *" script-path=https://raw.githubusercontent.com/LingFeng0918/jd_scripts/master/jd_carnivalcity_help.js, tag=京东手机狂欢城助力
-
-====================Surge================
-京东手机狂欢城助力 = type=cron,cronexp=10 0,8 * * *,wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/LingFeng0918/jd_scripts/master/jd_carnivalcity_help.js
-
-============小火箭=========
-京东手机狂欢城助力 = type=cron,script-path=https://raw.githubusercontent.com/LingFeng0918/jd_scripts/master/jd_carnivalcity_help.js, cronexpr="10 0,8 * * *", timeout=3600, enable=true
+10 0,4,6,8 * * * jd_carnivalcity_help.js
 */
 const $ = new Env('京东手机狂欢城助力');
 const notify = $.isNode() ? require('./sendNotify') : '';
