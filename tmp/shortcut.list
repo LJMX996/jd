@@ -1,0 +1,17 @@
+bot-->ql bot
+更新面板-->ql update
+获取互助码-->ql code
+删除日志-->ql rmlog 1
+赚京豆-->nohup task LJMX996_jd_aaron_jd_syj.js now
+京东签到-->nohup task LJMX996_jd_aaron_jd_bean_sign.js now
+领现金-->nohup task LJMX996_jd_aaron__jd_cash.js now
+京豆变动-->nohup task LJMX996_jd_aaron_jd_bean_change.js now
+京喜工厂-->nohup task LJMX996_jd_aaron_jd_dreamFactory.js now
+东东农场-->nohup task LJMX996_jd_aaron_jd_fruit.js now
+京喜农场-->nohup task LJMX996_jd_aaron_jd_jxnc.js now
+店铺取关-->nohup task LJMX996_jd_aaron_jd_unsubscribe.js now
+更新脚本-->nohup task /ql/repo/LJMX996_jd_aaron/pull.sh now
+安装依赖-->nohup task /ql/repo/LJMX996_jd_aaron/yilai.sh now
+检测cookie-->nohup task LJMX996_jd_aaron_jd_checkcookie.js now
+检测更新CK-->nohup task LJMX996_jd_aaron_ck_check_up.py now
+强制更新CK-->nohup task LJMX996_jd_aaron_ck_up.py now
