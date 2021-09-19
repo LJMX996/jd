@@ -1,5 +1,4 @@
 /*
-
 [task_local]
 #东东玩家
 20 0,8,17 * * * zy_ddwj.js
@@ -66,7 +65,7 @@ if ($.isNode()) {
        await getsecretp()
        await Ariszy()
        await zy()
-       await userScore()
+       await unlock()
    }
 
 })()
