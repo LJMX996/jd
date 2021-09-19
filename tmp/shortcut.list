@@ -13,5 +13,5 @@ bot-->ql bot
 更新脚本-->nohup task /ql/repo/LJMX996_jd_aaron/pull.sh now
 安装依赖-->nohup task /ql/repo/LJMX996_jd_aaron/yilai.sh now
 检测cookie-->nohup task LJMX996_jd_aaron_jd_checkcookie.js now
-检测更新CK-->nohup task LJMX996_jd_aaron_ck_check_up.py now
 强制更新CK-->nohup task LJMX996_jd_aaron_ck_up.py now
+检测更新CK-->nohup task LJMX996_jd_aaron_ck_check_up.py now
