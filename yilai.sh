@@ -3,7 +3,7 @@
 pnpm install @otplib/preset-default
 cd /ql/scripts && npm fund
 cd /ql/scripts && npm install jsdom
-
+cd /ql/scripts && npm install form-data
 cd /ql/scripts && npm install tough-cookie
 cd /ql/scripts && npm install axios date-fns
 cd /ql/scripts && npm install crypto-js
