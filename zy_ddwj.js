@@ -50,6 +50,7 @@ if ($.isNode()) {
       $.isLogin = true;
       $.index = i + 1;
        console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
+              console.log(`火爆了，洗洗睡吧`);
             if (!$.isLogin) {
                 $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {
                     "open-url": "https://bean.m.jd.com/bean/signIndex.action"
@@ -60,12 +61,12 @@ if ($.isNode()) {
                 }
                 continue
             }
-       await gethelpcode()
-       await getlist()
-       await getsecretp()
-       await getfeedtoken()
-       await Ariszy()
-       await zy()
+       //await gethelpcode()
+       //await getlist()
+       //await getsecretp()
+       //await getfeedtoken()
+       //await Ariszy()
+       //await zy()
        //await userScore()
    }
 for(let i = 0; i < cookiesArr.length; i++){
