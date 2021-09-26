@@ -26,5 +26,4 @@ cd /ql/scripts && apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev fre
 
 cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && npm i && npm i -S ts-node typescript @types/node date-fns axios png-js canvas --build-from-source
 
-ql update
 
