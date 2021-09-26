@@ -1,16 +1,16 @@
 
 /**
- 集魔方
- cron "11 7,19 * * *" jd_mofang.js
- TG:https://t.me/sheeplost
- */
+集魔方
+cron 6 8,20 * * * jd_mofang.js
+TG:https://t.me/sheeplost
+*/
 const $ = new Env('集魔方');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '';
-$.shareCodes = [];
+$.shareCodesList = [];
 if ($.isNode()) {
     Object.keys(jdCookieNode).forEach((item) => {
         cookiesArr.push(jdCookieNode[item])
@@ -25,6 +25,7 @@ if ($.isNode()) {
         $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
         return;
     }
+    console.log(`\n【原作者：JDHelloWorld大佬？】\n\nBy：zero205\n添加：邀请助力，内部互助\n活动入口：京东APP->底部栏"新品"->集魔方\n侵权删..\n`);
     UUID = getUUID('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
     for (let i = 0; i < cookiesArr.length; i++) {
         UA = `jdapp;iPhone;10.0.8;14.6;${UUID};network/wifi;JDEbook/openapp.jdreader;model/iPhone9,2;addressid/2214222493;appBuild/168841;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/16E158;supportJDSHWK/1`;
@@ -46,6 +47,18 @@ if ($.isNode()) {
                 continue
             }
             await main()
+        }
+    }
+    if ($.shareCodesList && $.shareCodesList.length) {
+        console.log(`\n==========开始账号内互助==========\n`);
+        for (let j = 0; j < cookiesArr.length; j++) {
+            cookie = cookiesArr[j];
+            $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
+            for (let item of $.shareCodesList) {
+                console.log(`账号${$.UserName} 去助力 ${item}`)
+                await await doInteractiveAssignment($.projectId, $.encryptAssignmentId, item)
+                await $.wait(1000)
+            }
         }
     }
 })().catch((e) => { $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '') }).finally(() => { $.done(); })
@@ -135,6 +148,12 @@ function queryInteractiveInfo(projectId) {
                     if (data) {
                         data = JSON.parse(data);
                         $.taskList = data.assignmentList
+                        $.encryptAssignmentId = $.taskList[1].encryptAssignmentId
+                        if ($.taskList[1].userVerificationInfo.completionCnt < $.taskList[1].assignmentTimesLimit) {
+                            $.shareCodes = $.taskList[1].ext.assistTaskDetail.itemId
+                            console.log("【您的助力码为】" + $.shareCodes)
+                            $.shareCodesList.push($.shareCodes)
+                        }
                     } else {
                         console.log("没有返回数据")
                     }
