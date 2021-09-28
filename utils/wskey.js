@@ -14,7 +14,7 @@ hostname = api.m.jd.com
 #京喜(已经废了)
 ^https:\/\/api\.m\.jd\.com\/api\?functionId=jxssdarkword url script-request-header https://raw.githubusercontent.com/LJMX996/jd/aaron/utils/wskey.js
 # 京东
-^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=serverConfig url script-request-header https://raw.githubusercontent.com/LJMX996/jd/aaron/utils/wskey.js
+^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=getIosDegrade url script-request-header https://raw.githubusercontent.com/LJMX996/jd/aaron/utils/wskey.js
 
 
 */
