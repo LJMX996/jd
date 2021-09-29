@@ -2,7 +2,7 @@
 /**
 芥么签到
 入口：微信-芥么小程序
-cron 11 0,9 * * * jd_zsign.js
+cron 11 0,9,21 * * * jd_zsign.js
 TG:https://t.me/sheeplost
 */
 const $ = new Env('芥么签到');
