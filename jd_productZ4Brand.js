@@ -1,10 +1,8 @@
-/**
-特务Z
+/*
+ 特务
 cron 23 3,8,16,18,22,23 3 8 * jd_productZ4Brand.js ,tag=特务z
-要跑2次
-*/
-const $ = new Env('特务Z');
-const notify = $.isNode() ? require('./sendNotify') : '';
+ */
+const $ = new Env('特务');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
 let cookiesArr = [];
