@@ -1,6 +1,6 @@
 /*
  特务
-cron 23 3,8,16,18,22,23 3 8 * jd_productZ4Brand.js ,tag=特务z
+cron 23 3,8,18,23 * * * jd_twz.js ,tag=特务z
  */
 const $ = new Env('特务');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
