@@ -10,47 +10,40 @@ jd_babel_diy_zeus
 cron 1 0,1,8 * * * jd_dpqd.js, tag=店铺签到diy
 */
 const $ = new Env('店铺签到');
-
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 //IOS等用户直接用NobyDa的jd cookie
-let cookiesArr = [], cookie = '', message;
-
+let cookiesArr = [], cookie = '', allMessage = '', message;
 const JD_API_HOST = 'https://api.m.jd.com/api?appid=interCenter_shopSign';
 
 let activityId=''
 let vender=''
 let num=0
 let shopname=''
-
-const token=[
-
-    '98CCFA28021D0623A6835480228862D5',//2-3天70京豆；
-    '9133123518A9C372D79D54407C5DF0F9',//15天100京豆；
-    'B633CA47876BC61E7F639EBED79DDF34',//3天20京豆；
-    'D92B26255A899BF4DD32B80196EB8934',
-    '10B6286F445A9F94C356B35469DB9A4D',
-    '5C1B739656B358743D816EAE714C83F3',
-    "A4469A359592ECFDF1A927B3EE6E7357", 
-    "FAC8EFA459B45C8208817F11C313C05D", 
-    '1D9BC39B71C4DF268D034D4DC78B81D3',
-    '3D99640B8E65273658E3A21908FFEC4C',
-    '9544C0361A02BCE538FBECA84D3A9508',
-    '261F616B5F721EFB1E112D6A1FA69BE1',
-    '94E9660F7E513526BE90DAE600414C03',
-    '9944E3E6476F61BEF9D4107210D24D55',
-    'D48CC0BF38018BFBD65E495201A160C6',
-    'C1B43EE810DF7CF9BCD82256690AD16B',
-    '0FD7C0E275B44718D79AD02D0D73770F',
-    'FEFF64118D0FB5D049763864E46ACBA3',
-    'EBAA272399094FA03629BF1A6D1410EC',
-    'CEDDE5C4517E0F402FD4B9A62B1F22D6',
-
+const token = [
+  '2CE2AE8C24D6E1DC60B7FC5A13A04A61',
+  'F06840A438B3C85550A5734639FD64BD',
+  '3D99640B8E65273658E3A21908FFEC4C',
+  '5C1B739656B358743D816EAE714C83F3',
+  '64DE462E1DF45B508CF4D57BBBF07E62',
+  "AA2480321D300985EEEF9D772749F5BE",
+  "92DAD4A0403A5FBC5823CD2836DB3AAB",
+  "77F925F11B0F8D26C4804B73CEB95C16",
+  "3C65BEF26F08E871AD4EE31A413904F9",
+  "826E716D40CA68DB27E6BFE5DC495821",
+  "3D99640B8E65273658E3A21908FFEC4C",
+  "F5CD5C9C14F5D942F793D1B4271F39BF",
+  "12DD65EC41A80686FE2FA28C54C3FAF1",
+  "F54C99449ACA2366DD863BA92C2A2085",
+  "2D01F8529A3FDF70C106459FE90E263C",
+  "5975ADF27E90C34C09E0E51C2F03195D",
+  "08CF28B9C0DB32912238B36662E075B6",
+  "5C1B739656B358743D816EAE714C83F3",
+  "BEBC961DB91F341A0BCF38766217E562",
+  "92CFAA3ECFF8BCC71F75991CBCFB6DC4",
+  "3D99640B8E65273658E3A21908FFEC4C",
 ]
-//IOS等用户直接用NobyDa的jd cookie
-
-$.TokenList =[];
 
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
@@ -72,19 +65,10 @@ if ($.isNode()) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
     return;
   }
-  
-	$.TokenLists = []
-  
-        //$.innerTokenList = await getStoreTokee('https://zy.kejiwanjia.com/jd_dpqiandao.php');
-        $.innerTokenList = token
-	
-	$.TokenLists.push(...$.TokenList,...$.innerTokenList);
-
-	
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
-      $.UserName = decodeURIComponent(cookie.match(/pt_pin=(.+?);/) && cookie.match(/pt_pin=(.+?);/)[1])
+      $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
       $.index = i + 1;
       $.isLogin = true;
       $.nickName = '';
@@ -93,16 +77,17 @@ if ($.isNode()) {
       console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
       if (!$.isLogin) {
         $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
-
         if ($.isNode()) {
           await notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
         }
         continue
       }
-      await babel_diy_zeus();
-	  await showMsg()
-      //if(i  <1 ) {await showMsg()}
+      await dpqd()
+      await showMsg()
     }
+  }
+  if ($.isNode() && allMessage) {
+    await notify.sendNotify(`${$.name}`, `${allMessage}`)
   }
 })()
     .catch((e) => {
@@ -113,19 +98,16 @@ if ($.isNode()) {
     })
 
 //开始店铺签到
-async function babel_diy_zeus(){
-	
-  for (var j = 0; j < $.TokenLists.length; j++) {
-	  
-	await $.wait(3000);  
+async function dpqd(){
+  for (var j = 0; j < token.length; j++) {
     num=j+1
-    if ($.TokenLists[j]=='') {continue}
-    await getvenderId($.TokenLists[j])
+    if (token[j]=='') {continue}
+    await getvenderId(token[j])
     if (vender=='') {continue}
     await getvenderName(vender)
-    await getActivityInfo($.TokenLists[j],vender)
-    await signCollectGift($.TokenLists[j],vender,activityId)
-    await taskUrl($.TokenLists[j],vender)
+    await getActivityInfo(token[j],vender)
+    await signCollectGift(token[j],vender,activityId)
+    await taskUrl(token[j],vender)
   }
 }
 
@@ -213,7 +195,7 @@ function getActivityInfo(token,venderId) {
         "accept-encoding": "gzip, deflate",
         "accept-language": "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7",
         "cookie": cookie,
-         "referer": `https://h5.m.jd.com/babelDiy/Zeus/2PAAf74aG3D61qvfKUM5dxUssJQ9/index.html?token=${token}&sceneval=2&jxsid=16178634353215523301&cu=true&utm_source=kong&utm_medium=jingfen&utm_campaign=t_2009753434_&utm_term=fa3f8f38c56f44e2b4bfc2f37bce9713`,
+        "referer": `https://h5.m.jd.com/babelDiy/Zeus/2PAAf74aG3D61qvfKUM5dxUssJQ9/index.html?token=${token}&sceneval=2&jxsid=16105853541009626903&cu=true&utm_source=kong&utm_medium=jingfen&utm_campaign=t_1001280291_&utm_term=fa3f8f38c56f44e2b4bfc2f37bce9713`,
         "User-Agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
       }
     }
@@ -234,8 +216,8 @@ function getActivityInfo(token,venderId) {
             const discount=data.data.continuePrizeRuleList[i].prizeList[0].discount
             mes += "签到"+level+"天,获得"+discount+'豆'
           }
-          //console.log(message+mes+'\n')
-          //message += mes+'\n'
+          // console.log(message+mes+'\n')
+          // message += mes+'\n'
         }
       } catch (e) {
         $.logErr(e, resp);
@@ -256,7 +238,7 @@ function signCollectGift(token,venderId,activitytemp) {
         "accept-encoding": "gzip, deflate",
         "accept-language": "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7",
         "cookie": cookie,
-        "referer": `https://h5.m.jd.com/babelDiy/Zeus/2PAAf74aG3D61qvfKUM5dxUssJQ9/index.html?token=${token}&sceneval=2&jxsid=16178634353215523301&cu=true&utm_source=kong&utm_medium=jingfen&utm_campaign=t_2009753434_&utm_term=fa3f8f38c56f44e2b4bfc2f37bce9713`,
+        "referer": `https://h5.m.jd.com/babelDiy/Zeus/2PAAf74aG3D61qvfKUM5dxUssJQ9/index.html?token=${token}&sceneval=2&jxsid=16105853541009626903&cu=true&utm_source=kong&utm_medium=jingfen&utm_campaign=t_1001280291_&utm_term=fa3f8f38c56f44e2b4bfc2f37bce9713`,
         "User-Agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
       }
     }
@@ -298,10 +280,10 @@ function taskUrl(token,venderId) {
           console.log(`\n${$.name}: API查询请求失败 ‼️‼️`)
           $.logErr(err);
         } else {
-            //console.log(data)
-            data = JSON.parse(/{(.*)}/g.exec(data)[0])
-            console.log(`已签到：`+data.data.days+`天`)
-            message +=`已签到：`+data.data.days+`天\n`
+          //console.log(data)
+          data = JSON.parse(/{(.*)}/g.exec(data)[0])
+          console.log(`已签到：`+data.data.days+`天`)
+          message +=`已签到：`+data.data.days+`天\n`
         }
       } catch (e) {
         $.logErr(e, resp);
@@ -315,7 +297,7 @@ function taskUrl(token,venderId) {
 async function showMsg() {
   if ($.isNode()) {
     $.msg($.name, '', `【京东账号${$.index}】${$.nickName}\n${message}`);
-    //await notify.sendNotify(`${$.name} - 账号${$.index} - ${$.nickName}`, `【京东账号${$.index}】${$.nickName}\n${message}`);
+    allMessage += `【京东账号${$.index}】${$.nickName}\n${message}${$.index !== cookiesArr.length ? '\n\n' : ''}`;
   }
 }
 
@@ -346,7 +328,11 @@ function TotalBean() {
               $.isLogin = false; //cookie过期
               return
             }
-            $.nickName = (data['base'] && data['base'].nickname) || $.UserName;
+            if (data['retcode'] === 0) {
+              $.nickName = data['base'].nickname;
+            } else {
+              $.nickName = $.UserName
+            }
           } else {
             console.log(`京东服务器返回空数据`)
           }
@@ -370,45 +356,6 @@ function jsonParse(str) {
       return [];
     }
   }
-}
-
-function getStoreTokee(url) {
-  return new Promise(async resolve => {
-    const options = {
-      "url": `${url}?${new Date()}`,
-      "timeout": 10000,
-      "headers": {
-        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
-      }
-    };
-    if ($.isNode() && process.env.TG_PROXY_HOST && process.env.TG_PROXY_PORT) {
-      const tunnel = require("tunnel");
-      const agent = {
-        https: tunnel.httpsOverHttp({
-          proxy: {
-            host: process.env.TG_PROXY_HOST,
-            port: process.env.TG_PROXY_PORT * 1
-          }
-        })
-      }
-      Object.assign(options, { agent })
-    }
-    let res = []
-    $.get(options, async (err, resp, data) => {
-      try {
-        if (err) {
-        } else {
-          if (data) res = JSON.parse(data)
-        }
-      } catch (e) {
-        // $.logErr(e, resp)
-      } finally {
-        resolve(res || []);
-      }
-    })
-    await $.wait(10000)
-    resolve(res);
-  })
 }
 
 // prettier-ignore
