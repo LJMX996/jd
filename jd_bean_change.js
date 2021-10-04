@@ -46,7 +46,7 @@ let IndexGp4 = 0;
 
 let notifySkipList = "";
 let IndexAll = 0;
-let EnableMonth = "false";
+let EnableMonth = "true";
 let isSignError = false;
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '';
@@ -88,7 +88,7 @@ if ($.isNode() && process.env.BEANCHANGE_ENABLEMONTH) {
 	EnableMonth = process.env.BEANCHANGE_ENABLEMONTH;
 }
 
-if (EnableMonth == "true" && Today.getDate() == 1 && Today.getHours() > 17)
+if (EnableMonth == "true" && Today.getDate() == 1 && Today.getHours() > 8)
 	llShowMonth = true;
 
 let userIndex2 = -1;
