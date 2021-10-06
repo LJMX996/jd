@@ -99,7 +99,7 @@ if ($.isNode() && process.env.BEANCHANGE_ENABLEMONTH) {
 	EnableMonth = process.env.BEANCHANGE_ENABLEMONTH;
 }
 
-if (EnableMonth == "true" && Today.getHours() > 12)
+if (EnableMonth == "true" && Today.getHours() > 22)
 	llShowMonth = true;
 
 let userIndex2 = -1;
