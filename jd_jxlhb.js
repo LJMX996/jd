@@ -71,7 +71,7 @@ const BASE_URL = 'https://m.jingxi.com/cubeactive/steprewardv3'
     $.canHelp = true;
     UA = UAInfo[$.UserName]
     for (let j = 0; j < 3 && $.canHelp; j++) {
-      console.log(`【账号${$.index} ${$.UserName}】去助力【${$.packetIdArr[j].userName}】邀请码：${$.packetIdArr[j].strUserPin}`);
+      console.log(`【账号${$.UserName}】去助力【${$.packetIdArr[j].userName}】邀请码：${$.packetIdArr[j].strUserPin}`);
       if ($.UserName === $.packetIdArr[j].userName) {
         console.log(`助力失败：不能助力自己`)
         continue
@@ -224,10 +224,10 @@ function enrollFriend(strPin) {
             if (data.iRet === 2015) $.canHelp = false;//助力已达上限
             if (data.iRet === 2016) {
               $.canHelp = false;//助力火爆
-              console.log(`温馨提示：这TM是个黑号，扔了吧`);
+              console.log(`温馨提示：这TM是个黑号，扔了吧❗❗❗❗`);
             }
             if (data.iRet === 2013) $.max = true;
-            console.log(`助力失败：大黑号，玩尼🐴呢`);
+            console.log(`助力失败：这TM大黑号，玩鸡巴呢❗❗❗❗`);
           }
         }
       } catch (e) {
