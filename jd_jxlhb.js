@@ -224,10 +224,10 @@ function enrollFriend(strPin) {
             if (data.iRet === 2015) $.canHelp = false;//助力已达上限
             if (data.iRet === 2016) {
               $.canHelp = false;//助力火爆
-              console.log(`温馨提示：如提示助力火爆，可尝试寻找京东客服`);
+              console.log(`温馨提示：这TM是个黑号，扔了吧`);
             }
             if (data.iRet === 2013) $.max = true;
-            console.log(`助力失败：${data.sErrMsg}\n`);
+            console.log(`助力失败：大黑号，玩尼🐴呢`);
           }
         }
       } catch (e) {
