@@ -42,7 +42,7 @@ const BASE_URL = 'https://m.jingxi.com/cubeactive/steprewardv3'
   if (res && res.activeId) $.activeId = res.activeId;
   $.authorMyShareIds = [...((res && res.codes) || [])];
   //开启红包,获取互助码
-  for (let i = 0; i < 9; i++) {
+  for (let i = 0; i < cookiesArr.length; i++) {
     cookie = cookiesArr[i];
     $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
     $.index = i + 1;
@@ -227,7 +227,7 @@ function enrollFriend(strPin) {
               console.log(`温馨提示：这TM是个黑号，扔了吧❗❗❗❗`);
             }
             if (data.iRet === 2013) $.max = true;
-            console.log(`助力失败：这TM大黑号，玩鸡巴呢❗❗❗❗`);
+            console.log(`助力失败❗❗❗：${data.sErrMsg}\n`);
           }
         }
       } catch (e) {
