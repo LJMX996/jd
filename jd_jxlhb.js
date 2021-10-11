@@ -227,7 +227,7 @@ function enrollFriend(strPin) {
               console.log(`温馨提示：这TM是个黑号，扔了吧❗❗❗❗`);
             }
             if (data.iRet === 2013) $.max = true;
-            console.log(`助力失败❗❗❗：${data.sErrMsg}\n`);
+            console.log(`助力失败：${data.sErrMsg}\n`);
           }
         }
       } catch (e) {
