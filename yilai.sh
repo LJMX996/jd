@@ -1,18 +1,18 @@
 
+npm install -g pnpm
+pnpm install -g @otplib/preset-default
+cd /ql/scripts && pnpm install -g fund
+cd /ql/scripts && pnpm install -g jsdom
+cd /ql/scripts && pnpm install -g form-data
+cd /ql/scripts && pnpm install -g tough-cookie
+cd /ql/scripts && pnpm install -g axios date-fns
+cd /ql/scripts && pnpm install -g crypto-js
+cd /ql/scripts && pnpm install -g crypto -g
+cd /ql/scripts && pnpm install -g download
+cd /ql/scripts && pnpm install -g typescript
+cd /ql/scripts && pnpm install -g png-js
 
-pnpm install @otplib/preset-default
-cd /ql/scripts && npm fund
-cd /ql/scripts && npm install jsdom
-cd /ql/scripts && npm install form-data
-cd /ql/scripts && npm install tough-cookie
-cd /ql/scripts && npm install axios date-fns
-cd /ql/scripts && npm install crypto-js
-cd /ql/scripts && npm install crypto -g
-cd /ql/scripts && npm install download
-cd /ql/scripts && npm install -g typescript
-cd /ql/scripts && npm i -S png-js
-
-cd /ql/scripts && pnpm install got@11
+cd /ql/scripts && pnpm install -g got@11
 
 cd /ql/scripts && apk add libc6-compat
 cd /ql/scripts && apk add nodejs-current
