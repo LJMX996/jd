@@ -3,7 +3,7 @@
 ============Quantumultx===============
 [task_local]
 # 京东赚赚
-2 0-23/3 * * * code_jdzz.js
+40 3-23/3 * * * code_jdzz.js
 
 
  */

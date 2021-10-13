@@ -3,7 +3,7 @@
 ===================quantumultx================
 [task_local]
 #东东健康社区
-2 0-23/3 * * * code_health.js
+40 3-23/3 * * * code_health.js
 
 
  */

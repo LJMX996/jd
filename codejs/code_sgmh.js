@@ -3,7 +3,7 @@
 ============Quantumultx===============
 [task_local]
 #闪购盲盒
-2 0-23/3 * * * code_sgmh.js
+40 3-23/3 * * * code_sgmh.js
 
 
  */

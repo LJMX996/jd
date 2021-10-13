@@ -8,7 +8,7 @@
 ============Quantumultx===============
 [task_local]
 #签到领现金
-2 0-23/3 * * * code_cash.js, tag=签到领现金助力码
+40 3-23/3 * * * code_cash.js, tag=签到领现金助力码
 
  */
 const $ = new Env('签到领现金助力码');

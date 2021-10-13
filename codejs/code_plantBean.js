@@ -1,6 +1,6 @@
 /*
 
-2 0-23/3 * * * code_plantBean.js
+40 3-23/3 * * * code_plantBean.js
 
 */
 const $ = new Env('京东种豆得豆助力码');

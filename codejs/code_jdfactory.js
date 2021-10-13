@@ -3,7 +3,7 @@
 ============Quantumultx===============
 [task_local]
 #东东工厂
-2 0-23/3 * * * code_jdfactory.js
+40 3-23/3 * * * code_jdfactory.js
 
 
  */

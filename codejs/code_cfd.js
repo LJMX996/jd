@@ -3,7 +3,7 @@
 ============Quantumultx===============
 [task_local]
 #京喜财富岛
-2 0-23/3 * * * code_cfd.js, tag=京喜财富岛助力码
+40 3-23/3 * * * code_cfd.js, tag=京喜财富岛助力码
 
  */
 !function (t, r) { "object" == typeof exports ? module.exports = exports = r() : "function" == typeof define && define.amd ? define([], r) : t.CryptoJS = r() }(this, function () {
