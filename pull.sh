@@ -1,4 +1,4 @@
-ql repo https://github.com/LJMX996/jd.git "getJDCookie|jd_|jx_|gua_|code_|zy_|jd-task-|jddj_|ql_|ck_" "static|tools|activity|backUp|jd_delCoupon|format_|tmp|cdle|helpjs" "JDJRValidator_Pure.js|sign_graphics_validate.js|MovementFaker.js|ZooFaker_Necklace.js|USER|^jd[^_]" "aaron" 
+ql repo https://github.com/LJMX996/jd.git "getJDCookie|jd_|jx_|gua_|code_|zy_|jd-task-|jddj_|ql_|ck_" "static|tools|activity|backUp|jd_delCoupon|format_|tmp|cdle|helpjs" "" "aaron" 
 
 
 
