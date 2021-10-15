@@ -27,7 +27,6 @@ if ($.isNode()) {
 } else {
   cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
-
 const JD_API_HOST = `https://api.m.jd.com/client.action`;
 !(async () => {
   if (!cookiesArr[0]) {
@@ -80,7 +79,6 @@ function interact_template_getHomeData(timeout = 0) {
         },
         body : `functionId=${homeDataFunPrefix}_getHomeData&body={"appId":"${appId}","taskToken":""}&client=wh5&clientVersion=1.0.0`
       }
-
       $.post(url, async (err, resp, data) => {
         try {
           data = JSON.parse(data);
@@ -293,16 +291,10 @@ function shareCodesFormat() {
 function readShareCode() {
   console.log(`开始`)
   return new Promise(async resolve => {
-    $.get({
-      url: ``,
-      headers: {
-        'Host':'api.sharecode.ga'
-      },
-      timeout: 10
-    }, (err, resp, data) => {
+    $.get({url: ``, timeout: 1}, (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
+          console.log(JSON.stringify(err))
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {

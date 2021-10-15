@@ -3,7 +3,7 @@
 ============Quantumultx===============
 [task_local]
 #京喜工厂
-10,40 * * * * jd_dreamFactory.js
+30 * * * * jd_dreamFactory.js
 
 */
 // prettier-ignore
@@ -631,26 +631,6 @@ function userInfo() {
                 message += `【生产商品】${$.productName}\n`;
                 message += `【当前等级】${data.user.userIdentity} ${data.user.currentLevel}\n`;
                 message += `【生产进度】${((production.investedElectric / production.needElectric) * 100).toFixed(2)}%\n`;
-
-                // ***************************
-                // 报告运行次数
-                $.get({
-                  url: `https://cdn.nz.lu/api/runTimes?activityId=jxfactory&sharecode=${data.user.encryptPin}`,
-                  headers: {
-                    'Host': 'api.sharecode.ga'
-                  },
-                  timeout: 10000
-                }, (err, resp, data) => {
-                  if (err) {
-                    console.log('上报失败', err)
-                  } else {
-                    if (data === '1' || data === '0') {
-                      console.log('上报成功')
-                    }
-                  }
-                })
-                // ***************************
-
                 if (production.investedElectric >= production.needElectric) {
                   if (production['exchangeStatus'] === 1) $.log(`\n\n可以兑换商品了`)
                   if (production['exchangeStatus'] === 3) {
@@ -1353,10 +1333,10 @@ async function showMsg() {
 function readShareCode() {
   console.log(`开始`)
   return new Promise(async resolve => {
-    $.get({url: ``, headers: {'Host': 'api.sharecode.ga'}, timeout: 1}, (err, resp, data) => {
+    $.get({url: ``, timeout: 1}, (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
+          console.log(JSON.stringify(err))
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {
