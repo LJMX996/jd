@@ -1,6 +1,6 @@
 /*
 
-cron 0,10 0,1 * * * jd_qpqd_diy.js, tag=店铺签到远程版
+cron 0,10 0,1 * * * jd_dpqd_Diy.js, tag=店铺签到远程版
 
 */
 
