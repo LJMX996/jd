@@ -1,6 +1,6 @@
 /*
 京喜财富岛提交助力码
-cron 30 0 0 * * * jd_upcfdcode.js
+cron 30 0,10 0 * * * jd_upcfdcode.js
 
  */
 !function (t, r) { "object" == typeof exports ? module.exports = exports = r() : "function" == typeof define && define.amd ? define([], r) : t.CryptoJS = r() }(this, function () {
