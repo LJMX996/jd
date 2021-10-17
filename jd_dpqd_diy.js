@@ -3,6 +3,7 @@
 cron 0,10 0,1 * * * jd_qpqd_diy.js, tag=店铺签到远程版
 
 */
+
 const $ = new Env('店铺签到远程版');
 
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -18,7 +19,12 @@ let vender=''
 let num=0
 let shopname=''
 
-const token=[]
+const token=[
+
+'020E4A5B75AE493CDF3020628CA72FDE',
+
+
+]
 //IOS等用户直接用NobyDa的jd cookie
 
 $.TokenList =[];
@@ -47,7 +53,7 @@ if ($.isNode()) {
 	$.TokenLists = []
   
         $.innerTokenList = await getStoreTokee('http://www.sunwang.co:666/dpqd.php');
-        $.innerTokenList = token
+        //$.innerTokenList = token
 	
 	$.TokenLists.push(...$.TokenList,...$.innerTokenList);
 
