@@ -37,8 +37,7 @@ if ($.isNode()) {
 }
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 let inviteCodes = [
-  'xBd-HlYMlLUzqSkuz0qzAzuayqOG3FfAIeOTGLowr29_KbnH2bV4EX4@RtGKzr_wSAn2eIKZRdRm07jvOMS2zVH-g8ri6aOIZPDcI8v7CA@RtGKzr-gRAmmdoaZQdcz30FEv6dt0Mio6a5hyr9dt0vq1P8G0g@RtGKz-ygEAj2e9aYH4U10HcN_2_yeoSSOH50A7CItcn6lB6jwQ',
-  'RtGKz-ygEAj2e9aYH4U10HcN_2_yeoSSOH50A7CItcn6lB6jwQ'
+  'RtGKz-igRwykf4OeFtEx3wklZHyH97m3W_L5b2xLLNYYtapwag@RtGKubL7K2DfI__FfoZymojXWnQBoZ-fB02oYpqQZLUCVKnl@RtGKzeiiSV6ge4GTQYU61jdd6CaWnTpfX7kGvsCMRpLJ6ad78g@RtGKzO2nSQOrLITMRIdhgEHIAChFPoWSYqLE8I14tLgCsHhU2Q@RtGKzuStFAyndoaaQYEzgoJXjoSTaIIduvsuKxsaEp7IPAHrBg@RtGKzrqkRAKrfoOdRtE00CGcm0bee0rkI8s-DBe3DIHXIUxZbw'
 ]
 !(async () => {
   if (!cookiesArr[0]) {
@@ -254,7 +253,7 @@ function city_lotteryAward() {
 function readShareCode() {
   console.log(`开始`)
   return new Promise(async resolve => {
-    $.get({url: `http://share.turinglabs.net/api/v3/city/query/10/`, 'timeout': 10000}, (err, resp, data) => {
+    $.get({url: ``, 'timeout': 1}, (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
