@@ -46,7 +46,7 @@ let inviteCodes = [
     return;
   }
   await requireConfig();
-  if (exchangeFlag) {
+  if (1 == 0) {
     console.log(`脚本自动抽奖`)
   } else {
     console.log(`脚本不会自动抽奖，建议活动快结束开启，默认关闭(在6.2日自动开启抽奖),如需自动抽奖请设置环境变量  JD_CITY_EXCHANGE 为true`);
@@ -80,7 +80,7 @@ let inviteCodes = [
             break
           }
           if (res['data']['result']['toasts'] && res['data']['result']['toasts'][0]) {
-            console.log(`助力 【${$.newShareCodes[i]}】:${res.data.result.toasts[0].msg}`)
+            console.log(`助力 :${res.data.result.toasts[0].msg}`)
           }
         }
         if ((res && res['status'] && res['status'] === '3') || (res && res.data && res.data.bizCode === -11)) {
@@ -99,7 +99,7 @@ let inviteCodes = [
         }
       } else {
         //默认6.2开启抽奖
-        if ((new Date().getMonth()  + 1) === 6 && new Date().getDate() >= 2) {
+        if ((new Date().getMonth()  + 1) === 10 && new Date().getDate() >= 28) {
           const res = await city_lotteryAward();//抽奖
           if (res && res > 0) {
             for (let i = 0; i < new Array(res).fill('').length; i++) {
