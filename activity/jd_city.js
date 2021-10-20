@@ -89,12 +89,12 @@ let inviteCodes = [
         }
       }
       await getInviteInfo();//雇佣
-      if (exchangeFlag) {
+      if (1 == 0) {
         const res = await city_lotteryAward();//抽奖
         if (res && res > 0) {
           for (let i = 0; i < new Array(res).fill('').length; i++) {
             await $.wait(1000)
-            await city_lotteryAward();//抽奖
+            //await city_lotteryAward();//抽奖
           }
         }
       } else {
@@ -104,7 +104,7 @@ let inviteCodes = [
           if (res && res > 0) {
             for (let i = 0; i < new Array(res).fill('').length; i++) {
               await $.wait(1000)
-              await city_lotteryAward();//抽奖
+              //await city_lotteryAward();//抽奖
             }
           }
         }
