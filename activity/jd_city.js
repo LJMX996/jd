@@ -37,9 +37,23 @@ if ($.isNode()) {
 }
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 let inviteCodes = [
-  'RtGKz-igRwykf4OeFtEx3wklZHyH97m3W_L5b2xLLNYYtapwag@RtGKubL7K2DfI__FfoZymojXWnQBoZ-fB02oYpqQZLUCVKnl@RtGKzO2nSQOrLITMRIdhgEHIAChFPoWSYqLE8I14tLgCsHhU2Q@RtGKzeiiSV6ge4GTQYU61jdd6CaWnTpfX7kGvsCMRpLJ6ad78g'
+  'RtGKz-igRwykf4OeFtEx3wklZHyH97m3W_L5b2xLLNYYtapwag@RtGKubL7K2DfI__FfoZymojXWnQBoZ-fB02oYpqQZLUCVKnl@RtGKzO2nSQOrLITMRIdhgEHIAChFPoWSYqLE8I14tLgCsHhU2Q'
 ]
-//Liu1  Liu3   lu  宋
+
+
+//RtGKz-igRwykf4OeFtEx3wklZHyH97m3W_L5b2xLLNYYtapwag    刘1
+//RtGKubL7K2DfI__FfoZymojXWnQBoZ-fB02oYpqQZLUCVKnl    刘3
+//RtGKzO2nSQOrLITMRIdhgEHIAChFPoWSYqLE8I14tLgCsHhU2Q   陆
+//RtGKzeiiSV6ge4GTQYU61jdd6CaWnTpfX7kGvsCMRpLJ6ad78g    宋
+//RtGKzuXxRwP1fNDLQdFnh2-oFmIeqpoWb1gMKAiuOrfooj1CTA    姐
+//HYDlze6kSAqjd4bQT4t2mlbIMAVhvMWMl-0LHPCjijGpmb8L   周
+//RtGKzuStFAyndoaaQYEzgoJXjoSTaIIduvsuKxsaEp7IPAHrBg    李1
+//RtGKzrqkRAKrfoOdRtE00CGcm0bee0rkI8s-DBe3DIHXIUxZbw     程1
+//RtGKze_2RFiheoTOEtNl37UCCoFYYqG6Ntit7s2LFqsHjvTm9Q    李2
+//RtGKz-WnSAukfNWaRtcyhTcSqrjNP5kAUihEHKeBufKZHhUq1A   程2
+
+
+
 !(async () => {
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
