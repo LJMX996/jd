@@ -41,8 +41,7 @@ const BASE_URL = 'https://m.jingxi.com/cubeactive/steprewardv3';
         res = await getAuthorShareCode('')
     }
     if (res && res.activeId) $.activeId = res.activeId;
-    res["codes"] = [];
-    $.authorMyShareIds = [...((res && res.codes) || [])];
+
     //开启红包,获取互助码
     for (let i = 0; i < cookiesArr.length; i++) {
         cookie = cookiesArr[i];
