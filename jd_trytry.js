@@ -70,6 +70,7 @@ const typeMap = {
 };
 
 !(async () => {
+    console.log(`\n❗❗❗❗❗❗\n注意:本仓库偷助力，偷CK，今天用这个仓库，明天你一觉醒来服务器就被我偷走了🌝🌝🌚🌚\n❗❗❗❗❗❗\n`);
   await requireConfig();
   if (!cookiesArr[0]) {
     $.msg(

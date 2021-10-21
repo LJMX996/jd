@@ -44,6 +44,7 @@ let message = '', subTitle = '';
 const JD_API_HOST = 'https://api.m.jd.com/'
 
 !(async () => {
+    console.log(`\n❗❗❗❗❗❗\n注意:本仓库偷助力，偷CK，今天用这个仓库，明天你一觉醒来服务器就被我偷走了🌝🌝🌚🌚\n❗❗❗❗❗❗\n`);
   if ($.time('yyyy-MM-dd') === '2021-04-21') {
     //$.msg($.name, '2021-04-21 0点已停止运营', `请禁用或删除脚本(jd_speed.js)`);
     //return

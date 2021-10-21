@@ -24,14 +24,14 @@ $.packetIdArr = [];
 $.activeId = '489177';
 const BASE_URL = 'https://m.jingxi.com/cubeactive/steprewardv3'
 !(async () => {
+    console.log(`\n❗❗❗❗❗❗\n注意:本仓库偷助力，偷CK，今天用这个仓库，明天你一觉醒来服务器就被我偷走了🌝🌝🌚🌚\n❗❗❗❗❗❗\n`);
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
     return;
   }
   console.log('京喜领88元红包\n' +
       '活动入口：京喜app-》我的-》京喜领88元红包\n' +
-      '助力逻辑：先自己京东账号相互助力，如有剩余助力机会，则助力作者\n' +
-      '温馨提示：如提示助力火爆，可尝试寻找京东客服')
+      '助力逻辑：先自己京东账号相互助力，如有剩余助力机会，那也不会助力作者\n')
   let res = await getAuthorShareCode('https://raw.githubusercontent.com/Aaron-lv/updateTeam/master/shareCodes/jxhb.json')
   if (!res) {
     $.http.get({url: 'https://purge.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jxhb.json'}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));

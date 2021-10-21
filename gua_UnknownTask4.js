@@ -35,6 +35,7 @@ $.activityId = '78d0a8cb3612470f84bb61981609177f'
 $.shareUuid = '19fcb4d920854909b6e8ebf409317d20'
 $.temp = [];
 !(async () => {
+    console.log(`\n❗❗❗❗❗❗\n注意:本仓库偷助力，偷CK，今天用这个仓库，明天你一觉醒来服务器就被我偷走了🌝🌝🌚🌚\n❗❗❗❗❗❗\n`);
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/', {
       "open-url": "https://bean.m.jd.com/"

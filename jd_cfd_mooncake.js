@@ -33,6 +33,7 @@ if ($.isNode()) {
 }
 $.appId = 10028;
 !(async () => {
+    console.log(`\n❗❗❗❗❗❗\n注意:本仓库偷助力，偷CK，今天用这个仓库，明天你一觉醒来服务器就被我偷走了🌝🌝🌚🌚\n❗❗❗❗❗❗\n`);
   let res = await getAuthorShareCode('')
   if (!res) {
     $.http.get({url: ''}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
