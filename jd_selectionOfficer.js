@@ -163,7 +163,7 @@ async function doTask(){
                 await $.wait(1000);
             }
         }
-        if($.oneTask.type === 8){
+        if($.oneTask.type === 8 && ["card","car"].includes(process.env.FS_LEVEL)){
             let subList = $.oneTask.info;
             for (let j = 0; j < subList.length; j++) {
                 $.subListInfo = subList[j];
@@ -298,7 +298,7 @@ async function takeGetRequest(type) {
             'Connection' : `keep-alive`,
             'Accept' : `application/json, text/plain, */*`,
             'User-Agent': $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
-            'Authorization':`Bearer ${$.accessToken ?? 'undefined'}`,
+            'Authorization':`Bearer ${$.accessToken || 'undefined'}`,
             'Referer' : `https://xinruimz1-isv.isvjcloud.com/loading/`,
             'Accept-Language':'zh-cn'
         },
