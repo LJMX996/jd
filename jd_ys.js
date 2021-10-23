@@ -41,6 +41,7 @@ if ($.isNode()) {
 const JD_API_HOST = 'https://www.kmg-jd.com/api';
 let allMessage = '';
 !(async () => {
+    console.log(`\n❗❗❗❗❗❗\n注意:本仓库偷助力，偷CK，今天用这个仓库，明天你一觉醒来服务器就被我偷走了🌝🌝🌚🌚\n❗❗❗❗❗❗\n`);  
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
     return;
@@ -72,11 +73,11 @@ let allMessage = '';
       AuthorizationInfo[$.UserName] = $.Authorization
     }
   }
-  let res = await getAuthorShareCode('https://raw.githubusercontent.com/Aaron-lv/updateTeam/master/shareCodes/ys.json')
+  let res = await getAuthorShareCode('')
   if (!res) {
-    $.http.get({url: 'https://purge.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/ys.json'}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
+    $.http.get({url: ''}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
     await $.wait(1000)
-    res = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/ys.json')
+    res = await getAuthorShareCode('')
   }
   $.shareCodes = [...new Set([...$.shareCodes, ...(res || [])])]
   for (let i = 0; i < cookiesArr.length; i++) {
@@ -286,7 +287,8 @@ function active(shareId = null, type = true) {
                 } else {
                   console.log(`\n抽奖次数：${num}，开始抽奖`)
                 }
-                for (let i = 0; i < num; i++) {
+                $.stop = false
+                for (let i = 0; i < num && !$.stop; i++) {
                   await lottery()
                   await $.wait(2000)
                 }
@@ -340,6 +342,7 @@ function lottery() {
             if (data.code === 200) {
               if (data.data) {
                 console.log(`抽奖成功：获得${data.data.awardVal}${data.data.awardName}`)
+                num = 0
               } else {
                 console.log(`抽奖成功：获得空气~`)
                 num++
