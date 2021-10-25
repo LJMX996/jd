@@ -233,7 +233,7 @@ function getInfo(inviteId, flag = false) {
                 for(let vo of data.data.result && data.data.result.mainInfos || []){
                   if (vo && vo.remaingAssistNum === 0 && vo.status === "1") {
                     console.log(vo.roundNum)
-                    await receiveCash(vo.roundNum)
+                    //await receiveCash(vo.roundNum)
                     await $.wait(2*1000)
                   }
                 }
