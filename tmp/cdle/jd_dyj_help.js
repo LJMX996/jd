@@ -39,6 +39,7 @@ let tools = []
     while (helps.length && tools.length) {
           tool = tools.pop()
           cookie = tool.cookie
+          await $.wait(200);
           data = await openRedEnvelopeInteract({redEnvelopeId: helps[0].redEnvelopeId,inviter: helps[0].markedPin, helpType:"1"})
           errMsg = data?.data?.helpResult?.errMsg
           if(errMsg){
