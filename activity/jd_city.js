@@ -39,12 +39,23 @@ if ($.isNode()) {
 }
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 let inviteCodes = [
-'HYThyu-lRBekfICaENI31VsBYnLTLQZxj-D--1TcO3hjV0-L5g',
+'SNq7n7vhEAqmfIHWW5gzms8P01elp23jqHMRENvpZzw',
 
-'HYbmwOysRg2leIr1V5h_miHZfRopQDnnbEytGEAgoRfpDQ',
-  'W9GllIrVC3fEHtrDUoh_mi0qN35_1oiu2swKdRyDwQ8COIk',
+'RtGKzuXySQ2rdoCaRYEyg__S_pyOxDvhZFCLHE1BZwBDv73QUQ',
+
+'RtGKzOmsRlmmK9DOEYIw1tXKMZMRgdJ7d13jcWavd7azDnA7Fg',
+
 ]
+/*
+let inviteCodes = [
+'RtGKr7PCNX7AOPrBbZRqmvz_AZJEkdMO6lfGmWer2tcdvXXv',
 
+'HYDlze6kSAqjd4bQT4t2mlbIMAVhvMWMl-0LHPCjijGpmb8L',
+
+'RtGKla_gMlzUD-DBaIdymmHu7G0LnxgisCHRaTgngdpeT4_G',
+
+]
+*/
 
 //RtGKz-igRwykf4OeFtEx3wklZHyH97m3W_L5b2xLLNYYtapwag    刘1
 //RtGKubL7K2DfI__FfoZymojXWnQBoZ-fB02oYpqQZLUCVKnl    刘3
