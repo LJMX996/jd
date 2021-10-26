@@ -1,6 +1,6 @@
 /**
 *
-58 59 8-18/1 * * * jx_cfdtx_new.js
+58 59 * * * * jx_cfdtx_new.js
 
 *
 **/
