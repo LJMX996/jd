@@ -42,7 +42,7 @@ let inviteCodes = [
 
 'RtGKopT-F2LfA_7eb71omiWNcu9b8Nvl91kpR3xLLLoB5GEz',
 
-'HYXjze6tQg2gfezHW5h_1iqGXE-fWFChVN22nLanccqZ',
+'RtGKu7jsI2j6K-r9Sq5Amqdna1eQxqHek8v9VhzyzRZhoIqR',
 
 'RtGKnbXCMHTaAvb9Zb11mkP6SK9lt5_0ZKMW_WlW0K3jYA85',
 
