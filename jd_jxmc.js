@@ -67,7 +67,7 @@ if ($.isNode()) {
         }
         await $.wait(2000);
     }
-    if(new Date().getHours() !== 0 && new Date().getHours() !== 23){
+    if(1 == 0){
         console.log('\n老子全天候都要账号内互助');
         return ;
     }
