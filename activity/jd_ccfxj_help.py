@@ -12,7 +12,7 @@ cron: 0 0 * * *
 new Env('城城分现金助力-助力.py');
 '''
 ## 助力账号名称：可填用户名 或 pin的值不要; env 设置 export ccfxj_help="Curtinlv&用户2"  多账号&分隔
-ccfxj_help=["jd_ZHjfXLMMtHYk&jd_eiVANILEWBYv&jd_CdxRRieYWmJC"]
+ccfxj_help=["jd_ZHjfXLMMtHYk","jd_eiVANILEWBYv","jd_CdxRRieYWmJC"]
 #是否开启通知，Ture：发送通知，False：不发送
 isNotice=True
 # UA 可自定义你的，注意格式: 【 jdapp;iPhone;10.0.4;14.2;9fb54498b32e17dfc5717744b5eaecda8366223c;network/wifi;ADID/2CF597D0-10D8-4DF8-C5A2-61FD79AC8035;model/iPhone11,1;addressid/7785283669;appBuild/167707;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 14_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/null;supportJDSHWK/1 】

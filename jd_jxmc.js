@@ -20,7 +20,7 @@
 const $ = new Env('惊喜牧场');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const JXUserAgent =  $.isNode() ? (process.env.JX_USER_AGENT ? process.env.JX_USER_AGENT : ``):``;
-const ByType = $.isNode() ? (process.env.BYTYPE ? process.env.BYTYPE : `888`):`888`;
+const ByType = $.isNode() ? (process.env.BYTYPE ? process.env.BYTYPE : `888`):`999`;
 let cookiesArr = [],token = {},ua = '';
 $.appId = 10028;
 let activeid = 'null';
@@ -67,8 +67,8 @@ if ($.isNode()) {
         }
         await $.wait(2000);
     }
-    if(new Date().getHours() !== 9 && new Date().getHours() !== 10){
-        console.log('\n脚本早上9点到10点直接执行，才会执行账号内互助');
+    if(new Date().getHours() !== 0 && new Date().getHours() !== 23){
+        console.log('\n老子全天候都要账号内互助');
         return ;
     }
     console.log('\n##################开始账号内互助#################\n');
@@ -410,7 +410,11 @@ async function doTask(){
                 if (Number(oneTask.completedTimes) > 0 && oneTask.completedTimes === oneTask.targetTimes) {
                     console.log(`完成任务：${oneTask.taskName}`);
                     awardInfo = await takeRequest(`newtasksys`,`newtasksys_front/Award`,`source=jxmc&taskId=${oneTask.taskId}&bizCode=jxmc`,`bizCode%2Csource%2CtaskId`,true);
-                    console.log(`领取金币成功，获得${JSON.parse(awardInfo.prizeInfo).prizeInfo}`);
+                    if (awardInfo.awardStatus == 0 || "" === awardInfo.prizeInfo) {
+                        console.log(`领取金币成功，获得0`);
+                    } else {
+                        console.log(`领取金币成功，获得${JSON.parse(awardInfo.prizeInfo).prizeInfo}`);
+                    }
                     await $.wait(2000);
                 }
                 for (let j = Number(oneTask.completedTimes); j < Number(oneTask.configTargetTimes); j++) {
@@ -419,12 +423,20 @@ async function doTask(){
                     await $.wait(5500);
                     console.log(`完成任务：${oneTask.description}`);
                     awardInfo = await takeRequest(`newtasksys`,`newtasksys_front/Award`,`source=jxmc&taskId=${oneTask.taskId}&bizCode=jxmc`,`bizCode%2Csource%2CtaskId`,true);
-                    console.log(`领取金币成功，获得${JSON.parse(awardInfo.prizeInfo).prizeInfo}`);
+                    if (awardInfo.awardStatus == 0 || "" === awardInfo.prizeInfo) {
+                        console.log(`领取金币成功，获得0`);
+                    } else {
+                        console.log(`领取金币成功，获得${JSON.parse(awardInfo.prizeInfo).prizeInfo}`);
+                    }
                 }
             } else if (oneTask.awardStatus === 2 && oneTask.completedTimes === oneTask.targetTimes) {
                 console.log(`完成任务：${oneTask.taskName}`);
                 awardInfo = await takeRequest(`newtasksys`,`newtasksys_front/Award`,`source=jxmc&taskId=${oneTask.taskId}&bizCode=jxmc`,`bizCode%2Csource%2CtaskId`,true);
-                console.log(`领取金币成功，获得${JSON.parse(awardInfo.prizeInfo).prizeInfo}`);
+                if (awardInfo.awardStatus == 0 || "" === awardInfo.prizeInfo) {
+                    console.log(`领取金币成功，获得0`);
+                } else {
+                    console.log(`领取金币成功，获得${JSON.parse(awardInfo.prizeInfo).prizeInfo}`);
+                }                
                 await $.wait(2000);
             }
         }
