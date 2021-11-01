@@ -35,7 +35,7 @@ $.keywordsNum = 0;
 !(async() => {
     console.log('使用前请确保你认真看了注释')
     console.log('环境变量添加：export JD_CART="true",当环境变量中存在JD_CART并设置为true时才会执行删除购物车')
-    if($.cart){
+    if(1 == 1){
         if(!cookiesArr[0]){
             $.msg('【京东账号一】移除购物车失败', '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {
                 "open-url": "https://bean.m.jd.com/bean/signIndex.action"
