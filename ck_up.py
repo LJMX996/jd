@@ -29,7 +29,7 @@ try:
 except:
     logger.info("无推送文件")
 
-ver = 1102
+ver = 1103
 
 
 # 登录青龙 返回值 token
@@ -161,7 +161,6 @@ def check_ck(ck):
 
 # 返回值 bool jd_ck
 def getToken(wskey):
-    sv, st, uuid, sign = get_sign()
     headers = {
         'cookie': wskey,
         'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -229,7 +228,8 @@ def get_sign():
     url = str(base64.b64decode('aHR0cDovL21vZS5zaGl6dWt1Lm1sOjg0NDMvd3NrZXk=').decode())
     for i in range(3):
         try:
-            res = jds.get(url=url, verify=False, timeout=20)
+            headers = {"User-Agent": ua}
+            res = requests.get(url=url, headers=headers, verify=False, timeout=20)
         except requests.exceptions.ConnectTimeout:
             logger.info("\n获取Sign超时, 正在重试!" + str(i))
             time.sleep(1)
@@ -239,8 +239,8 @@ def get_sign():
             time.sleep(1)
             continue
         except Exception as err:
-            logger.info(str(err) + "\n未知错误, 退出脚本!")
-            sys.exit(1)
+            logger.info(str(err) + "\n未知错误, 重试脚本!")
+            continue
         else:
             try:
                 sign_list = json.loads(res.text)
@@ -379,13 +379,15 @@ def cloud_info():
     url = str(base64.b64decode('aHR0cDovL21vZS5zaGl6dWt1Lm1sOjg0NDMvY2hlY2tfYXBp').decode())
     for i in range(3):
         try:
-            res = s.get(url=url, verify=False, timeout=20).text
+            headers = {"authorization": "Bearer Shizuku"}
+            res = requests.get(url=url, verify=False, headers=headers, timeout=20).text
         except requests.exceptions.ConnectTimeout:
             logger.info("\n获取云端参数超时, 正在重试!" + str(i))
         except requests.exceptions.ReadTimeout:
             logger.info("\n获取云端参数超时, 正在重试!" + str(i))
         except Exception as err:
-            logger.info(str(err) + "\n未知错误, 退出脚本!")
+            logger.info(str(err) + "\n未知错误云端, 退出脚本!")
+           #  time.sleep(2)
             sys.exit(1)
         else:
             try:
@@ -422,8 +424,7 @@ if __name__ == '__main__':
     update()
     boom()
     ua = cloud_arg['User-Agent']
-    jds = requests.session()
-    jds.headers.update({"User-Agent": ua})
+    sv, st, uuid, sign = get_sign()
     wslist = get_wskey()
     for ws in wslist:
         wspin = ws.split(";")[0]
