@@ -1,6 +1,7 @@
 
 npm install -g pnpm
 pnpm install -g @otplib/preset-default
+cd /ql/scripts && pnpm install -g js-base64
 cd /ql/scripts && pnpm install -g fund
 cd /ql/scripts && pnpm install -g jsdom
 cd /ql/scripts && pnpm install -g form-data
