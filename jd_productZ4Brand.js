@@ -4,14 +4,34 @@
  cron 23 3,8,20 * * * jd_productZ4Brand.js
  一天要跑2次
  */
+//脚本自用     禁止搬运
 const $ = new Env('特务Z');
 const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let cookiesArr = [];
 let UA = ``;
+let helpnum=5;
 $.allInvite = [];
 let useInfo = {};
 $.helpEncryptAssignmentId = '';
+Date.prototype.Format = function (fmt) { //author: meizz
+    var o = {
+      "M+": this.getMonth() + 1, //月份
+      "d+": this.getDate(), //日
+      "h+": this.getHours(), //小时
+      "m+": this.getMinutes(), //分
+      "s+": this.getSeconds(), //秒
+      "S": this.getMilliseconds() //毫秒
+    };
+    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+      if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
+  }
+  let nowtime = new Date().Format("h")
+
+
+
 if ($.isNode()) {
     Object.keys(jdCookieNode).forEach((item) => {
         cookiesArr.push(jdCookieNode[item])
@@ -36,6 +56,7 @@ if ($.isNode()) {
         $.isLogin = true;
         $.nickName = '';
         $.UserName = decodeURIComponent($.cookie.match(/pt_pin=([^; ]+)(?=;?)/) && $.cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
+        $.numnum = i;
         await TotalBean();
         console.log(`\n*****开始【京东账号${$.index}】${$.nickName || $.UserName}*****\n`);
         if (!$.isLogin) {
@@ -68,7 +89,7 @@ if ($.isNode()) {
         for (let j = 0; j < $.allInvite.length && $.canHelp; j++) {
             $.codeInfo = $.allInvite[j];
             $.code = $.codeInfo.code;
-            if($.UserName ===  $.codeInfo.userName || $.codeInfo.time === 3){
+            if($.UserName ===  $.codeInfo.userName || $.codeInfo.time === 30){
                 continue;
             }
             $.encryptAssignmentId = $.codeInfo.encryptAssignmentId;
@@ -82,7 +103,7 @@ if ($.isNode()) {
 async function main() {
     $.runFlag = false;
     $.activityInfo = {};
-    await takeRequest('superBrandSecondFloorMainPage');
+    await takeRequest('showSecondFloorCardInfo');
     if(JSON.stringify($.activityInfo) === '{}'){
         console.log(`获取活动详情失败`);
         return ;
@@ -90,8 +111,8 @@ async function main() {
     console.log(`获取活动详情成功`);
     $.activityId = $.activityInfo.activityBaseInfo.activityId;
     $.activityName = $.activityInfo.activityBaseInfo.activityName;
-    $.callNumber = $.activityInfo.activityUserInfo.userStarNum;
-    console.log(`当前活动:${$.activityName},ID：${$.activityId},可抽奖次数:${$.callNumber}`);
+    //$.callNumber = $.activityInfo.activityUserInfo.userStarNum;
+    console.log(`当前活动:${$.activityName},ID：${$.activityId}`);
     $.encryptProjectId = $.activityInfo.activityBaseInfo.encryptProjectId;
     useInfo[$.UserName] = $.encryptProjectId;
     await $.wait(1000);
@@ -100,7 +121,7 @@ async function main() {
     await $.wait(1000);
     await doTask();
     if($.runFlag){
-        await takeRequest('superBrandSecondFloorMainPage');
+        await takeRequest('showSecondFloorCardInfo');
         $.callNumber = $.activityInfo.activityUserInfo.userStarNum;
         console.log(`可抽奖次数:${$.callNumber}`);
     }
@@ -117,22 +138,44 @@ async function doTask(){
             console.log(`任务：${$.oneTask.assignmentName}，已完成`);
             continue;
         }
-        if($.oneTask.assignmentType === 3 || $.oneTask.assignmentType === 0 || $.oneTask.assignmentType === 7){
-            if($.oneTask.assignmentType === 7){
-                console.log(`任务：${$.oneTask.assignmentName}，尝试领取开卡奖励；（不会自动开卡，如果你已经是会员，则会领取成功）`);
+        if($.oneTask.assignmentType === 3 || $.oneTask.assignmentType === 0 || $.oneTask.assignmentType === 7 || $.oneTask.assignmentType === 1 || $.oneTask.assignmentType === 5){
+            if($.oneTask.assignmentType === 7 || $.oneTask.assignmentType === 5){
+                console.log(`任务：${$.oneTask.assignmentName}，`);
             }else{
                 console.log(`任务：${$.oneTask.assignmentName}，去执行`);
             }
-            let subInfo = $.oneTask.ext.followShop || $.oneTask.ext.brandMemberList || '';
-            if(subInfo && subInfo[0]){
+            let subInfo = $.oneTask.ext.followShop || $.oneTask.ext.brandMemberList|| $.oneTask.ext.shoppingActivity|| $.oneTask.ext.sign2 || '';
+            if(subInfo && subInfo[0] && $.oneTask.assignmentType!= 5){
                 $.runInfo = subInfo[0];
+            }else if($.oneTask.assignmentType=== 5){
+                let h = -1
+                if(nowtime>=9&&nowtime<10){
+                    h=0
+
+               }else if(nowtime>=13&&nowtime<14){
+                    h=1
+
+                }else if(nowtime>=16&&nowtime<17){
+                    h=2
+
+                }else if(nowtime>=19&&nowtime<20){
+                    h=3
+                    
+                }
+                if(h <0){
+                    $.runInfo = {'itemId':null};
+
+                }else{
+                    $.runInfo = subInfo[h];
+                }
+                
             }else{
                 $.runInfo = {'itemId':null};
             }
             await takeRequest('superBrandDoTask');
             await $.wait(1000);
             $.runFlag = true;
-        }else if($.oneTask.assignmentType === 2){
+        }else if($.oneTask.assignmentType === 2&&$.numnum<helpnum){
             console.log(`助力码：${$.oneTask.ext.assistTaskDetail.itemId}`);
             $.allInvite.push({
                 'userName':$.UserName,
@@ -149,24 +192,24 @@ async function takeRequest(type) {
     let url = ``;
     let myRequest = ``;
     switch (type) {
-        case 'superBrandSecondFloorMainPage':
-            url = `https://api.m.jd.com/api?functionId=superBrandSecondFloorMainPage&appid=ProductZ4Brand&client=wh5&t=${Date.now()}&body=%7B%22source%22:%22secondfloor%22%7D`;
+        case 'showSecondFloorCardInfo':
+            url = `https://api.m.jd.com/api?functionId=showSecondFloorCardInfo&appid=ProductZ4Brand&client=wh5&t=${Date.now()}&body=%7B%22source%22:%22card%22%7D`;
             break;
         case 'superBrandTaskList':
-            url = `https://api.m.jd.com/api?functionId=superBrandTaskList&appid=ProductZ4Brand&client=wh5&t=${Date.now()}&body=%7B%22source%22:%22secondfloor%22,%22activityId%22:${$.activityId},%22assistInfoFlag%22:1%7D`;
+            url = `https://api.m.jd.com/api?functionId=superBrandTaskList&appid=ProductZ4Brand&client=wh5&t=${Date.now()}&body=%7B%22source%22:%22card%22,%22activityId%22:${$.activityId},%22assistInfoFlag%22:1%7D`;
             break;
         case 'superBrandDoTask':
             if($.runInfo.itemId === null){
-                url = `https://api.m.jd.com/api?functionId=superBrandDoTask&appid=ProductZ4Brand&client=wh5&t=${Date.now()}&body=%7B%22source%22:%22secondfloor%22,%22activityId%22:${$.activityId},%22encryptProjectId%22:%22${$.encryptProjectId}%22,%22encryptAssignmentId%22:%22${$.oneTask.encryptAssignmentId}%22,%22assignmentType%22:${$.oneTask.assignmentType},%22completionFlag%22:1,%22itemId%22:%22${$.runInfo.itemId}%22,%22actionType%22:0%7D`;
+                url = `https://api.m.jd.com/api?functionId=superBrandDoTask&appid=ProductZ4Brand&client=wh5&t=${Date.now()}&body=%7B%22source%22:%22card%22,%22activityId%22:${$.activityId},%22encryptProjectId%22:%22${$.encryptProjectId}%22,%22encryptAssignmentId%22:%22${$.oneTask.encryptAssignmentId}%22,%22assignmentType%22:${$.oneTask.assignmentType},%22completionFlag%22:1,%22itemId%22:%22${$.runInfo.itemId}%22,%22actionType%22:0%7D`;
             }else{
-                url = `https://api.m.jd.com/api?functionId=superBrandDoTask&appid=ProductZ4Brand&client=wh5&t=${Date.now()}&body=%7B%22source%22:%22secondfloor%22,%22activityId%22:${$.activityId},%22encryptProjectId%22:%22${$.encryptProjectId}%22,%22encryptAssignmentId%22:%22${$.oneTask.encryptAssignmentId}%22,%22assignmentType%22:${$.oneTask.assignmentType},%22itemId%22:%22${$.runInfo.itemId}%22,%22actionType%22:0%7D`;
+                url = `https://api.m.jd.com/api?functionId=superBrandDoTask&appid=ProductZ4Brand&client=wh5&t=${Date.now()}&body=%7B%22source%22:%22card%22,%22activityId%22:${$.activityId},%22encryptProjectId%22:%22${$.encryptProjectId}%22,%22encryptAssignmentId%22:%22${$.oneTask.encryptAssignmentId}%22,%22assignmentType%22:${$.oneTask.assignmentType},%22itemId%22:%22${$.runInfo.itemId}%22,%22actionType%22:0%7D`;
             }
             break;
         case 'superBrandTaskLottery':
-            url = `https://api.m.jd.com/api?functionId=superBrandTaskLottery&appid=ProductZ4Brand&client=wh5&t=${Date.now()}&body=%7B%22source%22:%22secondfloor%22,%22activityId%22:${$.activityId}%7D`;
+            url = `https://api.m.jd.com/api?functionId=superBrandTaskLottery&appid=ProductZ4Brand&client=wh5&t=${Date.now()}&body=%7B%22source%22:%22card%22,%22activityId%22:${$.activityId}%7D`;
             break;
         case 'help':
-            url = `https://api.m.jd.com/api?functionId=superBrandDoTask&appid=ProductZ4Brand&client=wh5&t=${Date.now()}&body=%7B%22source%22:%22secondfloor%22,%22activityId%22:${$.activityId},%22encryptProjectId%22:%22${$.encryptProjectId}%22,%22encryptAssignmentId%22:%22${$.encryptAssignmentId}%22,%22assignmentType%22:2,%22itemId%22:%22${$.code}%22,%22actionType%22:0%7D`;
+            url = `https://api.m.jd.com/api?functionId=superBrandDoTask&appid=ProductZ4Brand&client=wh5&t=${Date.now()}&body=%7B%22source%22:%22card%22,%22activityId%22:${$.activityId},%22encryptProjectId%22:%22${$.encryptProjectId}%22,%22encryptAssignmentId%22:%22${$.encryptAssignmentId}%22,%22assignmentType%22:2,%22itemId%22:%22${$.code}%22,%22actionType%22:0%7D`;
             break;
         default:
             console.log(`错误${type}`);
@@ -194,7 +237,7 @@ function dealReturn(type, data) {
         return;
     }
     switch (type) {
-        case 'superBrandSecondFloorMainPage':
+        case 'showSecondFloorCardInfo':
             if(data.code === '0' &&  data.data && data.data.result){
                 $.activityInfo = data.data.result;
             }
