@@ -50,6 +50,11 @@ def get_qltoken(username, password):
         token = json.loads(res.text)["data"]['token']
     except:
         logger.info("青龙登录失败, 请检查面板状态!")
+        te_xt = '青龙面板WSKEY转换登陆面板失败, 请检查面板状态.'
+        try:
+            send('WSKEY转换', te_xt)
+        except:
+            logger.info("通知发送失败")
         sys.exit(1)
     else:
         return token
@@ -125,7 +130,7 @@ def check_ck(ck):
             'user-agent': ua
         }
         try:
-            res = requests.get(url=url, headers=headers, verify=False, timeout=50)
+            res = requests.get(url=url, headers=headers, verify=False, timeout=10)
         except:
             # logger.info("JD接口错误, 切换第二接口")
             url = 'https://me-api.jd.com/user_new/info/GetJDUserInfoUnion'
@@ -155,7 +160,7 @@ def check_ck(ck):
                     logger.info(str(pin) + ";状态失效\n")
                     return False
             else:
-                logger.info("JD接口错误码: ", res.status_code)
+                logger.info("JD接口错误码: " + str(res.status_code))
                 return False
 
 
@@ -180,7 +185,7 @@ def getToken(wskey):
     url = 'https://api.m.jd.com/client.action'
     data = 'body=%7B%22action%22%3A%22to%22%2C%22to%22%3A%22https%253A%252F%252Fplogin.m.jd.com%252Fcgi-bin%252Fm%252Fthirdapp_auth_page%253Ftoken%253DAAEAIEijIw6wxF2s3bNKF0bmGsI8xfw6hkQT6Ui2QVP7z1Xg%2526client_type%253Dandroid%2526appid%253D879%2526appup_type%253D1%22%7D&'
     try:
-        res = requests.post(url=url, params=params, headers=headers, data=data, verify=False, timeout=50)
+        res = requests.post(url=url, params=params, headers=headers, data=data, verify=False, timeout=10)
         res_json = json.loads(res.text)
         tokenKey = res_json['tokenKey']
     except:
