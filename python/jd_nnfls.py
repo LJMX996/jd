@@ -372,7 +372,7 @@ def main():
                 UserTaskFinish(cookie,taskId)
 
         UserSignNew(cookie)
-        if get_env('nnfls_Lucky') != 'no':
+        if 1 == 1:
             LuckyTwistDraw(cookie)
 
     msg(f'====================助力=========\n')
