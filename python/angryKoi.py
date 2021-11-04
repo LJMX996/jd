@@ -252,15 +252,15 @@ async def asyncmain():
     global session
     async with aiohttp.ClientSession() as session:
 
-        msg('***************************开启助力码***************\n')
-        tasks=[h5launch(cookie) for cookie in cookie_list]
+        msg('********开启指定被助力账号助力码********\n')
+        tasks=[h5launch(cookie) for cookie in cookie_list_pin]
         await asyncio.wait(tasks)
 
-        msg('***************************获取助力码***************\n')
+        msg('********获取指定被助力账号助力码********\n')
         tasks=[h5activityIndex(cookie) for cookie in cookie_list_pin]
         await asyncio.wait(tasks)
 
-        msg('*******************助力**************************\n')
+        msg('********开始助力指定被助力账号*******\n')
         tasks=list()
         if inviteCode_list:
             for inviteCode in inviteCode_list:
@@ -270,14 +270,48 @@ async def asyncmain():
         else:
             msg('没有需要助力的锦鲤红包助力码\n')
 
-        msg('*******************开红包**************************\n')
-        tasks=[h5receiveRedpacketAll(cookie) for cookie in cookie_list]
+        msg('********第一次开红包********\n')
+        tasks=[h5receiveRedpacketAll(cookie) for cookie in cookie_list_pin]
         await asyncio.wait(tasks)
 
-
+        msg('********第一次开红包********\n')
+        tasks=[h5receiveRedpacketAll(cookie) for cookie in cookie_list_pin]
+        await asyncio.wait(tasks)
+        
+        msg('********第二次开红包********\n')
+        tasks=[h5receiveRedpacketAll(cookie) for cookie in cookie_list_pin]
+        await asyncio.wait(tasks)
+        
+        msg('********第三次开红包********\n')
+        tasks=[h5receiveRedpacketAll(cookie) for cookie in cookie_list_pin]
+        await asyncio.wait(tasks)
+        
+        msg('********第四次开红包********\n')
+        tasks=[h5receiveRedpacketAll(cookie) for cookie in cookie_list_pin]
+        await asyncio.wait(tasks)
+        
+        msg('********第五次开红包********\n')
+        tasks=[h5receiveRedpacketAll(cookie) for cookie in cookie_list_pin]
+        await asyncio.wait(tasks)
+        
+        msg('********第六次开红包********\n')
+        tasks=[h5receiveRedpacketAll(cookie) for cookie in cookie_list_pin]
+        await asyncio.wait(tasks)
+        
+        msg('********第七次开红包********\n')
+        tasks=[h5receiveRedpacketAll(cookie) for cookie in cookie_list_pin]
+        await asyncio.wait(tasks)
+        
+        msg('********第八次开红包********\n')
+        tasks=[h5receiveRedpacketAll(cookie) for cookie in cookie_list_pin]
+        await asyncio.wait(tasks)
+        
+        msg('********每天最多可以开八次哦********\n')
+        
+        
 def main():
     msg('🔔愤怒的锦鲤，开始！\n')
-    msg(f'====================共{len(cookie_list)}京东个账号Cookie=========\n')
+    msg(f'======共{len(cookie_list)}京东个账号Cookie=======\n')
 
     asyncio.run(asyncmain())
     
