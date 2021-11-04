@@ -3,7 +3,7 @@
  Author：zxx
  Date：2021-11-2
 先内部助力，有剩余助力作者
- cron 20 1,10,20 * * * jd_nnfls.js
+ cron 1 0,9,19,23 * * * zx_nnfls.js
  一天要跑2次
  */
 const $ = new Env('牛牛福利');
@@ -49,8 +49,8 @@ if ($.isNode()) {
         res = await UserSignNew();
         await drawUserTask();
     }
-    // const author = Math.random() > 0.5 ? 'zero205' : 'zxx'
-    const author = 'zero205'
+    shareCodes = shareCodes.filter(code => code)
+    const author = Math.random() > 0.5 ? 'zero205' : 'ZXX2021'
     await getShareCode('nnfls.json',author,3,true)
     shareCodes = [...new Set([...shareCodes, ...($.shareCode || [])])];
     if (shareCodes.length > 0) {

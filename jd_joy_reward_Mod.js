@@ -326,7 +326,7 @@ function getExchangeRewards() {
 	}
 	return new Promise((resolve) => {
 		let lkt = new Date().getTime()
-			let lks = $.md5('' + 'JL1VTNRadM68cIMQ' + lkt).toString()
+			let lks = $.md5('' + 'q8DNJdpcfRQ69gIx' + lkt).toString()
 			const option = {
 			url: "https:" + taroRequest(opt)['url'] + $.validate,
 			headers: {
@@ -383,7 +383,7 @@ function exchange(saleInfoId, orderSource) {
 	}
 	return new Promise((resolve) => {
 		let lkt = new Date().getTime()
-			let lks = $.md5('' + 'JL1VTNRadM68cIMQ' + lkt).toString()
+			let lks = $.md5('' + 'q8DNJdpcfRQ69gIx' + lkt).toString()
 			const option = {
 			url: "https:" + taroRequest(opt)['url'] + $.validate,
 			body: `${JSON.stringify(body)}`,
