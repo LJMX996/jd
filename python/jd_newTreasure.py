@@ -5,6 +5,7 @@
 # 环境变量JD_COOKIE，多账号用&分割
 # export JD_COOKIE="第1个cookie&第2个cookie"
 # 11/1 12:40 增加ck格式兼容
+# 25 7,15 * * * jd_newTreasure.py
 
 import os,json,random,time,re,string
 import asyncio
