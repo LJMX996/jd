@@ -76,34 +76,6 @@ class Judge_env(object):
 cookie_list=Judge_env().main_run()
 
 # 检查账号有效性
-def getUserInfo(cookie):
-    try:
-        pin=get_pin(cookie)
-    except:
-        msg('有一个cookie 格式出错\n')
-        return
-    time.sleep(0.2)
-    url = 'https://me-api.jd.com/user_new/info/GetJDUserInfoUnion?orgFlag=JD_PinGou_New&callSource=mainorder&channel=4&isHomewhite=0&sceneval=2&sceneval=2&callback='
-    headers = {
-        'Cookie': cookie,
-        'Accept': '*/*',
-        'Connection': 'close',
-        'Referer': 'https://home.m.jd.com/myJd/home.action',
-        'Accept-Encoding': 'gzip, deflate, br',
-        'Host': 'me-api.jd.com',
-        'User-Agent': ua(),
-        'Accept-Language': 'zh-cn'
-    }
-    try:
-        resp = requests.get(url=url, headers=headers, timeout=60).json()
-        if resp['retcode'] == "0":
-            nickname = resp['data']['userInfo']['baseInfo']['nickname']  # 账号名
-            return True
-        else:
-            msg(f"账号 {pin} Cookie 已失效！请重新获取。\n")
-    except Exception:
-        msg(f"账号 {pin} Cookie 已失效！请重新获取。\n")
-    return
 
 
 ## 获取通知服务
@@ -770,8 +742,8 @@ def main():
     tasksss=[]
     for e,cookie in enumerate(cookie_list,start=1):
         msg(f'******开始【账号 {e}】 {get_pin(cookie)} *********\n')
-        a=getUserInfo(cookie)
-        if not a:
+
+        if 1 == 0:
             return
         asyncio.run(task_id(cookie))
         # async def task_id_async(cookie):

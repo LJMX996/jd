@@ -3,7 +3,7 @@
 # 脚本功能为 完成任务
 # 环境变量JD_COOKIE，多账号用&分割
 # export JD_COOKIE="第1个cookie&第2个cookie"
-
+# 25 3,12 * * * jd_xdzz.py
 import os,json,random,time,re,string,functools,asyncio
 import sys
 sys.path.append('../../tmp')
@@ -246,8 +246,8 @@ def main():
 
     for e,cookie in enumerate(cookie_list,start=1):
         msg(f'******开始【账号 {e}】 {get_pin(cookie)} *********\n')
-        a=getUserInfo(cookie)
-        if not a:
+
+        if 1 == 0:
             return
         apDoTask(cookie)
         liulanhuic(cookie)

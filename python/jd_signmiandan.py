@@ -4,6 +4,7 @@
 # 环境变量JD_COOKIE，多账号用&分割
 # export JD_COOKIE="第1个cookie&第2个cookie"
 # 11/1 12:40 增加ck格式兼容
+# 25 8,18 * * * jd_signmiandan.py
 
 import time
 import os
@@ -168,42 +169,12 @@ def sign_in(cookie,a):
 
 
 # 检查账号有效性
-def getUserInfo(cookie):
-    try:
-        pin=get_pin(cookie)
-    except:
-        msg('有一个cookie 格式出错\n')
-        return False
-    time.sleep(0.2)
-    url = 'https://me-api.jd.com/user_new/info/GetJDUserInfoUnion?orgFlag=JD_PinGou_New&callSource=mainorder&channel=4&isHomewhite=0&sceneval=2&sceneval=2&callback='
-    headers = {
-        'Cookie': cookie,
-        'Accept': '*/*',
-        'Connection': 'close',
-        'Referer': 'https://home.m.jd.com/myJd/home.action',
-        'Accept-Encoding': 'gzip, deflate, br',
-        'Host': 'me-api.jd.com',
-        'User-Agent': ua,
-        'Accept-Language': 'zh-cn'
-    }
-    try:
-        if sys.platform == 'ios':
-            resp = requests.get(url=url, verify=False, headers=headers, timeout=60).json()
-        else:
-            resp = requests.get(url=url, headers=headers, timeout=60).json()
-        if resp['retcode'] == "0":
-            nickname = resp['data']['userInfo']['baseInfo']['nickname']  # 账号名
-            return True
-        else:
-            msg(f"账号 {pin} Cookie 已失效！请重新获取。\n")
-    except Exception:
-        msg(f"账号 {pin} Cookie 已失效！请重新获取。\n")
-    return False
+
 
 
 def doTask(cookie):
-    a=getUserInfo(cookie)
-    if not a:
+
+    if 1 == 0:
         return
     merch_list=sign_merch(cookie)
     if not merch_list:

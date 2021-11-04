@@ -3,7 +3,7 @@
 # 脚本功能为 完成任务，获得100京豆
 # 环境变量JD_COOKIE，多账号用&分割
 # export JD_COOKIE="第1个cookie&第2个cookie"
-
+# 25 10,15 * * * jd_zjd.py
 import os,json,random,time,re,string,functools,asyncio
 import sys
 sys.path.append('../../tmp')
@@ -110,31 +110,7 @@ Msg().main()   # 初始化通知服务
 
 
 # 检查账号有效性
-def getUserInfo(cookie):
-    if not (pin:=get_pin(cookie)):
-        return
-    time.sleep(0.2)
-    url = 'https://me-api.jd.com/user_new/info/GetJDUserInfoUnion?orgFlag=JD_PinGou_New&callSource=mainorder&channel=4&isHomewhite=0&sceneval=2&sceneval=2&callback='
-    headers = {
-        'Cookie': cookie,
-        'Accept': '*/*',
-        'Connection': 'close',
-        'Referer': 'https://home.m.jd.com/myJd/home.action',
-        'Accept-Encoding': 'gzip, deflate, br',
-        'Host': 'me-api.jd.com',
-        'User-Agent': ua(),
-        'Accept-Langua()ge': 'zh-cn'
-    }
-    try:
-        resp = requests.get(url=url, headers=headers, timeout=60).json()
-        if resp['retcode'] == "0":
-            nickname = resp['data']['userInfo']['baseInfo']['nickname']  # 账号名
-            return True
-        else:
-            msg(f"账号 {pin} Cookie 已失效！请重新获取。\n")
-    except Exception:
-        msg(f"账号 {pin} Cookie 已失效！请重新获取。\n")
-cookie_list=list(filter(getUserInfo,cookie_list)) 
+
 
 
 def taskPostUrl(functionId, body, cookie):
