@@ -20,14 +20,14 @@ cd /ql/scripts && apk add nodejs-current
 
 
 cd /ql/scripts && pip3 install requests
-
+cd /ql/scripts && pip3 install --upgrade pip
+cd /ql/scripts && pip3 install aiohttp
 
 cd /ql/scripts && apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
 
 
 cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && npm i && npm i -S ts-node typescript @types/node date-fns axios png-js canvas --build-from-source
 
-pip3 install --upgrade pip
-pip3 install aiohttp
+
 
 
