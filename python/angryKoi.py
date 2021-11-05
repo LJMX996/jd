@@ -270,9 +270,7 @@ async def asyncmain():
         else:
             msg('没有需要助力的锦鲤红包助力码\n')
 
-        msg('********第一次开红包********\n')
-        tasks=[h5receiveRedpacketAll(cookie) for cookie in cookie_list_pin]
-        await asyncio.wait(tasks)
+
 
         msg('********第一次开红包********\n')
         tasks=[h5receiveRedpacketAll(cookie) for cookie in cookie_list_pin]
