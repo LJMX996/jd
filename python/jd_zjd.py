@@ -4,6 +4,8 @@
 # 环境变量JD_COOKIE，多账号用&分割
 # export JD_COOKIE="第1个cookie&第2个cookie"
 # 25 10,15 * * * jd_zjd.py
+# 11 5 17:41 修bug
+
 import os,json,random,time,re,string,functools,asyncio
 import sys
 sys.path.append('../../tmp')
@@ -17,7 +19,7 @@ requests.packages.urllib3.disable_warnings()
 
 
 JD_API_HOST = 'https://api.m.jd.com'
-run_send='yes'     # yes或no, yes则启用通知推送服务
+run_send='no'     # yes或no, yes则启用通知推送服务
 
 
 # 获取pin
@@ -81,7 +83,7 @@ class Msg(object):
             a += 1
             return self.getsendNotify(a)
 
-    def main(self,n=1):
+    def main(self,f=1):
         global send,msg,initialize
         sys.path.append(os.path.abspath('.'))
         for n in range(3):
@@ -101,16 +103,15 @@ class Msg(object):
             initialize(d)
         except:
             self.getsendNotify()
-            if n < 5:
-                n += 1
-                return self.main(n)
+            if f < 5:
+                f += 1
+                return self.main(f)
             else:
                 print('获取通知服务失败，请检查网络连接...')
 Msg().main()   # 初始化通知服务   
 
 
 # 检查账号有效性
-
 
 
 def taskPostUrl(functionId, body, cookie):
@@ -176,11 +177,13 @@ def getTaskList(cookie):
                 saveTaskRecord(cookie,taskId,content['taskType'],uid,tt)
                 log=functools.reduce(lambda a,i: a+'\n'+i,log)
                 msg(log)
-                return getTaskList(cookie)
+                if log:
+                    if log != ' ' and log != '\n':
+                        return getTaskList(cookie)
         log.append(f'{get_pin(cookie)}: 全部任务已完成\n')
     else:
         log.append(f"{get_pin(cookie)}:{res['msg']}\n")
-    log=functools.reduce(lambda a,i: a+'\n'+i,log)
+    log=functools.reduce(lambda a,i: str(a)+'\n'+str(i),log)
     msg(log)
 
 
@@ -218,14 +221,16 @@ def saveTaskRecord_2(cookie,taskId,taskType):
 def main():
     msg('🔔逛好物，赚京豆，开始！\n')
     msg(f'====================共{len(cookie_list)}京东个账号Cookie=========\n')
-    pool = Pool(p:=3)
-    msg(f'为节省时间，当前采用 {p} 账号并行\n')
+    # pool = Pool(p:=3)
+    # msg(f'为节省时间，当前采用 {p} 账号并行\n')
 
-    for e,cookie in enumerate(cookie_list,start=1):
-        pool.apply_async(func=getTaskList,args=(cookie,))
+    # for e,cookie in enumerate(cookie_list,start=1):
+    #     pool.apply_async(func=getTaskList,args=(cookie,))
 
-    pool.close()
-    pool.join()
+    # pool.close()
+    # pool.join()
+
+    [getTaskList(cookie) for cookie in cookie_list]
     
     if run_send=='yes':
         send('逛好物，赚京豆')   # 通知服务
