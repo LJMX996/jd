@@ -4,7 +4,7 @@
 # 环境变量JD_COOKIE，多账号用&分割
 # export JD_COOKIE="第1个cookie&第2个cookie"
 # 25 10,15 * * * jd_zjd.py
-# 11 5 17:41 修bug
+# 11 6 9:00 修bug
 
 import os,json,random,time,re,string,functools,asyncio
 import sys
@@ -180,6 +180,7 @@ def getTaskList(cookie):
                 if log:
                     if log != ' ' and log != '\n':
                         return getTaskList(cookie)
+                log=list()
         log.append(f'{get_pin(cookie)}: 全部任务已完成\n')
     else:
         log.append(f"{get_pin(cookie)}:{res['msg']}\n")
