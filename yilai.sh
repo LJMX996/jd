@@ -22,6 +22,7 @@ cd /ql/scripts && apk add nodejs-current
 cd /ql/scripts && pip3 install requests
 cd /ql/scripts && pip3 install --upgrade pip
 cd /ql/scripts && pip3 install aiohttp
+cd /ql/scripts && pip3 install jieba
 
 cd /ql/scripts && apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
 
