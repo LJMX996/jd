@@ -134,17 +134,17 @@ class getJDCookie(object):
                 resp = requests.get(url=url, verify=False, headers=headers, timeout=60).json()
             else:
                 resp = requests.get(url=url, headers=headers, timeout=60).json()
-            if resp['retcode'] == "0":
+            if true:
                 nickname = resp['data']['userInfo']['baseInfo']['nickname']
-                return ck, nickname
+                return ck, pinName
             else:
                 context = f"账号{userNum}【{pinName}】Cookie 已失效！请重新获取。"
                 printf(context)
-                return ck, False
+                return ck, pinName
         except Exception:
-            context = f"账号{userNum}【{pinName}】Cookie 已失效！请重新获取。"
+            context = f"无视账号失效"
             printf(context)
-            return ck, False
+            return ck, pinName
 
     def iscookie(self):
         """
