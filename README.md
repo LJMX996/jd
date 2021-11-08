@@ -103,7 +103,7 @@ services:
 @otplib/preset-defaultjs-base64fundjsdomform-datatough-cookieaxios date-fnscrypto-jscryptodownloadtypescriptpng-jsgot
 
 # Python3
-requestsaiohttpjieba
+requestsaiohttp  #安装这个会导致重启容器以后bot死掉jieba
 
 # Linux
 libc6-compatnodejs-currentpython3zlib-devgccjpeg-devpython3-devmusl-devfreetype-devbuild-basecairo-devpango-devgiflib-dev
