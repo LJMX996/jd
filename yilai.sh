@@ -20,7 +20,7 @@ cd /ql/scripts && pnpm install -g canvas
 
 cd /ql/scripts && pip3 install requests
 cd /ql/scripts && pip3 install --upgrade pip
-cd /ql/scripts && pip3 install aiohttp
+#cd /ql/scripts && pip3 install aiohttp
 cd /ql/scripts && pip3 install jieba
 
 
