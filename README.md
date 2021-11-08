@@ -78,21 +78,38 @@ services:
 ### 更新仓库必须用下面定时，不要直接用ql repo，我可以更新pull.sh文件让你们容器自动安装需要的依赖以及文件，不需要自己手动装依赖。
 
 > * 名称:更新仓库
-> * 定时:10,40 * * * *
+> * 定时:25 * * * *
 > * 命令:task /ql/repo/LJMX996_jd_aaron/pull.sh
 
 > * 名称:更新仓库备用
-> * 定时:25 * * * *
+> * 定时:10,40 * * * *
 > * 命令:task /ql/config/pull.sh
 
-> * 名称:依赖安装
-> * 定时: 00
-> * 命令:task /ql/repo/LJMX996_jd_aaron/yilai.sh
-> * 只需要运行一次
 
 > * 名称:助力导出
 > * 定时: 52 3-23/3 * * *
 > * 命令:task /ql/repo/LJMX996_jd_aaron/code.sh
+
+> * 名称:依赖安装
+> * 定时: 00
+> * 命令:task /ql/repo/LJMX996_jd_aaron/yilai.sh
+> * 只需要运行一次。
+> * 2.10开始可以使用面板安装依赖
+
+## 面板安装依赖
+
+   ```diff
+# NodeJs
+@otplib/preset-defaultjs-base64fundjsdomform-datatough-cookieaxios date-fnscrypto-jscryptodownloadtypescriptpng-jsgot
+
+# Python3
+requestsaiohttpjieba
+
+# Linux
+libc6-compatnodejs-currentpython3zlib-devgccjpeg-devpython3-devmusl-devfreetype-devbuild-basecairo-devpango-devgiflib-dev
+
+   ```
+
 
 ### 自动互助提示
 使用上面定时导出助力默认是助力前20个账号
