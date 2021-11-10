@@ -4,7 +4,7 @@
 # 由于每个号只有两次助力机会，所有只助力前两个号，以节省资源
 # 环境变量JD_COOKIE，多账号用&分割
 # export JD_COOKIE="第1个cookie&第2个cookie"
-# 11/1 12:40 增加ck格式兼容
+# 11 10 22:00 应要求更改cdn
 
 import os,json,random,time,re,string,functools,asyncio
 import sys
@@ -20,16 +20,13 @@ JD_API_HOST = 'https://api.m.jd.com'
 run_send='yes'     # yes或no, yes则启用通知推送服务
 
 
-cookie_match=re.compile(r'pt_key=(.+);pt_pin=(.+);')
-cookie_match2=re.compile(r'pt_pin=(.+);pt_key=(.+);')
+# 获取pin
+cookie_findall=re.compile(r'pt_pin=(.+?);')
 def get_pin(cookie):
     try:
-        return cookie_match.match(cookie).group(2)
+        return cookie_findall.findall(cookie)[0]
     except:
-        try:
-            return cookie_match2.match(cookie).group(1)
-        except:
-            print('ck格式不正确，请检测')
+        print('ck格式不正确，请检查')
 
 
 # 随机ua
@@ -76,7 +73,7 @@ cookie_list=Judge_env().main_run()
 class Msg(object):
     def getsendNotify(self, a=1):
         try:
-            url = 'https://ghproxy.com/https://raw.githubusercontent.com/wuye999/myScripts/main/sendNotify.py'
+            url = 'https://mirror.ghproxy.com/https://raw.githubusercontent.com/wuye999/myScripts/main/sendNotify.py'
             response = requests.get(url,timeout=3)
             with open('sendNotify.py', "w+", encoding="utf-8") as f:
                 f.write(response.text)
@@ -605,7 +602,6 @@ def main():
         if 1 == 0:
             return
         main_run(cookie)
-    
     if run_send=='yes':
         send('### 发财挖宝 ###')   # 通知服务
 
