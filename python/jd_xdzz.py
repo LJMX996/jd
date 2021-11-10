@@ -4,6 +4,11 @@
 # 环境变量JD_COOKIE，多账号用&分割
 # export JD_COOKIE="第1个cookie&第2个cookie"
 # 25 3,12 * * * jd_xdz.py
+'''
+
+new Env('星店长');
+
+'''
 import os,json,random,time,re,string,functools,asyncio
 import sys
 sys.path.append('../../tmp')

@@ -5,6 +5,11 @@
 # export JD_COOKIE="第1个cookie&第2个cookie"
 # export nnfls_Lucky="yes"     # 是否抽奖 yes或no，不填默认yes
 # 25 11,19 * * * jd_nnfls.py
+'''
+
+new Env('牛牛福利社');
+
+'''
 
 import os,json,random,time,re,string,functools,asyncio
 import sys

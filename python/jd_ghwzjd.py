@@ -5,6 +5,11 @@
 # export JD_COOKIE="第1个cookie&第2个cookie"
 # 25 10,15 * * * jd_zjd.py
 # 11 6 9:00 修bug
+'''
+
+new Env('逛好物，赚京豆');
+
+'''
 
 import os,json,random,time,re,string,functools,asyncio
 import sys

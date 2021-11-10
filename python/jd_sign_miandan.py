@@ -5,6 +5,11 @@
 # export JD_COOKIE="第1个cookie&第2个cookie"
 # 11/1 12:40 增加ck格式兼容
 # 25 8,18 * * * jd_signmiandan.py
+'''
+
+new Env('极速版签到免单');
+
+'''
 
 import time
 import os
