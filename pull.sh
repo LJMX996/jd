@@ -4,6 +4,8 @@ ql repo https://github.com/LJMX996/jd.git "jd_|jx_|gua_|code_|zy_|jd-task-|jddj_
 
 cp -rfv /ql/repo/LJMX996_jd_aaron/* /ql/scripts/
 
+cp -rfv /ql/repo/LJMX996_jd_aaron/* /ql/scripts/LJMX996_jd_aaron/
+
 
 
 
