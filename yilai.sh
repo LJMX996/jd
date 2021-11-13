@@ -1,6 +1,8 @@
 cd /ql/scripts && pip3 install requests
 cd /ql/scripts && pip3 install --upgrade pip
 cd /ql/scripts && pip3 install jieba
+cd /ql/scripts && pip3 install telethon
+cd /ql/scripts && pip3 install qrcode
 #cd /ql/scripts && pip3 install aiohttp
 
 
