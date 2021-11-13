@@ -46,9 +46,9 @@ if ($.isNode()) {
       }
 	  //开始任务
       $.taskStop = false;
-	  await taskRun()
-	  if((i+1) != cookiesArr.length) {
-		  await $.wait(90000)
+	  for (let m = 0; m < 4; m++) {
+		  await taskRun()
+		  if ($.taskStop == true) break;
 	  }
     }
   }
@@ -93,15 +93,15 @@ function getList() {
 					$.watchTime = vo.watchTime
 					status = vo.status
 					statusName = vo.statusName
-					if ($.taskId != null && status != 2) {
-						body = `{"taskId":${$.taskId},"taskType":${$.taskType}}`
-						await doTask(body)
-					} else {
-						console.log(`\n任务 ${$.taskName} 结束或已完成。提示：${statusName}`)
+					if ($.taskName != '直播下单更优惠') {
+						if ($.taskId != null && status != 2) {
+							body = `{"taskId":${$.taskId},"taskType":${$.taskType}}`
+							await doTask(body)
+						} else {
+							console.log(`\n任务 ${$.taskName} 结束或已完成。提示：${statusName}`)
+						}
+						if ($.code == 0) break;
 					}
-				}
-				if (list.length > 2) {
-					await taskRun()
 				}
             } else {
 				console.log(`\n获取 ${$.name} 任务列表失败：${JSON.stringify(result)}`)
@@ -195,6 +195,9 @@ function getReward() {
 				console.log(`${$.taskName} 完成，获得${result.content.msg}`)
 			} else {
 				console.log(`${$.taskName} 失败：${JSON.stringify(result)}`)
+			}
+			if (result.code == 0) {
+				$.code = result.code
 			}
           }
         }
