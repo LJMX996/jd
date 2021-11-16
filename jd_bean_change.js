@@ -1536,7 +1536,10 @@ function cash() {
 				} else {
 					if (safeGet(data)) {
 						data = JSON.parse(data);
-						$.JDtotalcash = data.data.goldBalance;
+						if (data.data.goldBalance)
+							$.JDtotalcash = data.data.goldBalance;
+						else
+							console.log(`领现金查询失败，服务器没有返回具体值.`)
 					}
 				}
 			} catch (e) {
