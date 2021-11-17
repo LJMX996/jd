@@ -77,7 +77,7 @@ cookie_list=Judge_env().main_run()
 class Msg(object):
     def getsendNotify(self, a=1):
         try:
-            url = 'https://ghproxy.com/https://raw.githubusercontent.com/wuye999/myScripts/main/sendNotify.py'
+            url = 'https://mirror.ghproxy.com/https://raw.githubusercontent.com/wuye999/myScripts/main/sendNotify.py'
             response = requests.get(url,timeout=3)
             with open('sendNotify.py', "w+", encoding="utf-8") as f:
                 f.write(response.text)
@@ -126,9 +126,10 @@ def taskPostUrl(functionId, body, cookie):
         'Host': 'ifanli.m.jd.com',
         'Connection': 'keep-alive',
         'origin': 'https://ifanli.m.jd.com',
-        'referer': 'https://ifanli.m.jd.com/rebate/earnBean.html?from=earnbean&sid=08ead42410a503dc73e11e9d2d611edw&un_area=4_134_19915_0',
+        'referer': 'https://ifanli.m.jd.com/rebate/earnBean.html?paltform=null',
         'Content-Type': 'application/json;charset=UTF-8',
         "User-Agent": ua(),
+        "Accept": "application/json, text/plain, */*",
         'Accept-Language': 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7',
         'Accept-Encoding': 'gzip, deflate, br',
     }
@@ -138,7 +139,7 @@ def taskPostUrl(functionId, body, cookie):
             res=requests.post(url=url,headers=headers,json=data).json()
             return res
         except:
-            if n==3:
+            if n==2:
                 msg('API请求失败，请检查网路重试❗\n')  
 
 
@@ -148,9 +149,10 @@ def taskGetUrl(functionId, cookie):
         'Cookie': cookie,
         'Host': 'ifanli.m.jd.com',
         'Connection': 'keep-alive',
-        'referer': 'https://ifanli.m.jd.com/rebate/earnBean.html?from=earnbean&sid=08ead42410a503dc73e11e9d2d611edw&un_area=4_134_19915_0',
+        'referer': 'https://ifanli.m.jd.com/rebate/earnBean.html?paltform=null',
         'Content-Type': 'application/json;charset=UTF-8',
         "User-Agent": ua(),
+        'accept':'application/json, text/plain, */*',
         'Accept-Language': 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7',
         'Accept-Encoding': 'gzip, deflate, br',
     }
@@ -159,7 +161,7 @@ def taskGetUrl(functionId, cookie):
             res=requests.get(url=url,headers=headers).json()
             return res
         except:
-            if n==3:
+            if n==2:
                 msg('API请求失败，请检查网路重试❗\n')
 
 # 任务列表
@@ -177,9 +179,9 @@ def getTaskList(cookie):
                 log.append(f"{get_pin(cookie)}:开始任务 {content['taskName']}")
                 log.append(f"{get_pin(cookie)}:等待 {content['watchTime']} 秒任务完成 ")
 
-                uid,tt=saveTaskRecord_2(cookie,taskId,content['taskType'])
+                uid,tt=saveTaskRecord_2(cookie,taskId,content['businessId'],content['taskType'])
                 time.sleep(content['watchTime']+1)
-                saveTaskRecord(cookie,taskId,content['taskType'],uid,tt)
+                saveTaskRecord(cookie,taskId,content['businessId'],content['taskType'],uid,tt)
                 log=functools.reduce(lambda a,i: a+'\n'+i,log)
                 msg(log)
                 if log:
@@ -194,9 +196,9 @@ def getTaskList(cookie):
 
 
 # 获取京豆
-def saveTaskRecord(cookie,taskId,taskType,uid,tt):
+def saveTaskRecord(cookie,taskId,businessId,taskType,uid,tt):
     global log
-    body={"taskId":taskId,"taskType":taskType,"uid":uid,"tt":tt}
+    body={"taskId":taskId,"taskType":taskType,"businessId":businessId,"uid":uid,"tt":tt}
     res=taskPostUrl("saveTaskRecord", body, cookie)
     if not res:
         return
@@ -210,9 +212,9 @@ def saveTaskRecord(cookie,taskId,taskType,uid,tt):
 
 
 # 获取uid,tt
-def saveTaskRecord_2(cookie,taskId,taskType):
+def saveTaskRecord_2(cookie,taskId,businessId,taskType):
     global log
-    body={"taskId":taskId,"taskType":taskType}
+    body={"taskId":taskId,'businessId':businessId,"taskType":taskType}
     res=taskPostUrl("saveTaskRecord", body, cookie)
     if not res:
         return
