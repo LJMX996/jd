@@ -1,5 +1,4 @@
 /*
-
 ============Quantumultx===============
 [task_local]
 #京喜财富岛热气球
@@ -67,7 +66,7 @@ if ($.isNode()) {
         await $.wait(time)
       }
     }
-  } while (count < 25)
+  } while (count < (process.env.CFD_LOOP_LIMIT || 10)*1)
 })()
   .catch((e) => $.logErr(e))
   .finally(() => $.done());
@@ -106,7 +105,7 @@ async function querystorageroom() {
                 strTypeCnt += `${bags[j]}|`
               }
             }
-            await $.wait(3000)
+            await $.wait(4000)
             await sellgoods(`strTypeCnt=${strTypeCnt}&dwSceneId=1`)
           } else {
             console.log(`背包是空的，快去捡贝壳吧\n`)
@@ -159,7 +158,7 @@ async function queryshell() {
             let vo = data.Data.NormShell[key]
             for (let j = 0; j < vo.dwNum && $.canpick; j++) {
               await pickshell(`dwType=${vo.dwType}`)
-              await $.wait(3000)
+              await $.wait(4000)
             }
             if (!$.canpick) break
           }
@@ -212,7 +211,7 @@ async function pickshell(body) {
             console.log(`捡贝壳成功：捡到了${dwName}`)
           } else if (data.iRet === 5403 || data.sErrMsg === '这种小贝壳背包放不下啦，先去卖掉一些吧~') {
             console.log(`捡贝壳失败：${data.sErrMsg}`)
-            await $.wait(3000)
+            await $.wait(4000)
             await querystorageroom()
           } else {
             $.canpick = false;
@@ -245,10 +244,12 @@ function taskUrl(function_path, body = '', dwEnv = 7) {
     }
   };
 }
+
 function getStk(url) {
   let arr = url.split('&').map(x => x.replace(/.*\?/, "").replace(/=.*/, ""))
   return encodeURIComponent(arr.filter(x => x).sort().join(','))
 }
+
 function randomString(e) {
   e = e || 32;
   let t = "0123456789abcdef", a = t.length, n = "";
