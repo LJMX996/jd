@@ -394,37 +394,14 @@ replies:
         #纯文本
         response_type: image
         url: http://ovooa.com/API/zan/api.php?QQ={{1}}
-  - type: url
-    rules:
-      - 外卖 (.*)
-      - (.*)外卖
-    request:
-        #纯文本
-        response_type: image
-        url: https://womc.cn/elm/{{1}}.png
+
   - type: url
     rules:
       - 翻译 (.*)
     request:
       response_type: text
       url: http://hm.suol.cc/API/fy.php?msg={{1}}
-#小爱机器人 
-  - type: url
-    rules:
-      - (\S*)？
-    request:
-      response_type: json
-      url: http://jiuli.xiaoapi.cn/i/xiaoai_tts.php?msg={{1}}
-      get: text
-#小爱机器人 
-  - type: url
-    rules:
-      - 喵喵(\S*)
-      - 猫咪(\S*)
-    request:
-      response_type: json
-      url: http://www.tuling123.com/openapi/api?key=4670f9d766704929b7983312808cdfa7&userid=xiaoxiao&info={{1}}
-      get: text
+
   - type: url
     rules:
       - 收录查询 (.*)
