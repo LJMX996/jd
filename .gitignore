@@ -1,1 +1,3 @@
 /tmp/helpjs/*
+!/package-lock.json
+

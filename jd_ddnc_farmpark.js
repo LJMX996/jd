@@ -23,7 +23,7 @@ if ($.isNode()) {
     Object.keys(jdCookieNode).forEach((item) => {
         cookiesArr.push(jdCookieNode[item])
     })
-    if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => { };
+    if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
 } else {
     cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
@@ -39,7 +39,7 @@ const JD_API_HOST = `https://api.m.jd.com/client.action`;
         return;
     }
 
-    for (let i = 0; i < cookiesArr.length; i++) {
+    for (let i = 0; i <cookiesArr.length ; i++) {
         cookie = cookiesArr[i];
         if (cookie) {
             $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
@@ -64,7 +64,7 @@ const JD_API_HOST = `https://api.m.jd.com/client.action`;
             for (task of $.taskList) {
                 if (task.topResource.task.status == 3) {
                     console.log(`任务 ${task.topResource.title} 已完成`)
-                } else {
+                }  else {
                     console.log("去浏览：" + task.topResource.title)
                     let index = task.name.match(/\d+/)[0] - 1
                     console.log(task.topResource.task.advertId, index, task.type)
@@ -73,15 +73,14 @@ const JD_API_HOST = `https://api.m.jd.com/client.action`;
                     await browseAward(task.topResource.task.advertId, index, task.type)
                 }
             }
-            console.log(`\n集勋章得好礼  By：【zero205】`)
-            console.log(`\n由于我自己写这个脚本的时候已经手动开启活动了\n所以不知道开启活动的代码\n没有开启的手动开启吧，活动入口：东东农场->水车\n`)
-            await collect()
+            console.log(`\n需要手动开启活动，活动入口：东东农场->水车\n`)
+			await collect()
         }
     }
 
 
 })()
-    .catch((e) => $.logErr(e))
+.catch((e) => $.logErr(e))
     .finally(() => $.done())
 //获取活动信息
 
@@ -99,7 +98,7 @@ function browseAward(id, index, type) {
                     console.log(`${$.name} API请求失败，请检查网路重试`);
                 } else {
                     data = JSON.parse(data);
-                    //    console.log(data)
+                //    console.log(data)
                     if (data.result) {
                         console.log("领取奖励成功,获得💧" + data.result.waterEnergy)
                     } else {
@@ -163,8 +162,6 @@ function parkInit() {
         });
     });
 }
-
-
 function collect() {
     return new Promise(async (resolve) => {
         const options = taskUrl("collect_Init", `{"channel":1}`)
