@@ -173,6 +173,7 @@ replies:
         url: https://acg.toubiec.cn/random.php
 
   - type: url
+    rules:
       - 手机号查询 (.*)
     request:
         #纯文本
@@ -180,6 +181,7 @@ replies:
         url: https://api.2xb.cn/phone?tel={{1}}
 
   - type: url
+    rules:
       - ip查询 (.*)
     request:
         #纯文本
@@ -205,6 +207,7 @@ replies:
         url: http://api.muuzi.cn/api/60look
 
   - type: url
+    rules:
       - 营养视频
     request:
         #纯文本
@@ -212,6 +215,7 @@ replies:
         url: http://api.muuzi.cn/api/yysp?type=txt
 
   - type: url
+    rules:
       - 毒鸡汤
     request:
         #纯文本
@@ -219,6 +223,7 @@ replies:
         url: http://api.muuzi.cn/api/djt?encode=text
 
   - type: url
+    rules:
       - 一言
     request:
         #纯文本
@@ -226,6 +231,7 @@ replies:
         url: http://api.muuzi.cn/api/yan?encode=text
 
   - type: url
+    rules:
       - 骚话
     request:
         #纯文本
@@ -233,6 +239,7 @@ replies:
         url: http://api.muuzi.cn/api/saohua?encode=text
 
   - type: url
+    rules:
       - 我在人间凑数的日子
     request:
         #纯文本
@@ -241,6 +248,7 @@ replies:
 
 
   - type: url
+    rules:
       - 艺术签名 (.*)
     request:
         #纯文本
