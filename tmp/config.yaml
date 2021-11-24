@@ -627,14 +627,8 @@ replies:
         #纯文本
         response_type: image
         url: http://ovooa.com/API/zan/api.php?QQ={{1}}
-  - type: url
-    rules:
-      - 外卖 (.*)
-      - (.*)外卖
-    request:
-        #纯文本
-        response_type: image
-        url: https://womc.cn/elm/{{1}}.png
+
+
   - type: url
     rules:
       - 翻译 (.*)
