@@ -69,13 +69,7 @@ replies:
         response_type: image 
         url: https://cdn.seovx.com/?mom=302
         
-  #美女
-  - type: url
-    rules:
-      - 美女
-    request:
-      response_type: image
-      url: 'http://api.btstu.cn/sjbz/zsy.php'
+
       
   - type: url
     rules:
@@ -172,11 +166,25 @@ replies:
   #链接类型回复
   - type: url
     rules:
-      - 二次元
+      - 二次元3
     request:
         #图片
         response_type: image 
         url: https://acg.toubiec.cn/random.php
+
+  - type: url
+      - 手机号查询 (.*)
+    request:
+        #纯文本
+        response_type: text
+        url: https://api.2xb.cn/phone?tel={{1}}
+
+  - type: url
+      - ip查询 (.*)
+    request:
+        #纯文本
+        response_type: text
+        url: https://api.2xb.cn/ipquery?ip={{1}}
 
   - type: url
     rules:
@@ -197,6 +205,49 @@ replies:
         url: http://api.muuzi.cn/api/60look
 
   - type: url
+      - 营养视频
+    request:
+        #纯文本
+        response_type: text
+        url: http://api.muuzi.cn/api/yysp?type=txt
+
+  - type: url
+      - 毒鸡汤
+    request:
+        #纯文本
+        response_type: text
+        url: http://api.muuzi.cn/api/djt?encode=text
+
+  - type: url
+      - 一言
+    request:
+        #纯文本
+        response_type: text
+        url: http://api.muuzi.cn/api/yan?encode=text
+
+  - type: url
+      - 骚话
+    request:
+        #纯文本
+        response_type: text
+        url: http://api.muuzi.cn/api/saohua?encode=text
+
+  - type: url
+      - 我在人间凑数的日子
+    request:
+        #纯文本
+        response_type: text
+        url: http://api.muuzi.cn/api/zrj?format=text
+
+
+  - type: url
+      - 艺术签名 (.*)
+    request:
+        #纯文本
+        response_type: text
+        url: http://api.muuzi.cn/api/ysqm?type=json&txt=kaq&name={{1}}
+        
+  - type: url
     rules:
       - 早安
       - 晚安
@@ -208,13 +259,155 @@ replies:
 
   - type: url
     rules:
-      - 买家秀
       - 秀儿
     request:
         #图片
         response_type: image 
-        url: https://api.uomg.com/api/rand.img3?sort=胖次猫&format=image
+        url: https://api.uomg.com/api/rand.img3?sort=胖次猫&format=images
 
+
+  - type: url
+    rules:
+      - 妹子1
+    request:
+        #图片
+        response_type: image 
+        url: https://api.uomg.com/api/rand.img2?sort=美女&format=images
+
+  - type: url
+    rules:
+      - 妹子2
+    request:
+        #图片
+        response_type: image 
+        url: https://api.uomg.com/api/rand.img1?sort=美女&format=images
+
+
+        
+  - type: url
+    rules:
+      - 腿控
+    request:
+        #图片
+        response_type: image 
+        url: https://api.uomg.com/api/rand.img2?sort=腿控&format=images
+        
+  - type: url
+    rules:
+      - 二次元1
+    request:
+        #图片
+        response_type: image 
+        url: https://api.uomg.com/api/rand.img2?sort=二次元&format=images
+
+  - type: url
+    rules:
+      - 二次元2
+    request:
+        #图片
+        response_type: image 
+        url: https://api.uomg.com/api/rand.img1?sort=二次元&format=images
+
+  - type: url
+    rules:
+      - 动漫
+    request:
+        #图片
+        response_type: image 
+        url: https://api.uomg.com/api/rand.img1?sort=动漫&format=images
+
+  - type: url
+    rules:
+      - 随机1
+    request:
+        #图片
+        response_type: image 
+        url: https://api.uomg.com/api/rand.img2&format=images
+
+  - type: url
+    rules:
+      - 随机2
+    request:
+        #图片
+        response_type: image 
+        url: https://api.uomg.com/api/rand.img1&format=images
+
+  - type: url
+    rules:
+      - 头像男
+    request:
+        #图片
+        response_type: image 
+        url: https://api.uomg.com/api/rand.avatar?sort=动漫男&format=images
+
+  - type: url
+    rules:
+      - 头像女
+    request:
+        #图片
+        response_type: image 
+        url: https://api.uomg.com/api/rand.avatar?sort=动漫女&format=images
+
+  - type: url
+    rules:
+      - 土味
+      - 土味情话
+    request:
+        #纯文本
+        response_type: text
+        url: https://api.uomg.com/api/rand.qinghua?format=text
+
+  - type: url
+    rules:
+      - 热歌榜
+    request:
+        #纯文本
+        response_type: text
+        url: https://api.uomg.com/api/rand.music?sort=热歌榜&format=json
+
+  - type: url
+    rules:
+      - 新歌榜
+    request:
+        #纯文本
+        response_type: text
+        url: https://api.uomg.com/api/rand.music?sort=新歌榜&format=json
+
+  - type: url
+    rules:
+      - 抖音榜
+    request:
+        #纯文本
+        response_type: text
+        url: https://api.uomg.com/api/rand.music?sort=抖音榜&format=json
+
+  - type: url
+    rules:
+      - 飙升榜
+    request:
+        #纯文本
+        response_type: text
+        url: https://api.uomg.com/api/rand.music?sort=飙升榜&format=json
+
+  - type: url
+    rules:
+      - 网易云热评
+    request:
+        #纯文本
+        response_type: text
+        url: https://api.uomg.com/api/comments.163?format=text
+
+  - type: text
+    rules:
+      - 强制加群
+    content: https://api.uomg.com/api/qq.joingroup?qid=群号
+    
+
+  - type: text
+    rules:
+      - 强制对话
+    content: https://api.uomg.com/api/qq.talk?qq=QQ号码
+        
   - type: url
     rules:
       - 换一个
