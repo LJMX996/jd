@@ -55,7 +55,7 @@ replies:
 
   - type: url
     rules:
-      - 姐姐
+      - 小姐姐
     request:
         #图片
         response_type: image 
@@ -420,7 +420,7 @@ replies:
     rules:
       - 换一个
       - 再换
-      - 小姐姐
+      - 姐姐
     request:
         #图片
         response_type: image 
