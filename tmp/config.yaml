@@ -224,7 +224,7 @@ replies:
 
   - type: url
     rules:
-      - 一言
+      - 鸡汤
     request:
         #纯文本
         response_type: text
