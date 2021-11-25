@@ -57,12 +57,11 @@ replies:
       - 美团
       - 饿了么
       - 吃饭
+      - 饿了
       - 恰饭
-        request:
-        #图片
-        response_type: image 
-        url: https://raw.githubusercontent.com/LJMX996/jd/aaron/tmp/elm.png
-
+    request:
+      response_type: image
+      url: 'https://pic.baixiongz.com/uploads/2021/11/25/11f547fdf68ff.jpeg'
 
   - type: url
     rules:
