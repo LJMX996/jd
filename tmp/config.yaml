@@ -55,9 +55,9 @@ replies:
     rules:
       - 外卖
       - 美团
-      - 饿了么
-      - 吃饭
       - 饿了
+      - 吃饭
+      - 饿
       - 恰饭
     request:
       response_type: image
