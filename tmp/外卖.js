@@ -2,7 +2,7 @@
 // [rule: 饿了么]
 // [rule: 美团]
 // [cron: 40 6,10,16 * * *]
-var ele = "https://pic.baixiongz.com/uploads/2021/11/25/11f547fdf68ff.jpeg";
+var ele = "https://pic.baixiongz.com/uploads/2021/11/25/5fe15c9d180b9.jpeg";
 //图文消息
 var content = image(ele) + "\n到饭点啦，微信扫码领饭票了！！！";
 var imType = ImType();
