@@ -137,6 +137,23 @@ replies:
 
   - type: url
     rules:
+      - 动漫 (.*)
+    request:
+        #纯文本
+        response_type: text
+        url: http://jiuli.xiaoapi.cn/i/age.php?msg={{1}}&max=10&n=1
+
+  - type: url
+    rules:
+      - 搜影片 (.*)(.*)
+      - 看影片 (.*) (.*)
+    request:
+        #纯文本
+        response_type: text
+        url: http://jiuli.xiaoapi.cn/i/video_so.php?msg={{1}}&max=10&n={{2}}
+
+  - type: url
+    rules:
       - (.*)天气
       - 天气(.*)
     request:
@@ -635,22 +652,8 @@ replies:
         response_type: text 
         url: http://81.70.100.130/api/jingxuanshipin.php?type={{1}}
 
-  - type: url
-    rules:
-      - 搜 (.*)(.*)
-      - 看 (.*) (.*)
-    request:
-        #纯文本
-        response_type: text
-        url: http://jiuli.xiaoapi.cn/i/video_so.php?msg={{1}}&max=10&n={{2}}
 
-  - type: url
-    rules:
-      - 动漫 (.*)
-    request:
-        #纯文本
-        response_type: text
-        url: http://jiuli.xiaoapi.cn/i/age.php?msg={{1}}&max=10&n=1
+
 
   - type: url
     rules:
