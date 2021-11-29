@@ -65,12 +65,187 @@ replies:
 
   - type: url
     rules:
-      - 小姐姐
+      - 姐姐
+      - 换一个
+      - 换个
+      - 再换
+      - 接着换
     request:
         #图片
         response_type: image 
-        url: https://api.btstu.cn/sjbz/api.php
+        url: http://81.70.100.130/api/MvImg.php
+
+  - type: url
+    rules:
+      - 漫图2
+    request:
+        #图片
+        response_type: image 
+        url: http://81.70.100.130/api/DmImgS.php
+
+  - type: url
+    rules:
+      - 二次元4
+    request:
+        #图片
+        response_type: image 
+        url: http://81.70.100.130/api/DmImg.php
+
+  - type: url
+    rules:
+      - 诱惑
+    request:
+        #图片
+        response_type: image 
+        url: http://81.70.100.130/api/youhuotu.php
+
+
+
+  - type: url
+    rules:
+      - 地理位置 (.*)
+      - (.*) 地理位置
+    request:
+        #图片
+        response_type: text 
+        url: http://81.70.100.130/api/location_address_geocoder.php?address={{1}}
+
+  - type: url
+    rules:
+      - 狗屁不通文章生成 (.*)
+    request:
+        #图片
+        response_type: text 
+        url: http://81.70.100.130/api/dog.php?msg={{1}}&num=257
+
+  - type: url
+    rules:
+      - 黄历
+    request:
+      response_type: text
+      url: http://81.70.100.130/api/huang.php
+
+
+  - type: url
+    rules:
+      - 绕口令
+    request:
+      response_type: text
+      url: http://81.70.100.130/api/rao.php
+
+  - type: url
+    rules:
+      - 段子
+    request:
+      response_type: text
+      url: http://81.70.100.130/api/duanzi.php
+
+  - type: url
+    rules:
+      - 精选短视频
+    request:
+      response_type: text
+      url: http://81.70.100.130/api/jiepai.php
+      
+#输网红、明星、热舞、风景、游戏、动物。
+  - type: url
+    rules:
+      - 短视频 (.*)
+      - (.*) 短视频
+    request:
+        #图片
+        response_type: text 
+        url: http://81.70.100.130/api/jingxuanshipin.php?type={{1}}
+
+  - type: url
+    rules:
+      - 身份证 (.*)
+    request:
+        #图片
+        response_type: text 
+        url: http://81.70.100.130/api/sfz.php?msg={{1}}
+
+  - type: url
+    rules:
+      - 未来三天 (.*)
+      - (.*) 未来三天
+    request:
+        #图片
+        response_type: text 
+        url: http://81.70.100.130/api/tq.php?msg={{1}}
         
+
+        
+  - type: text
+    rules:
+      - 三合一收款码
+    content: http://81.70.100.130/api/skm/api.php?biaoti=标题&touxiang=QQ号&nicheng=收款人昵称&qq=QQ收款码链接&vx=微信收款码链接&zfb=支付宝收款码链接
+
+
+
+  - type: url
+    rules:
+      - 表白网页
+    content: http://81.70.100.130/api/biaobai/biaobai.php?a=群主爸爸
+    
+    
+  - type: url
+    rules:
+      - MC酱
+    request:
+        #图片
+        response_type: image 
+        url: http://81.70.100.130/api/McImg.php
+
+  - type: url
+    rules:
+      - 手机壁纸2
+    request:
+        #图片
+        response_type: image 
+        url: http://81.70.100.130/api/mobil.girl.php
+
+  - type: url
+    rules:
+      - 电脑壁纸
+    request:
+        #图片
+        response_type: image 
+        url: http://81.70.100.130/api/girl.php
+
+  - type: url
+    rules:
+      - 二次元5
+    request:
+        #图片
+        response_type: image 
+        url: http://81.70.100.130/api/acgimg.php
+
+  - type: url
+    rules:
+      - 风景图
+    request:
+        #图片
+        response_type: image 
+        url: http://81.70.100.130/api/view.php
+
+  - type: url
+    rules:
+      - 联盟
+      - LOL
+    request:
+        #图片
+        response_type: image 
+        url: http://81.70.100.130/api/lolskin.php
+
+  - type: url
+    rules:
+      - 妹子3
+    request:
+        #图片
+        response_type: image 
+        url: http://81.70.100.130/api/pcmnt.php
+
   - type: url
     rules:
       - 妹妹
@@ -83,7 +258,7 @@ replies:
       
   - type: url
     rules:
-      - 壁纸
+      - 手机壁纸1
     request:
       response_type: image
       url: 'https://api.iyk0.com/sjmn'
@@ -328,7 +503,7 @@ replies:
 
   - type: url
     rules:
-      - 漫图
+      - 漫图1
     request:
         #图片
         response_type: image 
@@ -428,9 +603,7 @@ replies:
         
   - type: url
     rules:
-      - 换一个
-      - 再换
-      - 姐姐
+      - 小姐姐
     request:
         #图片
         response_type: image 
@@ -674,13 +847,14 @@ replies:
         #图片
         response_type: image 
         url: https://api.iyk0.com/mtt
+
   - type: url
     rules:
-      -  ^举牌 (.*)$
+      -  举牌(.*)
     request:
       response_type: image
       url: http://xiaobai.klizi.cn/API/tw/source.php?text={{1}}
-  #文字转语音(小云，小刚，若兮，思琪，思佳，思诚，艾琪，爱佳，艾诚，艾达，宁儿，瑞琳)
+
   - type: url
     rules:
       - (.*)语音(.*)
