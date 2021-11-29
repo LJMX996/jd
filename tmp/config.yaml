@@ -1,0 +1,776 @@
+replies:
+  #文本类型的回复
+  - type: text
+    rules:
+      - 在吗
+      - 机器人
+      - 阿卡丽
+      - 滴滴
+    content: 我是你的专属宝贝，快来撩我吧。发送菜单获取功能详情。对话时发送小爱前缀就可以和我的小爱对话了。用机器人登陆只是查询哦！挂豆需要点进链接自己上车，发送上车获取上车链接。
+  - type: text
+    rules:
+      - 滚
+      - 去你妈
+    content: 🤬
+  - type: text
+    rules:
+      - 牛
+      - 🐮
+    content: 牛啊🐮
+
+  - type: text
+    rules:
+      - 上车
+      - 有车吗
+      - 有车上吗
+    content: http://jmx996.icu:9999
+
+  - type: url
+    rules:
+      - 功能
+      - 菜单
+    request:
+        #纯文本
+        response_type: text
+        url: https://github.com/LJMX996/jd/raw/aaron/tmp/caidan2.txt
+#小爱机器人 
+  - type: url
+    rules:
+      - (\S*)？
+    request:
+      response_type: json
+      url: http://jiuli.xiaoapi.cn/i/xiaoai_tts.php?msg={{1}}
+      get: text
+#小爱机器人 
+  - type: url
+    rules:
+      - 喵喵(\S*)
+      - 阿卡丽(\S*)
+    request:
+      response_type: json
+      url: http://www.tuling123.com/openapi/api?key=4670f9d766704929b7983312808cdfa7&userid=xiaoxiao&info={{1}}
+      get: text
+
+  - type: url
+    rules:
+      - 外卖
+      - 美团
+      - 饿了
+      - 吃饭
+      - 饿
+      - 恰饭
+    request:
+      response_type: image
+      url: 'https://pic.baixiongz.com/uploads/2021/11/25/5fe15c9d180b9.jpeg'
+
+  - type: url
+    rules:
+      - 黄历
+    request:
+      response_type: text
+      url: http://81.70.100.130/api/huang.php
+
+  - type: url
+    rules:
+      - 今日要闻
+    request:
+        #图片
+        response_type: image 
+        url: http://api.muuzi.cn/api/60look
+
+  - type: url
+    rules:
+      - 世界新闻
+      - 一分钟看世界
+    request:
+        #图片
+        response_type: image 
+        url: https://api.2xb.cn/zaob
+        get: imageUrl
+
+  - type: url
+    rules:
+      - 音乐 (.*)
+    request:
+      response_type: text
+      url: 'http://xiaoapi.cn/api/yy.php?type=qq&msg={{1}}&n=1'
+      
+  - type: url
+    rules:
+      - 搜歌 (.*)(.*)
+      - 听歌 (.*) (.*)
+    request:
+      response_type: text
+      url: https://api.womc.cn/api/qqyy/api.php?msg={{1}}&n={{2}}
+      
+  - type: url
+    rules:
+      - 热歌榜
+    request:
+        #纯文本
+        response_type: text
+        url: https://api.uomg.com/api/rand.music?sort=热歌榜&format=json
+
+  - type: url
+    rules:
+      - 新歌榜
+    request:
+        #纯文本
+        response_type: text
+        url: https://api.uomg.com/api/rand.music?sort=新歌榜&format=json
+
+  - type: url
+    rules:
+      - 抖音榜
+    request:
+        #纯文本
+        response_type: text
+        url: https://api.uomg.com/api/rand.music?sort=抖音榜&format=json
+
+  - type: url
+    rules:
+      - 飙升榜
+    request:
+        #纯文本
+        response_type: text
+        url: https://api.uomg.com/api/rand.music?sort=飙升榜&format=json
+
+  - type: url
+    rules:
+      - (.*)天气
+      - 天气(.*)
+    request:
+      response_type: text
+      url: http://hm.suol.cc/API/tq.php?msg={{1}}&n=1
+
+  - type: url
+    rules:
+      - 未来三天 (.*)
+      - (.*) 未来三天
+    request:
+        #图片
+        response_type: text 
+        url: http://81.70.100.130/api/tq.php?msg={{1}}
+
+  - type: url
+    rules:
+      - 地理位置 (.*)
+      - (.*) 地理位置
+    request:
+        #图片
+        response_type: text 
+        url: http://81.70.100.130/api/location_address_geocoder.php?address={{1}}
+
+  - type: url
+    rules:
+      - 身份证 (.*)
+    request:
+        #图片
+        response_type: text 
+        url: http://81.70.100.130/api/sfz.php?msg={{1}}
+
+  - type: url
+    rules:
+      - 手机号查询 (.*)
+    request:
+        #纯文本
+        response_type: text
+        url: https://api.2xb.cn/phone?tel={{1}}
+
+  - type: url
+    rules:
+      - ip查询 (.*)
+    request:
+        #纯文本
+        response_type: text
+        url: https://api.2xb.cn/ipquery?ip={{1}}
+
+
+
+  - type: url
+    rules:
+      - 艺术签名 (.*)
+    request:
+        #纯文本
+        response_type: text
+        url: http://api.muuzi.cn/api/ysqm?type=json&txt=kaq&name={{1}}
+ 
+  - type: url
+    rules:
+      - 短网址 (.*)
+      - 短链接 (.*)
+    request:
+        #纯文本
+        response_type: json
+        url: https://www.lzfh.com/api/dwz.php?cb=1&sturl=6&longurl={{1}}
+        get: dwz_url   
+ 
+  - type: url
+    rules:
+      - 二维码 (.*)
+    request:
+        #纯文本
+        response_type: image
+        url: https://api.womc.cn/api/qrcode/api.php?text={{1}}
+      
+  - type: url
+    rules:
+      - 网易云热评
+    request:
+        #纯文本
+        response_type: text
+        url: https://api.uomg.com/api/comments.163?format=text
+
+
+  - type: url
+    rules:
+      - 毒鸡汤
+    request:
+        #纯文本
+        response_type: text
+        url: http://api.muuzi.cn/api/djt?encode=text
+
+  - type: url
+    rules:
+      - 鸡汤
+    request:
+        #纯文本
+        response_type: text
+        url: http://api.muuzi.cn/api/yan?encode=text
+
+  - type: url
+    rules:
+      - 骚话
+    request:
+        #纯文本
+        response_type: text
+        url: http://api.muuzi.cn/api/saohua?encode=text
+
+  - type: url
+    rules:
+      - 我在人间凑数的日子
+    request:
+        #纯文本
+        response_type: text
+        url: http://api.muuzi.cn/api/zrj?format=text
+
+  - type: url
+    rules:
+      - 土味
+      - 土味情话
+    request:
+        #纯文本
+        response_type: text
+        url: https://api.uomg.com/api/rand.qinghua?format=text
+
+  - type: url
+    rules:
+      - 舔狗日记
+      - 舔狗
+    request:
+        #纯文本
+        response_type: text
+        url: https://api.oick.cn/dog/api.php
+
+  - type: url
+    rules:
+      - 狗屁不通文章生成 (.*)
+    request:
+        #图片
+        response_type: text 
+        url: http://81.70.100.130/api/dog.php?msg={{1}}&num=257
+
+  #历史上的今天
+  - type: url
+    rules:
+      - 历史上的今天
+    request:
+      url: 'https://api.iyk0.com/lishi/'
+      response_type: template
+      template: "fjson(tfmt(01月02日).[i],[i]. [?.year]，[?.title]。,\n)"
+
+
+  - type: url
+    rules:
+      - 表白网页
+    content: http://81.70.100.130/api/biaobai/biaobai.php?a=群主爸爸
+    
+
+  - type: text
+    rules:
+      - 三合一收款码
+    content: http://81.70.100.130/api/skm/api.php?biaoti=标题&touxiang=QQ号&nicheng=收款人昵称&qq=QQ收款码链接&vx=微信收款码链接&zfb=支付宝收款码链接
+
+  - type: url
+    rules:
+      - 早安
+      - 晚安
+      - 午安
+    request:
+        #图片
+        response_type: image 
+        url: https://xiaobai.klizi.cn/API/getImage-master/out_image.php
+
+  - type: url
+    rules:
+      - 日历
+    request:
+      response_type: image
+      url: 'https://api.kbapi.cc/rl.api'
+
+  - type: url
+    rules:
+      - MC酱
+    request:
+        #图片
+        response_type: image 
+        url: http://81.70.100.130/api/McImg.php
+
+  - type: url
+    rules:
+      - 漫图1
+    request:
+        #图片
+        response_type: image 
+        url: https://api.uomg.com/api/rand.img1?sort=动漫&format=images
+
+
+  - type: url
+    rules:
+      - 漫图2
+    request:
+        #图片
+        response_type: image 
+        url: http://81.70.100.130/api/DmImgS.php
+
+
+
+  - type: url
+    rules:
+      - 二次元1
+    request:
+        #图片
+        response_type: image 
+        url: https://acg.toubiec.cn/random.php
+
+  - type: url
+    rules:
+      - 二次元2
+    request:
+        #图片
+        response_type: image 
+        url: http://81.70.100.130/api/DmImg.php
+
+
+  - type: url
+    rules:
+      - 二次元3
+    request:
+        #图片
+        response_type: image 
+        url: http://81.70.100.130/api/acgimg.php
+
+  - type: url
+    rules:
+      - 二次元4
+    request:
+        #图片
+        response_type: image 
+        url: https://api.uomg.com/api/rand.img2?sort=二次元&format=images
+
+  - type: url
+    rules:
+      - 二次元5
+    request:
+        #图片
+        response_type: image 
+        url: https://api.uomg.com/api/rand.img1?sort=二次元&format=images
+
+  - type: url
+    rules:
+      - 美图诱惑1
+    request:
+      response_type: image
+      url: 'https://api.iyk0.com/sjmn'
+
+  - type: url
+    rules:
+      - 美图诱惑2
+    request:
+        #图片
+        response_type: image 
+        url: http://81.70.100.130/api/youhuotu.php
+
+
+
+  - type: url
+    rules:
+      - cos美图
+    request:
+      response_type: image
+      url: 'https://api.iyk0.com/cos'
+
+  #必应美图
+  - type: url
+    rules:
+      - bing美图
+    request:
+      response_type: image
+      url: 'https://api.iyk0.com/bing'
+
+
+  - type: url
+    rules:
+      - 买家秀
+    request:
+      response_type: image
+      url: 'https://api.iyk0.com/mjx'
+
+  - type: url
+    rules:
+      - 秀儿
+    request:
+        #图片
+        response_type: image 
+        url: https://api.uomg.com/api/rand.img3?sort=胖次猫&format=images
+
+
+  - type: url
+    rules:
+      - 妹子1
+    request:
+        #图片
+        response_type: image 
+        url: https://api.uomg.com/api/rand.img2?sort=美女&format=images
+
+  - type: url
+    rules:
+      - 妹子2
+    request:
+        #图片
+        response_type: image 
+        url: https://api.uomg.com/api/rand.img1?sort=美女&format=images
+
+
+  - type: url
+    rules:
+      - 妹子3
+    request:
+        #图片
+        response_type: image 
+        url: http://81.70.100.130/api/pcmnt.php
+
+  - type: url
+    rules:
+      - 小姐姐
+    request:
+        #图片
+        response_type: image 
+        url: https://api.nmb.show/xiaojiejie2.php
+
+  - type: url
+    rules:
+      - 姐姐
+      - 换一个
+      - 换个
+      - 再换
+      - 接着换
+    request:
+        #图片
+        response_type: image 
+        url: http://81.70.100.130/api/MvImg.php
+
+  - type: url
+    rules:
+      - 妹妹
+    request:
+        #图片
+        response_type: image 
+        url: https://cdn.seovx.com/?mom=302
+
+  - type: url
+    rules:
+      - 美腿
+    request:
+      response_type: image
+      url: 'https://api.iyk0.com/mtt'
+
+  - type: url
+    rules:
+      - 腿控
+    request:
+        #图片
+        response_type: image 
+        url: https://api.uomg.com/api/rand.img2?sort=腿控&format=images
+
+  - type: url
+    rules:
+      - 大丝袜
+    request:
+        #图片
+        response_type: image 
+        url: https://api.iyk0.com/mtt
+
+  - type: url
+    rules:
+      - 风景图
+    request:
+        #图片
+        response_type: image 
+        url: http://81.70.100.130/api/view.php
+
+  - type: url
+    rules:
+      - 电脑壁纸
+    request:
+        #图片
+        response_type: image 
+        url: http://81.70.100.130/api/girl.php
+
+  - type: url
+    rules:
+      - 手机壁纸1
+    request:
+      response_type: image
+      url: 'https://api.iyk0.com/sjmn'
+
+  - type: url
+    rules:
+      - 手机壁纸2
+    request:
+        #图片
+        response_type: image 
+        url: http://81.70.100.130/api/mobil.girl.php
+
+  - type: url
+    rules:
+      - 联盟
+      - LOL
+    request:
+        #图片
+        response_type: image 
+        url: http://81.70.100.130/api/lolskin.php
+
+  - type: url
+    rules:
+      - 随机1
+    request:
+        #图片
+        response_type: image 
+        url: https://api.uomg.com/api/rand.img2&format=images
+
+  - type: url
+    rules:
+      - 随机2
+    request:
+        #图片
+        response_type: image 
+        url: https://api.uomg.com/api/rand.img1&format=images
+
+  - type: url
+    rules:
+      - 头像男
+    request:
+        #图片
+        response_type: image 
+        url: https://api.uomg.com/api/rand.avatar?sort=动漫男&format=images
+
+  - type: url
+    rules:
+      - 头像女
+    request:
+        #图片
+        response_type: image 
+        url: https://api.uomg.com/api/rand.avatar?sort=动漫女&format=images
+
+  - type: url
+    rules:
+      -  举牌(.*)
+    request:
+      response_type: image
+      url: http://xiaobai.klizi.cn/API/tw/source.php?text={{1}}
+
+  - type: url
+    rules:
+      - 涩图
+    request:
+      response_type: image
+      url: 'https://pximg2.rainchan.win/rawimg'
+
+
+  - type: url
+    rules:
+      - 色图
+    request:
+      response_type: image
+      url: 'https://api.nyan.xyz/httpapi/sexphoto/'
+      get: data.url.[0]
+
+
+
+  - type: url
+    rules:
+      - 精选短视频1
+    request:
+      response_type: text
+      url: http://81.70.100.130/api/jiepai.php
+      
+
+  - type: url
+    rules:
+      - 精选短视频2
+    request:
+        #纯文本
+        response_type: text
+        url: http://api.muuzi.cn/api/yysp?type=txt
+
+
+#输网红、明星、热舞、风景、游戏、动物。
+  - type: url
+    rules:
+      - 短视频 (.*)
+      - (.*) 短视频
+    request:
+        #图片
+        response_type: text 
+        url: http://81.70.100.130/api/jingxuanshipin.php?type={{1}}
+
+  - type: url
+    rules:
+      - 搜 (.*)(.*)
+      - 看 (.*) (.*)
+    request:
+        #纯文本
+        response_type: text
+        url: http://jiuli.xiaoapi.cn/i/video_so.php?msg={{1}}&max=10&n={{2}}
+
+  - type: url
+    rules:
+      - 动漫 (.*)
+    request:
+        #纯文本
+        response_type: text
+        url: http://jiuli.xiaoapi.cn/i/age.php?msg={{1}}&max=10&n=1
+
+  - type: url
+    rules:
+      - 百科 (.*)
+      - 百度百科 (.*)
+    request:
+        #纯文本
+        response_type: text
+        url: http://xiaoapi.cn/api/sgbaike.php?msg={{1}}
+        get: data.url
+
+  - type: url
+    rules:
+      - 翻译 (.*)
+    request:
+      response_type: text
+      url: http://hm.suol.cc/API/fy.php?msg={{1}}
+
+  - type: url
+    rules:
+      - 收录查询 (.*)
+      - 百度收录 (.*)
+    request:
+      response_type: json
+      url: https://api.womc.cn/api/shoulu/api.php?domain={{1}}
+      get: data
+  - type: url
+    rules:
+      - ^查字\s*(\S*)$
+    replace:
+      - 
+        - <br>
+
+        - "\n" 
+    request:
+        response_type: template
+        url: https://api.tianapi.com/txapi/xhzd/index?key=19eea766886493ecd04e770d0c2b56f9&word={{1}}
+        template: "汉字：gjson(newslist.[0].hanzi)\n读音：gjson(newslist.[0].pyyb)\n解释：gjson(newslist.[0].content)\n拓展：gjson(newslist.[0].explain)"    
+
+
+  - type: url
+    rules:
+      - 垃圾 (.*)
+      - 垃圾分类 (.*)
+    request:
+        #纯文本
+        response_type: text
+        url: http://xiaoapi.cn/api/laji.php?msg={{1}}
+
+  - type: text
+    rules:
+      - 强制加群
+    content: https://api.uomg.com/api/qq.joingroup?qid=群号
+    
+
+  - type: text
+    rules:
+      - 强制对话
+    content: https://api.uomg.com/api/qq.talk?qq=QQ号码
+        
+  - type: url
+      - 股票 (.*)
+    request:
+        #纯文本
+        response_type: text
+        url: https://zyzcfa.com:444/api/stocks?keyword={{1}}
+
+  - type: url
+    rules:
+      - 王者(.*)
+      - 王者荣耀(.*)
+    request:
+      response_type: text
+      url: http://hm.suol.cc/API/wzry.php?msg={{1}}
+
+
+
+  - type: url
+    rules:
+      - ping (.*)
+      - 超级ping (.*)
+    request:
+      response_type: text
+      url: http://hm.suol.cc/API/sping.php?url={{1}}
+
+  - type: url
+    rules:
+      - 战力 (.*)
+      - 最低战力 (.*)
+    request:
+        #纯文本
+        response_type: text
+        url: http://jiuli.xiaoapi.cn/i/wzry_zdzl.php?name={{1}}
+
+  - type: url
+    rules:
+      - 游戏
+      - 开始游戏
+    request:
+        #纯文本
+        response_type: text
+        url: http://hm.suol.cc/API/game_gs.php?msg=开始游戏
+
+  - type: url
+    rules:
+      - 答 (.*)
+      - 答(.*)
+    request:
+        #纯文本
+        response_type: text
+        url: http://hm.suol.cc/API/game_gs.php?msg=答{{1}}
+
+  - type: url
+    rules:
+      - 提示
+    request:
+        #纯文本
+        response_type: text
+        url: http://hm.suol.cc/API/game_gs.php?msg=提示
+
+
+
+
