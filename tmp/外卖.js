@@ -1,8 +1,6 @@
-// [rule: 外卖]
-// [rule: 饿了么]
-// [rule: 美团]
+
 // [cron: 40 6,10,16 * * *]
-var ele = "https://pic.baixiongz.com/uploads/2021/11/25/5fe15c9d180b9.jpeg";
+var ele = "https://i.loli.net/2021/12/02/Q5siGbTMVZe8Dm7.jpg";
 //图文消息
 var content = image(ele) + "\n到饭点啦，微信扫码领饭票了！！！";
 var imType = ImType();
@@ -13,6 +11,9 @@ if (imType == "fake") {
     },{
         imType: "wx",
         groupCode: 20481317764,
+    },{
+        imType: "wx",
+        groupCode: 21784132403,
     }]
     for (var i = 0; i < groups.length; i++) {
         groups[i]["content"] = content
