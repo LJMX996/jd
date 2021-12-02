@@ -8,11 +8,11 @@
 const {Env} = require('./utils/magic');
 const $ = new Env('M京豆夺宝');
 $.logic = async function () {
-    // let ex = await queryexpirejingdou();
-    // if (ex === 0) {
-    //     $.log('你没有过期的京豆，退出')
-    //     return;
-    // }
+    let ex = await queryexpirejingdou();
+    if (ex === 0) {
+        $.log('你没有过期的京豆，退出')
+        return;
+    }
     let tk = await userToken()
     await $.wait(100, 200)
     let {lkToken} = await encryptPin()
@@ -76,7 +76,7 @@ async function finishTask(id, token, activeid) {
         'Cookie': ''
     }
     // noinspection DuplicatedCode
-    headers['User-Agent'] = `jdapp;iPhone;10.2.0;14.4.2;${$.randomString(
+    headers['User-Agent'] = `jdapp;iPhone;10.2.0;14.4.2;${$.uuid(
         40)};M/5.0;network/wifi;ADID/;model/iPhone8,1;addressid/0;appBuild/167853;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1;`
     let url = `https://pf.moxigame.cn/jddb/duobao/finishTask`
     let data = await $.post(url, body, headers)
@@ -100,7 +100,7 @@ async function joinAwardedList(id, token) {
         'Cookie': ''
     }
     // noinspection DuplicatedCode
-    headers['User-Agent'] = `jdapp;iPhone;10.2.0;14.4.2;${$.randomString(
+    headers['User-Agent'] = `jdapp;iPhone;10.2.0;14.4.2;${$.uuid(
         40)};M/5.0;network/wifi;ADID/;model/iPhone8,1;addressid/0;appBuild/167853;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1;`
     let url = `https://pf.moxigame.cn/jddb/duobao/joinAwardedList`
     let data = await $.post(url, body, headers)
@@ -124,7 +124,7 @@ async function dbDetail(id, token, activeid) {
         'Cookie': ''
     }
     // noinspection DuplicatedCode
-    headers['User-Agent'] = `jdapp;iPhone;10.2.0;14.4.2;${$.randomString(
+    headers['User-Agent'] = `jdapp;iPhone;10.2.0;14.4.2;${$.uuid(
         40)};M/5.0;network/wifi;ADID/;model/iPhone8,1;addressid/0;appBuild/167853;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1;`
     let url = `https://pf.moxigame.cn/jddb/duobao/detail`
     let data = await $.post(url, body, headers)
@@ -148,7 +148,7 @@ async function dbJoin(id, token, activeid) {
         'Cookie': ''
     }
     // noinspection DuplicatedCode
-    headers['User-Agent'] = `jdapp;iPhone;10.2.0;14.4.2;${$.randomString(
+    headers['User-Agent'] = `jdapp;iPhone;10.2.0;14.4.2;${$.uuid(
         40)};M/5.0;network/wifi;ADID/;model/iPhone8,1;addressid/0;appBuild/167853;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1;`
     let url = `https://pf.moxigame.cn/jddb/duobao/join`
     let data = await $.post(url, body, headers)
@@ -178,7 +178,7 @@ async function dbList(id, token) {
         'Cookie': ''
     }
     // noinspection DuplicatedCode
-    headers['User-Agent'] = `jdapp;iPhone;10.2.0;14.4.2;${$.randomString(
+    headers['User-Agent'] = `jdapp;iPhone;10.2.0;14.4.2;${$.uuid(
         40)};M/5.0;network/wifi;ADID/;model/iPhone8,1;addressid/0;appBuild/167853;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1;`
     let url = `https://pf.moxigame.cn/jddb/duobao/list`
     let data = await $.post(url, body, headers)
@@ -208,7 +208,7 @@ async function dbJoinProgressList(id, token) {
         'Cookie': ''
     }
     // noinspection DuplicatedCode
-    headers['User-Agent'] = `jdapp;iPhone;10.2.0;14.4.2;${$.randomString(
+    headers['User-Agent'] = `jdapp;iPhone;10.2.0;14.4.2;${$.uuid(
         40)};M/5.0;network/wifi;ADID/;model/iPhone8,1;addressid/0;appBuild/167853;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1;`
     let url = `https://pf.moxigame.cn/jddb/duobao/joinProgressList`
     let data = await $.post(url, body, headers)
@@ -248,7 +248,7 @@ async function login(lkToken, token) {
         'Cookie': ''
     }
     // noinspection DuplicatedCode
-    headers['User-Agent'] = `jdapp;iPhone;10.2.0;14.4.2;${$.randomString(
+    headers['User-Agent'] = `jdapp;iPhone;10.2.0;14.4.2;${$.uuid(
         40)};M/5.0;network/wifi;ADID/;model/iPhone8,1;addressid/0;appBuild/167853;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1;`
     let url = `https://pf.moxigame.cn/jddb/duobao/login`
     let data = await $.post(url, body, headers)
@@ -271,7 +271,7 @@ async function userToken(param = {}) {
     }
     // noinspection DuplicatedCode
     headers['Cookie'] = $.cookie
-    headers['User-Agent'] = `jdapp;iPhone;10.2.0;14.4.2;${$.randomString(
+    headers['User-Agent'] = `jdapp;iPhone;10.2.0;14.4.2;${$.uuid(
         40)};M/5.0;network/wifi;ADID/;model/iPhone8,1;addressid/0;appBuild/167853;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1;`
     let url = `https://jdjoy.jd.com/saas/framework/user/token?appId=dafbe42d5bff9d82298e5230eb8c3f79&client=m&url=pengyougou.m.jd.com`
     let data = await $.post(url, body, headers)
@@ -294,7 +294,7 @@ async function encryptPin(param = {}) {
     }
     // noinspection DuplicatedCode
     headers['Cookie'] = $.cookie
-    headers['User-Agent'] = `jdapp;iPhone;10.2.0;14.4.2;${$.randomString(
+    headers['User-Agent'] = `jdapp;iPhone;10.2.0;14.4.2;${$.uuid(
         40)};M/5.0;network/wifi;ADID/;model/iPhone8,1;addressid/0;appBuild/167853;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1;`
     let url = `https://jdjoy.jd.com/saas/framework/encrypt/pin?appId=dafbe42d5bff9d82298e5230eb8c3f79`
     let data = await $.post(url, body, headers)
@@ -318,7 +318,7 @@ async function verifyDomain(param = {}) {
 
     // noinspection DuplicatedCode
     headers['Cookie'] = $.cookie
-    headers['User-Agent'] = `jdapp;iPhone;10.2.0;14.4.2;${$.randomString(
+    headers['User-Agent'] = `jdapp;iPhone;10.2.0;14.4.2;${$.uuid(
         40)};M/5.0;network/wifi;ADID/;model/iPhone8,1;addressid/0;appBuild/167853;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1;`
     let url = `https://jdjoy.jd.com/saas/verify/domain?domain=game-cdn.moxigame.cn&appId=dafbe42d5bff9d82298e5230eb8c3f79`
     let data = await $.post(url, body, headers)

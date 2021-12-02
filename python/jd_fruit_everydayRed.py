@@ -1,10 +1,10 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 '''
-cron: 5 5,20 * * * jd_fruit_everydayRed.py
+cron: 5 5,15 * * * jd_fruit_everydayRed.py
 new Env('东东农场-天天红包抽奖');
 入口: 京东》我的>东东农场>天天红包
-变量: JD_COOKIE
-export JD_COOKIE="第1个cookie&第2个cookie"
-
+青龙拉取命令：ql raw https://raw.githubusercontent.com/wuye999/myScripts/main/jd/jd_fruit_everydayRed.py
 '''
 
 import os,json,random,time,re,string,functools
@@ -103,23 +103,25 @@ cookie_list=Judge_env().main_run()
 
 ## 获取通知服务
 class Msg(object):
-    def getsendNotify(self, a=1):
-        try:
-            url = 'https://mirror.ghproxy.com/https://raw.githubusercontent.com/wuye999/myScripts/main/sendNotify.py'
-            response = requests.get(url,timeout=10)
-            with open(SCF_path+'sendNotify.py', "w+", encoding="utf-8") as f:
-                f.write(response.text)
-            return
-        except:
-            pass
-        if a < 3:
-            a += 1
-            return self.getsendNotify(a)
-
-    def main(self,f=1):
+    def getsendNotify(self):
+        url_list = [
+            'https://mirror.ghproxy.com/https://raw.githubusercontent.com/wuye999/myScripts/main/sendNotify.py',
+            'https://cdn.jsdelivr.net/gh/wuye999/myScripts@main/sendNotify.py',
+            'https://raw.githubusercontent.com/wuye999/myScripts/main/sendNotify.py',
+        ]
+        for e,url in enumerate(url_list):
+            try:
+                response = requests.get(url,timeout=10)
+                with open('sendNotify.py', "w+", encoding="utf-8") as f:
+                    f.write(response.text)
+                return
+            except:
+                if e >= (len(url_list)-1):
+                    print('获取通知服务失败，请检查网络连接...')               
+    def main(self,f=0):
         global send,msg,initialize
         sys.path.append(os.path.abspath('.'))
-        for n in range(3):
+        for _ in range(2):
             try:
                 from sendNotify import send,msg,initialize
                 break
@@ -135,13 +137,11 @@ class Msg(object):
         try:
             initialize(d)
         except:
-            self.getsendNotify()
-            if f < 3:
+            if f < 2:
                 f += 1
+                self.getsendNotify()
                 return self.main(f)
-            else:
-                print('获取通知服务失败，请检查网络连接...')
-Msg().main()   # 初始化通知服务   
+Msg().main()   # 初始化通知服务    
 
 # type 和 抽奖次数
 def initForTurntableFarm(cookie):
@@ -203,10 +203,14 @@ def lotteryForTurntableFarm(cookie):
             type_i=res['type']        # 奖品类型
             remainLotteryTimes=res['remainLotteryTimes']        # 剩余抽奖次数
             name=type_name_s[type_i]
-            msg(f"本次抽到 {name}")
-            msg(f'剩余抽奖次数为 {remainLotteryTimes}')
-            if int(remainLotteryTimes)>0:
+            msg(f"抽到 {name}")
+            if int(remainLotteryTimes) > 0:
+                # msg(f'剩余抽奖次数为 {remainLotteryTimes}')
                 return lotteryForTurntableFarm(cookie)
+            else:
+                msg('抽奖次数不足\n')
+        else:
+            return lotteryForTurntableFarm(cookie)
     except:
         msg(f"错误\n{res}")    
 
@@ -214,7 +218,7 @@ def main():
     msg('🔔东东农场-天天红包抽奖，开始！\n')
     msg(f'====================共{len(cookie_list)}京东个账号Cookie=========\n')
     for e,cookie in enumerate(cookie_list):
-        msg(f'******开始【账号 {e}】 {get_pin(cookie)} *********\n')
+        msg(f'******开始【账号 {e+1}】 {get_pin(cookie)} *********\n')
         remainLotteryTimes=initForTurntableFarm(cookie)
         if remainLotteryTimes>0:
             lotteryForTurntableFarm(cookie)
