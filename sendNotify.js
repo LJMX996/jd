@@ -187,7 +187,7 @@ async function sendNotify(text, desp, params = {}, author = '\n\n本通知 By LJ
         PUSH_PLUS_USER = '';
         PUSH_PLUS_TOKEN_hxtrip = '';
         PUSH_PLUS_USER_hxtrip = '';
-        Notify_CKTask = "";
+        Notify_CKTask = "ck_check_up.py";
         Notify_SkipText = [];
 
         //变量开关
