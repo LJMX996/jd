@@ -156,7 +156,7 @@ let boolneedUpdate = false;
 let strCustom = "";
 let strCustomArr = [];
 let strCustomTempArr = [];
-let Notify_CKTask = "ck_check_up.py";
+let Notify_CKTask = "/ql/scripts/LJMX996_jd_aaron/ck_check_up.py";
 let Notify_SkipText = [];
 async function sendNotify(text, desp, params = {}, author = '\n\n本通知 By LJMX996-信条') {
     console.log(`开始发送通知...`);
@@ -187,7 +187,7 @@ async function sendNotify(text, desp, params = {}, author = '\n\n本通知 By LJ
         PUSH_PLUS_USER = '';
         PUSH_PLUS_TOKEN_hxtrip = '';
         PUSH_PLUS_USER_hxtrip = '';
-        Notify_CKTask = "ck_check_up.py";
+        Notify_CKTask = "/ql/scripts/LJMX996_jd_aaron/ck_check_up.py";
         Notify_SkipText = [];
 
         //变量开关
