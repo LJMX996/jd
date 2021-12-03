@@ -32,7 +32,7 @@ replies:
     request:
         #纯文本
         response_type: text
-        url: https://github.com/LJMX996/jd/raw/aaron/tmp/caidan2.txt
+        url: https://github.com/LJMX996/jd/raw/aaron/sillyGirl/caidan.txt
 #小爱机器人 
   - type: url
     rules:
