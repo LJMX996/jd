@@ -18,7 +18,7 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
-const randomCount = $.isNode() ? 0 : 5;
+const randomCount = $.isNode() ? 20 : 5;
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
 $.tuanList = [];
@@ -37,11 +37,16 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
     return;
+  }
   $.authorTuanList = await getAuthorShareCode('');
+  if (!$.authorTuanList) {
+    $.http.get({url: ''}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
+    await $.wait(1000)
+    $.authorTuanList = await getAuthorShareCode('') || [];
+  }
   const temp = await getAuthorShareCode('') || []
   $.authorTuanList = [...$.authorTuanList,...temp]
   // await getRandomCode();
-  }
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -64,16 +69,16 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
     }
   }
   console.log(`\n\n内部互助 【赚京豆(微信小程序)-瓜分京豆】活动(优先内部账号互助(需内部cookie数量大于${$.assistNum || 4}个)，如有剩余助力次数则给作者和随机团助力)\n`)
-   for (let i = 0; i < cookiesArr.length; i++) {
-     $.canHelp = true
-     if (cookiesArr[i]) {
-       cookie = cookiesArr[i];
-       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
-       if ($.canHelp && (cookiesArr.length > $.assistNum)) {
-         if ($.tuanList.length) console.log(`开始账号内部互助 赚京豆-瓜分京豆 活动，优先内部账号互助`)
-         for (let j = 0; j < $.tuanList.length; ++j) {
-           console.log(`账号 ${$.UserName} 开始给 【${$.tuanList[j]['assistedPinEncrypted']}】助力`)
-           await helpFriendTuan($.tuanList[j])
+  for (let i = 0; i < cookiesArr.length; i++) {
+    $.canHelp = true
+    if (cookiesArr[i]) {
+      cookie = cookiesArr[i];
+      $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
+      if ($.canHelp && (cookiesArr.length > $.assistNum)) {
+        if ($.tuanList.length) console.log(`开始账号内部互助 赚京豆-瓜分京豆 活动，优先内部账号互助`)
+        for (let j = 0; j < $.tuanList.length; ++j) {
+          console.log(`账号 ${$.UserName} 开始给 【${$.tuanList[j]['assistedPinEncrypted']}】助力`)
+          await helpFriendTuan($.tuanList[j])
           if(!$.canHelp) break
           await $.wait(200)
         }
@@ -84,12 +89,12 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
         for (let j = 0; j < $.authorTuanList.length; ++j) {
           console.log(`账号 ${$.UserName} 开始给作者和随机团 ${$.authorTuanList[j]['assistedPinEncrypted']}助力`)
           await helpFriendTuan($.authorTuanList[j])
-           if(!$.canHelp) break
-           await $.wait(200)
-         }
-       }
-     }
-   }
+          if(!$.canHelp) break
+          await $.wait(200)
+        }
+      }
+    }
+  }
 })()
     .catch((e) => {
       $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
@@ -596,7 +601,7 @@ function helpFriendTuan(body) {
               else if (data.resultCode === '2400205') console.log('助力结果：团已满\n')
               else if (data.resultCode === '2400203') {console.log('助力结果：助力次数已耗尽\n');$.canHelp = false}
               else if (data.resultCode === '9000000') {console.log('助力结果：活动火爆，跳出\n');$.canHelp = false}
-              else console.log(`助力结果：未知错误\n${JSON.stringify(data)}\n\n`)
+              else {console.log(`助力结果：未知错误\n${JSON.stringify(data)}\n\n`);$.canHelp = false}
             }
           }
         }
@@ -724,7 +729,7 @@ async function getRandomCode() {
         let { body } = resp;
         body = JSON.parse(body);
         if (body && body['code'] === 200) {
-      // console.log(`随机取【赚京豆-瓜分京豆】${randomCount}个邀请码成功\n`);
+          console.log(`随机取【赚京豆-瓜分京豆】${randomCount}个邀请码成功\n`);
           $.body = body['data'];
           $.body1 = [];
           $.body.map(item => {
@@ -732,7 +737,7 @@ async function getRandomCode() {
           })
         }
       } catch (e) {
-    //  console.log(`随机取【赚京豆-瓜分京豆】${randomCount}个邀请码异常:${e}`);
+        console.log(`随机取【赚京豆-瓜分京豆】${randomCount}个邀请码异常:${e}`);
       }
     }
   }).catch((e) => console.log(`随机取【赚京豆-瓜分京豆】${randomCount}个邀请码异常:${e}`));
