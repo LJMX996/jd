@@ -59,9 +59,10 @@ replies:
       - 吃饭
       - 饿
       - 恰饭
+      - 红包
     request:
       response_type: image
-      url: 'https://i.loli.net/2021/12/02/Q5siGbTMVZe8Dm7.jpg'
+      url: 'https://i.loli.net/2021/12/03/MS4LKzTyd5WCc1X.jpg'
 
   - type: url
     rules:
