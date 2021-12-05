@@ -109,6 +109,7 @@ class Msg(object):
         url_list = [
             'https://mirror.ghproxy.com/https://raw.githubusercontent.com/wuye999/myScripts/main/sendNotify.py',
             'https://cdn.jsdelivr.net/gh/wuye999/myScripts@main/sendNotify.py',
+            'https://raw.fastgit.org/wuye999/myScripts/main/sendNotify.py',
             'https://raw.githubusercontent.com/wuye999/myScripts/main/sendNotify.py',
         ]
         for e,url in enumerate(url_list):
@@ -228,6 +229,7 @@ def spring_reward_list(cookie):
                 prizeBaseId=_items['prizeBaseId']
                 if prizeType == 4:
                     msg('尝试微信提现')
+                    time.sleep(1.2)
                     wecat(cookie,amountid,poolBaseId,prizeGroupId,prizeBaseId)
         else:
             msg(f'获取数据失败\n{res}\n')
