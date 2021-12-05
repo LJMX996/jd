@@ -119,7 +119,7 @@ let GOTIFY_PRIORITY = 0;
  */
 let PushErrorTime = 0;
 let strTitle = "";
-let ShowRemarkType = "1";
+let ShowRemarkType = "3";
 let Notify_NoCKFalse = "false";
 let Notify_NoLoginSuccess = "false";
 let UseGroupNotify = 1;
