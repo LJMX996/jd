@@ -23,7 +23,7 @@ replies:
       - 上车
       - 有车吗
       - 有车上吗
-    content: 47.100.44.200:9999
+    content: http://47.100.44.200:9999
 
   - type: url
     rules:
