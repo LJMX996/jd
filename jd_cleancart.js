@@ -1,6 +1,6 @@
 /*
 #清空购物车
-20 1-23/4 * * * jd_cleancart.js, tag=清空购物车
+20 11,23 * * * jd_cleancart.js, tag=清空购物车
  */
 const $ = new Env('清空购物车');
 //Node.js用户请在jdCookie.js处填写京东ck;
