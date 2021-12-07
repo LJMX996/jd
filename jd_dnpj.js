@@ -24,7 +24,7 @@ if ($.isNode()) {
   cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
 
-let guaunknownTask_addSku = "false"
+let guaunknownTask_addSku = "true"
 guaunknownTask_addSku = $.isNode() ? (process.env.guaunknownTask_addSku1 ? process.env.guaunknownTask_addSku1 : `${guaunknownTask_addSku}`) : ($.getdata('guaunknownTask_addSku1') ? $.getdata('guaunknownTask_addSku1') : `${guaunknownTask_addSku}`);
 guaunknownTask_addSku = $.isNode() ? (process.env.guaunknownTask_addSku_All ? process.env.guaunknownTask_addSku_All : `${guaunknownTask_addSku}`) : ($.getdata('guaunknownTask_addSku_All') ? $.getdata('guaunknownTask_addSku_All') : `${guaunknownTask_addSku}`);
 allMessage = ""
