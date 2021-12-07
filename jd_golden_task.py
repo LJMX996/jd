@@ -3,7 +3,10 @@ cron: 5 12,18 * * * jd_golden_task.py
 new Env('金榜年终奖');
 入口: 18:/#L0UqX8PSJNouJN%ヤ﹎壹起祛【京東】，复制全部内容，打开京东App，即可为我助力，领大额红包！一起来参与领1212金榜年终奖吧！
 功能：完成任务，互助, 开红包
+环境变量 jd_golden_yearendBonus_runtask，是否做任务
+export jd_golden_yearendBonus_runtask="yes"       # 是否做任务，yes则做，no则不做任务，直接助力开红包,默认yes
 账号1助力作者，其余账号按顺序内部互助
+由于每个人只有3个助力次数，所以只助力前三个助力码
 青龙拉取命令：ql raw https://raw.githubusercontent.com/wuye999/myScripts/main/jd/jd_golden_yearendBonus.py
 2021/12/06 22:30
 '''
@@ -20,6 +23,41 @@ requests.packages.urllib3.disable_warnings()
 
 
 run_send='no'              # yes或no, yes则启用通知推送服务
+jd_golden_yearendBonus_runtask="yes"       # 是否做任务，yes则做，no则不做任务，直接助力开红包,默认yes
+
+
+# 读取环境变量
+def get_env(env):
+    try:
+        if env in os.environ:
+            a=os.environ[env]
+        elif '/ql' in os.path.abspath(os.path.dirname(__file__)):
+            try:
+                a=v4_env(env,'/ql/config/config.sh')
+            except:
+                a=eval(env)
+        elif '/jd' in os.path.abspath(os.path.dirname(__file__)):
+            try:
+                a=v4_env(env,'/jd/config/config.sh')
+            except:
+                a=eval(env)
+        else:
+            a=eval(env)
+    except:
+        a=''
+    return a
+
+# v4
+def v4_env(env,paths):
+    b=re.compile(r'(?:export )?'+env+r' ?= ?[\"\'](.*?)[\"\']', re.I)
+    with open(paths, 'r') as f:
+        for line in f.readlines():
+            try:
+                c=b.match(line).group(1)
+                break
+            except:
+                pass
+    return c 
 
 
 # 获取pin
@@ -170,41 +208,42 @@ def harmony_collectScore(task,cookie):
     if taskName=='好友助力':
         helpcode(task,cookie)
         return
-    shoppingActivityVos=task.get('shoppingActivityVos',None)
-    if not shoppingActivityVos: 
-        shoppingActivityVos=task.get('productInfoVos',None)
-    for shoppingActivity in shoppingActivityVos:
-        try:
-            title=shoppingActivity.get('title',None)
+    if get_env("jd_golden_yearendBonus_runtask")=='yes':
+        shoppingActivityVos=task.get('shoppingActivityVos',None)
+        if not shoppingActivityVos: 
+            shoppingActivityVos=task.get('productInfoVos',None)
+        for shoppingActivity in shoppingActivityVos:
             try:
-                advId=shoppingActivity['advId']
-            except:
-                advId=shoppingActivity['itemId']
-            taskToken=shoppingActivity['taskToken']
-            body='functionId=harmony_collectScore&body={"appId":"1EFVXxg","taskToken":"'+str(taskToken)+'","taskId":'+str(taskId)+',"itemId":"'+str(advId)+'","actionType":"1"}&client=wh5&clientVersion=1.0.0'
-        except Exception as e:
-            msg('获取任务数据失败')
-            msg(e)
-            continue
-        msg(f'开始 {title}')
-        msg('等待3.2s')
-        res=taskPostUrl(body, cookie)
-        if res['code']==0:
-            msg(res['data'].get('bizMsg',None))
-            if res['data'].get('bizMsg',None)=='任务已完成':
+                title=shoppingActivity.get('title',None)
+                try:
+                    advId=shoppingActivity['advId']
+                except:
+                    advId=shoppingActivity['itemId']
+                taskToken=shoppingActivity['taskToken']
+                body='functionId=harmony_collectScore&body={"appId":"1EFVXxg","taskToken":"'+str(taskToken)+'","taskId":'+str(taskId)+',"itemId":"'+str(advId)+'","actionType":"1"}&client=wh5&clientVersion=1.0.0'
+            except Exception as e:
+                msg('获取任务数据失败')
+                msg(e)
                 continue
-        else:
-            msg('任务失败')
-        msg('等待3.2s')
-        time.sleep(3.2)
-        body='functionId=harmony_collectScore&body={"appId":"1EFVXxg","taskToken":"'+str(taskToken)+'","taskId":'+str(taskId)+',"itemId":"'+str(advId)+'","actionType":0}&client=wh5&clientVersion=1.0.0'
-        res=taskPostUrl(body, cookie)
-        if res['code']==0:
-            msg(res['data'].get('bizMsg',None))
-        else:
-            msg('任务失败')
-    splitHongbao_getLotteryResult(taskId,cookie)
-    pass
+            msg(f'开始 {title}')
+            msg('等待3.2s')
+            res=taskPostUrl(body, cookie)
+            if res['code']==0:
+                msg(res['data'].get('bizMsg',None))
+                if res['data'].get('bizMsg',None)=='任务已完成':
+                    continue
+            else:
+                msg('任务失败')
+            msg('等待3.2s')
+            time.sleep(3.2)
+            body='functionId=harmony_collectScore&body={"appId":"1EFVXxg","taskToken":"'+str(taskToken)+'","taskId":'+str(taskId)+',"itemId":"'+str(advId)+'","actionType":0}&client=wh5&clientVersion=1.0.0'
+            res=taskPostUrl(body, cookie)
+            if res['code']==0:
+                msg(res['data'].get('bizMsg',None))
+            else:
+                msg('任务失败')
+        splitHongbao_getLotteryResult(taskId,cookie)
+        pass
 
 
 # 开任务红包
@@ -244,8 +283,12 @@ def splitHongbao_getHomeData_helpcode(cookie,inviteCode):
         msg(f"{get_pin(cookie)}去助力 {res['data']['result']['guestInfo']['nickName']}")
         msg(res['data'].get('bizMsg',None))
     except Exception as e:
-        msg(f"{get_pin(cookie)}去助力 {inviteCode}")
-        msg(res['data'].get('bizMsg',None))
+        try:
+            msg(f"{get_pin(cookie)}去助力 {inviteCode}")
+            msg(res['data'].get('bizMsg',None))
+        except:
+            msg(f"{get_pin(cookie)}去助力 {inviteCode}")
+            msg('助力失败')
     body='functionId=harmony_collectScore&body={"appId":"1EFVXxg","taskToken":"'+inviteCode+'","taskId":6,"actionType":0}&client=wh5&clientVersion=1.0.0'
     res=taskPostUrl(body, cookie)
 
