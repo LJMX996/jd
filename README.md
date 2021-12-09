@@ -79,7 +79,7 @@ services:
 
 > * 名称:更新仓库
 > * 定时:25 * * * *
-> * 命令:task /ql/repo/LJMX996_jd_aaron/pull.sh
+> * 命令:ql raw https://raw.githubusercontent.com/LJMX996/jd/aaron/pull.sh && task raw_aaron_pull.sh
 
 > * 名称:更新仓库备用
 > * 定时:10,40 * * * *
