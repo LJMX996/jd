@@ -632,7 +632,13 @@ replies:
       url: 'https://api.nyan.xyz/httpapi/sexphoto/'
       get: data.url.[0]
 
-
+  - type: url
+    rules:
+      - 瑟土
+    request:
+      response_type: image
+      url: 'https://api.nyan.xyz/httpapi/sexphoto/?r18=true'
+      get: data.url.[0]
 
   - type: url
     rules:
