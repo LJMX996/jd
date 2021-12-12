@@ -1,7 +1,7 @@
 /*
 京喜财富岛
 40 8-20/4 * * * jd_cfd.js
-更新时间：2021-7-13
+更新時間：2021-9-11
 活动入口：京喜APP-我的-京喜财富岛
 
 
@@ -46,8 +46,8 @@ $.appId = 10032;
 
 !(async () => {
   if (!cookiesArr[0]) {
-    $.msg('【京东账号一】宠汪汪积分兑换奖品失败', '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
-    return
+    $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
+    return;
   }
   console.log(`\n
 想要我的财富吗
