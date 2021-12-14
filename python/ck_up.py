@@ -193,7 +193,8 @@ def getToken(wskey):
         tokenKey = res_json['tokenKey']
     except:
         logger.info("WSKEY转换接口出错, 请稍后尝试, 脚本退出")
-        sys.exit(1)
+        tokenKey = '转换出错'
+        return appjmp(wskey, tokenKey)
     else:
         return appjmp(wskey, tokenKey)
 
