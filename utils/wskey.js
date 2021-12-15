@@ -23,11 +23,11 @@ const $ = new Env("wskey")
 
 let cookie = $request.headers.Cookie
 let wskey = cookie.match(/(wskey=[^;]*)/)[1]
-let pin = cookie.match(/(pin=[^;]*)/)[1]
+
 console.log('================')
-console.log(`${pin};${wskey};`)
+console.log(`${wskey};`)
 console.log('================')
-$.msg(`${pin};`, "的wskey获取成功！")
+$.msg("wskey获取成功！")
 
 
 
