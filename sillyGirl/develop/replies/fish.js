@@ -15,9 +15,7 @@ function main() {
 	headInfo();
 	weekend();
 	festival('元旦', 1, 1);
-	festival('春节', 2, 1);
-	festival('五一', 5, 1);
-	festival('端午', 6, 3);
+	festival('清明', 4, 4);
 	festival('国庆', 10, 1);
 	lastInfo();
 	sendText(msg)
@@ -61,7 +59,7 @@ function main() {
 	var info = "";
 	var newfestival = new Date(year + 1, fmonth , fday );
 	var endDate = Date.parse(newfestival);
-	var days = Math.round((endDate - startDate - 1) / (1 * 24 * 60 * 60 * 1000));
+	var days = Math.round((endDate - startDate) / (1 * 24 * 60 * 60 * 1000));
 	if (month == fmonth && day == fday) {
 		info = "今天就是"+chinese+"节，好好享受！\n"
 	} else {
