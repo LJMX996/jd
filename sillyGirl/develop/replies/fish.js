@@ -5,7 +5,7 @@
  */
 var fishMan = new Date();
 var year = fishMan.getFullYear();
-var month = fishMan.getMonth();
+var month = fishMan.getMonth()+1;
 var day = fishMan.getDate();
 var hour = fishMan.getHours();
 var item = fishMan.getDay()
@@ -61,7 +61,7 @@ function main() {
 	var info = "";
 	var newfestival = new Date(year + 1, fmonth , fday );
 	var endDate = Date.parse(newfestival);
-	var days = Math.round((endDate - startDate) / (1 * 24 * 60 * 60 * 1000));
+	var days = Math.round((endDate - startDate - 1) / (1 * 24 * 60 * 60 * 1000));
 	if (month == fmonth && day == fday) {
 		info = "今天就是"+chinese+"节，好好享受！\n"
 	} else {
