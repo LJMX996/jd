@@ -5,7 +5,7 @@
  */
 var fishMan = new Date();
 var year = fishMan.getFullYear();
-var month = fishMan.getMonth()+1;
+var month = fishMan.getMonth();
 var day = fishMan.getDate();
 var hour = fishMan.getHours();
 var item = fishMan.getDay()
