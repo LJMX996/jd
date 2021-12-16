@@ -5,11 +5,11 @@ function main() {
     var userID = GetUserID()
     var time = (60) //禁言的时间 单位/秒
     var qq = encodeURI(param(1))
-    if (qq == 机器人QQ号) {
+    if (qq == 2383180544) {
         sendText("查我？拉出去毙了") //这里设置机器人QQ、触发限制查询机器人QQ
         return
     }
-    if (qq == 管理员QQ号) {
+    if (qq == 2417964144) {
         sendText("不能查群主，禁言一分钟作为惩罚") //这里设置群主QQ、触发限制查询群主、并触发禁言1分钟
         sleep(800)
         GroupBan(userID, time)
