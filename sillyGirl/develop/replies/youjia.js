@@ -1,6 +1,6 @@
 //[rule: ?油价 ] 例北京油价
 
-var key=""//天行数据申请的key网站https://www.tianapi.com/
+var key="51c97f482dec8bbdccb2fb79d80a53bf"//天行数据申请的key网站https://www.tianapi.com/
 function main() {
     var address = param(1) //匹配规则第一个问号的值
     var content = request({ // 内置http请求函数
