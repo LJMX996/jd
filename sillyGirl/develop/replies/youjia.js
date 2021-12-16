@@ -4,7 +4,7 @@ var key="51c97f482dec8bbdccb2fb79d80a53bf"//天行数据申请的key网站https:
 function main() {
     var add = param(1) //匹配规则第一个问号的值
     var content = request({ // 内置http请求函数
-        "url": "http://api.tianapi.com/oilprice/index?key=51c97f482dec8bbdccb2fb79d80a53bf&code=wti&address="+add+"" //请求链接
+        "url": "http://api.tianapi.com/oilprice/index?key=51c97f482dec8bbdccb2fb79d80a53bf&code=wti&address={{1}}" //请求链接
         "method": "get", //请求方法
         "dataType": "json", //这里接口直接返回文本，所以不需要指定json类型数据
     })
