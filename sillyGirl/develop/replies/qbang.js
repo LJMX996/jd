@@ -24,7 +24,7 @@ function main() {
     var lol = (data.lol)
     var wb = (data.wb)
     var tx = "数据来自互联网，已经是很旧的数据了，仅供参考！请勿滥用"
-    sendText("手机号："+phone+"\n归属地："+phonediqu+"\nLOL："+lol+"\n微博："+wb"\n提醒："+wb)
+    sendText("手机号："+phone+"\n归属地："+phonediqu+"\nLOL："+lol+"\n微博："+wb+"\n提醒："+tx)
     
        
 }
