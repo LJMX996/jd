@@ -1,12 +1,6 @@
 /* 
 cron 14 10 * * * https://raw.githubusercontent.com/smiek2121/scripts/master/jd_sign_graphics.js
-只支持nodejs环境
-需要安装依赖 
-npm i png-js 或者 npm i png-js -S
 
-如果 read ECONNRESET 错误 可以试试
-环境变量 JOY_HOST
-修改域名 https://jdjoy.jd.com 可以改成ip https://49.7.27.236
 */
 
 // const validator = require('./JDJRValidator_Pure.js');
@@ -109,7 +103,7 @@ async function signRun() {
     }else{
       errorNum++;
     }
-    let time = Math.random() * 5000 + 15000
+    let time = Math.random() * 4000 + 16000
     console.log(`等待${(time/1000).toFixed(3)}秒`)
     await $.wait(parseInt(time, 10))
   }
@@ -137,7 +131,7 @@ function Login(i) {
                 $.appId = 'b342e';
                 await requestAlgo();
                 await Sign(i,1)
-                let time = Math.random() * 5000 + 15000
+                let time = Math.random() * 4000 + 16000
                 console.log(`等待${(time/1000).toFixed(3)}秒`)
                 await $.wait(parseInt(time, 10))
               } else if (data.hasSign === true) {
