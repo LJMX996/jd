@@ -642,6 +642,14 @@ replies:
 
   - type: url
     rules:
+      - 10张土
+    request:
+      response_type: image
+      url: 'https://api.nyan.xyz/httpapi/sexphoto/?r18=true&num=10'
+      get: data.url.[0]
+      
+  - type: url
+    rules:
       - 精选短视频1
     request:
       response_type: text
