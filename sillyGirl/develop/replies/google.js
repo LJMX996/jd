@@ -7,13 +7,13 @@ function main() {
      var data = request({
           method: 'GET',
           url: 'https://google-search3.p.rapidapi.com/api/v1/search/q=' + encodeURI(keyword) + '&num=100',
-          useProxy: true,//使用代理，自动调用tg代理
+          useProxy: false,//使用代理，自动调用tg代理
           dataType: "json",
           headers: {
                'x-user-agent': 'desktop',
                'x-proxy-location': 'US',
                'x-rapidapi-host': 'google-search3.p.rapidapi.com',
-               'x-rapidapi-key': 'cd8518b54amsh4f14b15d452c84ap18022cjsncec7f3f236a1'//需要自己去申请，https://rapidapi.com/apigeek/api/google-search3/
+               'x-rapidapi-key': '8d40762ea9mshf4a385667fa7934p121275jsn5894213ce483'//需要自己去申请，https://rapidapi.com/apigeek/api/google-search3/
           }
 
      })
