@@ -97,8 +97,8 @@ if ($.isNode()) {
 		doCheckJxBeans = process.env.BEANCHANGE_ExJxBeans;	
 	}
 }
-if ($.isNode() && process.env.BEANCHANGE_PERSENT) {
-	intPerSent = parseInt(process.env.BEANCHANGE_PERSENT);
+if ($.isNode() && BEANCHANGE_PERSENT) {
+	intPerSent = parseInt(BEANCHANGE_PERSENT);
 	console.log(`检测到设定了分段通知:` + intPerSent);
 }
 
