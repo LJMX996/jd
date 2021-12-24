@@ -192,6 +192,15 @@ if ($.isNode() && process.env.CHECKCK_ALLNOTIFY) {
             if ($.NoReturn) {
                 console.log(`接口1检测失败，尝试使用接口2....\n`);
                 await isLoginByX1a0He();
+                
+                console.log(`成功获取到别名: ${$.nickName},Pass!\n`);
+                    
+                    if(envs[i].remarks === null || envs[i].remarks ==="")
+                        {
+                        await updateEnv(envs[i].value,envs[i]._id,$.nickName)
+                        console.log(`成功更新别名进备注: ${$.nickName},Pass!\n`);
+                        }
+
             } else {
                 if ($.isLogin) {
                     if (!$.nickName) {
@@ -199,11 +208,6 @@ if ($.isNode() && process.env.CHECKCK_ALLNOTIFY) {
                         await isLoginByX1a0He();
                     } else {
                         console.log(`成功获取到别名: ${$.nickName},Pass!\n`);
-                if(envs[i].remarks === null || envs[i].remarks ==="")
-                        {
-                        await updateEnv(envs[i].value,envs[i]._id,$.nickName)
-                        console.log(`成功更新别名进备注: ${$.nickName},Pass!\n`);
-                        }
                     }
                 }
             }
