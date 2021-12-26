@@ -199,7 +199,7 @@ if ($.isNode() && process.env.CHECKCK_ALLNOTIFY) {
                         await isLoginByX1a0He();
                     } else {
                         console.log(`成功获取到别名: ${$.nickName},Pass!\n`);
-                if(envs[i].remarks == null || envs[i].remarks =="" || envs[i].remarks ==="未知")
+                if(envs[i].remarks == null || envs[i].remarks =="" || envs[i].remarks == "未知")
                         {
                         await updateEnv(envs[i].value,envs[i]._id,$.nickName);
                         console.log(`成功更新别名进备注: ${$.nickName},Pass!\n`);
