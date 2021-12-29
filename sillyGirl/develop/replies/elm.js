@@ -1,5 +1,4 @@
 
-// [cron: 40 11 * * *]
 var ele = "https://i.loli.net/2021/12/03/MS4LKzTyd5WCc1X.jpg";
 //图文消息
 var content = image(ele) + "\n到饭点啦，微信扫码领饭票了！！！";
