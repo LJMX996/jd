@@ -2,6 +2,12 @@
 JoyJd任务脚本
 已支持IOS双京东账号,Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
+jd_joyjd_open通用ID任务，多个活动用@连接，任务连接https://jdjoy.jd.com/module/task/v2/doTask
+export comm_activityIDList="af2b3d56e22d43afa0c50622c45ca2a3"  
+export comm_endTimeList="1639756800000"
+export comm_tasknameList="京东工业品抽奖"
+
+即时任务，无需cron,短期或者长期请参考活动规则设置cron
 ============Quantumultx===============
 [task_local]
 #JoyJd任务脚本
@@ -51,7 +57,6 @@ if ($.isNode()) {
     if (!activityIDList) {
         $.log(`没有通用ID任务，尝试获取远程`);
         let data = await getData("https://gitee.com/KingRan521/JD-Scripts/raw/master/shareCodes/joyjd_open.json")
-        }
         if (data.activityIDList && data.activityIDList.length) {
             $.log(`获取到远程且有数据`);
             activityIDList = data.activityIDList.join('@')
