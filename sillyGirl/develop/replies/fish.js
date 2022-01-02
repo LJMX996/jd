@@ -61,7 +61,7 @@ function weekend() {
 function festival(chinese, fmonth, fday) {
      var startDate = Date.parse(fishMan);
      var info = "";
-     var newfestival = new Date(year + 1, fmonth - 1, fday);
+     var newfestival = new Date(year, fmonth - 1, fday);
      var endDate = Date.parse(newfestival);
      var days = Math.round((endDate - startDate) / (1 * 24 * 60 * 60 * 1000));
      if (month == fmonth && day == fday) {
