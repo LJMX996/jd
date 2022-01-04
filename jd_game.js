@@ -1,9 +1,25 @@
 /*
-https://lzkj-isv.isvjcloud.com/wxgame/activity/8530275?activityId=e5cff304b4b545a98ba6130ceb4027d2
-爆裂豆豆游戏
+通用游戏任务
 活动ID环境变量 WXGAME_ACT_ID
+https://lzkj-isv.isvjcloud.com/wxgame/activity/8530275?activityId=xxxxxx
+
+即时任务，无需cron,短期或者长期请参考活动规则设置cron
+============Quantumultx===============
+[task_local]
+#通用游戏任务
+31 1 * * * https://raw.githubusercontent.com/KingRan/JDJB/main/jd_game.js, tag=通用游戏任务, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+
+================Loon==============
+[Script]
+cron "31 1 * * *" script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_game.js,tag=通用游戏任务
+
+===============Surge=================
+通用游戏任务 = type=cron,cronexp="31 1 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_game.js
+
+============小火箭=========
+通用游戏任务 = type=cron,script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_game.js, cronexpr="31 1 * * *", timeout=3600, enable=true
 */
-const $ = new Env('打豆豆');
+const $ = new Env('通用游戏任务');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
 let cookiesArr = [], cookie = '', message = '';
@@ -34,6 +50,18 @@ if (process.env.WXGAME_ACT_ID && process.env.WXGAME_ACT_ID != "") {
         $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
         return;
     }
+    if (!wxgameActivityId) {
+        $.log(`没有通用ID任务，尝试获取远程`);
+        let data = await getData("https://gitee.com/KingRan521/JD-Scripts/raw/master/shareCodes/jd_game.json")
+        if (data.wxgameActivityId && data.wxgameActivityId.length) {
+            $.log(`获取到远程且有数据`);
+            wxgameActivityId = data.wxgameActivityId.join('@')
+        }else{
+            $.log(`获取失败或当前无远程数据`);
+            return
+        }
+    }
+    console.log(`通用ID任务就位，准备开始薅豆`);
     for (let i = 0; i < cookiesArr.length; i++) {
         if (cookiesArr[i]) {
             cookie = cookiesArr[i]
@@ -421,6 +449,29 @@ function getUUID(format = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', UpperCase 
         }
         return uuid;
     });
+}
+function getData(url) {
+  return new Promise(async resolve => {
+    const options = {
+      url: `${url}?${new Date()}`, "timeout": 10000, headers: {
+        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
+      }
+    };
+    $.get(options, async (err, resp, data) => {
+      try {
+        if (err) {
+        } else {
+          if (data) data = JSON.parse(data)
+        }
+      } catch (e) {
+        // $.logErr(e, resp)
+      } finally {
+        resolve(data);
+      }
+    })
+    await $.wait(10000)
+    resolve();
+  })
 }
 function checkCookie() {
     const options = {
