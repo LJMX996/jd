@@ -21,36 +21,9 @@ if ($.isNode()) {
   cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
-let inviteCodes = [
 
-'RtGKopT-F2LfA_7eb71omiWNcu9b8Nvl91kpR3xLLLoB5GEz',
 
-'RtGKu7jsI2j6K-r9Sq5Amqdna1eQxqHek8v9VhzyzRZhoIqR',
-
-'RtGKnbXCMHTaAvb9Zb11mkP6SK9lt5_0ZKMW_WlW0K3jYA85',
-
-]
-/*
-let inviteCodes = [
-'RtGKr7PCNX7AOPrBbZRqmvz_AZJEkdMO6lfGmWer2tcdvXXv',
-
-'HYDlze6kSAqjd4bQT4t2mlbIMAVhvMWMl-0LHPCjijGpmb8L',
-
-'RtGKla_gMlzUD-DBaIdymmHu7G0LnxgisCHRaTgngdpeT4_G',
-
-]
-*/
-
-//RtGKz-igRwykf4OeFtEx3wklZHyH97m3W_L5b2xLLNYYtapwag    刘1
-//RtGKubL7K2DfI__FfoZymojXWnQBoZ-fB02oYpqQZLUCVKnl    刘3
-//RtGKzO2nSQOrLITMRIdhgEHIAChFPoWSYqLE8I14tLgCsHhU2Q   陆
-//RtGKzeiiSV6ge4GTQYU61jdd6CaWnTpfX7kGvsCMRpLJ6ad78g    宋
-//RtGKzuXxRwP1fNDLQdFnh2-oFmIeqpoWb1gMKAiuOrfooj1CTA    姐
-//HYDlze6kSAqjd4bQT4t2mlbIMAVhvMWMl-0LHPCjijGpmb8L   周
-//RtGKzuStFAyndoaaQYEzgoJXjoSTaIIduvsuKxsaEp7IPAHrBg    李1
-//RtGKzrqkRAKrfoOdRtE00CGcm0bee0rkI8s-DBe3DIHXIUxZbw     程1
-//RtGKze_2RFiheoTOEtNl37UCCoFYYqG6Ntit7s2LFqsHjvTm9Q    李2
-//RtGKz-WnSAukfNWaRtcyhTcSqrjNP5kAUihEHKeBufKZHhUq1A   程2
+let inviteCodes = ['-ryUXa0Pbm1LMRWSGYiXocgxvQ9_3cUr','-ryUKPJTDA4_Pm6bI4mEu1jiZOdTthk','-ryUXqgIYGJEYhLAS97H_phMNj6uEwgU']
 
 
 $.shareCodesArr = [];
@@ -168,9 +141,9 @@ function taskPostUrl(functionId,body) {
   }
 }
 function getInviteId() {
-  let body = {"lbsCity":"16","realLbsCity":"1315","inviteId":'',"headImg":"","userName":"","taskChannel":"1"}
+  let body = {"lbsCity":"13","realLbsCity":"1000","inviteId":'',"headImg":"","userName":"","taskChannel":"1"}
   return new Promise((resolve) => {
-    $.post(taskPostUrl("city_getHomeData",body), async (err, resp, data) => {
+    $.post(taskPostUrl("city_getHomeDatav1",body), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -192,7 +165,7 @@ function getInviteId() {
                 }
               }
             } else {
-              console.log(`\n\ncity_getHomeData失败:${JSON.stringify(data)}\n`)
+              console.log(`\n\ncity_getHomeDatav1失败:${JSON.stringify(data)}\n`)
             }
           }
         }
@@ -205,9 +178,9 @@ function getInviteId() {
   })
 }
 function getInfo(inviteId, flag = false) {
-  let body = {"lbsCity":"16","realLbsCity":"1315","inviteId":inviteId,"headImg":"","userName":"","taskChannel":"1"}
+  let body = {"lbsCity":"13","realLbsCity":"1000","inviteId":inviteId,"headImg":"","userName":"","taskChannel":"1"}
   return new Promise((resolve) => {
-    $.post(taskPostUrl("city_getHomeData",body), async (err, resp, data) => {
+    $.post(taskPostUrl("city_getHomeDatav1",body), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -252,7 +225,7 @@ function getInfo(inviteId, flag = false) {
                 }
               }
             } else {
-              console.log(`\n\ncity_getHomeData失败:${JSON.stringify(data)}\n`)
+              console.log(`\n\ncity_getHomeDatav1失败:${JSON.stringify(data)}\n`)
             }
           }
         }
@@ -341,11 +314,11 @@ function city_lotteryAward() {
 function readShareCode() {
   console.log(`开始`)
   return new Promise(async resolve => {
-    $.get({url: `https://jd.sm11.tk/city`, 'timeout': 10000}, (err, resp, data) => {
+    $.get({url: ``, 'timeout': 10}, (err, resp, data) => {
       try {
         if (err) {
-          //console.log(`${JSON.stringify(err)}`)
-          console.log(`去尼玛的助力池`)
+          console.log(`${JSON.stringify(err)}`)
+          console.log(`去你娘的助力池，傻逼`)
 
         } else {
           if (data) {
@@ -372,10 +345,10 @@ function shareCodesFormat() {
     }
     if($.index != 0) $.newShareCodes = [...inviteCodes]
     try{
-      const readShareCodeRes = await readShareCode();
-      if (readShareCodeRes && readShareCodeRes.code != 200) {
-        $.newShareCodes = [...new Set([...$.newShareCodes/*, ...(readShareCodeRes.data || [])*/])];
-      }
+      // const readShareCodeRes = await readShareCode();
+      // if (readShareCodeRes && readShareCodeRes.code != 200) {
+      //   $.newShareCodes = [...new Set([...$.newShareCodes/*, ...(readShareCodeRes.data || [])*/])];
+      // }
     } catch (e) {
       console.log(e);
     }
