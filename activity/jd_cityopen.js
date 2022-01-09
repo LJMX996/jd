@@ -36,7 +36,7 @@ $.shareCodesArr = [];
       $.isLogin = true;
       $.nickName = '';
       message = '';
-
+      console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
       await getInfo('',true);
 
   }
