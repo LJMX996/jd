@@ -1,5 +1,5 @@
 /*
-
+1 0 * * * jd_city.js
  */
 const $ = new Env('城城领现金');
 const notify = $.isNode() ? require('./sendNotify') : '';
