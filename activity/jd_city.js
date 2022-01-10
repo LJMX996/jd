@@ -23,7 +23,7 @@ if ($.isNode()) {
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 
 
-let inviteCodes = ['-ryUXa0Pbm1LMRWSGYiXocgxvQ9_3cUr','-ryUKPJTDA4_Pm6bI4mEu1jiZOdTthk','-ryUXqgIYGJEYhLAS97H_phMNj6uEwgU']
+let inviteCodes = ['dGVXjSSGsuzzt5pen25IIiZPZrvgLUhQme7MIAE','-ryUM9RWMAw_Hm-AMrKeu3Ll-0hAT3E','oe37XK4Mb2RDaheOEoSAu_SytuO9G_o']
 
 
 $.shareCodesArr = [];
