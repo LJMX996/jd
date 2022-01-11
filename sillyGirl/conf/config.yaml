@@ -243,7 +243,7 @@ replies:
     request:
         #纯文本
         response_type: image
-        url: https://api.womc.cn/api/qrcode/api.php?text={{1}}
+        url: https://api.qrserver.com/v1/create-qr-code/?size=150×150&data={{1}}
       
   - type: url
     rules:
@@ -707,7 +707,7 @@ replies:
       - 百度收录 (.*)
     request:
       response_type: json
-      url: https://api.qrserver.com/v1/create-qr-code/?size=150×150&data={{1}}
+      url: https://api.womc.cn/api/shoulu/api.php?domain={{1}}
       get: data
   - type: url
     rules:
