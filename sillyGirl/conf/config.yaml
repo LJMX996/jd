@@ -707,7 +707,7 @@ replies:
       - 百度收录 (.*)
     request:
       response_type: json
-      url: https://api.womc.cn/api/shoulu/api.php?domain={{1}}
+      url: https://api.qrserver.com/v1/create-qr-code/?size=150×150&data={{1}}
       get: data
   - type: url
     rules:
