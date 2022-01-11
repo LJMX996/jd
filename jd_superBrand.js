@@ -1,7 +1,7 @@
 /**
  特务Z，默认选择左边战队
  脚本没有自动开卡，会尝试领取开卡奖励
-55 4,11,22 * * * jd_superBrand.js
+35 11,22 * * * jd_superBrand.js
  一天要跑2次
  */
 const $ = new Env('特务Z');
