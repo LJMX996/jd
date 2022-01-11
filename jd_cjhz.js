@@ -71,16 +71,20 @@ const JD_API_HOST = `https://api.m.jd.com/client.action`;
                     await helpShare({ "taskId": $.helpId, "linkId": "Ll3Qb2mhCXSEWxruhv8qIw", "encryptPin": $.shareCoseList[y] });
                     await $.wait(1000);
                 }
-      }
-	  
-            //如果有多余机会给我助力
-            let authorCode = 'sb';
-            for (let y = 0; y < $.shareCoseList.length; y++){
-                console.log(`京东账号${$.index} ${$.UserName || $.UserName}去助力${authorCode}`)
-                await helpShare({"taskId":$.helpId,"linkId":"DQFdr1ttvWWzn0wsQ7JDZQ","encryptPin":$.authorCode});
-                await $.wait(1000);
             }
-            
+        }
+    }
+    for (let i = 0; i < cookiesArr.length; i++) {
+        cookie = cookiesArr[i];
+        if (cookie) {
+            $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
+            $.index = i + 1;
+            $.isLogin = true;
+            $.nickName = '';
+            if (!$.isLogin) {
+                $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
+                continue
+            }            
             //开箱
             console.log(`京东账号${$.index}去开箱`)
             for (let y = 0; y < $.lotteryNumber; y++) {
@@ -95,6 +99,7 @@ const JD_API_HOST = `https://api.m.jd.com/client.action`;
     .finally(() => $.done())
 
 async function main() {
+    $.unLogin = false
     await superboxSupBoxHomePage({ "taskId": "", "linkId": "Ll3Qb2mhCXSEWxruhv8qIw", "encryptPin": "" })
     console.log(`【京东账号${$.index}】${$.nickName || $.UserName}互助码：${$.encryptPin}`)
     await $.wait(1000);
@@ -108,14 +113,17 @@ async function main() {
             };
             if (["BROWSE_SHOP"].includes($.oneTask.taskType) && $.oneTask.taskFinished === false) {
                 await apTaskDetail({ "taskId": $.oneTask.id, "taskType": $.oneTask.taskType, "channel": 4, "linkId": "Ll3Qb2mhCXSEWxruhv8qIw", "encryptPin": "7pcfSWHrAG9MKu3RKLl127VL5L4aIE1sZ1eRRdphpl8" });
+                if ($.unLogin) return
                 await $.wait(1000)
-                for (let y = 0; y < ($.doList.status.finishNeed - $.doList.status.userFinishedTimes); y++) {
-                    $.startList = $.doList.taskItemList[y];
-                    $.itemName = $.doList.taskItemList[y].itemName;
-                    console.log(`去浏览${$.itemName}`)
-                    await apDoTask({ "taskId": $.allList[i].id, "taskType": $.allList[i].taskType, "channel": 4, "itemId": $.startList.itemId, "linkId": "Ll3Qb2mhCXSEWxruhv8qIw", "encryptPin": "7pcfSWHrAG9MKu3RKLl127VL5L4aIE1sZ1eRRdphpl8" })
-                    await $.wait(1000)
-                }
+                if ($.doList && $.doList.status) {
+                    for (let y = 0; y < ($.doList.status.finishNeed - $.doList.status.userFinishedTimes); y++) {
+                        $.startList = $.doList.taskItemList[y];
+                        $.itemName = $.doList.taskItemList[y].itemName;
+                        console.log(`去浏览${$.itemName}`)
+                        await apDoTask({ "taskId": $.allList[i].id, "taskType": $.allList[i].taskType, "channel": 4, "itemId": $.startList.itemId, "linkId": "Ll3Qb2mhCXSEWxruhv8qIw", "encryptPin": "7pcfSWHrAG9MKu3RKLl127VL5L4aIE1sZ1eRRdphpl8" })
+                        await $.wait(2000)
+                    }
+                } else return
             }
         }
     } else {
@@ -179,28 +187,31 @@ function apTaskList(body) {
 
 //获取任务分表
 function apTaskDetail(body) {
-  return new Promise((resolve) => {
-    $.get(taskGetUrl('apTaskDetail',body), (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} apTaskDetail API请求失败，请检查网路重试`)
-        } else {
-          data = JSON.parse(data);
-          if (data.code === 0) {
-              $.doList = data.data
-              //console.log(JSON.stringify($.doList));
-          } else {
-            console.log(`apTaskDetail错误：${JSON.stringify(data)}\n`);
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp);
-      } finally {
-        resolve();
-      }
+    return new Promise((resolve) => {
+        $.get(taskGetUrl('apTaskDetail', body), (err, resp, data) => {
+            try {
+                if (err) {
+                    console.log(`${JSON.stringify(err)}`)
+                    console.log(`${$.name} apTaskDetail API请求失败，请检查网路重试`)
+                } else {
+                    data = JSON.parse(data);
+                    if (data.code === 0) {
+                        $.doList = data.data
+                        //console.log(JSON.stringify($.doList));
+                    } else {
+                        if (data.errMsg && data.errMsg == "未登录") {
+                            console.log(`账号好像失效了\n`);
+                            $.unLogin = true
+                        } else console.log(`apTaskDetail错误：${JSON.stringify(data)}\n`);
+                    }
+                }
+            } catch (e) {
+                $.logErr(e, resp);
+            } finally {
+                resolve();
+            }
+        })
     })
-  })
 }
 
 //做任务
