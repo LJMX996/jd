@@ -16,7 +16,7 @@ if (imType == "fake") {
     },{
         imType: "wx",
         groupCode: 21784132403,
-    }{
+    },{
         imType: "wx",
         groupCode: 25454884764,
     }]
