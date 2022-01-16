@@ -14,7 +14,7 @@ const querystring = require('querystring');
 const exec = require('child_process').exec;
 const $ = new Env();
 const timeout = 15000; //超时时间(单位毫秒)
-console.log("加载sendNotify，当前版本: 20220112");
+console.log("加载sendNotify，当前版本: 20220116");
 // =======================================go-cqhttp通知设置区域===========================================
 //gobot_url 填写请求地址http://127.0.0.1/send_private_msg
 //gobot_token 填写在go-cqhttp文件设置的访问密钥
@@ -122,7 +122,7 @@ let GOTIFY_PRIORITY = 0;
  */
 let PushErrorTime = 0;
 let strTitle = "";
-let ShowRemarkType = "3";
+let ShowRemarkType = "1";
 let Notify_NoCKFalse = "false";
 let Notify_NoLoginSuccess = "false";
 let UseGroupNotify = 1;
@@ -160,7 +160,7 @@ let boolneedUpdate = false;
 let strCustom = "";
 let strCustomArr = [];
 let strCustomTempArr = [];
-let Notify_CKTask = "/ql/scripts/LJMX996_jd_aaron/ck_check_up.py";
+let Notify_CKTask = "";
 let Notify_SkipText = [];
 let isLogin = false;
 if (process.env.NOTIFY_SHOWNAMETYPE) {
@@ -172,7 +172,7 @@ if (process.env.NOTIFY_SHOWNAMETYPE) {
     if (ShowRemarkType == "4")
         console.log("检测到显示备注名称，格式为: 备注");
 }
-async function sendNotify(text, desp, params = {}, author = '\n\n本通知 By LJMX996-信条',strsummary="") {
+async function sendNotify(text, desp, params = {}, author = '\n\n本通知 By ccwav Mod', strsummary = "") {
     console.log(`开始发送通知...`);
 
     try {
@@ -201,7 +201,7 @@ async function sendNotify(text, desp, params = {}, author = '\n\n本通知 By LJ
         PUSH_PLUS_USER = '';
         PUSH_PLUS_TOKEN_hxtrip = '';
         PUSH_PLUS_USER_hxtrip = '';
-        Notify_CKTask = "/ql/scripts/LJMX996_jd_aaron/ck_check_up.py";
+        Notify_CKTask = "";
         Notify_SkipText = [];
 
         //变量开关
@@ -264,7 +264,14 @@ async function sendNotify(text, desp, params = {}, author = '\n\n本通知 By LJ
                             isLogin = true;
                             await isLoginByX1a0He(temptest.value);
                             if (!isLogin) {
-                                const DisableCkBody = await DisableCk(temptest._id);
+								var tempid = 0;
+								if (temptest._id) {
+								    tempid = temptest._id;
+								}
+								if (temptest.id) {
+								    tempid =temptest.id;
+								}
+                                const DisableCkBody = await DisableCk(tempid);
                                 strPtPin = temptest.value;
                                 strPtPin = (strPtPin.match(/pt_pin=([^; ]+)(?=;?)/) && strPtPin.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
                                 var strAllNotify = "";
@@ -1500,7 +1507,7 @@ function getRemark(strRemark) {
     }
 }
 
-async function sendNotifybyWxPucher(text, desp, PtPin, author = '\n\n本通知 By LJMX996-信条', strsummary = "") {
+async function sendNotifybyWxPucher(text, desp, PtPin, author = '\n\n本通知 By ccwav Mod', strsummary = "") {
 
     try {
         var Uid = "";
