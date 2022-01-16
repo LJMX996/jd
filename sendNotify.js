@@ -14,7 +14,7 @@ const querystring = require('querystring');
 const exec = require('child_process').exec;
 const $ = new Env();
 const timeout = 15000; //超时时间(单位毫秒)
-console.log("加载sendNotify，当前版本: 20220112");
+console.log("加载sendNotify，当前版本: 20220116");
 // =======================================go-cqhttp通知设置区域===========================================
 //gobot_url 填写请求地址http://127.0.0.1/send_private_msg
 //gobot_token 填写在go-cqhttp文件设置的访问密钥
@@ -81,7 +81,7 @@ let IGOT_PUSH_KEY = '';
 // =======================================push+设置区域=======================================
 //官方文档：http://www.pushplus.plus/
 //PUSH_PLUS_TOKEN：微信扫码登录后一对一推送或一对多推送下面的token(您的Token)，不提供PUSH_PLUS_USER则默认为一对一推送
-//PUSH_PLUS_USER： 一对多推送的"群组编码"（一对多推送下面->您的群组(如无则新建)->群组编码，如果您是创建群组人。也需点击"查看二维码"扫描绑定，否则不能接受群组消息推送）
+//PUSH_PLUS_USER： 一对多推送的“群组编码”（一对多推送下面->您的群组(如无则新建)->群组编码，如果您是创建群组人。也需点击“查看二维码”扫描绑定，否则不能接受群组消息推送）
 let PUSH_PLUS_TOKEN = '';
 let PUSH_PLUS_USER = '';
 let PUSH_PLUS_TOKEN_hxtrip = '';
@@ -264,7 +264,14 @@ async function sendNotify(text, desp, params = {}, author = '\n\n本通知 By LJ
                             isLogin = true;
                             await isLoginByX1a0He(temptest.value);
                             if (!isLogin) {
-                                const DisableCkBody = await DisableCk(temptest._id);
+								var tempid = 0;
+								if (temptest._id) {
+								    tempid = temptest._id;
+								}
+								if (temptest.id) {
+								    tempid =temptest.id;
+								}
+                                const DisableCkBody = await DisableCk(tempid);
                                 strPtPin = temptest.value;
                                 strPtPin = (strPtPin.match(/pt_pin=([^; ]+)(?=;?)/) && strPtPin.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
                                 var strAllNotify = "";
