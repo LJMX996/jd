@@ -1,6 +1,6 @@
 /**
 京东超市年货日历
-36 4,16 * * * jd_year.js
+cron 36 2,13 * * * year.js
 TG频道：https://t.me/sheeplost
 */
 const $ = new Env("京东超市年货日历");
@@ -93,8 +93,8 @@ async function main() {
                         }
                     }
                 }
-                console.log('助力作者')
-                await taskPost('invite_friend', `inviter_id=61e58b5c20ade60129&uuid=${$.uuid}&source=shareFriend`);
+                console.log('助力尼玛的作者呢')
+
             }
         } else {
             $.log('获取accessToken失败')
