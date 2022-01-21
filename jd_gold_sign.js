@@ -2,7 +2,7 @@
 京东金榜
 活动入口：https://h5.m.jd.com/babelDiy/Zeus/2H5Ng86mUJLXToEo57qWkJkjFPxw/index.html
 by:小手冰凉 tg:@chianPLA
-脚本更新时间：2021-11-18 14:20
+脚本更新时间：2022-1-5
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 新手写脚本，难免有bug，能用且用。
 ===================quantumultx================
