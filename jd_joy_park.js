@@ -78,7 +78,7 @@ message = ""
         if (process.env.HELP_JOYPARK && process.env.HELP_JOYPARK == "false") {
         } else {
           await getShareCode()
-          if (1 == 0) {
+          if ($.kgw_invitePin && $.kgw_invitePin.length) {
             $.log("开始帮作者助力开工位\n");
             $.kgw_invitePin = [...($.kgw_invitePin || [])][Math.floor((Math.random() * $.kgw_invitePin.length))];
             let resp = await getJoyBaseInfo(undefined, 2, $.kgw_invitePin);
@@ -343,9 +343,9 @@ function doJoyMerge(joyId1, joyId2) {
         } else {
           data = JSON.parse(data);
           $.log(`合成 ${joyId1} <=> ${joyId2} ${data.success ? `成功！` : `失败！【${data.errMsg}】 code=${data.code}`}`)
-          if (data.code == '1006') {
-            hotFlag = true
-          }
+          // if (data.code == '1006') {
+          //   hotFlag = true
+          // }
         }
       } catch (e) {
         $.logErr(e, resp)
