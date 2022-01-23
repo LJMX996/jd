@@ -1,5 +1,17 @@
 /*
-cron 1 0,1,8 * * * jd_dpqd.js, tag=店铺签到diy
+1 0,1,8 * * * jd_dpqd.js
+
+============Quantumultx===============
+[task_local]
+#店铺签到
+15 2,14 * * * https://raw.githubusercontent.com/KingRan/JDJB/main/jd_shop_sign.js, tag=店铺签到, enabled=true
+===========Loon============
+[Script]
+cron "15 2,14 * * *" script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_shop_sign.js,tag=店铺签到
+============Surge=============
+店铺签到 = type=cron,cronexp="15 2,14 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_shop_sign.js
+===========小火箭========
+店铺签到 = type=cron,script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_shop_sign.jss, cronexpr="15 2,14 * * *", timeout=3600, enable=true
 */
 const $ = new Env('店铺签到');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -26,6 +38,9 @@ const token = [
   "AFC71B4BFEFD168AF0889313EC642ABB",
   "344CDCE624282AB0D50E71F002064A59",
   "755A1AA058A02D18CCB4D239E35FCB5B",
+  "7765870BE5277C77671BB516128A54CD",
+  "CD5CE31B72FE8799D4572EBD2A8DF81A",
+  "08FBC4EE41DE216E0FA610A7B82ECE53",
   "F21F54D77A164114746ABFBFD509393F",
   "332C448EA5D09D5627B7068C502CDE9A",
   "3B4780A6320DA492A1FA6FA44519DF06",
