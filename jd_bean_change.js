@@ -76,13 +76,14 @@ let BEANCHANGE_PERSENT="10"
 let WP_APP_TOKEN_ONE = "";
 
 let TempBaipiao = "";
-if ($.isNode() && process.env.WP_APP_TOKEN_ONE) {
-	WP_APP_TOKEN_ONE = process.env.WP_APP_TOKEN_ONE;
-}
+
 
 let doExJxBeans ="false";
 let time = new Date().getHours();
 if ($.isNode()) {
+	if (process.env.WP_APP_TOKEN_ONE) {		
+		WP_APP_TOKEN_ONE = process.env.WP_APP_TOKEN_ONE;
+	}
 	if(process.env.BEANCHANGE_ExJxBeans=="true"){
 		if (time >= 17){ 
 			console.log(`检测到设定了临期京豆转换喜豆...`);
@@ -92,6 +93,11 @@ if ($.isNode()) {
 		}
 	}
 }
+if(WP_APP_TOKEN_ONE)
+	console.log(`检测到已配置Wxpusher的Token，启用一对一推送...`);
+else
+	console.log(`检测到未配置Wxpusher的Token，禁用一对一推送...`);
+		
 if ($.isNode() && BEANCHANGE_PERSENT) {
 	intPerSent = parseInt(BEANCHANGE_PERSENT);
 	console.log(`检测到设定了分段通知:` + intPerSent);
@@ -120,18 +126,18 @@ if ($.isNode() && process.env.BEANCHANGE_USERGP4) {
 	//EnableMonth = process.env.BEANCHANGE_ENABLEMONTH;
 //}
 
+if ($.isNode() && process.env.BEANCHANGE_SUBNOTIFY) {	
+	strSubNotify=process.env.BEANCHANGE_SUBNOTIFY;
+	strSubNotify+="\n";
+	console.log(`检测到预览置顶内容,将在一对一推送的预览显示...\n`);	
+}
+
 if ($.isNode() && process.env.BEANCHANGE_ALLNOTIFY) {	
 	strAllNotify=process.env.BEANCHANGE_ALLNOTIFY;
 	console.log(`检测到设定了公告,将在推送信息中置顶显示...`);
 	strAllNotify = `【✨✨✨✨公告✨✨✨✨】\n`+strAllNotify;
 	console.log(strAllNotify+"\n");
 	strAllNotify +=`\n🎏🎏🎏🎏🎏🎏🎏🎏🎏🎏🎏🎏🎏`
-}
-
-if ($.isNode() && process.env.BEANCHANGE_SUBNOTIFY) {	
-	strSubNotify=process.env.BEANCHANGE_SUBNOTIFY;
-	strSubNotify+="\n";
-	console.log(`检测到预览置顶内容,将在一对一推送的预览显示...\n`);	
 }
 
 
