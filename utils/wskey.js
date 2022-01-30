@@ -1,6 +1,6 @@
 /*
-
-杀掉后台后打开京东app获取app_open
+10.0.2以上版本用这个
+杀掉后台后打开京东app获取wskey
 在脚本日志查看值
 
 [MITM]
@@ -11,8 +11,6 @@ hostname = api.m.jd.com
 
 # wskey
 
-#京喜(已经废了)
-^https:\/\/api\.m\.jd\.com\/api\?functionId=jxssdarkword url script-request-header https://raw.githubusercontent.com/LJMX996/jd/aaron/utils/wskey.js
 # 京东
 ^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=getIosDegrade url script-request-header https://raw.githubusercontent.com/LJMX996/jd/aaron/utils/wskey.js
 
