@@ -13,7 +13,7 @@ hostname = api.m.jd.com
 
 
 # 京东
-^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=getIosDegrade url script-request-header https://raw.githubusercontent.com/LJMX996/jd/aaron/utils/wskey_10.0.2.js
+^https?:\/\/api\.m\.jd\.com\/client\.action\?functionId=getIosDegrade url script-request-header https://raw.githubusercontent.com/LJMX996/jd/aaron/utils/wskey_10.0.2.js
 
 
 */
