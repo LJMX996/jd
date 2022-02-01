@@ -188,7 +188,7 @@ def getToken(wskey):
     url = 'https://api.m.jd.com/client.action'
     data = 'body=%7B%22action%22%3A%22to%22%2C%22to%22%3A%22https%253A%252F%252Fplogin.m.jd.com%252Fcgi-bin%252Fm%252Fthirdapp_auth_page%253Ftoken%253DAAEAIEijIw6wxF2s3bNKF0bmGsI8xfw6hkQT6Ui2QVP7z1Xg%2526client_type%253Dandroid%2526appid%253D879%2526appup_type%253D1%22%7D&'
     try:
-        res = requests.post(url=url, params=params, headers=headers, data=data, verify=False, timeout=100)
+        res = requests.post(url=url, params=params, headers=headers, data=data, verify=False, timeout=10000)
         res_json = json.loads(res.text)
         tokenKey = res_json['tokenKey']
     except:
@@ -221,13 +221,13 @@ def appjmp(wskey, tokenKey):
         jd_ck = str(pt_key) + ';' + str(pt_pin) + ';'
         wskey = wskey.split(";")[0]
         if 'fake' in pt_key:
-            logger.info(str(wskey) + ";WsKey状态失效\n")
+            logger.info(str(wskey) + ";WsKey状态失效❗❗❗\n")
             return False, jd_ck
         else:
             logger.info(str(wskey) + ";WsKey状态正常\n")
             return True, jd_ck
     except:
-        logger.info("JD接口转换失败, 默认WsKey失效\n")
+        logger.info("JD接口转换失败❗❗❗\n")
         wskey = "pt_" + str(wskey.split(";")[0])
         return False, wskey
 
