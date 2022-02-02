@@ -229,7 +229,7 @@ def appjmp(wskey, tokenKey):
     except:
         logger.info("JD接口转换失败❗❗❗\n")
         wskey = "pt_" + str(wskey.split(";")[0])
-        return False, wskey
+        return True, jd_ck
 
 
 # 返回值 svv, stt, suid, jign
