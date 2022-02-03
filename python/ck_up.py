@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*
 """
 new Env('强制更新ck');
-cron: 15 4,16 * * * ck_up.py
         
 """
 
