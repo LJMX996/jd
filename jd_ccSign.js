@@ -1,11 +1,27 @@
 /*
+领券中心签到
 
+@感谢 ddo 提供sign算法
+@感谢 匿名大佬 提供pin算法
+
+活动入口：领券中心
+更新时间：2021-08-23
+已支持IOS双京东账号,Node.js支持N个京东账号
+脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ============Quantumultx===============
 [task_local]
 #领券中心签到
-15 0,5 * * * jd_ccSign.js
+15 0 * * * https://raw.githubusercontent.com/KingRan/JDJB/main/jd_ccSign.js, tag=领券中心签到, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
+================Loon==============
+[Script]
+cron "15 0 * * *" script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_ccSign.js,tag=领券中心签到
 
+===============Surge=================
+领券中心签到 = type=cron,cronexp="15 0 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_ccSign.js
+
+============小火箭=========
+领券中心签到 = type=cron,script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_ccSign.js, cronexpr="15 0 * * *", timeout=3600, enable=true
  */
 const $ = new Env('领券中心签到');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -25,7 +41,6 @@ if ($.isNode()) {
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 let allMessage = '';
 !(async () => {
-    console.log(`\n❗❗❗❗❗❗\n注意:本仓库偷助力，偷CK，今天用这个仓库，明天你一觉醒来服务器就被我偷走了🌝🌝🌚🌚\n❗❗❗❗❗❗\n`);
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
     return;
@@ -66,12 +81,10 @@ async function jdSign() {
 
 async function getCouponConfig() {
   let functionId = `getCouponConfig`
-  let body = escape(JSON.stringify({"childActivityUrl":"openapp.jdmobile://virtual?params={\"category\":\"jump\",\"des\":\"couponCenter\"}","incentiveShowTimes":0,"monitorRefer":"","monitorSource":"ccresource_android_index_config","pageClickKey":"Coupons_GetCenter","rewardShowTimes":0,"sourceFrom":"1"}))
-  let uuid = randomString(16)
-  let sign = await getSign(functionId, decodeURIComponent(body), uuid)
-  let url = `${JD_API_HOST}?functionId=${functionId}&client=android&clientVersion=10.1.2&uuid=${uuid}&${sign}`
+  let body = {"childActivityUrl":"openapp.jdmobile://virtual?params={\"category\":\"jump\",\"des\":\"couponCenter\"}","incentiveShowTimes":0,"monitorRefer":"","monitorSource":"ccresource_android_index_config","pageClickKey":"Coupons_GetCenter","rewardShowTimes":0,"sourceFrom":"1"}
+  let sign = await getSign(functionId, body)
   return new Promise(async resolve => {
-    $.post(taskUrl(url, body), async (err, resp, data) => {
+    $.post(taskUrl(functionId, sign), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -86,7 +99,7 @@ async function getCouponConfig() {
               } else {
                 let pin = await getsecretPin($.UserName)
                 functionId = `ccSignInNecklace`
-                body = escape(JSON.stringify({"childActivityUrl":"openapp.jdmobile://virtual?params={\"category\":\"jump\",\"des\":\"couponCenter\"}","monitorRefer":"appClient","monitorSource":"cc_sign_android_index_config","pageClickKey":"Coupons_GetCenter","sessionId":"","signature":data.result.couponConfig.signNecklaceDomain.signature,"pin":pin,"verifyToken":""}))
+                body = {"childActivityUrl":"openapp.jdmobile://virtual?params={\"category\":\"jump\",\"des\":\"couponCenter\"}","monitorRefer":"appClient","monitorSource":"cc_sign_android_index_config","pageClickKey":"Coupons_GetCenter","sessionId":"","signature":data.result.couponConfig.signNecklaceDomain.signature,"pin":pin,"verifyToken":""}
               }
             } else {
               if (data.result.couponConfig.signNewDomain.roundData.ynSign === '1') {
@@ -94,7 +107,7 @@ async function getCouponConfig() {
               } else {
                 let pin = await getsecretPin($.UserName)
                 functionId = `ccSignInNew`
-                body = escape(JSON.stringify({"childActivityUrl":"openapp.jdmobile://virtual?params={\"category\":\"jump\",\"des\":\"couponCenter\"}","monitorRefer":"appClient","monitorSource":"cc_sign_android_index_config","pageClickKey":"Coupons_GetCenter","pin":pin}))
+                body = {"childActivityUrl":"openapp.jdmobile://virtual?params={\"category\":\"jump\",\"des\":\"couponCenter\"}","monitorRefer":"appClient","monitorSource":"cc_sign_android_index_config","pageClickKey":"Coupons_GetCenter","pin":pin}
               }
             }
             if (functionId && body) await ccSign(functionId, body)
@@ -109,11 +122,9 @@ async function getCouponConfig() {
   })
 }
 async function ccSign(functionId, body) {
-  let uuid = randomString(16)
-  let sign = await getSign(functionId, decodeURIComponent(body), uuid)
-  let url = `${JD_API_HOST}?functionId=${functionId}&client=android&clientVersion=10.1.2&uuid=${uuid}&${sign}`
+  let sign = await getSign(functionId, body)
   return new Promise(async resolve => {
-    $.post(taskUrl(url, body), async (err, resp, data) => {
+    $.post(taskUrl(functionId, sign), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -136,14 +147,13 @@ async function ccSign(functionId, body) {
     })
   })
 }
-function getSign(functionid, body, uuid) {
+function getSign(functionId, body) {
   return new Promise(async resolve => {
     let data = {
-      "functionId":functionid,
-      "body":body,
-      "uuid":uuid,
+      functionId,
+      body: JSON.stringify(body),
       "client":"android",
-      "clientVersion":"10.1.2"
+      "clientVersion":"10.3.2"
     }
     let HostArr = ['jdsign.cf', 'signer.nz.lu']
     let Host = HostArr[Math.floor((Math.random() * HostArr.length))]
@@ -216,10 +226,10 @@ function showMsg() {
   })
 }
 
-function taskUrl(url, body) {
+function taskUrl(functionId, body) {
   return {
-    url,
-    body: `body=${body}`,
+    url: `${JD_API_HOST}?functionId=${functionId}`,
+    body,
     headers: {
       "Host": "api.m.jd.com",
       "Connection": "keep-alive",
@@ -232,13 +242,6 @@ function taskUrl(url, body) {
       "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
     }
   }
-}
-function randomString(e) {
-  e = e || 32;
-  let t = "abcdefghijklmnopqrstuvwxyz0123456789", a = t.length, n = "";
-  for (let i = 0; i < e; i++)
-    n += t.charAt(Math.floor(Math.random() * a));
-  return n
 }
 
 function TotalBean() {
