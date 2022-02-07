@@ -452,7 +452,7 @@ if __name__ == '__main__':
     ua = cloud_arg['User-Agent']
     wslist = get_wskey()
     envlist = get_env()
-    sleepTime = 10
+    sleepTime = 5
     for ws in wslist:
         wspin = ws.split(";")[0]
         if "pin" in wspin:
