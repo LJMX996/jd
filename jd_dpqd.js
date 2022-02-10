@@ -572,6 +572,8 @@ async function dpqd(){
     await getActivityInfo(token[j],vender)
     await signCollectGift(token[j],vender,activityId)
     await taskUrl(token[j],vender)
+    console.log(`延迟5s，等待中……`)
+    await $.wait(5000);
   }
 }
 
