@@ -237,7 +237,7 @@ def appjmp(wskey, tokenKey):
             res_set = res.cookies.get_dict()
             pt_key = 'pt_key=' + res_set['pt_key']
             pt_pin = 'pt_pin=' + res_set['pt_pin']
-            jd_ck = str(pt_key) + '; ' + str(pt_pin) + '; __time=' + str(time.time())
+            jd_ck = str(pt_key) + '; ' + str(pt_pin) + '; '
         except Exception as err:
             logger.info("JD_appjmp提取Cookie错误 请重试或者更换IP❗❗❗❗\n")
             logger.info(str(err))
@@ -452,7 +452,7 @@ if __name__ == '__main__':
     ua = cloud_arg['User-Agent']
     wslist = get_wskey()
     envlist = get_env()
-    sleepTime = 5
+    sleepTime = 3
     for ws in wslist:
         wspin = ws.split(";")[0]
         if "pin" in wspin:
