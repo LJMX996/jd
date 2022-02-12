@@ -14,6 +14,8 @@ cp -rfv /ql/repo/LJMX996_jd_aaron/* /ql/scripts/LJMX996_jd_aaron/
 
 cp -rfv /ql/repo/LJMX996_jd_aaron/pull.sh /ql/config/
 
+cd /ql/scripts && pip3 install PyExecJS
+
 
 
 
