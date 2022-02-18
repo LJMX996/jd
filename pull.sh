@@ -7,12 +7,12 @@ cp -rfv /ql/repo/LJMX996_jd_aaron/* /ql/scripts/
 
 cp -rfv /ql/repo/LJMX996_jd_aaron/* /ql/scripts/LJMX996_jd_aaron/
 
-
-
-
-
-
 cp -rfv /ql/repo/LJMX996_jd_aaron/pull.sh /ql/config/
+
+cp -rfv /ql/repo/LJMX996_jd_aaron/sendNotify.js /ql/deps/
+
+
+
 
 
 

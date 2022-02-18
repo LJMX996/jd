@@ -22,7 +22,8 @@ if ($.isNode()) {
         ...$.toObj($.getdata("CookiesJD") || "[]").map((item) => item.cookie)].filter((item) => !!item);
 }
 const activityList = [
-    {'id':'027ba51d1ee44a3eb9dddfb06ee4f9e6','endTime':1646063999000},//2022-02-01---2022-02-10 SKG京东自营旗舰店
+    {'id':'d8594388e5454a568e49592f90c2bf5b','endTime':1646063999000},//
+    {'id':'027ba51d1ee44a3eb9dddfb06ee4f9e6','endTime':1646063999000},//2022-02-01---2022-02-28
     {'id':'dc08625c66a342a7b884b7a0e981edd8','endTime':1646063999000},//2022-02-01---2022-02-28 Origins悦木之源京东自营官方旗舰店
     {'id':'145efa9da8d74d4784f284a10f3f13c2','endTime':1646063999000},//2022-02-01---2022-02-28 戴·可·思（Dexter）母婴京东自营旗舰店
     {'id':'ad006d9123d14e92b40a898c19508bc1','endTime':1645286400000},//2022-02-01---2022-02-20 乐而雅旗舰店
