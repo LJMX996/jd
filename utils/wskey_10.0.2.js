@@ -26,8 +26,9 @@ let pin = cookie.match(/(pin=[^;]*)/)[1]
 console.log('================')
 console.log(`${pin};${wskey};`)
 console.log('================')
-$.msg(`${pin};`, "的wskey获取成功！")
+console.log(`${pin};`, "的wskey获取中！")
 
+$notify("点击复制" + `${pin};` + "的wskey", "",`${pin};${wskey};`);
 
     
 function Env(t, e) {

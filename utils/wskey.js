@@ -25,10 +25,10 @@ let wskey = cookie.match(/(wskey=[^;]*)/)[1]
 console.log('================')
 console.log(`${wskey};`)
 console.log('================')
-$.msg("wskey获取成功！")
 
+console.log("wskey获取中！")
 
-
+$notify("点击复制wskey", "",`${wskey};`);
     
 function Env(t, e) {
   "undefined" != typeof process && JSON.stringify(process.env).indexOf("GITHUB") > -1 && process.exit(0);
