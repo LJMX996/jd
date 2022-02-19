@@ -13,7 +13,7 @@ const Template = require('./template');
 class Main extends Template {
     constructor() {
         super()
-        this.title = "京东东东农场"
+        this.title = "可达鸭东东农场"
         this.cron = "33 0,11,17,22 * * *"
         this.thread = 6
         this.task = 'local'
@@ -477,7 +477,7 @@ class Main extends Template {
             }
         }
         let salveHelpAddWater = 0;
-        let remainTimes = 3;//今日剩余助力次数,默认3次（京东农场每人每天3次助力机会）。
+        let remainTimes = 0;//今日剩余助力次数,默认3次（京东农场每人每天3次助力机会）。
         let helpSuccessPeoples = '';//成功助力好友
         for (let code of this.code) {
             if (code.finish) {
