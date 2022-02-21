@@ -107,10 +107,20 @@ async function jdFruit() {
                 return
             }
             await doDailyTask();
+            console.log('等待2秒');
+            await $.wait(4000);
             await doTenWater(); //浇水十次
+            console.log('等待4秒');
+            await $.wait(4000);
             await getFirstWaterAward(); //领取首次浇水奖励
+            console.log('等待4秒');
+            await $.wait(4000);
             await getTenWaterAward(); //领取10浇水奖励
+            console.log('等待4秒');
+            await $.wait(4000);
             await getWaterFriendGotAward(); //领取为2好友浇水奖励
+            console.log('等待4秒');
+            await $.wait(4000);
             await duck();
             if (!process.env.DO_TEN_WATER_AGAIN) {
                 console.log('执行再次浇水')
@@ -124,7 +134,7 @@ async function jdFruit() {
             if ($.retry < 2) {
                 $.retry++
                     console.log(`等待3秒后重试,第:${$.retry}次`);
-                await $.wait(3000);
+                await $.wait(5000);
                 await jdFruit();
             }
         }
@@ -240,9 +250,9 @@ async function doDailyTask() {
 async function predictionFruit() {
     console.log('开始预测水果成熟时间\n');
     await initForFarm();
-	await $.wait(2000);
+	await $.wait(4000);
     await taskInitForFarm();
-	await $.wait(2000);
+	await $.wait(4000);
     let waterEveryDayT = $.farmTask.totalWaterTaskInit.totalWaterTaskTimes; //今天到到目前为止，浇了多少次水
     message += `【今日共浇水】${waterEveryDayT}次\n`;
     message += `【剩余 水滴】${$.farmInfo.farmUserPro.totalEnergy}g💧\n`;
@@ -928,7 +938,7 @@ async function gotStageAwardForFarm(type) {
 }
 //浇水API
 async function waterGoodForFarm() {
-    await $.wait(2000);
+    await $.wait(4000);
     console.log('等待了2秒');
 
     const functionId = arguments.callee.name.toString();
@@ -939,7 +949,7 @@ async function initForTurntableFarm() {
     $.initForTurntableFarmRes = await request(arguments.callee.name.toString(), { version: 4, channel: 1 });
 }
 async function lotteryForTurntableFarm() {
-    await $.wait(2000);
+    await $.wait(4000);
     console.log('等待了2秒');
     $.lotteryRes = await request(arguments.callee.name.toString(), { type: 1, version: 4, channel: 1 });
 }
