@@ -185,4 +185,3 @@ fi
 > * /cmd cd /ql/repo/dockerbot/jbot/bot/ && rm -rf getcookie.py && wget https://raw.githubusercontent.com/LJMX996/jd/help/getcookie.py
 
 
-demo
