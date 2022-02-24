@@ -5,7 +5,8 @@
 只支持Node.js支持N个京东账号
 脚本兼容: Node.js
 [task_local]
-cron 58 59 23 * * * jd_beauty_exchage.js
+1 7,12,19 * * * jd_beauty_ex.js
+
  */
 
 const jd_helpers = require('./utils/JDHelpers.js');
