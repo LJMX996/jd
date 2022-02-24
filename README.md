@@ -145,7 +145,7 @@ giflib-dev
 
 ##### 独立助力仓库
    ```diff
-ql repo https://github.com/LJMX996/code_help.git "jd_"
+ql repo https://github.com/LJMX996/code_help.git "jd_" "tmp" "USER_AGENTS.js|sendNotify.js|ql.js|JS_USER_AGENTS.js|jdCookie.js"
    ```
    
 使用上面独立仓库默认是助力前15个账号
