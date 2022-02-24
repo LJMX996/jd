@@ -145,7 +145,7 @@ giflib-dev
 
 ##### 独立助力仓库
    ```diff
-ql repo https://github.com/LJMX996/code_help.git
+ql repo https://github.com/LJMX996/code_help.git "jd_"
    ```
    
 使用上面独立仓库默认是助力前15个账号
