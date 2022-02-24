@@ -18,7 +18,7 @@ cron "40 0,2 * * *" script-path=https://github.com/mrddddgggg/dongge/raw/main/jd
 ============小火箭=========
 虎娃迎福 = type=cron,script-path=https://github.com/mrddddgggg/dongge/raw/main/jd_hwyf.js, cronexpr="40 0,2 * * *", timeout=3600, enable=true
  */
-const $ = new Env('疯狂砸金蛋-虎娃迎福-JOY的年味大挑战-新年宠粉');
+const $ = new Env('疯狂砸金蛋');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
@@ -26,8 +26,9 @@ let message = '', allMessage = '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '';
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
-let appIdArr = ['1EFRQwA','1GVJWyqg','1GVFUx6g','1GFNRxq8'];
-let appNameArr = ['疯狂砸金蛋','虎娃迎福','JOY的年味大挑战','新年宠粉'];
+//let appIdArr = ['1EFRQwA','1GVJWyqg','1GVFUx6g','1GFNRxq8'];
+let appIdArr = ['1EFRQwA'];
+let appNameArr = ['疯狂砸金蛋''];
 let appId, appName;
 $.shareCode = [];
 if ($.isNode()) {
