@@ -3,6 +3,7 @@
  
 20 0-23/2 * * * jd_EsportsManager.js
 
+ 东东电竞经理:脚本更新地址 jd_EsportsManager.js
  更新时间：2021-06-20
  活动入口：京东APP-东东农场-风车-电竞经理
  活动链接：https://xinruidddj-isv.isvjcloud.com
@@ -10,7 +11,6 @@
  cron "20 0-23/2 * * *" script-path=jd_EsportsManager.js,tag=东东电竞经理
  按顺序给第(Math.floor((index - 1) / 6) + 1)个账号助力
  可能有BUG，但不会给别人号助力
- 
  */
 
 const $ = new Env('东东电竞经理');
@@ -51,8 +51,8 @@ let tasks = [], shareCodes = [], first = true;
             if (r !== 200)
                 continue
 
-            await $.wait(2000);
-            await main();
+            //await $.wait(2000);
+            //await main();
             await $.wait(3000)
         }
     }
