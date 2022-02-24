@@ -102,14 +102,40 @@ services:
 
    ```diff
 # NodeJs
-@otplib/preset-defaultjs-base64fundjsdomform-datatough-cookieaxios date-fnscrypto-jscryptodownloadtypescriptpng-jsgot
+@otplib/preset-default
+js-base64
+fund
+jsdom
+form-data
+tough-cookie
+axios 
+date-fns
+crypto-js
+crypto
+download
+typescript
+png-js
+got
 
 # Python3
-requestsjieba
+requests
+jieba
 aiohttp  #安装这个会导致重启容器以后bot死掉
 
 # Linux
-libc6-compatnodejs-currentpython3zlib-devgccjpeg-devpython3-devmusl-devfreetype-devbuild-basecairo-devpango-devgiflib-dev
+libc6-compat
+nodejs-current
+python3
+zlib-dev
+gcc
+jpeg-dev
+python3-dev
+musl-dev
+freetype-dev
+build-base
+cairo-dev
+pango-dev
+giflib-dev
 
    ```
 
@@ -159,3 +185,4 @@ fi
 > * /cmd cd /ql/repo/dockerbot/jbot/bot/ && rm -rf getcookie.py && wget https://raw.githubusercontent.com/LJMX996/jd/help/getcookie.py
 
 
+demo
