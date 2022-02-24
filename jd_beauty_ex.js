@@ -4,6 +4,7 @@
 活动入口：京东app首页-美妆馆-底部中间按钮
 只支持Node.js支持N个京东账号
 脚本兼容: Node.js
+[task_local]
 cron 58 59 23 * * * jd_beauty_exchage.js
  */
 
