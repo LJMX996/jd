@@ -9,18 +9,21 @@ import random
 import string
 import urllib
 
+def getnowtime():
+    t=str(round(time.time() * 1000))
+    return t
 
-t=str(round(time.time() * 1000))
-choujiangurl='https://api.m.jd.com/?functionId=spring_reward_receive&body={"inviter":"","linkId":"7ya6o83WSbNhrbYJqsMfFA"}&_t='+t+'&appid=activities_platform'
-tixianxinxiurl='https://api.m.jd.com/?functionId=spring_reward_list&body={"pageNum":1,"pageSize":10,"linkId":"7ya6o83WSbNhrbYJqsMfFA","inviter":""}&_t='+t+'&appid=activities_platform'
-tixianurl='https://api.m.jd.com/'
+
+
+
+
 
 
 #以下部分参考Curtin的脚本：https://github.com/curtinlv/JD-Script
 
 
 def randomuserAgent():
-    global uuid,addressid,iosVer,iosV,clientVersion,iPhone,area,ADID
+    global uuid,addressid,iosVer,iosV,clientVersion,iPhone,area,ADID,lng,lat
     uuid=''.join(random.sample(['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','0','1','2','3','4','5','6','7','8','9','a','b','c','z'], 40))
     addressid = ''.join(random.sample('1234567898647', 10))
     iosVer = ''.join(random.sample(["15.1.1","14.5.1", "14.4", "14.3", "14.2", "14.1", "14.0.1"], 1))
@@ -29,6 +32,8 @@ def randomuserAgent():
     iPhone = ''.join(random.sample(["8", "9", "10", "11", "12", "13"], 1))
     area=''.join(random.sample('0123456789', 2)) + '_' + ''.join(random.sample('0123456789', 4)) + '_' + ''.join(random.sample('0123456789', 5)) + '_' + ''.join(random.sample('0123456789', 4))
     ADID = ''.join(random.sample('0987654321ABCDEF', 8)) + '-' + ''.join(random.sample('0987654321ABCDEF', 4)) + '-' + ''.join(random.sample('0987654321ABCDEF', 4)) + '-' + ''.join(random.sample('0987654321ABCDEF', 4)) + '-' + ''.join(random.sample('0987654321ABCDEF', 12))
+    lng='119.31991256596'+str(random.randint(100,999))
+    lat='26.1187118976'+str(random.randint(100,999))
     UserAgent=''
     if not UserAgent:
         return f'jdapp;iPhone;10.0.4;{iosVer};{uuid};network/wifi;ADID/{ADID};model/iPhone{iPhone},1;addressid/{addressid};appBuild/167707;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS {iosV} like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/null;supportJDSHWK/1'
@@ -60,7 +65,7 @@ load_send()
 def get_remarkinfo():
     url='http://127.0.0.1:5600/api/envs'
     try:
-        with open(os.getcwd().replace('scripts','config')+'/auth.json', 'r') as f:
+        with open('/ql/config/auth.json', 'r') as f:
             token=json.loads(f.read())['token']
         headers={
             'Accept':'application/json',
@@ -72,15 +77,16 @@ def get_remarkinfo():
             if json.loads(response.text)['data'][i]['name']=='JD_COOKIE':
                 try:
                     if json.loads(response.text)['data'][i]['remarks'].find('@@')==-1:
-                        remarkinfos[json.loads(response.text)['data'][i]['value'].split(';')[1].replace('pt_pin=','')]=json.loads(response.text)['data'][i]['remarks'].replace('remark=','').replace(';','')
+                        remarkinfos[json.loads(response.text)['data'][i]['value'].split(';')[1].replace('pt_pin=','')]=json.loads(response.text)['data'][i]['remarks'].replace('remark=','')
                     else:
                         remarkinfos[json.loads(response.text)['data'][i]['value'].split(';')[1].replace('pt_pin=','')]=json.loads(response.text)['data'][i]['remarks'].split("@@")[0].replace('remark=','').replace(';','')
                 except:
                     pass
     except:
-        printf('读取auth.json文件出错，跳过获取备注\n')
+        print('读取auth.json文件出错，跳过获取备注')
 
 def choujiang(ck):
+    choujiangurl='https://api.m.jd.com/?functionId=spring_reward_receive&body={"inviter":"","linkId":"%s"}&t=1645603459107&appid=activities_platform&h5st=20220223160420320;2413529808494242;07244;tk02wace11c1018nsPDbHF274OYVdYhemyZUEO+VnplpvBjuIMMtPahDxG2WtMBb5khbGCJQwJX7JZQ2mqi6Emb1ZZS9;c52006981c5c5a3e82a1d5102f5c8984011231ad82506cab025485579f03d397;3.0;1645603460320'%(linkId)
     headers={
         'Accept':'application/json, text/plain, */*',
         'Accept-Encoding':'gzip, deflate, br',
@@ -97,15 +103,19 @@ def choujiang(ck):
         response=requests.get(url=choujiangurl,headers=headers)
         amount=json.loads(response.text)['data']['received']['amount']
         useLimit=json.loads(response.text)['data']['received']['useLimit']
-        if useLimit!='':
-            printf(f'获得{useLimit}-{amount}的优惠券\n')
-        else:
-            printf(f'获得{amount}现金')
+        prizeType=json.loads(response.text)['data']['received']['prizeType']
+        if int(prizeType)==1:
+            printf(f'获得{useLimit}-{amount}的优惠券')
+        if int(prizeType)==2:
+            printf(f'获得{amount}极速版红包')
+        if int(prizeType)==4:
+            printf(f'获得{amount}微信红包')
     except:
         printf('抽奖失败，可能是次数用完或者黑号了\n')
 def tixianxinxi(ck):
     global tixianliebiao
     tixianliebiao=[]
+    tixianxinxiurl='https://api.m.jd.com/?functionId=spring_reward_list&body={"pageNum":1,"pageSize":10,"linkId":"'+linkId+'","inviter":""}&_t='+getnowtime()+'&appid=activities_platform'
     headers={
         'Accept':'application/json, text/plain, */*',
         'Accept-Encoding':'gzip, deflate, br',
@@ -120,11 +130,12 @@ def tixianxinxi(ck):
     try:
         response=requests.get(url=tixianxinxiurl,headers=headers)
         for i in range(len(json.loads(response.text)['data']['items'])):
-            if not json.loads(response.text)['data']['items'][i]['couponKind'] and int(json.loads(response.text)['data']['items'][i]['state'])==3 and int(json.loads(response.text)['data']['items'][i]['prizeType']==4):
+            if int(json.loads(response.text)['data']['items'][i]['state'])==0 and int(json.loads(response.text)['data']['items'][i]['prizeType']==4):
                 tixianliebiao.append(str(json.loads(response.text)['data']['items'][i]['id'])+'@'+str(json.loads(response.text)['data']['items'][i]['poolBaseId'])+'@'+str(json.loads(response.text)['data']['items'][i]['prizeGroupId'])+'@'+str(json.loads(response.text)['data']['items'][i]['prizeBaseId']))
     except:
         printf('获取提现列表出错，可能是黑号了\n')
 def tixian(ck,couponId,poolBaseId,prizeGroupId,prizeBaseId):
+    tixianurl='https://api.m.jd.com/client.action'
     headers={
         'Host':'api.m.jd.com',
         'Content-Type':'application/x-www-form-urlencoded',
@@ -135,13 +146,13 @@ def tixian(ck,couponId,poolBaseId,prizeGroupId,prizeBaseId):
         'Accept':'application/json, text/plain, */*',
         'User-Agent':UserAgent,
         'Referer':'https://prodev.m.jd.com/',
-        'Content-Length':'277',
+        'Content-Length':'276',
         'Accept-Language':'zh-CN,zh-Hans;q=0.9'
         }
-    data='functionId=apCashWithDraw&body={"businessSource":"SPRING_FESTIVAL_RED_ENVELOPE","base":{"id":%s,"business":null,"poolBaseId":%s,"prizeGroupId":%s,"prizeBaseId":%s,"prizeType":4},"linkId":"7ya6o83WSbNhrbYJqsMfFA","inviter":""}&_t=%s&appid=activities_platform'%(couponId,poolBaseId,prizeGroupId,prizeBaseId,t)
+    data='functionId=apCashWithDraw&body={"businessSource":"SPRING_FESTIVAL_RED_ENVELOPE","base":{"id":%s,"business":null,"poolBaseId":%s,"prizeGroupId":%s,"prizeBaseId":%s,"prizeType":4},"linkId":"%s","inviter":""}&t=%s&appid=activities_platform'%(int(couponId),int(poolBaseId),int(prizeGroupId),int(prizeBaseId),str(linkId),getnowtime())
     try:
         response=requests.post(url=tixianurl,headers=headers,data=data)
-        printf(response.text+'\n')
+        printf(response.text)
     except:
         printf('提现失败')
 if __name__ == '__main__':
@@ -163,6 +174,8 @@ if __name__ == '__main__':
                 printf("--无备注账号:" + urllib.parse.unquote(ptpin) + "--")
         except:
             printf("--账号:" + urllib.parse.unquote(ptpin) + "--")
+        linkId='Eu7-E0CUzqYyhZJo9d3YkQ'
+        print("linkId:"+linkId)
         for i in range(3):
             choujiang(ck)
         tixianxinxi(ck)
@@ -170,4 +183,3 @@ if __name__ == '__main__':
             for i in range(len(tixianliebiao)):
                 tixian(ck,tixianliebiao[i].split('@')[0],tixianliebiao[i].split('@')[1],tixianliebiao[i].split('@')[2],tixianliebiao[i].split('@')[3])
         printf('\n\n\n')
-        time.sleep(30)
