@@ -1,5 +1,5 @@
 // Q绑查询 熊猫制作2021-12-10 QQ:1305759960 网站：bbs.xm08.cn
-// [rule: Q绑查询 ?]
+// [rule: 查q ?]
 // [admin: false] 这里默认关闭了、开启true后除管理员账号外、群员不可查
 function main() {
     var userID = GetUserID()

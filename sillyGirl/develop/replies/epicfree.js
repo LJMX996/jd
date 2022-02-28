@@ -1,6 +1,6 @@
 // [rule: epic]
 // [rule: Epic]
-// [cron: 30 11 * * *]
+
 
 request('https://store-site-backend-static-ipv4.ak.epicgames.com/freeGamesPromotions?locale=zh-CN&country=CN&allowCountries=CN', function (error,response, body) {
 
