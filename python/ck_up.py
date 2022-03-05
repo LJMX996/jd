@@ -472,7 +472,7 @@ if __name__ == '__main__':
             if return_serch[0]:  # bool: True 搜索到账号
                 jck = str(return_serch[1])  # 拿到 JD_COOKIE
                 if not check_ck(jck):  # bool: False 判定 JD_COOKIE 有效性
-                    tryCount = 10
+                    tryCount = 5
                     if "WSKEY_TRY_COUNT" in os.environ:
                         if os.environ["WSKEY_TRY_COUNT"].isdigit():
                             tryCount = int(os.environ["WSKEY_TRY_COUNT"])
