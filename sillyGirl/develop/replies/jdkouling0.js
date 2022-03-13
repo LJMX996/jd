@@ -8,8 +8,8 @@
  * 
  * Copyright (c) 2022 by 烟雨, All Rights Reserved. 
  */
-//[rule:code ?]
-//[rule:转口令 ?]
+
+//[rule:口令 ?]
 var code = param(1);
 sendText("正在解析口令，请稍等片刻......")
 var _data = {"code": code}
