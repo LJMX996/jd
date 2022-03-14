@@ -154,12 +154,6 @@ replies:
         response_type: text
         url: http://jiuli.xiaoapi.cn/i/video_so.php?msg={{1}}&max=10&n={{2}}
 
-  - type: text
-    rules:
-      - 视频app
-      - 软件
-      - 看视频的
-    content: https://iosfans.cn/appstore/filmapp.html
 
 
   - type: url
