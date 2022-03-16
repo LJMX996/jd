@@ -160,7 +160,7 @@ let boolneedUpdate = false;
 let strCustom = "";
 let strCustomArr = [];
 let strCustomTempArr = [];
-let Notify_CKTask = "/ql/scripts/LJMX996_jd_aaron/ck_check_up.py";
+let Notify_CKTask = "";
 let Notify_SkipText = [];
 let isLogin = false;
 if (process.env.NOTIFY_SHOWNAMETYPE) {
@@ -218,7 +218,7 @@ async function sendNotify(text, desp, params = {}, author = '\n\n本通知 By LJ
         PUSH_PLUS_USER = '';
         PUSH_PLUS_TOKEN_hxtrip = '';
         PUSH_PLUS_USER_hxtrip = '';
-        Notify_CKTask = "/ql/scripts/LJMX996_jd_aaron/ck_check_up.py";
+        Notify_CKTask = "";
         Notify_SkipText = [];
 
         //变量开关
