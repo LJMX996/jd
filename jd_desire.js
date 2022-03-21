@@ -1,20 +1,14 @@
 /*
 京东集魔方
-by:小手冰凉 tg:@chianPLA
-脚本更新时间：2021-12-27 19:20
-脚本兼容: Node.js
-新手写脚本，难免有bug，能用且用。
 ===========================
-大势新品赏-集魔方
-入口：京东APP首页左上角-领京贴
-活动时间：2021年10月27日 – 1月1日24:00
 
-cron:12 0,20 * * *
+cron:30 6 * * *
 ============Quantumultx===============
 [task_local]
 #集魔方
-12 0,20 * * * https://raw.githubusercontent.com/KingRan/JDJB/main/jd_desire.js, tag=12.27~1.1 集魔方, enabled=true
+30 6 * * * jd_desire.js, tag=集魔方, enabled=true
  */
+
 const $ = new Env('京东集魔方');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
