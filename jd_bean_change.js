@@ -388,7 +388,13 @@ if(DisableIndex!=-1){
 			
 			//京喜牧场
 			if(EnableJxMC){
+				llgeterror = false;
 				await requestAlgo();
+				if(llgeterror){
+					console.log(`等待10秒后再次尝试...`)
+			        await $.wait(10 * 1000);
+					await requestAlgo();
+				}					
 				await JxmcGetRequest();
 			}
 			
@@ -435,7 +441,7 @@ if(DisableIndex!=-1){
 
 						await notify.sendNotify(`${$.name}`, `${allMessage}`, {
 							url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
-						}, '\n\n本通知 By LJMX996-信条',TempMessage)
+						}, '\n\n本通知 By ccwav Mod',TempMessage)
 					}
 					if ($.isNode() && allMessageMonth) {
 						await notify.sendNotify(`京东月资产变动`, `${allMessageMonth}`, {
@@ -504,7 +510,7 @@ if(DisableIndex!=-1){
 				
 				await notify.sendNotify(`${$.name}`, `${allMessage}`, {
 					url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
-				}, '\n\n本通知 By LJMX996-信条',TempMessage)
+				}, '\n\n本通知 By ccwav Mod',TempMessage)
 			}
 			if ($.isNode() && allMessageMonth) {
 				await notify.sendNotify(`京东月资产变动`, `${allMessageMonth}`, {
@@ -520,7 +526,7 @@ if(DisableIndex!=-1){
 				allMessageGp2=strAllNotify+`\n`+allMessageGp2;
 			await notify.sendNotify(`${$.name}#2`, `${allMessageGp2}`, {
 				url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
-			}, '\n\n本通知 By LJMX996-信条',TempMessage)
+			}, '\n\n本通知 By ccwav Mod',TempMessage)
 			await $.wait(10 * 1000);
 		}
 		if ($.isNode() && allMessageGp3) {
@@ -529,7 +535,7 @@ if(DisableIndex!=-1){
 				allMessageGp3=strAllNotify+`\n`+allMessageGp3;
 			await notify.sendNotify(`${$.name}#3`, `${allMessageGp3}`, {
 				url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
-			}, '\n\n本通知 By LJMX996-信条',TempMessage)
+			}, '\n\n本通知 By ccwav Mod',TempMessage)
 			await $.wait(10 * 1000);
 		}
 		if ($.isNode() && allMessageGp4) {
@@ -538,7 +544,7 @@ if(DisableIndex!=-1){
 				allMessageGp4=strAllNotify+`\n`+allMessageGp4;
 			await notify.sendNotify(`${$.name}#4`, `${allMessageGp4}`, {
 				url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
-			}, '\n\n本通知 By LJMX996-信条',TempMessage)
+			}, '\n\n本通知 By ccwav Mod',TempMessage)
 			await $.wait(10 * 1000);
 		}
 		if ($.isNode() && allMessage) {
@@ -548,7 +554,7 @@ if(DisableIndex!=-1){
 			
 			await notify.sendNotify(`${$.name}`, `${allMessage}`, {
 				url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
-			}, '\n\n本通知 By LJMX996-信条',TempMessage)
+			}, '\n\n本通知 By ccwav Mod',TempMessage)
 			await $.wait(10 * 1000);
 		}
 
@@ -899,8 +905,17 @@ async function showMsg() {
 	}
 	if(EnableJDPet){
 		llPetError=false;
-		const response = await PetRequest('energyCollect');
-		const initPetTownRes = await PetRequest('initPetTown');
+		var response ="";
+		response = await PetRequest('energyCollect');
+		if(llPetError)
+			response = await PetRequest('energyCollect');
+		
+		llPetError=false;
+		var initPetTownRes = "";
+		initPetTownRes = await PetRequest('initPetTown');
+		if(llPetError)
+			initPetTownRes = await PetRequest('initPetTown');
+		
 		if(!llPetError && initPetTownRes){
 			if (initPetTownRes.code === '0' && initPetTownRes.resultCode === '0' && initPetTownRes.message === 'success') {
 				$.petInfo = initPetTownRes.result;
@@ -1016,7 +1031,7 @@ async function showMsg() {
 		if(strAllNotify)
 			ReturnMessage=strAllNotify+`\n`+ReturnMessage;
 		
-		await notify.sendNotifybyWxPucher(strTitle, `${ReturnMessage}`, `${$.UserName}`,'\n\n本通知 By LJMX996-信条',strsummary);
+		await notify.sendNotifybyWxPucher(strTitle, `${ReturnMessage}`, `${$.UserName}`,'\n\n本通知 By ccwav Mod',strsummary);
 	}
 
 	//$.msg($.name, '', ReturnMessage , {"open-url": "https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean"});
@@ -1233,7 +1248,8 @@ function apptaskUrl(functionId = "", body = "") {
       'User-Agent': 'JD4iPhone/167774 (iPhone; iOS 14.7.1; Scale/3.00)',
       'Accept-Language': 'zh-Hans-CN;q=1',
       'Accept-Encoding': 'gzip, deflate, br',
-    }
+    },
+    timeout: 10000
   }
 }
 function getSign(functionId, body) {
@@ -1278,7 +1294,8 @@ function TotalBean() {
 			headers: {
 				Cookie: cookie,
 				"User-Agent": "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1",
-			}
+			},
+			timeout: 10000
 		}
 		$.get(options, (err, resp, data) => {
 			try {
@@ -1329,6 +1346,7 @@ function TotalBean2() {
 				Host: `wxapp.m.jd.com`,
 				'User-Agent': `Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.10(0x18000a2a) NetType/WIFI Language/zh_CN`,
 			},
+			timeout: 10000
 		};
 		$.post(options, (err, resp, data) => {
 			try {
@@ -1373,6 +1391,7 @@ function isLoginByX1a0He() {
 				"referer": "https://h5.m.jd.com/",
 				"User-Agent": "jdapp;iPhone;10.1.2;15.0;network/wifi;Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1",
 			},
+			timeout: 10000
 		}
 		$.get(options, (err, resp, data) => {
 			try {
@@ -1620,7 +1639,8 @@ function getCoupon() {
                 'referer': 'https://wqs.jd.com/',
                 'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8',
                 'cookie': cookie
-            }
+            },
+			timeout: 10000
         }
         $.get(options, async(err, resp, data) => {
             try {
@@ -1768,7 +1788,8 @@ function taskJDZZUrl(functionId, body = {}) {
 			'User-Agent': $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
 			'Accept-Language': 'zh-cn',
 			'Accept-Encoding': 'gzip, deflate, br',
-		}
+		},
+		timeout: 10000
 	}
 }
 
@@ -1812,7 +1833,8 @@ function taskMsPostUrl(function_id, body = {}, extra = '', function_id2) {
 			"referer": "https://h5.m.jd.com/babelDiy/Zeus/2NUvze9e1uWf4amBhe1AV6ynmSuH/index.html",
 			'Content-Type': 'application/x-www-form-urlencoded',
 			"User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
-		}
+		},
+		timeout: 10000
 	}
 }
 
@@ -1864,7 +1886,7 @@ async function getjdfruit() {
 				"User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
 				"Content-Type": "application/x-www-form-urlencoded"
 			},
-			timeout: 10000,
+			timeout: 10000
 		};
 		$.post(option, (err, resp, data) => {
 			try {
@@ -1935,7 +1957,8 @@ function taskPetUrl(function_id, body = {}) {
 			'User-Agent': $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
 			'Host': 'api.m.jd.com',
 			'Content-Type': 'application/x-www-form-urlencoded',
-		}
+		},
+		timeout: 10000
 	};
 }
 
@@ -2019,7 +2042,8 @@ function taskcashUrl(_0x7683x2, _0x7683x3 = {}) {
 			'user-agent': __Oxb24bc[0x10],
 			'accept-language': __Oxb24bc[0x11],
 			'Cookie': cookie
-		}
+		},
+		timeout: 10000
 	}
 }
 (function (_0x7683x9, _0x7683xa, _0x7683xb, _0x7683xc, _0x7683xd, _0x7683xe) {
@@ -2167,7 +2191,8 @@ function jxTaskurl(functionId, body = '', stk) {
 			'Accept-Language': 'zh-cn',
 			'Referer': 'https://wqsd.jd.com/pingou/dream_factory/index.html',
 			'Accept-Encoding': 'gzip, deflate, br',
-		}
+		},
+		timeout: 10000
 	}
 }
 
@@ -2278,7 +2303,7 @@ function ddFactoryTaskUrl(function_id, body = {}, function_id2) {
 			"Referer": "https://h5.m.jd.com/babelDiy/Zeus/2uSsV2wHEkySvompfjB43nuKkcHp/index.html",
 			"User-Agent": "jdapp;iPhone;9.3.4;14.3;88732f840b77821b345bf07fd71f609e6ff12f43;network/4g;ADID/1C141FDD-C62F-425B-8033-9AAB7E4AE6A3;supportApplePay/0;hasUPPay/0;hasOCPay/0;model/iPhone11,8;addressid/2005183373;supportBestPay/0;appBuild/167502;jdSupportDarkMode/0;pv/414.19;apprpd/Babel_Native;ref/TTTChannelViewContoller;psq/5;ads/;psn/88732f840b77821b345bf07fd71f609e6ff12f43|1701;jdv/0|iosapp|t_335139774|appshare|CopyURL|1610885480412|1610885486;adk/;app_device/IOS;pap/JA2015_311210|9.3.4|IOS 14.3;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1",
 		},
-		timeout: 10000,
+		timeout: 10000
 	}
 }
 
@@ -2315,7 +2340,8 @@ function taskPostClientActionUrl(body) {
 			'Origin': 'https://joypark.jd.com',
 			'Referer': 'https://joypark.jd.com/?activityId=LsQNxL7iWDlXUs6cFl-AAg&lng=113.387899&lat=22.512678&sid=4d76080a9da10fbb31f5cd43396ed6cw&un_area=19_1657_52093_0',
 			'Cookie': cookie,
-		}
+		},
+		timeout: 10000
 	}
 }
 
@@ -2339,7 +2365,8 @@ function taskJxUrl(functionId, body = '') {
             "Accept-Language": "zh-CN,zh-Hans;q=0.9",
             "Referer": "https://st.jingxi.com/",
             "Cookie": cookie
-        }
+        },
+		timeout: 10000
     }
 }
 
@@ -2466,7 +2493,8 @@ function getGetRequest(type, url) {
 	return {
 		url: url,
 		method: method,
-		headers: headers
+		headers: headers,
+		timeout: 10000
 	};
 }
 
@@ -2557,6 +2585,7 @@ async function requestAlgo() {
 				if (err) {
 					console.log(`${JSON.stringify(err)}`)
 					console.log(`request_algo 签名参数API请求失败，请检查网路重试`)
+					llgeterror = true;
 				} else {
 					if (data) {
 						data = JSON.parse(data);
@@ -2569,10 +2598,12 @@ async function requestAlgo() {
 							console.log('request_algo 签名参数API请求失败:')
 						}
 					} else {
+						llgeterror = true;
 						console.log(`京东服务器返回空数据`)
 					}
 				}
 			} catch (e) {
+				llgeterror = true;
 				$.logErr(e, resp)
 			}
 			finally {
@@ -2680,7 +2711,8 @@ function taskPetPigUrl(function_id, body) {
       'User-Agent': UA,
       'Referer': `https://u.jr.jd.com/`,
       'Accept-Language': `zh-cn`
-    }
+    },
+    timeout: 10000
   }
 }
 
