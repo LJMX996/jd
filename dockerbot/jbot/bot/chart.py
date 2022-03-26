@@ -19,7 +19,7 @@ async def my_chart(event):
         if text==None:
             SENDER = event.sender_id
             btn = []
-            for i in range(11):
+            for i in range(20):
                 btn.append(Button.inline(str(i+1), data=str(i+1)))
             btn.append(Button.inline('取消', data='cancel'))
             btn = split_list(btn, 3)            
