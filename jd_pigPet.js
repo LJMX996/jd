@@ -1,10 +1,8 @@
 /*
-活动入口：京东金融养猪猪
-一键开完所有的宝箱功能。耗时70秒
-大转盘抽奖
-喂食
-每日签到
-完成分享任务得猪粮
+*
+京东金融养猪猪
+活动入口：京东金融养猪猪，
+加了个邀新助力，不过应该没啥用。邀请码变量：PIGPETSHARECODES，变量仅支持单账号邀请码
 已支持IOS双京东账号,Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ============Quantumultx===============
@@ -69,7 +67,6 @@ if ($.isNode()) {
     }
   }
   console.log(`\n======开始大转盘助力======\n`);
-  $.helpId = await getAuthorShareCode('');
   $.shareCodes = [...$.shareCodes, ...($.helpId || [])]
   for (let j = 0; j < cookiesArr.length; j++) {
     cookie = cookiesArr[j];
