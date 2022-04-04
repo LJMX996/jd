@@ -148,24 +148,15 @@ async def myaddwskey(event):
                     text += f"新增wskey成功！pin为：{pt_pin}\n"
                 msg = await jdbot.edit_message(msg, text)
         if len(text) > 1:
-            if os.path.exists("/jd/own/wskey_ptkey.py"):
+            if os.path.exists("/jd/own/ck_check_up.py"):
                 text += "\n将自动更新cookie列表，自行查看更新情况"
-                await cmd("python /jd/own/wskey_ptkey.py")
-            elif os.path.exists("/jd/scripts/wskey_ptkey.py"):
+                await cmd("python /jd/own/ck_check_up.py")
+            elif os.path.exists("/jd/scripts/ck_check_up.py"):
                 text += "\n将自动更新cookie列表，自行查看更新情况"
-                await cmd("python /jd/scripts/wskey_ptkey.py")
-            elif os.path.exists("/ql/scripts/wskey_ptkey.py"):
+                await cmd("python /jd/scripts/ck_check_up.py")
+            elif os.path.exists("/ql/scripts/ck_check_up.py"):
                 text += "\n将自动更新cookie列表，自行查看更新情况"
-                await cmd("task /ql/scripts/wskey_ptkey.py")
-            elif os.path.exists("/ql/scripts/ql_pandaAPI_refreshCK.py") and not os.path.exists("/ql/db/wskey.list"):
-                text += "\n将自动更新cookie列表，自行查看更新情况"
-                await cmd("task /ql/scripts/ql_pandaAPI_refreshCK.py")
-            elif os.path.exists("/ql/raw/ql_pandaAPI_refreshCK.py") and not os.path.exists("/ql/db/wskey.list"):
-                text += "\n将自动更新cookie列表，自行查看更新情况"
-            elif os.path.exists("/ql/scripts/ql_pandaAPI_refreshCK.py") and os.path.exists("/ql/db/wskey.list"):
-                text += "\n由于使用wskey.list存储，无法执行scripts目录下的ql_pandaAPI_refreshCK.py脚本"
-            elif os.path.exists("/ql/raw/ql_pandaAPI_refreshCK.py") and os.path.exists("/ql/db/wskey.list"):
-                text += "\n由于使用wskey.list存储，无法执行raw目录下的ql_pandaAPI_refreshCK.py脚本"
+                await cmd("task /ql/scripts/ck_check_up.py")
             if "自动更新" in text or "无法执行" in text:
                 await jdbot.edit_message(msg, text)
     except Exception as e:
