@@ -1,22 +1,22 @@
 /*
-京享周周乐
-活动入口：京东APP --京享会员
-更新时间：2022-04-03
+微信签到领现金
 by:小手冰凉 tg:@chianPLA
-已支持IOS双京东账号,Node.js支持N个京东账号
-脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
-============Quantumultx===============
+交流群：https://t.me/jdPLA2
+脚本更新时间：2022-4-2
+脚本兼容: Node.js
+新手写脚本，难免有bug，能用且用。
+===========================
 [task_local]
-#京享周周乐
-2 6 * * 5 jd_xs_zzl.js, tag=京享周周乐, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+#微信签到领现金
+16 0,5 * * * jd_cash_wx.js, tag=微信签到领现金, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
  */
 
-const $ = new Env('京享周周乐');
+const $ = new Env('微信签到领现金');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 //IOS等用户直接用NobyDa的jd cookie
-let cookiesArr = [], cookie = '', message;
+let cookiesArr = [], cookie = '';
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => { cookiesArr.push(jdCookieNode[item]) })
   if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => { };
@@ -48,8 +48,7 @@ let allMessage = '';
         }
         continue
       }
-      await pg_channel_page_data();
-      await $.wait(1000);
+      await jdCash()
     }
   }
   if (allMessage) {
@@ -63,55 +62,80 @@ let allMessage = '';
   .finally(() => {
     $.done();
   })
+async function jdCash() {
+  await mob_sign()
+  await mob_home()
 
-//首页
-function pg_channel_page_data() {
+}
+
+//做任务
+function mob_sign() {
   return new Promise((resolve) => {
-    $.get(taskUrl("pg_channel_page_data", { "v": "13.2", "paramData": { "token": "2b11cbdd-b8bb-4a98-ad17-c9d6bc23ee92" }, "argMap": { "raffleConfigId": "12" } }), async (err, resp, data) => {
+    $.get(taskUrl("cash_mob_sign", { "breakReward": 1 }), (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
-          console.log(`pg_channel_page_data API请求失败，请检查网路重试`)
+          console.log(`cash_mob_sign API请求失败，请检查网路重试`)
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
-            if (data.success === true) {
-              console.log(data.data.floorInfoList[0].floorData.rarityActNineBox.raffleActKey);
-              console.log(data.data.floorInfoList[0].token);
-              await pg_interact_interface_invoke(data.data.floorInfoList[0].token, data.data.floorInfoList[0].floorData.rarityActNineBox.raffleActKey)
+            // console.log(data);
+            if (data.data.bizCode === 0) {
+              console.log(`签到${data.data.bizMsg}`)
             } else {
-              console.log(data.message);
+              console.log(data.data.bizMsg)
             }
           }
         }
       } catch (e) {
         $.logErr(e, resp)
       } finally {
-        resolve(data);
+        resolve();
       }
     })
   })
 }
 
 
-function pg_interact_interface_invoke(floorToken, raffleActKey) {
+//获取任务
+function mob_home() {
   return new Promise((resolve) => {
-    $.get(taskUrl("pg_interact_interface_invoke", { "v": "13.2", "floorToken": floorToken, "dataSourceCode": "lottery", "argMap": { "raffleActKey": raffleActKey, "pitIndex": 1 } }), (err, resp, data) => {
+    $.get(taskUrl("cash_mob_home"), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
-          console.log(`pg_interact_interface_invoke API请求失败，请检查网路重试`)
+          console.log(`cash_mob_home API请求失败，请检查网路重试`)
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
-            if (data.success === true) {
-              if (data.data.prizeIndex === 0) {
-                console.log(`恭喜获${data.data.beanNumber}得京豆`);
-              } else {
-                console.log(`恭喜获优惠卷`);
+            if (data.code === 0 && data.data.result) {
+              for (let task of data.data.result.taskInfos) {
+                if (task.type === 4) {
+                  for (let i = task.doTimes; i < task.times; ++i) {
+                    console.log(`去做${task.name}任务 ${i + 1}/${task.times}`)
+                    await doTask(task.type, task.jump.params.skuId)
+                    await $.wait(5000)
+                  }
+                } else if (task.type === 2) {
+                  for (let i = task.doTimes; i < task.times; ++i) {
+                    console.log(`去做${task.name}任务 ${i + 1}/${task.times}`)
+                    await doTask(task.type, task.jump.params.shopId)
+                    await $.wait(5000)
+                  }
+                } else if (task.type === 31) {
+                  for (let i = task.doTimes; i < task.times; ++i) {
+                    console.log(`去做${task.name}任务 ${i + 1}/${task.times}`)
+                    await doTask(task.type, task.jump.params.path)
+                    await $.wait(5000)
+                  }
+                } else if (task.type === 16 || task.type === 3 || task.type === 5 || task.type === 17 || task.type === 21) {
+                  for (let i = task.doTimes; i < task.times; ++i) {
+                    console.log(`去做${task.name}任务 ${i + 1}/${task.times}`)
+                    await doTask(task.type, task.jump.params.url)
+                    await $.wait(5000)
+                  }
+                }
               }
-            } else {
-              console.log("抽奖失败:  " + data.resultTips);
             }
           }
         }
@@ -124,22 +148,49 @@ function pg_interact_interface_invoke(floorToken, raffleActKey) {
   })
 }
 
+//做任务
+function doTask(type, taskInfo) {
+  return new Promise((resolve) => {
+    $.get(taskUrl("cash_doTask", { "type": type, "taskInfo": taskInfo }), (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${JSON.stringify(err)}`)
+          console.log(`cash_doTask API请求失败，请检查网路重试`)
+        } else {
+          if (safeGet(data)) {
+            data = JSON.parse(data);
+            if (data.code === 0) {
+              console.log(`任务完成成功`)
+            } else {
+              console.log(data)
+            }
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve(data);
+      }
+    })
+  })
+}
 
 function taskUrl(functionId, body = {}) {
   return {
-    url: `${JD_API_HOST}?functionId=${functionId}&body=${encodeURIComponent(JSON.stringify(body))}&uuid=&appid=vipChannelHome&loginWQBiz=huiyuan&ext=&t=${(new Date).getTime()}`,
+    url: `${JD_API_HOST}?functionId=${functionId}&body=${encodeURIComponent(JSON.stringify(body))}&&appid=CashRewardMiniH5Env&clientVersion=9.2.0&loginWQBiz=interact`,
     headers: {
       'Cookie': cookie,
       'Host': 'api.m.jd.com',
-      'user-agent': 'Mozilla/5.0 (Linux; Android 9; Note9 Build/PKQ1.181203.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/86.0.4240.99 XWEB/3209 MMWEBSDK/20220204 Mobile Safari/537.36 MMWEBID/8813 MicroMessenger/8.0.20.2100(0x280014DA) Process/appbrand1 WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64 miniProgram/wx91d27dbf599dff74',
-      'accept': '*/*',
-      'x-requested-with': 'com.tencent.mm',
-      'referer': 'https://huiyuan.m.jd.com/?source=xcx',
-      'accept-encoding': 'gzip, deflate',
-      'accept-language': 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7'
+      'Connection': 'keep-alive',
+      'Content-Type': 'application/json',
+      'Referer': 'http://wq.jd.com/wxapp/pages/hd-interaction/index/index',
+      'User-Agent': $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+      'Accept-Language': 'zh-cn',
+      'Accept-Encoding': 'gzip, deflate, br',
     }
   }
 }
+
 
 function TotalBean() {
   return new Promise(async resolve => {
