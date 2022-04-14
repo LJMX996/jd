@@ -70,7 +70,7 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
     if (!id) continue;
     console.log(`\n今日${new Date().getHours()}点ID：${id
     }\n`);
-    for (let i = 0; i < cookiesArr.length; i++) {
+    for (let i = 0; i < 10; i++) {
       if (cookiesArr[i]) {
         cookie = cookiesArr[i];
         $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
