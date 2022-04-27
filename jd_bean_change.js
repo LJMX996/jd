@@ -163,7 +163,7 @@ if ($.isNode()) {
 }
 
 //查询开关
-let strDisableList = "";
+let strDisableList = "金融养猪&东东农场";
 let DisableIndex=-1;
 if ($.isNode()) {	
 	strDisableList = process.env.BEANCHANGE_DISABLELIST ? process.env.BEANCHANGE_DISABLELIST.split('&') : [];
