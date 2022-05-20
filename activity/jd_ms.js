@@ -1,31 +1,18 @@
 /*
-京东秒秒币
-Last Modified time: 2021-05-22 8:55:00
-一天签到100币左右，100币可兑换1毛钱红包，推荐攒着配合农场一起用
-活动时间：长期活动
+搞鸡玩家-秒秒币
+Last Modified time: 2022-1-21
+活动入口：京东 首页秒杀
 更新地址：jd_ms.js
-活动入口：京东app-京东秒杀-签到领红包
-脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
-============Quantumultx===============
-[task_local]
-#京东秒秒币
-10 7 * * * jd_ms.js, tag=京东秒秒币, img-url=https://raw.githubusercontent.com/yogayyy/Scripts/master/Icon/shylocks/jd_ms.jpg, enabled=true
+已支持IOS双京东账号, Node.js支持N个京东账号
+脚本兼容: QuantumultX, Surge, Loon, 小火箭，JSBox, Node.js
 
-================Loon==============
-[Script]
-cron "10 7 * * *" script-path=jd_ms.js,tag=京东秒秒币
-
-===============Surge=================
-京东秒秒币 = type=cron,cronexp="10 7 * * *",wake-system=1,timeout=200,script-path=jd_ms.js
-
-============小火箭=========
-京东秒秒币 = type=cron,script-path=jd_ms.js, cronexpr="10 7 * * *", timeout=200, enable=true
  */
-const $ = new Env('京东秒秒币');
+const $ = new Env('搞鸡玩家-秒秒币');
 
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+var timestamp = Math.round(new Date().getTime()).toString();
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
 if ($.isNode()) {
@@ -40,7 +27,6 @@ if ($.isNode()) {
 }
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 !(async () => {
-    console.log(`\n❗❗❗❗❗❗\n注意:本仓库偷助力，偷CK，今天用这个仓库，明天你一觉醒来服务器就被我偷走了🌝🌝🌚🌚\n❗❗❗❗❗❗\n`);
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
     return;
@@ -63,6 +49,8 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
         }
         continue
       }
+      console.log(`通天塔签到`)
+      await tttsign()
       await jdMs()
     }
   }
@@ -78,11 +66,15 @@ async function jdMs() {
   $.score = 0
   await getActInfo()
   await getUserInfo()
+  await getActInfo()
   $.cur = $.score
   if ($.encryptProjectId) {
+      console.log(`领红包签到`)
+      await readpacksign()
     await getTaskList()
   }
   await getUserInfo(false)
+  
   await showMsg()
 }
 
@@ -99,6 +91,7 @@ function getActInfo() {
             if (data.code === 200) {
               $.encryptProjectId = data.result.assignmentResult.encryptProjectId
               console.log(`活动名称：${data.result.assignmentResult.projectName}`)
+              sourceCode = data.result.sourceCode
             }
           }
         }
@@ -134,6 +127,7 @@ function getUserInfo(info=true) {
     })
   })
 }
+
 function getTaskList() {
   let body = {"encryptProjectId": $.encryptProjectId, "sourceCode": "wh5"}
   return new Promise(resolve => {
@@ -207,7 +201,7 @@ function getTaskList() {
 }
 
 function doTask(body) {
-  body = {...body, "encryptProjectId": $.encryptProjectId, "sourceCode": "wh5", "ext": {}}
+  body = {...body, "encryptProjectId": $.encryptProjectId, "sourceCode": sourceCode, "ext": {},"extParam":{"businessData":{"random":25500725},"signStr":timestamp+"~1hj9fq9","sceneid":"MShPageh5"} }
   return new Promise(resolve => {
     $.post(taskPostUrl('doInteractiveAssignment', body), (err, resp, data) => {
       try {
@@ -230,6 +224,57 @@ function doTask(body) {
   })
 }
 
+function tttsign() {
+  return new Promise(resolve => {
+      body = 'appid=babelh5&body=%7B%22encryptProjectId%22%3A%224NzhoLbAJtBXbyRj5zGwprtf6GDv%22%2C%22encryptAssignmentId%22%3A%223yRMFkp3SN8nXpX49xAdCWsdy5XP%22%2C%22completionFlag%22%3Atrue%2C%22itemId%22%3A%221%22%2C%22sourceCode%22%3A%22aceaceqingzhan%22%7D&sign=11&t=1642929553660'
+    $.post(ttt(body), (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${err},${jsonParse(resp.body)['message']}`)
+          console.log(`${$.name} API请求失败，请检查网路重试`)
+        } else {
+          if (safeGet(data)) {
+            data = JSON.parse(data)
+            if (data.code === 0) {
+              rewardsInfo = data.rewardsInfo.failRewards[0].msg
+              console.log(`${rewardsInfo}`)
+            }else console.log(data.msg)
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve(data);
+      }
+    })
+  })
+}
+function readpacksign() {
+  return new Promise(resolve => {
+      body = 'uuid=88888&clientVersion=10.3.4&client=wh5&osVersion=&area=4_48201_54794_0&networkType=unknown&functionId=signRedPackage&body={"random":"23715587","log":"~1oji7rf","sceneid":"MShPageh5","ext":{"platform":"1","eid":"","referUrl":-1,"userAgent":-1}}&appid=SecKill2020'
+    $.post(readpack(body), (err, resp, data) => {
+    
+      try {
+        if (err) {
+          console.log(`${err},${jsonParse(resp.body)['message']}`)
+          console.log(`${$.name} API请求失败，请检查网路重试`)
+        } else {
+          if (safeGet(data)) {
+            data = JSON.parse(data)
+            if (data.code === 200) {
+              rewardsInfo = data.result.assignmentResult.msg
+              console.log(`${rewardsInfo}`)
+            }else console.log("今日签到红包已领")
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve(data);
+      }
+    })
+  })
+}
 function showMsg() {
   return new Promise(resolve => {
     message += `本次运行获得秒秒币${$.score-$.cur}枚，共${$.score}枚`;
@@ -237,8 +282,36 @@ function showMsg() {
     resolve()
   })
 }
+function ttt(body) {
+  let url = `${JD_API_HOST}client.action?functionId=doInteractiveAssignment`;
 
+  return {
+    url,
+    body: body,
+    headers: {
+      "Cookie": cookie,
+      "origin": "https://prodev.m.jd.com",
+     
+      'Content-Type': 'application/x-www-form-urlencoded',
+      "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+    }
+  }
+}
+function readpack(body) {
+  let url = `${JD_API_HOST}client.action`;
 
+  return {
+    url,
+    body: body,
+    headers: {
+      "Cookie": cookie,
+      "origin": "https://h5.m.jd.com",
+     
+      'Content-Type': 'application/x-www-form-urlencoded',
+      "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+    }
+  }
+}
 function taskPostUrl(function_id, body = {}, extra = '', function_id2) {
   let url = `${JD_API_HOST}`;
   if (function_id2) {
