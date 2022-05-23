@@ -9,7 +9,7 @@
  * Copyright (c) 2022 by 烟雨, All Rights Reserved. 
  */
 //[rule:code ?]
-//[rule:转口令 ?]
+
 
 var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTI4MjMzODg0OCwiaWF0IjoxNjUzMzEwNTMwLCJleHAiOjE2ODQ4NDY1MzB9.LIi-9Xbuj-higATAKWVmqGpYlRe57if78-0zs9i_Y6c"
 
