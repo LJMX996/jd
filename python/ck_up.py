@@ -584,7 +584,7 @@ if __name__ == '__main__':  # Python主函数执行入口
     if "WSKEY_SLEEP" in os.environ and str(os.environ["WSKEY_SLEEP"]).isdigit():  # 判断变量[WSKEY_SLEEP]是否为数字类型
         sleepTime = int(os.environ["WSKEY_SLEEP"])  # 获取变量 [int]
     else:  # 判断分支
-        sleepTime = 3  # 默认休眠时间 10秒
+        sleepTime = 5  # 默认休眠时间 10秒
     for ws in wslist:  # wslist变量 for循环  [wslist -> ws]
         wspin = ws.split(";")[0]  # 变量分割 ;
         if "pin" in wspin:  # 判断 pin 是否存在于 [wspin]
