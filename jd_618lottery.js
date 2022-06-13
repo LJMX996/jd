@@ -1,13 +1,18 @@
 /*
 618天天抽奖
+
 请求太频繁会被黑ip
+
+
 活动网址：
 https://prodev.m.jd.com/mall/active/2tSZSK78Bm63pM4yGwA1rKChafQz/index.html
+
 cron:33 7 * * *
 ============Quantumultx===============
 [task_local]
 #618天天抽奖
 33 7 * * * jd_618lottery.js, tag=618天天抽奖, enabled=true
+
 */
 const $ = new Env('618天天抽奖');
 const notify = $.isNode() ? require('./sendNotify') : '';
