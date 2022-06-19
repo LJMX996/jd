@@ -1,9 +1,20 @@
 /*
+脚本：取关主播
+更新时间：2021-07-27
+默认：每运行一次脚本取关所有主播
 
+脚本兼容: Quantumult X, Surge, Loon, JSBox, Node.js, 小火箭
 ==============Quantumult X===========
 [task_local]
 #取关所有主播
-55 6,22 * * * jd_unsubscriLive.js, 
+55 22 * * * jd_unsubscriLive.js, tag=取关所有主播, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+===========Loon============
+[Script]
+cron "55 22 * * *" script-path=jd_unsubscriLive.js,tag=取关所有主播
+============Surge=============
+取关所有主播 = type=cron,cronexp="55 22 * * *",wake-system=1,timeout=3600,script-path=jd_unsubscriLive.js
+===========小火箭========
+取关所有主播 = type=cron,script-path=jd_unsubscriLive.js, cronexpr="55 22 * * *", timeout=3600, enable=true
  */
 const $ = new Env('取关所有主播');
 //Node.js用户请在jdCookie.js处填写京东ck;
@@ -21,7 +32,6 @@ if ($.isNode()) {
     cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
 !(async () => {
-    console.log(`\n❗❗❗❗❗❗\n注意:本仓库偷助力，偷CK，今天用这个仓库，明天你一觉醒来服务器就被我偷走了🌝🌝🌚🌚\n❗❗❗❗❗❗\n`);
     let aid = ''
     if (!cookiesArr[0]) {
         $.msg('【京东账号一】取关所有主播失败', '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
@@ -126,7 +136,7 @@ function unsubscribeCartsFun(author) {
                 $.result = true;
                 console.log(`取关主播【${$.userName}】成功\n`)
             } else {
-                console.log(`取关主播【${$.userName}】失败：` + data + `\n`)
+                console.log(`取关主播【${$.userName}】失败\n`)
             }
             resolve(data);
         });

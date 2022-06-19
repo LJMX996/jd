@@ -1,5 +1,7 @@
 /*
- cron 18 9,18 * * * jd_speed_signfree_Mod.js 签到免单
+  入口>京东极速版>首页>签到免单
+  京东极速版,先下单,第二天开始签到
+  18 8,20 * * * jd_speed_signfree.js 签到免单
 */
 const $ = new Env('京东极速版签到免单');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -101,7 +103,7 @@ function query() {
                                 first_flag = false
                                 console.log("脚本也许随时失效,请注意");
                                 msg.push("脚本也许随时失效,请注意")
-                                if (data.data.risk == true) {
+                                if (data.data.risk == false) {
                                     console.log("风控用户,可能有异常");
                                     msg.push("风控用户,可能有异常")
                                 }
