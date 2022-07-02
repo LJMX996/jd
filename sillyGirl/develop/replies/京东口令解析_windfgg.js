@@ -15,7 +15,8 @@ try {
     }, function (err, resp, body) {
         result = JSON.parse(body)
         if (result.code == 200) {
-            sendText("口令发起人：" + result.data.userName + "\n链接：" + result.data.jumpUrl)
+            sendText("口令发起人：" + result.data.userName)
+            sendText(result.data.jumpUrl)
         } else {
             sendText(result.msg)
         }
