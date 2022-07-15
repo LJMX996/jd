@@ -1,24 +1,12 @@
-/**
- * 登录助手
- * 环境：qx,loon,surge
- *
- * [MITM] *.jd.com, *.*.jd.com, *.jingxi.com, *.*.jingxi.com
- *
- * [Rule]
- * 京喜：^https?:\/\/([\w-]+\.)?([\w-]+\.)jingxi\.com\/?((?!\.(js|json|gif|webp|dpg|flv|mp3|mp4)).)*$
- * 京东：^https?:\/\/([\w-]+\.)?([\w-]+\.)jd\.(com|hk)\/?((?!\.(js|json|gif|webp|dpg|flv|mp3|mp4)).)*$
- *
- * [Script]
- * https://raw.githubusercontent.com/dompling/Script/master/jd/jd_login_help.js
- */const $ = new API('jd_ck_remark'),
+const $ = new API('jd_ck_remark'),
   APIKey = 'CookiesJD',
   CacheKey = `#${APIKey}`,
   remark_key = `remark`,
   searchKey = 'keyword'
+
 ;($.url = $request.url), ($.html = $response.body)
 
 const cookieIndex = $.read(`#CookieIndex`) || 0
-const boxjs_host = $.read('#boxjs_host').indexOf('com') !== -1 ? 'com' : 'net'
 
 try {
   ;($.html.includes && $.html.includes('</body>')) || $.done({ body: $.html })
@@ -38,9 +26,7 @@ function getUsername(str) {
 
 // 初始化 boxjs 数据
 function initBoxJSData() {
-  const CookiesJD = JSON.parse($.read(CacheKey) || '[]').map((item) => {
-    return { ...item, userName: getUsername(item.userName) }
-  })
+  const CookiesJD = JSON.parse($.read(CacheKey) || '[]')
 
   let cookiesRemark = JSON.parse($.read(remark_key) || '[]')
   const keyword = ($.read(searchKey) || '').split(',')
@@ -48,15 +34,14 @@ function initBoxJSData() {
   const cookiesFormat = {}
 
   cookiesRemark.forEach((item) => {
-    const key = getUsername(item.username)
-    cookiesFormat[key] = item
+    cookiesFormat[item.username] = item
   })
 
   cookiesRemark = CookiesJD.map((item) => ({
-    nickname: getUsername(item.userName),
-    ...cookiesFormat[item.userName],
     ...item,
     username: getUsername(item.userName),
+    nickname: getUsername(item.userName),
+    ...cookiesFormat[item.userName],
   })).filter((item) => !!item.cookie)
 
   cookiesRemark = cookiesRemark.filter((item, index) => {
@@ -76,9 +61,6 @@ const cookiesRemark = initBoxJSData()
 function createStyle() {
   return `
 <style>
-   #cus-mask{
-     overflow:hidden
-   }
    #cus-mask .iconfont{
      font-size: ${getRem(0.2)};
    }
@@ -136,21 +118,27 @@ function createStyle() {
   }
   .cus-mask{
     position: fixed;
-    top: -500vh;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: rgba(0,0,0,.6);
+  }
+  .cus-mask_view{
+    width: 85%;
+    background: #fff;
+    border-radius: ${getRem(0.25)};
+    overflow: hidden;
+    position: relative;
+    top: 50%;
     left: 50%;
-    z-index: 9999;   
+    color: #2e2d2d;
     transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
     -moz-transform: translate(-50%,-50%);
     -webkit-transform: translate(-50%,-50%);
-    -o-transform: translate(-50%,-50%); 
-  }
-  .cus-mask_view{
-    width: 90vw;
-    background: #fff;
-    border-radius: ${getRem(0.25)};
-    overflow: hidden;
-    color: #2e2d2d;
+    -o-transform: translate(-50%,-50%);
   }
   .cus-view{
     font-size: ${getRem(0.16)};
@@ -204,7 +192,7 @@ function createStyle() {
     text-align: center;
     height: ${getRem(0.45)};
     line-height: ${getRem(0.45)};
-    width: 100%;
+    width: 50%;
     border-top: 1px solid #eaeaea;
   }
   .cus-footer span{
@@ -248,8 +236,8 @@ function createStyle() {
   #account_list{
     border: 4px solid #f7bb10;
     border-radius: ${getRem(0.3)};
-    height: ${getRem(3.69)};
-    // min-height: ${getRem(1.98)};
+    max-height: ${getRem(3.69)};
+    min-height: ${getRem(1.98)};
     overflow-x: hidden;
     overflow-y: scroll;
     padding: ${getRem(0.06)} ${getRem(0.1)};
@@ -418,8 +406,7 @@ function createStyle() {
   }
   .isPlus{
     width: ${getRem(0.4)};
-    z-index:99;
-    height: ${getRem(0.4)};
+z-index:99;    height: ${getRem(0.4)};
     position: absolute;
     left: -1px;
     top: -3px;
@@ -476,103 +463,14 @@ function createStyle() {
   .jinfen_group .cart,.jinfen_group .cart a{
     color: #1890ff !important;
   }
-
-  .mask{
-    position:fixed;
-    width:100%;
-    height:100%;
-    top:0;
-    left:0;
-    z-index:9998;
-    background:rgba(0,0,0,.2);
-    display:none;
-  }
-  #edit-row {
-    display:none;
-  }
-  .edit-form{
-    position: absolute;
-    width:100%;
-    height:100%;
-    z-index:9999;
-    background: #fff;
-    border-radius: ${getRem(0.25)};
-    overflow: hidden;
-    color: #2e2d2d;
-    bottom: -500vh;
-    box-sizing: border-box;
-  }
-  .edit-form .form-title{
-    padding: 10px;
-    height: 45px;
-    text-align: center;
-    font-size: 16px;
-    color: #333;
-    background:linear-gradient(180deg,#fff,#efefef);
-    box-sizing: border-box;
-  }
-  #eidt-form{
-    padding:0 10px;
-  }
-  #cus-mask p.form-item{
-    font-size: 12px;
-    padding: 12px 10px 12px 75px;
-    position: relative;
-    box-sizing: border-box;
-  }
-  .form-item-label:after{
-    content: "";
-    position: absolute;
-    z-index: 1;
-    pointer-events: none;
-    background-color: #cbcbcb;
-    height: 1px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-  .form-item-label span{
-    width: 65px;
-    line-height: 1;
-    position: absolute;
-    top: 15px;
-    left: 0;
-    right: 0;
-    margin: auto 0;
-    padding: 0 10px;
-    font-size: 14px;
-    color: #999;
-  }
-  .form-item-input{
-    height: 20px;
-    line-height: normal;
-    border: 0 none;
-    font-size: 14px;
-    width: 100%;
-    -webkit-appearance: none;
-    vertical-align: top;
-    color: #333;
-  }
-  .form-container{
-    position:relative;
-    height:calc(100% - 45px)
-  }
-  .form-container .cus-footer{
-    position: absolute;
-    width:100%;
-    bottom:0;
-  }
-  b.beanNum{
-    color:#ef3620 !important;
-    margin-right: ${getRem(0.14)} !important;
-  }
 </style>
 `
 }
 const accounts = cookiesRemark
   .map((n, e) => {
-    const t = '正常' === n.status;
-    const beanNum = n.beanNum?`<b class="ant-ribbon beanNum">京豆：${n.beanNum}</b>`:'';
+    const t = '正常' === n.status,
+      i = n.wskey ? 'ant-tag-cyan' : 'ant-tag-magenta',
+      s = n.wskey ? 'APP' : 'WEB'
     return `
 <div class="cus-avatar" data-value="${n.mobile || ''}" data-name="${
       n.username
@@ -588,34 +486,20 @@ const accounts = cookiesRemark
     ${'1' === n.isPlusVip ? `<div class="isPlus"></div>` : ''}
   </div>
   <div class="cususer_info">
-     <p>${decodeURIComponent(n.nickname)}</p>
-     <span><b class="ant-ribbon">${e + 1}</b>${n.username}</span>
+     <p>${decodeURIComponent(n.nickname)} </p>
+     <span><b class="ant-ribbon">${e + 1}</b>${decodeURIComponent(
+      n.username
+    )}</span>
   </div>
   
-  <div class="beanNumValue">
-    ${beanNum}  
-  </div>
-  
+  <span class="ant-tag ${i}">${s}</span>
   <span class="cus-icon ${t ? '' : 'cus-err'}"></span>
 </div>`
   })
   .join('')
-
 function createHTML() {
   return `
-<div id="cus-mask" class="cus-mask">
-  <div class="edit-form">
-      <h3 class="form-title" id="form-title"></h3>
-      <div class="form-container">
-        <form id="eidt-form"></form>
-        <div class="cus-footer">
-          <div class="btn-wrap" style="display: flex">
-            <span class="abtn" id="form-cancel">取消</span>
-            <span class="abtn btn-ok" id="form-ok">确定</span>
-          </div>
-        </div>
-      </div>
-  </div>
+<div id="cus-mask" class="cus-mask" style="visibility:hidden">
   <div class="cus-mask_view">
     <div class="cus-content">
       <div class="cus-view">
@@ -639,7 +523,7 @@ function createHTML() {
     </div>
     <div class="cus-footer">
         <div class="btn-wrap" style="display: flex">
-          <span class="abtn iconfont icon-bianji" id="edit-row"></span>
+          <span class="abtn iconfont icon-cancel" id="cus-mask-cancel"></span>
           <span class="abtn border-btn iconfont icon-dengchu" id="clear-ck"></span>
           <span class="abtn border-btn iconfont icon-fuzhi" id="copyCk"></span>
           <span class="abtn btn-ok iconfont ${
@@ -649,7 +533,7 @@ function createHTML() {
     </div>
   </div>
 </div>
-<div class="cus-mask" id="jf_mask">
+<div class="cus-mask" id="jf_mask" style="visibility:hidden">
     <div class="cus-mask_view" style="overflow: hidden;"></div>
 </div>
 <div id="cus-tip" style="display: none;"></div>
@@ -658,29 +542,27 @@ function createHTML() {
    <img  src="https://raw.githubusercontent.com/chavyleung/scripts/master/BOXJS.png" />
   </div>
 </div>
-<div id="mask" class="mask"></div>
   `
 }
 const fillMobile = `<span class="abtn border-btn iconfont icon-shouye" id="fill-input"></span>`
 function createScript() {
   return `
-<script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.0/jquery.min.js"><\/script>  
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"><\/script>  
 <script type="text/javascript">
   var pk = getCookie("pt_key");
   var pp = decodeURIComponent(getCookie("pt_pin"));
-
   var isLogin = window.location.href.indexOf("/login/login")>-1;
   const head = document.getElementsByTagName("head")[0];
   head.insertAdjacentHTML('beforeEnd', \`
   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-  <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_2100531_8vma5eluuga.css" charset="utf-8"/>
+  <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_2100531_3yc4kgu1xc6.css" charset="utf-8"/>
   \`);
-  
-  let jd_ck = ${JSON.stringify(cookiesRemark)};
-  console.log(jd_ck)
+
+  const jd_ck = ${JSON.stringify(cookiesRemark)};
   const boxjs_btn = document.querySelector("#boxjs");
   let fill_btn = document.querySelector("#fill-input");
   const copyCk_btn = document.querySelector("#copyCk");
+  const cancel_btn = document.querySelector("#cus-mask-cancel");
   const ok_btn = document.querySelector("#cus-mask-ok");
   let clear_btn = document.querySelector("#clear-ck");
   const tip_view = document.querySelector("#cus-tip");
@@ -725,7 +607,8 @@ function createScript() {
   function getAccountList(cks){
    return  cks.map((item,index) => {
   const status = item.status === '正常';
-  const beanNum = item.beanNum? \`<b class="ant-ribbon beanNum">京豆：\${item.beanNum}</b>\`:'';
+  const className = item.wskey ? 'ant-tag-cyan' : 'ant-tag-magenta';
+  const tag = item.wskey ? 'APP' : 'WEB';
   return \`
 <div class="cus-avatar" data-value="\${item.mobile||''}" data-name="\${item.username}">
   <div class="avatar_container \${item.isPlusVip==='1' ? 'plus' : ''}">
@@ -740,9 +623,9 @@ function createScript() {
 
   <div class="cususer_info">
      <p>\${decodeURIComponent(item.nickname)}</p>
-     <span><b class="ant-ribbon">\${index + 1}</b>\${item.username}</span>
+     <span><b class="ant-ribbon">\${index + 1}</b>\${decodeURIComponent(item.username)}</span>
   </div>
-  <div class="beanNumValue">\${beanNum}</div>
+  <span class="ant-tag \${className}">\${tag}</span>
   <span class="cus-icon \${status ? '' : 'cus-err'}"></span>
 </div>\`;
 }).join('')
@@ -767,7 +650,6 @@ function createScript() {
    if(avatarItem && avatarItem.avatar){
      boxjs_btn.innerHTML = "<img src='"+ avatarItem.avatar +"' />";
    }
-
    if(pk === "" || !pk){
     copyCk_btn.style.display="none";
     clear_btn.style.display="none";
@@ -779,7 +661,7 @@ function createScript() {
       var nextIndex = null;
       var current = null
       jd_ck.forEach((item,index)=>{
-        if(decodeURIComponent(item.username) === pp){
+        if(item.username === pp){
           current = index;
           preIndex = index !== 0 ? index - 1 : null;
           nextIndex = index !== jd_ck.length - 1 ? index + 1 : null;
@@ -834,24 +716,22 @@ function createScript() {
 
       avatarView.forEach(item=>{
        const username = item.getAttribute('data-name');
-        if(username === pp)item.className = "cus-avatar cus-now_active";
-
+        if(username === pp){
+          item.className = "cus-avatar cus-now_active";
+          item.id = "jd_account";
+        }
         item.onclick = function (){
-          avatarView.forEach(account=>{
-            account.className = "cus-avatar";
-            account.id = "";
+          avatarView.forEach(item=>{
+              item.className = "cus-avatar";
+              item.id = "";
           })
-
           const mobile = this.getAttribute('data-value');
           this.className = "cus-avatar cus-active";
           this.id = "jd_account";
-
           $("#fill-input").remove();
-          $("#edit-row").show();
-          $("#form-title").html(username);
-          
           if(mobile){
-            $("#cus-mask-ok").before(\`${fillMobile}\`);
+            copyToClipMobile(mobile);
+            if(isLogin) $("#cus-mask-cancel").after(\`${fillMobile}\`);
             registerClick();
           }
         }
@@ -859,9 +739,7 @@ function createScript() {
 
       if(fill_btn){
         fill_btn.addEventListener('click',function(){
-          if(isLogin) fillInput();
-          const mobile = $('#jd_account').data('value');
-          copyToClip(mobile,'手机号复制成功')
+          fillInput();
         });
       }
 
@@ -878,122 +756,23 @@ function createScript() {
     
     registerClick();
 
-
     boxjs_btn.addEventListener('click', function(){
       maskVisible(true);
+    });
+
+    cancel_btn.addEventListener('click', function(){
+      maskVisible(false);
     });
 
     ok_btn.addEventListener('click', function(){
       btnSubmit();
     });
 
-    const form_field = {
-        "avatar": {
-            "label": "头像",
-            "remark": "请输入头像链接"
-        },
-        "nickname": {
-            "label": "姓名"
-        },
-        "mobile": {
-            "label": "手机号"
-        },
-        "paymentCode": {
-          "label": "支付密码"
-        },
-        "cardId": {
-            "label": "身份证",
-            "remark": "请输入身份证前两位和后四位"
-        },
-        "isPlusVip": {
-            "label": "VIP",
-            "remark": "1vip ，0 非 vip"
-        },
-        "qywxUserId": {
-            "label": "企业微信",
-            "remark": "企业微信 ID&（all 推送所有）"
-        }
-    };
-
-    $("#edit-row").on('click',function(){
-      $(".edit-form").show();
-      $(".edit-form").animate({bottom:0});
-      const selectPin = $("#jd_account").data("name");
-      const current = jd_ck.find(item=>item.username === selectPin);
-      if(!current)return;
-      let form_html = \`
-            <input 
-              type="hidden"
-              name="userName" 
-              class="form-item-input" 
-              value="\${selectPin}" 
-            />
-        \`;
-      Object.keys(form_field).forEach((name)=>{
-        const field = form_field[name];
-        form_html+=\`<p class="form-item">
-                      <label class="form-item-label" for="\${name}">
-                        <span>\${field.label}</span>
-                        <input 
-                            name="\${name}" 
-                            class="form-item-input" 
-                            value="\${current[name]||""}" 
-                            placeholder="\${field.remark||"请输入"}"
-                         />
-                      </label>
-                    </p>\`
-      })
-      $("#eidt-form").html(form_html);
-    });
-    
-    $('#form-ok').on('click',function(){
-      const updateArr = $('#eidt-form').serializeArray();
-      let updateItem = {};
-      updateArr.forEach((item)=>{
-        updateItem[item.name]=item.value;
-      })
-      const new_jd_ck = []
-      const formValue = jd_ck.map((item,index)=>{
-          const {wskey,cookie,userName,...temp} = item;
-          if(item.userName === updateItem.userName){
-            updateItem = {...temp , ...updateItem};
-            new_jd_ck.push({...item , ...updateItem});
-            return { index , ...updateItem}
-          }
-          new_jd_ck.push(item);
-          return { index, ...temp}
-      });
-      
-      const val = JSON.stringify(formValue, null, \`\t\`);
-      $.ajax({
-        method:"post",
-        url:"//boxjs.${boxjs_host}/api/saveData/",
-        data:JSON.stringify({key:"@jd_ck_remark.remark",val:val}),
-        contentType:'application/x-www-form-urlencoded; charset=UTF-8',
-        success:(response)=>{
-          jd_ck = new_jd_ck;
-          account_list.innerHTML = getAccountList(jd_ck);
-          registerClick()
-          formHide();
-          $("#edit-row").hide();
-        }
-      })
-    })
-
-    function formHide(){
-      $('.edit-form').animate({bottom:"-500vh"},function(){
-        $(".edit-form").hide();
-      });
-    }
-
-    $('#form-cancel').on('click',function(){
-      formHide();
-    })
 
     copyCk_btn.addEventListener('click',function(){
-      copyToClip(\`pt_key=\${pk};pt_pin=\${pp}\`,'COOKIE复制成功');
+      copyToClip();
     })
-     
+
     function toast(message,time= 2000){
        tip_view.style.display = "block";
        tip_view.innerHTML = message;
@@ -1004,16 +783,8 @@ function createScript() {
     }
 
     function maskVisible(visible){
-      if(visible){
-        $('#mask').show();
-      }
-      $('#cus-mask').animate({top:visible?"50%":"-500vh"},function(){
-        if(!visible){
-          $('#mask').hide();
-          $('.edit-form').hide();
-          $('.edit-form').animate({bottom:"-500vh"});
-        }
-      });
+      const cusmsk = document.getElementById("cus-mask");
+      cusmsk.style.visibility = visible? "visible" : "hidden";
     }
 
     function fillInput(){
@@ -1080,74 +851,49 @@ function createScript() {
       }
       return "";
   }
-
-
-  function copyToClip(text,notify=false){
+  function copyToClip(){
     const _input = document.createElement('input');
     _input.style.width="1px";
     _input.style.height="1px";
     _input.style.position="fixed";
     _input.style.right="-1px";
     document.body.prepend(_input);
-    _input.value = text;
+    _input.value = "pt_key="+pk+";pt_pin="+pp+";";
     _input.focus();
     _input.select();
     document.execCommand('copy');
     _input.blur();
     document.body.removeChild(_input);
-    console.log(text)
-    if(notify)toast(notify);
+    toast('复制成功');
   }
 
-  $('#mask').on('click',function(){
-    $("#jf_mask,#cus-mask").animate({top:"-500vh"},function(){
-      formHide();
-      $('#mask').hide();
-    }) 
-  })
-
-<\/script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/eruda/2.4.1/eruda.min.js"><\/script>
-<script>
-    var eruda_show = localStorage.getItem("eruda_show")||"0";
-    if (eruda_show === "1") {
-      window.eruda && eruda.init();
-    }
-    // 记录点击次数
-    var clickCount = 0,initCount = 0;
-    // 设置连点监听
-    document.addEventListener('click', function() {
-        clickCount++;
-        if(initCount) clearTimeout(initCount)
-        initCount = setTimeout(function() {
-          clickCount = 0
-        }, 500)
-        if(clickCount === 3) showConsole();
-    })
-    
-    function showConsole() {
-      if (eruda_show === "0"){
-        $('#tool-bars,#tool_bar_jf').animate({right:"0"},1000);
-        window.eruda && eruda.init();
-        eruda_show = "1"
-      }else{
-        $('#tool-bars,#tool_bar_jf').animate({right:"-100px"},1000);
-        window.eruda && eruda.destroy();
-        eruda_show = "0"
-      }
-      localStorage.setItem("eruda_show",eruda_show)
-    }
+  function copyToClipMobile(mobile){
+    const _input = document.createElement('input');
+    _input.style.width="1px";
+    _input.style.height="1px";
+    _input.style.position="fixed";
+    _input.style.right="-1px";
+    document.body.prepend(_input);
+    _input.value = mobile;
+    _input.focus();
+    _input.select();
+    document.execCommand('copy');
+    _input.blur();
+    document.body.removeChild(_input);
+  }
 <\/script>
   `
 }
 
 ;(async () => {
   if ($.html.indexOf('</body>') > -1) {
+    const jfScript = ""
+
     console.log(`重写URL：${$.url}`)
     const n = createStyle(),
       e = createScript(),
       t = createHTML(),
-      i = `\n${n}\n${t}\n${e}`
+      i = `\n${n}\n${t}\n${e}\n${jfScript}`
     $.html = $.html.replace(/(<body)/, `${i} <body`)
   }
 })()
@@ -1155,31 +901,13 @@ function createScript() {
     console.log(`错误URL：${$.url}\n错误信息：${JSON.stringify(n)}`)
   })
   .finally(() => {
-    $.headers = { ...$.headers, 'Cache-Control': 'no-cache' }
-    let modifiedHeaders = $.headers
-    if (modifiedHeaders['Content-Security-Policy'])
-      delete modifiedHeaders['Content-Security-Policy']
-    if (modifiedHeaders['X-XSS-Protection'])
-      delete modifiedHeaders['X-XSS-Protection']
-
-    if ($.headers['Set-Cookie']) {
-      const cookies = $.headers['Set-Cookie']
-        .replace(/HttpOnly/gi, '')
-        .replace(/(Expires=.+?),/gi, '$1@')
-        .split(', ')
-
-      let key = 'Set-Cookie'
-      cookies.forEach((ck, i) => {
-        key += ' '
-        modifiedHeaders[key] = ck.replace(/@/g, ',')
-      })
-    }
-    $.done({ body: $.html, headers: modifiedHeaders })
+    ;($.headers = { ...$.headers, 'Cache-Control': 'no-cache' }),
+      $.done({ body: $.html, headers: $.headers })
   })
 
 // prettier-ignore
-function ENV(){const e="function"==typeof require&&"undefined"!=typeof $jsbox;return{isQX:"undefined"!=typeof $task,isLoon:"undefined"!=typeof $loon,isSurge:"undefined"!=typeof $httpClient&&"undefined"!=typeof $utils,isBrowser:"undefined"!=typeof document,isNode:"function"==typeof require&&!e,isJSBox:e,isRequest:"undefined"!=typeof $request,isScriptable:"undefined"!=typeof importModule}}
+function ENV(){const e="undefined"!=typeof $task,t="undefined"!=typeof $loon,s="undefined"!=typeof $httpClient&&!t,i="function"==typeof require&&"undefined"!=typeof $jsbox;return{isQX:e,isLoon:t,isSurge:s,isNode:"function"==typeof require&&!i,isJSBox:i,isRequest:"undefined"!=typeof $request,isScriptable:"undefined"!=typeof importModule}}
 // prettier-ignore
-function HTTP(e={baseURL:""}){const{isQX:t,isLoon:s,isSurge:o,isScriptable:n,isNode:i,isBrowser:r}=ENV(),u=/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;const a={};return["GET","POST","PUT","DELETE","HEAD","OPTIONS","PATCH"].forEach(h=>a[h.toLowerCase()]=(a=>(function(a,h){h="string"==typeof h?{url:h}:h;const d=e.baseURL;d&&!u.test(h.url||"")&&(h.url=d?d+h.url:h.url),h.body&&h.headers&&!h.headers["Content-Type"]&&(h.headers["Content-Type"]="application/x-www-form-urlencoded");const l=(h={...e,...h}).timeout,c={...{onRequest:()=>{},onResponse:e=>e,onTimeout:()=>{}},...h.events};let f,p;if(c.onRequest(a,h),t)f=$task.fetch({method:a,...h});else if(s||o||i)f=new Promise((e,t)=>{(i?require("request"):$httpClient)[a.toLowerCase()](h,(s,o,n)=>{s?t(s):e({statusCode:o.status||o.statusCode,headers:o.headers,body:n})})});else if(n){const e=new Request(h.url);e.method=a,e.headers=h.headers,e.body=h.body,f=new Promise((t,s)=>{e.loadString().then(s=>{t({statusCode:e.response.statusCode,headers:e.response.headers,body:s})}).catch(e=>s(e))})}else r&&(f=new Promise((e,t)=>{fetch(h.url,{method:a,headers:h.headers,body:h.body}).then(e=>e.json()).then(t=>e({statusCode:t.status,headers:t.headers,body:t.data})).catch(t)}));const y=l?new Promise((e,t)=>{p=setTimeout(()=>(c.onTimeout(),t(`${a} URL: ${h.url} exceeds the timeout ${l} ms`)),l)}):null;return(y?Promise.race([y,f]).then(e=>(clearTimeout(p),e)):f).then(e=>c.onResponse(e))})(h,a))),a}
+function HTTP(e={baseURL:""}){const{isQX:t,isLoon:s,isSurge:o,isScriptable:n,isNode:r}=ENV(),a=/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,u={};return["GET","POST","PUT","DELETE","HEAD","OPTIONS","PATCH"].forEach(i=>u[i.toLowerCase()]=(u=>(function(u,i){i="string"==typeof i?{url:i}:i;const d=e.baseURL;d&&!a.test(i.url||"")&&(i.url=d?d+i.url:i.url),i.body&&i.headers&&!i.headers["Content-Type"]&&(i.headers["Content-Type"]="application/x-www-form-urlencoded");const h=(i={...e,...i}).timeout,l={...{onRequest:()=>{},onResponse:e=>e,onTimeout:()=>{}},...i.events};let c,m;if(l.onRequest(u,i),t)c=$task.fetch({method:u,...i});else if(s||o||r)c=new Promise((e,t)=>{(r?require("request"):$httpClient)[u.toLowerCase()](i,(s,o,n)=>{s?t(s):e({statusCode:o.status||o.statusCode,headers:o.headers,body:n})})});else if(n){const e=new Request(i.url);e.method=u,e.headers=i.headers,e.body=i.body,c=new Promise((t,s)=>{e.loadString().then(s=>{t({statusCode:e.response.statusCode,headers:e.response.headers,body:s})}).catch(e=>s(e))})}const T=h?new Promise((e,t)=>{m=setTimeout(()=>(l.onTimeout(),t(`${u} URL: ${i.url} exceeds the timeout ${h} ms`)),h)}):null;return(T?Promise.race([T,c]).then(e=>(clearTimeout(m),e)):c).then(e=>l.onResponse(e))})(i,u))),u}
 // prettier-ignore
-function API(e="untitled",t=!1){const{isQX:s,isLoon:o,isSurge:n,isNode:i,isJSBox:r,isScriptable:u}=ENV();return new class{constructor(e,t){this.name=e,this.debug=t,this.http=HTTP(),this.env=ENV(),this.node=(()=>{if(i){return{fs:require("fs")}}return null})(),this.initCache();Promise.prototype.delay=function(e){return this.then(function(t){return((e,t)=>new Promise(function(s){setTimeout(s.bind(null,t),e)}))(e,t)})}}initCache(){if(s&&(this.cache=JSON.parse($prefs.valueForKey(this.name)||"{}")),(o||n)&&(this.cache=JSON.parse($persistentStore.read(this.name)||"{}")),i){let e="root.json";this.node.fs.existsSync(e)||this.node.fs.writeFileSync(e,JSON.stringify({}),{flag:"wx"},e=>console.log(e)),this.root={},e=`${this.name}.json`,this.node.fs.existsSync(e)?this.cache=JSON.parse(this.node.fs.readFileSync(`${this.name}.json`)):(this.node.fs.writeFileSync(e,JSON.stringify({}),{flag:"wx"},e=>console.log(e)),this.cache={})}}persistCache(){const e=JSON.stringify(this.cache,null,2);s&&$prefs.setValueForKey(e,this.name),(o||n)&&$persistentStore.write(e,this.name),i&&(this.node.fs.writeFileSync(`${this.name}.json`,e,{flag:"w"},e=>console.log(e)),this.node.fs.writeFileSync("root.json",JSON.stringify(this.root,null,2),{flag:"w"},e=>console.log(e)))}write(e,t){if(this.log(`SET ${t}`),-1!==t.indexOf("#")){if(t=t.substr(1),n||o)return $persistentStore.write(e,t);if(s)return $prefs.setValueForKey(e,t);i&&(this.root[t]=e)}else this.cache[t]=e;this.persistCache()}read(e){return this.log(`READ ${e}`),-1===e.indexOf("#")?this.cache[e]:(e=e.substr(1),n||o?$persistentStore.read(e):s?$prefs.valueForKey(e):i?this.root[e]:void 0)}delete(e){if(this.log(`DELETE ${e}`),-1!==e.indexOf("#")){if(e=e.substr(1),n||o)return $persistentStore.write(null,e);if(s)return $prefs.removeValueForKey(e);i&&delete this.root[e]}else delete this.cache[e];this.persistCache()}notify(e,t="",a="",h={}){const d=h["open-url"],l=h["media-url"];if(s&&$notify(e,t,a,h),n&&$notification.post(e,t,a+`${l?"\n多媒体:"+l:""}`,{url:d}),o){let s={};d&&(s["openUrl"]=d),l&&(s["mediaUrl"]=l),"{}"===JSON.stringify(s)?$notification.post(e,t,a):$notification.post(e,t,a,s)}if(i||u){const s=a+(d?`\n点击跳转: ${d}`:"")+(l?`\n多媒体: ${l}`:"");if(r){require("push").schedule({title:e,body:(t?t+"\n":"")+s})}else console.log(`${e}\n${t}\n${s}\n\n`)}}log(e){this.debug&&console.log(`[${this.name}] LOG: ${this.stringify(e)}`)}info(e){console.log(`[${this.name}] INFO: ${this.stringify(e)}`)}error(e){console.log(`[${this.name}] ERROR: ${this.stringify(e)}`)}wait(e){return new Promise(t=>setTimeout(t,e))}done(e={}){s||o||n?$done(e):i&&!r&&"undefined"!=typeof $context&&($context.headers=e.headers,$context.statusCode=e.statusCode,$context.body=e.body)}stringify(e){if("string"==typeof e||e instanceof String)return e;try{return JSON.stringify(e,null,2)}catch(e){return"[object Object]"}}}(e,t)}
+function API(e="untitled",t=!1){const{isQX:i,isLoon:s,isSurge:n,isNode:o,isJSBox:r,isScriptable:h}=ENV();return new class{constructor(e,t){this.name=e,this.debug=t,this.http=HTTP(),this.env=ENV(),this.node=(()=>o?{fs:require("fs")}:null)(),this.initCache(),Promise.prototype.delay=function(e){return this.then(function(t){return((e,t)=>new Promise(function(i){setTimeout(i.bind(null,t),e)}))(e,t)})}}initCache(){if(i&&(this.cache=JSON.parse($prefs.valueForKey(this.name)||"{}")),(s||n)&&(this.cache=JSON.parse($persistentStore.read(this.name)||"{}")),o){let e="root.json";this.node.fs.existsSync(e)||this.node.fs.writeFileSync(e,JSON.stringify({}),{flag:"wx"},e=>console.log(e)),this.root={},e=`${this.name}.json`,this.node.fs.existsSync(e)?this.cache=JSON.parse(this.node.fs.readFileSync(`${this.name}.json`)):(this.node.fs.writeFileSync(e,JSON.stringify({}),{flag:"wx"},e=>console.log(e)),this.cache={})}}persistCache(){const e=JSON.stringify(this.cache,null,2);i&&$prefs.setValueForKey(e,this.name),(s||n)&&$persistentStore.write(e,this.name),o&&(this.node.fs.writeFileSync(`${this.name}.json`,e,{flag:"w"},e=>console.log(e)),this.node.fs.writeFileSync("root.json",JSON.stringify(this.root,null,2),{flag:"w"},e=>console.log(e)))}write(e,t){if(this.log(`SET ${t}`),-1!==t.indexOf("#")){if(t=t.substr(1),n||s)return $persistentStore.write(e,t);if(i)return $prefs.setValueForKey(e,t);o&&(this.root[t]=e)}else this.cache[t]=e;this.persistCache()}read(e){return this.log(`READ ${e}`),-1===e.indexOf("#")?this.cache[e]:(e=e.substr(1),n||s?$persistentStore.read(e):i?$prefs.valueForKey(e):o?this.root[e]:void 0)}delete(e){if(this.log(`DELETE ${e}`),-1!==e.indexOf("#")){if(e=e.substr(1),n||s)return $persistentStore.write(null,e);if(i)return $prefs.removeValueForKey(e);o&&delete this.root[e]}else delete this.cache[e];this.persistCache()}notify(e,t="",l="",c={}){const a=c["open-url"],f=c["media-url"];if(i&&$notify(e,t,l,c),n&&$notification.post(e,t,l+`${f?"\n多媒体:"+f:""}`,{url:a}),s){let i={};a&&(i["openUrl"]=a),f&&(i["mediaUrl"]=f),"{}"===JSON.stringify(i)?$notification.post(e,t,l):$notification.post(e,t,l,i)}if(o||h){const i=l+(a?`\n点击跳转: ${a}`:"")+(f?`\n多媒体: ${f}`:"");r?require("push").schedule({title:e,body:(t?t+"\n":"")+i}):console.log(`${e}\n${t}\n${i}\n\n`)}}log(e){this.debug&&console.log(`[${this.name}] LOG: ${this.stringify(e)}`)}info(e){console.log(`[${this.name}] INFO: ${this.stringify(e)}`)}error(e){console.log(`[${this.name}] ERROR: ${this.stringify(e)}`)}wait(e){return new Promise(t=>setTimeout(t,e))}done(e={}){i||s||n?$done(e):o&&!r&&"undefined"!=typeof $context&&($context.headers=e.headers,$context.statusCode=e.statusCode,$context.body=e.body)}stringify(e){if("string"==typeof e||e instanceof String)return e;try{return JSON.stringify(e,null,2)}catch(e){return"[object Object]"}}}(e,t)}
