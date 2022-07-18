@@ -311,7 +311,7 @@ replies:
     request:
         #图片
         response_type: image 
-        url: https://api.uomg.com/api/rand.img3?sort=胖次猫&format=images
+        url: 'https://api.uomg.com/api/rand.img3?sort=胖次猫&format=images'
 
 
   - type: url
