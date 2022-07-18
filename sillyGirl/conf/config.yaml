@@ -441,13 +441,4 @@ replies:
       - 强制对话
     content: https://api.uomg.com/api/qq.talk?qq=QQ号码
 
-  - type: url
-    rules:
-      - 王者(.*)
-      - 王者荣耀(.*)
-    request:
-      response_type: text
-      url: http://hm.suol.cc/API/wzry.php?msg={{1}}
-
-
 
