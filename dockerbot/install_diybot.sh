@@ -4,10 +4,10 @@ cd /ql/repo/jd && git pull
 
 cp -rfv /ql/repo/jd/dockerbot/ /ql/repo/
 
-cp -rfv /ql/repo/jd/dockerbot/jbot/bot /ql/jbot/
+cp -rfv /ql/repo/jd/dockerbot/jbot/* /ql/jbot/
 
 ql bot
 
 cp -rfv /ql/repo/jd/dockerbot/ /ql/repo/
 
-cp -rfv /ql/repo/jd/dockerbot/jbot/bot /ql/jbot/
+cp -rfv /ql/repo/jd/dockerbot/jbot/* /ql/jbot/
