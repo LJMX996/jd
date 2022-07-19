@@ -8,10 +8,10 @@ cd /ql/repo/ccwav_QLScript2 && git pull
 
 cp -rfv /ql/repo/jd/dockerbot/ /ql/repo/
 
-cp -rfv /ql/repo/jd/dockerbot/jbot/bot /ql/jbot/
+cp -rfv /ql/repo/jd/dockerbot/jbot/* /ql/jbot/
 
 ql bot
 
 cp -rfv /ql/repo/jd/dockerbot/ /ql/repo/
 
-cp -rfv /ql/repo/jd/dockerbot/jbot/bot /ql/jbot/
+cp -rfv /ql/repo/jd/dockerbot/jbot/* /ql/jbot/
