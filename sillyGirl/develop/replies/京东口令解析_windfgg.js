@@ -8,7 +8,7 @@ sendText(code)
 sendText("正在解析口令，请稍等片刻......")
 try {
     request({
-        url: 'http://www.sixgod.ml/jd/sign',
+        url: 'http://10.10.10.3:9000/jd/jKeyCommand',
         method: 'POST',
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: "key=" + code
