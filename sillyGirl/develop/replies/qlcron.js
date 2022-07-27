@@ -21,10 +21,10 @@ if (imType == "fake") {
         push(groups[i])
     }
 } else {
-    sendText("︎1600云函数并发命令")
+    sendText("1600云函数并发命令")
 
-    sendText("︎ql task 1600.sh")
+    sendText("ql task 1600.sh")
     
-    sendText("︎另:") 
+    sendText("另:") 
     sendText("ql cron run 1600") 
 }
