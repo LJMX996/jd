@@ -1,8 +1,6 @@
-// [rule: 1600指令]
+// [rule: 1600]
 
 
-
-var content = image(chezhu) + "\n目前付费车助力直接跑满。\n相比之前的均等助力，\n 目前助力翻了3-5倍。\n 由于豆子收入减少，价格降低到8¥/月。\n 转账备注自己账号用户名(不是昵称，是京东设置里面的，长按可以复制的)。\n ";
 var imType = ImType();
 if (imType == "fake") {
     var groups = [{
