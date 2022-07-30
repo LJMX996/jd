@@ -1,12 +1,23 @@
 /*
 金榜创造营
 活动入口：https://h5.m.jd.com/babelDiy/Zeus/2H5Ng86mUJLXToEo57qWkJkjFPxw/index.html
-
-==============quantumultx=============
+活动时间：2021-05-21至2021-12-31
+脚本更新时间：2021-05-28 14:20
+脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
+===================quantumultx================
 [task_local]
 #金榜创造营
-19 5,12 * * * jd_gold_creator.js
+13 1,22 * * * jd_gold_creator.js, tag=金榜创造营, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
+=====================Loon================
+[Script]
+cron "13 1,22 * * *" script-path=jd_gold_creator.js, tag=金榜创造营
+
+====================Surge================
+金榜创造营 = type=cron,cronexp="13 1,22 * * *",wake-system=1,timeout=3600,script-path=jd_gold_creator.js
+
+============小火箭=========
+金榜创造营 = type=cron,script-path=jd_gold_creator.js, cronexpr="13 1,22 * * *", timeout=3600, enable=true
  */
 const $ = new Env('金榜创造营');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -30,7 +41,6 @@ if ($.isNode()) {
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 
 !(async () => {
-    console.log(`\n❗❗❗❗❗❗\n注意:本仓库偷助力，偷CK，今天用这个仓库，明天你一觉醒来服务器就被我偷走了🌝🌝🌚🌚\n❗❗❗❗❗❗\n`);
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/', {"open-url": "https://bean.m.jd.com/"});
     return;
@@ -44,7 +54,7 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
       $.beans = 0
       $.nickName = '';
       message = '';
-      await TotalBean();
+      //await TotalBean();
       console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
       if (!$.isLogin) {
         $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/`, {"open-url": "https://bean.m.jd.com/"});
