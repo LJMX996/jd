@@ -4,6 +4,7 @@
 日常任务，助力，游戏
 第一个账号助力作者 其他依次助力CK1
 默认不做加购任务，如需要设置变量erport car_addsku='true'
+只跑前5个CK
 55 8,18 * * * jd_mpdz_car.js 
 */
 
@@ -21,7 +22,7 @@ allMessage='';
 message='';
 $.hotFlag=false;
 $.outFlag=false;
-let shareUuidArr=[''];
+let shareUuidArr=['B2s863iFzsHJxGtOlrCXxsjNhNaYFy2HteErE6izlhTf9nrGY7gBkCdGU4C6z/xD','WoDXSUOIZFZbWchg5qcDb14tLNYA4seuA67MOIYQxEk3Vl9+AVo4NF+tgyeIc6A6kdK3rLBQpEQH9V4tdrrh0w==','3KtP4oQOaF9hH0uFesDKL14tLNYA4seuA67MOIYQxEk3Vl9+AVo4NF+tgyeIc6A6kdK3rLBQpEQH9V4tdrrh0w==','OsiH6Sic/uTxioPBG6hh5K9AMkY4oJ31vhy6nI5LWbOiIw7XUQOP/Btn03/M1TYH','8AIkpPYAb4jMiUQb+YijkcjNhNaYFy2HteErE6izlhTf9nrGY7gBkCdGU4C6z/xD'];
 let n=0;
 n=Math.floor(Math.random()*shareUuidArr.length);
 let shareUuid=shareUuidArr[n]||'';
