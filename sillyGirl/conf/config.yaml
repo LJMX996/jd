@@ -45,7 +45,7 @@ replies:
       - 你(\S*)
       - 好(\S*)
     request:
-      response_type: json
+      response_type: text
       url: http://81.70.100.130/api/liaotian.php?msg={{1}}
       get: text
 #小爱机器人 
