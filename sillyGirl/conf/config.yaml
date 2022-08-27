@@ -46,7 +46,7 @@ replies:
       - 好(\S*)
     request:
       response_type: json
-      url: http://www.tuling123.com/openapi/api?key=4670f9d766704929b7983312808cdfa7&userid=xiaoxiao&info={{1}}
+      url: http://81.70.100.130/api/liaotian.php?msg={{1}}
       get: text
 #小爱机器人 
   - type: url
