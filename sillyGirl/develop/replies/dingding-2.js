@@ -1,5 +1,5 @@
 
-// [cron: 0,5,10 18 * * *]
+// [cron: 0,5,10 18 * * * MON-FRI]
 var ele = "https://i.loli.net/2021/12/03/MS4LKzTyd5WCc1X.jpg";
 //图文消息
 var content = "\n愉快的一天从下班开始，\n 记得钉钉打卡哦！！！";
