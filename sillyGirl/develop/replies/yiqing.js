@@ -4,7 +4,7 @@
 function main() {
     var address = param(1) 
     var data = request({ 
-        "url": "https://api.iyk0.com/yq/?msg=" + address , 
+        "url": "https://xiaobai.klizi.cn/API/other/yiqing.php?city=" + address , 
         "method": "get", 
         "dataType": "json" 
     })
