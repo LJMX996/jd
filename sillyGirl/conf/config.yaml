@@ -245,9 +245,24 @@ replies:
         url: https://api.uomg.com/api/rand.img1?sort=动漫&format=images
 
 
+  - type: url
+    rules:
+      - 腿控
+      - 黑丝
+    request:
+        #图片
+        response_type: image 
+        url: https://jintia.jintias.cn/api/tk.php
 
 
-
+  - type: url
+    rules:
+      - 诱惑
+    request:
+        #图片
+        response_type: image 
+        url: https://jintia.jintias.cn/api/yht.php
+        
 
   - type: url
     rules:
@@ -277,12 +292,6 @@ replies:
         response_type: image 
         url: https://api.uomg.com/api/rand.img1?sort=二次元&format=images
 
-  - type: url
-    rules:
-      - 美图诱惑
-    request:
-      response_type: image
-      url: 'https://api.iyk0.com/sjmn'
 
 
 
