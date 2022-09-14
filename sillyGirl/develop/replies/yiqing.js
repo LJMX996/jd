@@ -9,7 +9,7 @@ function main() {
         "dataType": "json" 
     })
     
-        sendText("查询地区:" +data.城市+"\n累积确诊：" + data.积累确诊 +"\n现存确诊：" +  data.现存确诊 + "\n现存无症状："+ data.现存无症状+"\n治愈:"+data.治愈+"\n死亡:"+data.死亡)
+        sendText("查询地区:" +data.data.城市+"\n累积确诊：" + data.积累确诊 +"\n现存确诊：" +  data.现存确诊 + "\n现存无症状："+ data.现存无症状+"\n治愈:"+data.治愈+"\n死亡:"+data.死亡)
 
 }
 main()
