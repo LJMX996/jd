@@ -110,7 +110,7 @@ replies:
       - 天气(.*)
     request:
       response_type: text
-      url: http://hm.suol.cc/API/tq.php?msg={{1}}&n=1
+      url: https://xiaobai.klizi.cn/API/other/weather_1.php?data=&msg={{1}}
 
   - type: url
     rules:
