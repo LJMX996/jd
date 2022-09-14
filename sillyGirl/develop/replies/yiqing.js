@@ -3,7 +3,7 @@
 // [rule: 疫情 ? ] 疫情 武汉
 function main() {
     var address = param(1) 
-    var content = request({ 
+    var data = request({ 
         "url": "https://api.iyk0.com/yq/?msg=" + address , 
         "method": "get", 
         "dataType": "json" 
