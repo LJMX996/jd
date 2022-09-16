@@ -81,20 +81,13 @@ replies:
   - type: url
     rules:
       - 今日要闻
+      - 一分钟看世界 
     request:
         #图片
         response_type: image 
-        url: http://api.muuzi.cn/api/60look
+        url: https://jintia.jintias.cn/api/60s.php
 
-  - type: url
-    rules:
-      - 世界新闻
-      - 一分钟看世界
-    request:
-        #图片
-        response_type: image 
-        url: https://api.2xb.cn/zaob
-        get: imageUrl
+
 
 
 
@@ -313,20 +306,22 @@ replies:
       url: 'https://api.iyk0.com/bing'
 
 
+
   - type: url
     rules:
       - 买家秀
     request:
       response_type: image
-      url: 'https://api.iyk0.com/mjx'
+      url: 'https://gw.alicdn.com/tfscom/tuitui/O1CN012FFo2zya7DELPPy_!!0-rate.jpg'
+      get: data
 
   - type: url
     rules:
       - 秀儿
     request:
-        #图片
-        response_type: image 
-        url: 'https://api.uomg.com/api/rand.img3?sort=胖次猫&format=images'
+      response_type: image
+      url: 'https://gw.alicdn.com/tfscom/tuitui/O1CN012FFo2zya7DELPPy_!!0-rate.jpg'
+      get: data
 
 
   - type: url
