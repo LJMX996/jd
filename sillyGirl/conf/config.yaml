@@ -311,7 +311,7 @@ replies:
       - 买家秀
     request:
       response_type: image
-      url: 'https://jintia.jintias.cn/api/mjx.php'
+      url: 'https://api.uomg.com/api/rand.img3?sort=胖次猫&format=images'
 
 
 
