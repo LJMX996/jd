@@ -311,7 +311,8 @@ replies:
       - 买家秀
     request:
       response_type: image
-      url: 'https://api.uomg.com/api/rand.img3?sort=胖次猫&format=images'
+      url: 'https://api.uomg.com/api/rand.img3?sort=胖次猫&format=json'
+      get: imgurl
 
 
 
