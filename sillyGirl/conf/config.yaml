@@ -188,14 +188,13 @@ replies:
         response_type: text 
         url: http://81.70.100.130/api/dog.php?msg={{1}}&num=257
 
-  #历史上的今天
   - type: url
     rules:
       - 历史上的今天
     request:
-      url: 'https://api.iyk0.com/lishi/'
-      response_type: template
-      template: "fjson(tfmt(01月02日).[i],[i]. [?.year]，[?.title]。,\n)"
+        #图片
+        response_type: image 
+        url: https://xiaoapi.cn/API/lssdjt_pic.php
 
 
   - type: url
@@ -312,16 +311,9 @@ replies:
       - 买家秀
     request:
       response_type: image
-      url: 'https://gw.alicdn.com/tfscom/tuitui/O1CN012FFo2zya7DELPPy_!!0-rate.jpg'
-      get: data
+      url: 'https://jintia.jintias.cn/api/mjx.php'
 
-  - type: url
-    rules:
-      - 秀儿
-    request:
-      response_type: image
-      url: 'https://gw.alicdn.com/tfscom/tuitui/O1CN012FFo2zya7DELPPy_!!0-rate.jpg'
-      get: data
+
 
 
   - type: url
