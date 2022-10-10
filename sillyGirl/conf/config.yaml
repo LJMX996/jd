@@ -222,6 +222,60 @@ replies:
 
   - type: url
     rules:
+      - 妹妹
+    request:
+        #图片
+        response_type: image 
+        url: https://cdn.seovx.com/?mom=302
+
+
+  - type: url
+    rules:
+      - 古风
+    request:
+        #图片
+        response_type: image 
+        url: https://cdn.seovx.com/ha/?mom=302
+
+
+  - type: url
+    rules:
+      - 诱惑
+    request:
+        #图片
+        response_type: image 
+        url: http://81.70.100.130/api/youhuotu.php
+        
+  - type: url
+    rules:
+      - 妹子
+    request:
+        #图片
+        response_type: image 
+        url: http://81.70.100.130/api/pcmnt.php
+        
+        
+        
+  - type: url
+    rules:
+      - 二次元
+    request:
+        #图片
+        response_type: image 
+        url: http://81.70.100.130/api/peacg.php
+        
+        
+        
+  - type: url
+    rules:
+      - 腿控
+    request:
+        #图片
+        response_type: image 
+        url: http://81.70.100.130/api/tk.php  
+
+  - type: url
+    rules:
       - MC酱
     request:
         #图片
@@ -239,7 +293,6 @@ replies:
 
   - type: url
     rules:
-      - 腿控
       - 黑丝
     request:
         #图片
@@ -247,13 +300,6 @@ replies:
         url: https://jintia.jintias.cn/api/tk.php
 
 
-  - type: url
-    rules:
-      - 诱惑
-    request:
-        #图片
-        response_type: image 
-        url: https://jintia.jintias.cn/api/yht.php
         
 
   - type: url
@@ -316,26 +362,6 @@ replies:
 
 
 
-
-  - type: url
-    rules:
-      - 妹子
-    request:
-        #图片
-        response_type: image 
-        url: https://api.uomg.com/api/rand.img2?sort=美女&format=images
-
-
-
-
-
-  - type: url
-    rules:
-      - 妹妹
-    request:
-        #图片
-        response_type: image 
-        url: https://cdn.seovx.com/?mom=302
 
 
 
