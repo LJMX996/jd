@@ -243,7 +243,7 @@ replies:
       - 诱惑
     request:
         #图片
-        response_type: image 
+        response_type: text 
         url: http://81.70.100.130/api/youhuotu.php
         
   - type: url
@@ -262,7 +262,7 @@ replies:
     request:
         #图片
         response_type: image 
-        url: http://81.70.100.130/api/peacg.php
+        url: https://cdn.seovx.com/d/?mom=302
         
         
         
