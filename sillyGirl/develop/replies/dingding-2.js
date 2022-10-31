@@ -8,6 +8,9 @@ if (imType == "fake") {
     var groups = [{
         imType: "wx",
         groupCode: 48102851005,
+    },{
+        imType: "wx",
+        groupCode: 49190051947,
     }]
     for (var i = 0; i < groups.length; i++) {
         groups[i]["content"] = content
