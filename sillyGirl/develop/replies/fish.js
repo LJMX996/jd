@@ -85,6 +85,7 @@ function main() {
         addYinFestival('端午节', 5, 5);
         addYinFestival('中秋节', 8, 15);
         addYangFestival('国庆节', 10, 1);
+        addYangFestival('2023考研', 12, 24);
         newFestival();
 
         lastInfo();
