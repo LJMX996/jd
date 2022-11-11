@@ -1,5 +1,5 @@
 
-// [rule: ?revokemsg? ]
+// [rule: 撤回了一条消息 ]
 
 function main() {
 	if(true){
