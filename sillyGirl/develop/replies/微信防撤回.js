@@ -1,5 +1,5 @@
 
-// [rule: ?revoked_msg? ]
+// [rule: ?revokemsg? ]
 
 function main() {
 	if(true){
