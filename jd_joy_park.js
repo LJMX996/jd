@@ -1,19 +1,23 @@
 /*
+
 脚本默认会帮我助力开工位，介意请添加变量HELP_JOYPARK，false为不助力
 export HELP_JOYPARK=""
+
 ============Quantumultx===============
 [task_local]
 #汪汪乐园每日任务
-0 7,17 * * * jd_joy_park.js, tag=汪汪乐园每日任务, img-url=https://raw.githubusercontent.com/tsukasa007/icon/master/jd_joypark_task.png, enabled=true
+0 1,7,20 * * * jd_joypark_task.js, tag=汪汪乐园每日任务, img-url=https://raw.githubusercontent.com/tsukasa007/icon/master/jd_joypark_task.png, enabled=true
+
 ================Loon==============
 [Script]
-cron "0 7,17 * * *" script-path=jd_joy_park.js,tag=汪汪乐园每日任务
-===============Surge=================
-汪汪乐园每日任务 = type=cron,cronexp="0 0,7,9,17,20 * * *",wake-system=1,timeout=3600,script-path=jd_joypark_task.js
-============小火箭=========
-汪汪乐园每日任务 = type=cron,script-path=jd_joy_park.js, cronexpr="0 0,7,9,17,20 * * *", timeout=3600, enable=true
-*/
+cron "0 1,7,20 * * *" script-path=jd_joypark_task.js,tag=汪汪乐园每日任务
 
+===============Surge=================
+汪汪乐园每日任务 = type=cron,cronexp="0 1,7,20 * * *",wake-system=1,timeout=3600,script-path=jd_joypark_task.js
+
+============小火箭=========
+汪汪乐园每日任务 = type=cron,script-path=jd_joypark_task.js, cronexpr="0 1,7,20 * * *", timeout=3600, enable=true
+*/
 const $ = new Env('汪汪乐园每日任务');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -29,7 +33,11 @@ if ($.isNode()) {
   cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
 $.invitePinTaskList = []
-$.invitePin = []
+$.invitePin = [
+  "",
+  "",
+  ""
+]
 const JD_API_HOST = `https://api.m.jd.com/client.action`;
 message = ""
 !(async () => {
