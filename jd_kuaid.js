@@ -2,6 +2,7 @@
 京东快递
 @Leaf
 
+随机定时
 */
 const $ = new Env('京东快递');
 const got = require('got');
