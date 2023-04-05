@@ -3,7 +3,7 @@
 
 '''
 12 */4 * * *
-new Env('检测更新ck');
+new Env('青龙token刷新');
 
 '''
 import socket  # 用于端口检测
